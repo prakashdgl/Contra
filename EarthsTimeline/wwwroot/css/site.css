@@ -103,9 +103,9 @@ section {
 .card {
     border: none;
     border-radius: 20px;
-    box-shadow: -10px 20px 5px #ddd;
+    box-shadow: -10px 15px 5px #cacaca;
     flex: 2 1;
-    height: 300px;
+    min-height: 300px;
     margin: 15px;
     padding: 25px;
     position: relative;
@@ -179,7 +179,7 @@ button.accept-policy {
         height: 200px;
     }
     .section-title:first-of-type {
-        margin-top: 100px;
+        margin-top: 70px;
     }
     #border-gradient {
         top: 200px;
