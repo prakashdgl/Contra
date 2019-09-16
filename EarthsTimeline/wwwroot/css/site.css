@@ -153,6 +153,19 @@ section {
     min-height: 50px; 
 }
 
+.card-search .image-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.card-search .image-container img {
+    min-height: 100%;
+    width: auto;
+}
+
 .banner {
     background-color: #fff;
     border-radius: 10px;
@@ -215,5 +228,11 @@ button.accept-policy {
     }
     nav #links a {
         float: right;
+    }
+    .card-search .image-container {
+        display: unset;
+    }
+    .card-search > div {
+        margin-left: 200px;
     }
 }
