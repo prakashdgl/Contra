@@ -21,4 +21,4 @@ function onResize() {
         menu.style.display = "";
         nav.style.height = "";
     }
-};
+}
