@@ -1,4 +1,8 @@
-﻿html {
+﻿::selection {
+    background-color: #abc;
+}
+
+html {
     font-size: 14px;
     font-family: Calibri, sans-serif;
     position: relative;
@@ -143,6 +147,10 @@ section {
 
 .card-encapsulate img {
     left: 0;
+}
+
+.card-search {
+    min-height: 50px; 
 }
 
 .banner {

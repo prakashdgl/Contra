@@ -4,11 +4,26 @@
     ViewData["Title"] = "Search";
 }
 
-<h1>Search</h1>
+<div class="content container">
+    <div class="section-title">
+        <h2>Search</h2>
+    </div>
+@foreach (var item in Model) {
+    <section>
+        <div class="card card-big card-search">
+            <img src="@Html.DisplayNameFor(model => model.SmallThumbnailURL)" />
+            <div>
+                <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+                <p>@Html.DisplayFor(modelItem => item.AuthorName) - @Html.DisplayFor(modelItem => item.Date)</p>
+                <br />
+                <p>@Html.DisplayFor(modelItem => item.SummaryLong)</p>
+                <a asp-action="Details" asp-route-id="@item.Id">Read More</a>
+            </div>
+        </div>
+    </section>
+}
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -16,25 +31,10 @@
                 @Html.DisplayNameFor(model => model.AuthorId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AuthorName)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.LargeThumbnailURL)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SmallThumbnailURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.SummaryShort)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SummaryLong)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Content)
@@ -49,31 +49,15 @@
                 @Html.DisplayFor(modelItem => item.AuthorId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AuthorName)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.LargeThumbnailURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SmallThumbnailURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SummaryShort)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SummaryLong)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Content)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
 }

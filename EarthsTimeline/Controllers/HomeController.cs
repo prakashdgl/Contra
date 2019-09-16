@@ -22,8 +22,14 @@ namespace EarthsTimeline.Controllers
         }
 
         [Route("/admin")]
-        public IActionResult Admin()
+        public async Task<IActionResult> Admin()
         {
+            ViewData["Articles"] = _context.Article.Count();
+            ViewData["ArticlesLeft"] = (await _context.Article.Where((x) => x.Approved == false).ToListAsync()).Count;
+
+            ViewData["Comments"] = _context.Comment.Count();
+            ViewData["CommentsLeft"] = (await _context.Comment.Where((x) => x.Approved == false).ToListAsync()).Count;
+
             return View();
         }
 
