@@ -13,6 +13,25 @@ body {
 nav {
     background-image: linear-gradient(#111, #000);
     height: 50px;
+    line-height: 50px;
+}
+
+nav #links {
+    display: none;
+    flex-direction: column;
+    flex: 1 1;
+    align-items: center;
+}
+
+nav #menu-button {
+    background-color: #000;
+    border: solid 2px #fff;
+    border-radius: 10px;
+    color: #fff;
+    float: right;
+    padding: 0 24px;
+    line-height: 40px;
+    margin-top: 10px;
 }
 
 a.navbar-brand {
@@ -31,10 +50,10 @@ a {
 
 .header {
     background-color: #000;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    right: 0;
+    position: relative;
+    top: -1px;
+    z-index: -1;
+    width: 100%;
     height: 150px;
 }
 
@@ -52,20 +71,24 @@ a {
 #border-gradient {
     background-image: linear-gradient(#666, #edeef3);
     position: absolute;
-    top: 200px;
+    top: 150px;
     left: 0;
     right: 0;
+    z-index: -1;
     height: 10px;
 }
 
 .content {
-    margin-top: 200px;
     margin-bottom: 100px;
 }
 
 .section-title {
     margin: 20px;
     margin-top: 100px;
+}
+
+.section-title:first-of-type {
+    margin-top: 40px;
 }
 
 .section-title > h2 {
@@ -155,14 +178,26 @@ button.accept-policy {
     .header {
         height: 200px;
     }
+    .section-title:first-of-type {
+        margin-top: 100px;
+    }
     #border-gradient {
-        top: 250px;
+        top: 200px;
     }
     section {
         flex-direction: row;
     }
-    .content {
-        margin-top: 250px;
-        margin-bottom: 100px;
+}
+
+@media (min-width: 1000px) {
+    nav #menu-button {
+        display: none;
+    }
+    nav #links {
+        display: inline-flex;
+        flex-direction: row;
+    }
+    nav #links a {
+        float: right;
     }
 }

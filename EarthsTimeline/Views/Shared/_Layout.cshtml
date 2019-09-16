@@ -7,43 +7,29 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body onresize="onResize()">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
+        <nav id="nav">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Timeline</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">News</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Sports</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Editorial</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Opinion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Arts & Culture</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Donate</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Apply</a>
-                        </li>
-                    </ul>
+                <button id="menu-button" onclick="showMenu()">Menu</button>
+                <div id="links">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">News</a>
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Sports</a>
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Editorial</a>
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Opinion</a>
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Arts & Culture</a>
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Donate</a>
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Apply</a>
                 </div>
             </div>
         </nav>
+        <div class="header">
+            <img src="../img/banner.svg" />
+            <div id="border-gradient"></div>
+        </div>
     </header>
+
     <div class="container">
         @RenderBody()
     </div>
