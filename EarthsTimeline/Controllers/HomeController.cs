@@ -47,6 +47,9 @@ namespace EarthsTimeline.Controllers
             var article = await _context.Article.FirstOrDefaultAsync(m => m.Id == id);
             if (article == null) return NotFound();
 
+            List<Comment> comments = await _context.Comment.Where(c => c.PostId == article.Id).ToListAsync();
+            ViewData["Comments"] = comments;
+
             return View(article);
         }
 

@@ -11,24 +11,39 @@
     @if (Model.Approved)
     {
         <section>
-            <div class="card">
-                <h2>@Model.AuthorName - @Model.Date.ToShortDateString()</h2>
+            <div class="card article">
+                <span class="image-container">
+                    <img src="@Model.LargeThumbnailURL" />
+                </span>
+                <div>
+                    <h3>@Model.AuthorName - @Model.Date.ToShortDateString()</h3>
+                    <br />
+                    <p>@Model.Content</p>
+                </div>
             </div>
         </section>
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.LargeThumbnailURL)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.LargeThumbnailURL)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Content)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Content)
-            </dd>
-        </dl>
+
+        <div class="section-title">
+            <h2>Comments</h2>
+        </div>
+        <section>
+            <div class="card card-search">
+                <div>
+                    <p>Comment Input Here</p>
+                </div>
+            </div>
+        </section>
+        foreach (Comment comment in (List<Comment>)ViewData["Comments"])
+        {
+            <section>
+                <div class="card">
+                    <div>
+                        <h3>@comment.AuthorName - @comment.Date</h3>
+                        <p>@comment.Content</p>
+                    </div>
+                </div>
+            </section>
+        }
     }
     else
     {
