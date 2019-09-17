@@ -70,10 +70,15 @@ namespace EarthsTimeline.Controllers
             return View(comment);
         }
 
-        [Route("/search")]
-        public async Task<IActionResult> Search()
+        [Route("/search/{*param}")]
+        public async Task<IActionResult> Search(string param)
         {
-            return View(await _context.Article.Where((x) => x.Approved == true).ToListAsync());
+            if (string.IsNullOrEmpty(param))
+                return View(await _context.Article.Where((x) => x.Approved == true).ToListAsync());
+
+            ViewData["Query"] = param;
+            return View(await _context.Article.Where((x) => x.Approved == true && 
+                       (x.Title.Contains(param) || x.SummaryShort.Contains(param))).ToListAsync());
         }
 
         [HttpGet("/apply")]
