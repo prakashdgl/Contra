@@ -47,10 +47,26 @@ namespace EarthsTimeline.Controllers
             var article = await _context.Article.FirstOrDefaultAsync(m => m.Id == id);
             if (article == null) return NotFound();
 
-            List<Comment> comments = await _context.Comment.Where(c => c.PostId == article.Id).ToListAsync();
+            List<Comment> comments = await _context.Comment.Where(c => c.PostId == article.Id && c.Approved).ToListAsync();
             ViewData["Comments"] = comments;
 
             return View(article);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Comment([Bind("Id,AuthorId,AuthorName,Content")] Comment comment, int PostId)
+        {
+            if (ModelState.IsValid)
+            {
+                comment.PostId = PostId;
+                comment.Approved = false;
+                comment.Date = DateTime.Now;
+
+                _context.Add(comment);
+                await _context.SaveChangesAsync();
+                return Redirect($"~/article/{comment.PostId}");
+            }
+            return View(comment);
         }
 
         [Route("/search")]
