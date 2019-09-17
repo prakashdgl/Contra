@@ -76,7 +76,7 @@ namespace EarthsTimeline.Controllers
             if (string.IsNullOrEmpty(param))
                 return View(await _context.Article.Where((x) => x.Approved == true).ToListAsync());
 
-            ViewData["Query"] = param;
+            ViewData["Query"] = "- " + param;
             return View(await _context.Article.Where((x) => x.Approved == true && 
                        (x.Title.Contains(param) || x.SummaryShort.Contains(param))).ToListAsync());
         }
@@ -95,7 +95,10 @@ namespace EarthsTimeline.Controllers
             {
                 article.Approved = false;
                 article.Date = DateTime.Now;
-                article.SummaryLong = article.Content.Substring(0, 60) + "...";
+                if (article.Content.Length >= 60)
+                    article.SummaryLong = article.Content.Substring(0, 60) + "...";
+                else
+                    article.SummaryLong = article.Content;
 
                 _context.Add(article);
                 await _context.SaveChangesAsync();
