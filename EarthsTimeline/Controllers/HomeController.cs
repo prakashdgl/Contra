@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using EarthsTimeline.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +37,17 @@ namespace EarthsTimeline.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Route("/article/{*id}")]
+        public async Task<IActionResult> Article(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var article = await _context.Article.FirstOrDefaultAsync(m => m.Id == id);
+            if (article == null) return NotFound();
+
+            return View(article);
         }
 
         [Route("/search")]

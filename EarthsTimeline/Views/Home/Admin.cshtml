@@ -4,59 +4,63 @@
     ViewData["Title"] = "Admin";
 }
 
-    <div class="content">
-        <div class="section-title">
-            <h2>Aministrator Panel</h2>
-        </div>
-        <section>
-            <div class="card card-big">
-                <div>
-                    <h2>@ViewData["ArticlesLeft"] Articles</h2>
-                    <p>There are @ViewData["ArticlesLeft"] articles pending approval.</p>
-                    <h2>@ViewData["CommentsLeft"] Comments</h2>
-                    <p>There are @ViewData["CommentsLeft"] comments pending approval.</p>
-                </div>
+<div class="content">
+    <div class="section-title">
+        <h2>Aministrator Panel</h2>
+    </div>
+    <section>
+        <div class="card card-big">
+            <div>
+                <h2>@ViewData["ArticlesLeft"] Articles</h2>
+                <p>There are @ViewData["ArticlesLeft"] articles pending approval.</p>
+                <h2>@ViewData["CommentsLeft"] Comments</h2>
+                <p>There are @ViewData["CommentsLeft"] comments pending approval.</p>
             </div>
-            <div class="card card-encapsulate">
-                <img src="../img/img02.png" />
+        </div>
+        <div class="card card-encapsulate">
+            <img src="../img/img02.png" />
+            <div>
+                <h2>Site Status</h2>
+                <p>@ViewData["Articles"] total articles.</p>
+                <p>@ViewData["Comments"] total comments.</p>
+            </div>
+        </div>
+    </section>
+    <div class="section-title">
+        <h2>Article Approvals</h2>
+    </div>
+    @foreach (Article article in (List<Article>)ViewData["ArticlesList"])
+    {
+        <section>
+            <div class="card card-big card-search">
                 <div>
-                    <h2>Site Status</h2>
-                    <p>@ViewData["Articles"] total articles.</p>
-                    <p>@ViewData["Comments"] total comments.</p>
+                    <h2>@article.Title</h2>
+                    <p>@article.AuthorName - @article.Date</p>
+                    <br />
+                    <p>@article.SummaryLong</p>
+                    <a asp-action="Article" asp-route-id="@article.Id">Read More</a> - 
+                    <a class="text-danger" asp-controller="Articles" asp-action="Delete" asp-route-id="@article.Id">Reject Article</a> - 
+                    <a class="text-danger" asp-action="ApproveArticle" asp-route-id="@article.Id">Approve Article</a>
                 </div>
             </div>
         </section>
-        <div class="section-title">
-            <h2>Article Approvals</h2>
-        </div>
-        @foreach (Article article in (List<Article>)ViewData["ArticlesList"])
-        {
-            <section>
-                <div class="card card-big card-search">
-                    <div>
-                        <h2>@article.Title</h2>
-                        <p>@article.AuthorName - @article.Date</p>
-                        <br />
-                        <p>@article.SummaryLong</p>
-                        <a asp-action="Details" asp-route-id="@article.Id">Read More</a> - <a class="text-danger" asp-controller="Articles" asp-action="Delete" asp-route-id="@article.Id">Reject Article</a> - <a class="text-danger" asp-action="ApproveArticle" asp-route-id="@article.Id">Approve Comment</a>
-                    </div>
-                </div>
-            </section>
-        }
-        <div class="section-title">
-            <h2>Comment Approvals</h2>
-        </div>
-        @foreach (Comment comment in (List<Comment>)ViewData["CommentsList"])
-        {
-            <section>
-                <div class="card card-big card-search">
-                    <div>
-                        <h2>@comment.AuthorName - @comment.Date</h2>
-                        <p>@comment.PostId</p>
-                        <p>@comment.Content</p>
-                        <a asp-action="Details" asp-route-id="@comment.Id">Read More</a> - <a class="text-danger" asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id">Reject Comment</a> - <a class="text-danger" asp-action="ApproveComment" asp-route-id="@comment.Id">Approve Comment</a>
-                    </div>
-                </div>
-            </section>
-        }
+    }
+    <div class="section-title">
+        <h2>Comment Approvals</h2>
     </div>
+    @foreach (Comment comment in (List<Comment>)ViewData["CommentsList"])
+    {
+        <section>
+            <div class="card card-big card-search">
+                <div>
+                    <h2>@comment.AuthorName - @comment.Date</h2>
+                    <p>@comment.PostId</p>
+                    <p>@comment.Content</p>
+                    <a asp-action="Details" asp-route-id="@comment.Id">Read More</a> - 
+                    <a class="text-danger" asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id">Reject Comment</a> - 
+                    <a class="text-danger" asp-action="ApproveComment" asp-route-id="@comment.Id">Approve Comment</a>
+                </div>
+            </div>
+        </section>
+    }
+</div>
