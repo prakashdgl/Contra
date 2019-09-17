@@ -4,7 +4,7 @@
 
 html {
     font-size: 14px;
-    font-family: Calibri, sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     position: relative;
     min-height: 100%;
 }
@@ -83,17 +83,17 @@ a {
     height: 10px;
 }
 
+.container {
+    max-width: 100%;
+}
+
 .content {
     margin-bottom: 100px;
 }
 
 .section-title {
     margin: 20px;
-    margin-top: 100px;
-}
-
-.section-title:first-of-type {
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 .section-title > h2 {
@@ -115,6 +115,11 @@ section {
     padding: 25px;
     position: relative;
     overflow: hidden;
+    transition-duration: 0.3s;
+}
+
+.story:hover {
+    transform: translate(15px, -15px);
 }
 
 .card img {
@@ -153,19 +158,6 @@ section {
     min-height: 50px; 
 }
 
-.card-search .image-container {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-}
-
-.card-search .image-container img {
-    min-height: 100%;
-    width: auto;
-}
-
 .banner {
     background-color: #fff;
     border-radius: 10px;
@@ -187,9 +179,18 @@ section {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+form {
+    width: 80%;
+    margin-left: 20px;
+}
+
+form section div {
+    width: 100%;
+    margin-right: 20px;
+}
+
+form section div:last-of-type {
+    margin-right: 0;
 }
 
 .footer {
@@ -200,6 +201,12 @@ button.accept-policy {
   line-height: 60px;
 }
 
+@media (min-width: 512px) {
+    .container {
+        max-width: 80%;
+    }
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -207,7 +214,7 @@ button.accept-policy {
     .header {
         height: 200px;
     }
-    .section-title:first-of-type {
+    .section-title {
         margin-top: 70px;
     }
     #border-gradient {
@@ -229,10 +236,13 @@ button.accept-policy {
     nav #links a {
         float: right;
     }
-    .card-search .image-container {
-        display: unset;
+    .container {
+        max-width: 900px;
     }
-    .card-search > div {
-        margin-left: 200px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
     }
 }

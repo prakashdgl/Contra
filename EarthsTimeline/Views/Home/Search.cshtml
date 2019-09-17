@@ -4,16 +4,13 @@
     ViewData["Title"] = "Search";
 }
 
-<div class="content container">
+<div class="content">
     <div class="section-title">
         <h2>Search</h2>
     </div>
 @foreach (var item in Model) {
     <section>
-        <div class="card card-big card-search">
-            <div class="image-container">
-                <img src=@Html.DisplayFor(modelItem => item.SmallThumbnailURL) />
-            </div>
+        <div class="card card-big card-search story">
             <div>
                 <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
                 <p>@Html.DisplayFor(modelItem => item.AuthorName) - @Html.DisplayFor(modelItem => item.Date)</p>

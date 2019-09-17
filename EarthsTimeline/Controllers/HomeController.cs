@@ -52,11 +52,13 @@ namespace EarthsTimeline.Controllers
 
         [HttpPost("/apply")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Apply([Bind("Id,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,Date,SummaryShort,SummaryLong,Content")] Article article)
+        public async Task<IActionResult> Apply([Bind("Id,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,SummaryShort,SummaryLong,Content")] Article article)
         {
             if (ModelState.IsValid)
             {
                 article.Approved = false;
+                article.Date = DateTime.Now;
+
                 _context.Add(article);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
