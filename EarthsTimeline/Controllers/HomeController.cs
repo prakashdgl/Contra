@@ -84,12 +84,13 @@ namespace EarthsTimeline.Controllers
 
         [HttpPost("/apply")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Apply([Bind("Id,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,SummaryShort,SummaryLong,Content")] Article article)
+        public async Task<IActionResult> Apply([Bind("Id,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,SummaryShort,Content")] Article article)
         {
             if (ModelState.IsValid)
             {
                 article.Approved = false;
                 article.Date = DateTime.Now;
+                article.SummaryLong = article.Content.Substring(0, 60) + "...";
 
                 _context.Add(article);
                 await _context.SaveChangesAsync();
