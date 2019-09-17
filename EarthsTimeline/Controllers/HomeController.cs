@@ -12,23 +12,25 @@ namespace EarthsTimeline.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly TimelineContext _context;
 
-        public HomeController(ILogger<HomeController> logger, TimelineContext context)
+        public HomeController(TimelineContext context)
         {
-            _logger = logger;
             _context = context;
         }
 
         [Route("/admin")]
         public async Task<IActionResult> Admin()
         {
+            List<Article> articles = await _context.Article.Where((x) => x.Approved == false).ToListAsync();
             ViewData["Articles"] = _context.Article.Count();
-            ViewData["ArticlesLeft"] = (await _context.Article.Where((x) => x.Approved == false).ToListAsync()).Count;
+            ViewData["ArticlesList"] = articles;
+            ViewData["ArticlesLeft"] = articles.Count;
 
+            List<Comment> comments = await _context.Comment.Where((x) => x.Approved == false).ToListAsync();
             ViewData["Comments"] = _context.Comment.Count();
-            ViewData["CommentsLeft"] = (await _context.Comment.Where((x) => x.Approved == false).ToListAsync()).Count;
+            ViewData["CommentsList"] = comments;
+            ViewData["CommentsLeft"] = comments.Count;
 
             return View();
         }
