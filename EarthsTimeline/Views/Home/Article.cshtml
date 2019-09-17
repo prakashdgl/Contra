@@ -24,7 +24,7 @@
         </section>
 
         <div class="section-title">
-            <h2>Comments</h2>
+            <h2>Comments (@ViewData["PendingComments"] Pending)</h2>
         </div>
         <section>
             <div class="card card-search">
@@ -36,19 +36,19 @@
                             <section>
                                 <div>
                                     <label class="control-label">MVLA Email ID (1000xxxxx)</label>
-                                    <input asp-for="AuthorId" class="form-control" />
+                                    <input asp-for="AuthorId" class="form-control" autocomplete="off" value="" />
                                     <span asp-validation-for="AuthorId" class="text-danger"></span>
                                 </div>
                                 <div>
                                     <label class="control-label">Name</label>
-                                    <input asp-for="AuthorName" class="form-control" autocomplete="off" />
-                                    <span asp-validation-for="AuthorName" class="text-danger" autocomplete="off"></span>
+                                    <input asp-for="AuthorName" class="form-control" autocomplete="off" value="" />
+                                    <span asp-validation-for="AuthorName" class="text-danger"></span>
                                 </div>
                             </section>
                         </div>
                         <div class="form-group">
                             <label asp-for="Content" class="control-label"></label>
-                            <input asp-for="Content" class="form-control" autocomplete="off"/>
+                            <input asp-for="Content" class="form-control" autocomplete="off" value="" />
                             <span asp-validation-for="Content" class="text-danger"></span>
                         </div>
                         <div class="form-group">

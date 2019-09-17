@@ -49,6 +49,7 @@ namespace EarthsTimeline.Controllers
 
             List<Comment> comments = await _context.Comment.Where(c => c.PostId == article.Id && c.Approved).ToListAsync();
             ViewData["Comments"] = comments;
+            ViewData["PendingComments"] = (await _context.Comment.Where(c => c.PostId == article.Id && !c.Approved).ToListAsync()).Count();
 
             return View(article);
         }
