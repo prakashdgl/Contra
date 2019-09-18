@@ -83,26 +83,19 @@ namespace EarthsTimeline.Controllers
             return View(article);
         }
 
-        // GET: Articles/Delete/5
+        [Route("/delete/{*id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (!LoggedIn()) return Redirect("~/login");
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var article = await _context.Article
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null)
-            {
-                return NotFound();
-            }
+            if (article == null) return NotFound();
 
             return View(article);
         }
 
-        // POST: Articles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

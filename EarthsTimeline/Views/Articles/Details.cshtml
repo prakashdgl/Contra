@@ -19,7 +19,8 @@
                 <p>Small Thumbnail - @Model.SmallThumbnailURL</p>
                 <p>
                     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-                    <a asp-action="Index">All Articles</a>
+                    <a asp-action="Index">All Articles</a> |
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="text-danger">Delete</a>
                 </p>
                 <br />
                 <p>@Html.Raw(Model.Content)</p>
