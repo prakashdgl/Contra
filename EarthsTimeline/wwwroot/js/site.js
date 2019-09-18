@@ -22,3 +22,7 @@ function onResize() {
         nav.style.height = "";
     }
 }
+
+function redirect(id) {
+    window.location = "article/"+id;
+}

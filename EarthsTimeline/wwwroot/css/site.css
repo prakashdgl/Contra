@@ -118,6 +118,10 @@ section {
     transition-duration: 0.3s;
 }
 
+.story {
+    cursor: pointer;
+}
+
 .story:hover {
     transform: translate(15px, -15px);
 }
