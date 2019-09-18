@@ -107,7 +107,7 @@ namespace EarthsTimeline.Controllers
             return Redirect("~/admin");
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             List<List<Article>> articles = new List<List<Article>>();
             Article placeholder = new Article
@@ -118,16 +118,22 @@ namespace EarthsTimeline.Controllers
             };
 
             Random rnd = new Random();
-            List<Article> top = await _context.Article.Where(x => x.Approved == true).ToListAsync();
+            List<Article> top = (from a in _context.Article
+                                 where a.Approved == true
+                                 orderby a.Date descending
+                                 select a).ToList();
             while (top.Count < 4)
             {
                 placeholder.SmallThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".png";
                 top.Add(placeholder);
             }
-
             articles.Add(top);
 
-            List<Article> editorial = await _context.Article.Where(x => x.Approved == true && x.SummaryShort.Contains("Editorial")).ToListAsync();
+            List<Article> editorial = (from a in _context.Article
+                                       where a.Approved == true && 
+                                       a.SummaryShort.Contains("Featured Editorial")
+                                       orderby a.Date descending
+                                       select a).ToList();
             while (editorial.Count < 4)
             {
                 placeholder.SmallThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".png";
@@ -146,9 +152,16 @@ namespace EarthsTimeline.Controllers
             var article = await _context.Article.FirstOrDefaultAsync(m => m.Id == id);
             if (article == null) return NotFound();
 
-            List<Comment> comments = await _context.Comment.Where(c => c.PostId == article.Id && c.Approved).ToListAsync();
+            List<Comment> comments = await (from c in _context.Comment
+                                            where c.PostId == article.Id
+                                            && c.Approved
+                                            orderby c.Date descending
+                                            select c).ToListAsync();
             ViewData["Comments"] = comments;
-            ViewData["PendingComments"] = (await _context.Comment.Where(c => c.PostId == article.Id && !c.Approved).ToListAsync()).Count();
+            ViewData["PendingComments"] = (await (from c in _context.Comment
+                                                  where c.PostId == article.Id
+                                                  && !c.Approved
+                                                  select c).ToListAsync()).Count;
 
             return View(article);
         }
@@ -170,14 +183,21 @@ namespace EarthsTimeline.Controllers
         }
 
         [Route("/search/{*param}")]
-        public async Task<IActionResult> Search(string param)
+        public IActionResult Search(string param)
         {
             if (string.IsNullOrEmpty(param))
-                return View(await _context.Article.Where((x) => x.Approved == true).ToListAsync());
+                return View((from a in _context.Article
+                             where a.Approved
+                             orderby a.Date descending
+                             select a).ToList());
 
             ViewData["Query"] = "- " + param;
-            return View(await _context.Article.Where((x) => x.Approved == true && 
-                       (x.Title.Contains(param) || x.SummaryShort.Contains(param))).ToListAsync());
+            return View((from a in _context.Article
+                         where a.Approved
+                         || a.Title.Contains(param)
+                         || a.SummaryShort.Contains(param)
+                         orderby a.Date descending
+                         select a).ToList());
         }
 
         [HttpGet("/apply")]

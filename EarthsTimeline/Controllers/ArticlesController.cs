@@ -41,9 +41,17 @@ namespace EarthsTimeline.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (article == null) return NotFound();
 
-            List<Comment> comments = await _context.Comment.Where(c => c.PostId == article.Id && c.Approved).ToListAsync();
+            List<Comment> comments = await (from c in _context.Comment
+                                            where c.PostId == article.Id
+                                            && c.Approved
+                                            orderby c.Date descending
+                                            select c).ToListAsync();
             ViewData["Comments"] = comments;
-            ViewData["PendingComments"] = (await _context.Comment.Where(c => c.PostId == article.Id && !c.Approved).ToListAsync()).Count();
+            ViewData["PendingComments"] = (await (from c in _context.Comment
+                                                  where c.PostId == article.Id
+                                                  && !c.Approved
+                                                  orderby c.Date descending
+                                                  select c).ToListAsync()).Count;
 
             return View(article);
         }
