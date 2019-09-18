@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace EarthsTimeline.Models
 {
@@ -18,7 +17,5 @@ namespace EarthsTimeline.Models
         public string SummaryLong { get; set; }
 
         public string Content { get; set; }
-
-        public IEnumerable<Comment> Comments { get; set; }
     }
 }
