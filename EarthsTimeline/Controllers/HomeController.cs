@@ -117,12 +117,22 @@ namespace EarthsTimeline.Controllers
                 Id = -1
             };
 
+            Random rnd = new Random();
             List<Article> top = await _context.Article.Where(x => x.Approved == true).ToListAsync();
-            while (top.Count < 4) top.Add(placeholder);
+            while (top.Count < 4)
+            {
+                placeholder.SmallThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".png";
+                top.Add(placeholder);
+            }
+
             articles.Add(top);
 
             List<Article> editorial = await _context.Article.Where(x => x.Approved == true && x.SummaryShort.Contains("Editorial")).ToListAsync();
-            while (editorial.Count < 4) editorial.Add(placeholder);
+            while (editorial.Count < 4)
+            {
+                placeholder.SmallThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".png";
+                editorial.Add(placeholder);
+            }
             articles.Add(editorial);
 
             return View(articles);

@@ -131,7 +131,7 @@ section {
     height: 100%;
 }
 
-.card img {
+.card .image-container {
     position: absolute;
     top: 0;
     left: 180px;
@@ -144,7 +144,7 @@ section {
     flex: 3 1;
 }
 
-.card-big img {
+.card-big .image-container {
     left: 200px;
 }
 
@@ -159,7 +159,7 @@ section {
     height: 100%;
 }
 
-.card-encapsulate img {
+.card-encapsulate .image-container {
     left: 0;
 }
 
@@ -184,6 +184,7 @@ section {
     top: 0;
     left: 0;
     min-width: 100%;
+    max-width: 150%;
     min-height: 100%;
     max-height: unset;
 }
