@@ -18,15 +18,26 @@ namespace EarthsTimeline.Controllers
             _context = context;
         }
 
+        private bool LoggedIn()
+        {
+            if (Request.Cookies.ContainsKey("AntiForge") &&
+                Request.Cookies["AntiForge"] == "UUDDLRLRBABAS")
+                return true;
+            else
+                return false;
+        }
+
         // GET: Articles
         public async Task<IActionResult> Index()
         {
+            if (!LoggedIn()) return Redirect("~/login");
             return View(await _context.Article.ToListAsync());
         }
 
         // GET: Articles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (!LoggedIn()) return Redirect("~/login");
             if (id == null)
             {
                 return NotFound();
@@ -42,31 +53,10 @@ namespace EarthsTimeline.Controllers
             return View(article);
         }
 
-        // GET: Articles/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Articles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Approved,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,Date,SummaryShort,SummaryLong,Content")] Article article)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(article);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(article);
-        }
-
         // GET: Articles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!LoggedIn()) return Redirect("~/login");
             if (id == null)
             {
                 return NotFound();
@@ -87,6 +77,7 @@ namespace EarthsTimeline.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Approved,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,Date,SummaryShort,SummaryLong,Content")] Article article)
         {
+            if (!LoggedIn()) return Redirect("~/login");
             if (id != article.Id)
             {
                 return NotFound();
@@ -118,6 +109,7 @@ namespace EarthsTimeline.Controllers
         // GET: Articles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!LoggedIn()) return Redirect("~/login");
             if (id == null)
             {
                 return NotFound();
@@ -138,6 +130,7 @@ namespace EarthsTimeline.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (!LoggedIn()) return Redirect("~/login");
             var article = await _context.Article.FindAsync(id);
             _context.Article.Remove(article);
             await _context.SaveChangesAsync();

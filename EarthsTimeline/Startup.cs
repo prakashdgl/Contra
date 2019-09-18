@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using EarthsTimeline.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace EarthsTimeline
 {
@@ -20,6 +21,12 @@ namespace EarthsTimeline
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddControllersWithViews();
 
             services.AddDbContext<TimelineContext>(options =>
@@ -41,6 +48,7 @@ namespace EarthsTimeline
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 

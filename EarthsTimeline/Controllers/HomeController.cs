@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using EarthsTimeline.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace EarthsTimeline.Controllers
 {
@@ -18,9 +19,49 @@ namespace EarthsTimeline.Controllers
             _context = context;
         }
 
+        private bool LoggedIn()
+        {
+            if (Request.Cookies.ContainsKey("AntiForge") &&
+                Request.Cookies["AntiForge"] == "UUDDLRLRBABAS")
+                return true;
+            else
+                return false;
+        }
+
+        [Route("/logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("AntiForge");
+            return Redirect("~/");
+        }
+
+        [Route("/login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string User)
+        {
+            if (User == "admin")
+            {
+                Response.Cookies.Append("AntiForge", "UUDDLRLRBABAS", 
+                        new CookieOptions() { Path = "/", Expires = DateTime.Now.AddDays(1), IsEssential = true } );
+                return Redirect("~/");
+            }
+            else
+            {
+                return View();
+            }
+
+        }
+
         [Route("/admin")]
         public async Task<IActionResult> Admin()
         {
+            if (!LoggedIn()) return Redirect("~/login");
+
             List<Article> articles = await _context.Article.Where((x) => x.Approved == false).ToListAsync();
             ViewData["Articles"] = _context.Article.Count();
             ViewData["ArticlesList"] = articles;
@@ -37,6 +78,8 @@ namespace EarthsTimeline.Controllers
 
         public IActionResult ApproveArticle(int id)
         {
+            if (!LoggedIn()) return Redirect("~/");
+
             Article article = _context.Article.Where(x => x.Id == id).FirstOrDefault();
             if (article != null)
             {
@@ -49,6 +92,8 @@ namespace EarthsTimeline.Controllers
 
         public IActionResult ApproveComment(int id)
         {
+            if (!LoggedIn()) return Redirect("~/");
+
             Comment comment = _context.Comment.Where(x => x.Id == id).FirstOrDefault();
             if (comment != null)
             {
