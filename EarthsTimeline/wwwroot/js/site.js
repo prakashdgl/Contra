@@ -1,4 +1,4 @@
-﻿var menu;
+﻿var menu, nav;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     menu = document.getElementById("links");

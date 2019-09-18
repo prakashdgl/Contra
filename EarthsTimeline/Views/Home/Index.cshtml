@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<List<Article>>
+
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -10,15 +12,15 @@
         <div class="card card-big story">
             <img src="../img/img01.png" />
             <div>
-                <h2>Card Title</h2>
-                <p>Card Text</p>
+                <h2>@Model.ElementAt(0)[0].Title</h2>
+                <p>@Model.ElementAt(0)[0].SummaryLong</p>
             </div>
         </div>
         <div class="card card-encapsulate story">
             <img src="../img/img02.png" />
             <div>
-                <h2>Card Title</h2>
-                <p>Card Text</p>
+                <h2>@Model.ElementAt(0)[1].Title</h2>
+                <p>@Model.ElementAt(0)[1].SummaryLong</p>
             </div>
         </div>
     </section>
@@ -26,15 +28,15 @@
         <div class="card card-encapsulate story">
             <img src="../img/img03.png" />
             <div>
-                <h2>Card Title</h2>
-                <p>Card Text</p>
+                <h2>@Model.ElementAt(0)[2].Title</h2>
+                <p>@Model.ElementAt(0)[2].SummaryLong</p>
             </div>
         </div>
         <div class="card card-big story">
             <img src="../img/img04.png" />
             <div>
-                <h2>Card Title</h2>
-                <p>Card Text</p>
+                <h2>@Model.ElementAt(0)[3].Title</h2>
+                <p>@Model.ElementAt(0)[3].SummaryLong</p>
             </div>
         </div>
     </section>
@@ -53,15 +55,15 @@
         <div class="card card-big card-encapsulate story">
             <img src="../img/img01.png" />
             <div>
-                <h2>Card Title</h2>
-                <p>Card Text</p>
+                <h2>@Model.ElementAt(1)[0].Title</h2>
+                <p>@Model.ElementAt(1)[0].SummaryLong</p>
             </div>
         </div>
         <div class="card story">
             <img src="../img/img03.png" />
             <div>
-                <h2>Card Title</h2>
-                <p>Card Text</p>
+                <h2>@Model.ElementAt(1)[1].Title</h2>
+                <p>@Model.ElementAt(1)[2].SummaryLong</p>
             </div>
         </div>
     </section>

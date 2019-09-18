@@ -122,6 +122,11 @@ section {
     transform: translate(15px, -15px);
 }
 
+.story > div {
+    width: 160px;
+    height: 100%;
+}
+
 .card img {
     position: absolute;
     top: 0;
@@ -156,6 +161,10 @@ section {
 
 .card-search {
     min-height: 50px; 
+}
+
+.card-search > div {
+    width: 100%;
 }
 
 .article .image-container {

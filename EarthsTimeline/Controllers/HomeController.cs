@@ -34,9 +34,25 @@ namespace EarthsTimeline.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<List<Article>> articles = new List<List<Article>>();
+            Article placeholder = new Article
+            {
+                Title = "Relevant Story",
+                SummaryLong = "Oops! Looks like we don't have enough articles to show you right now.",
+                Id = -1
+            };
+
+            List<Article> top = await _context.Article.Where(x => x.Approved == true).ToListAsync();
+            while (top.Count < 4) top.Add(placeholder);
+            articles.Add(top);
+
+            List<Article> editorial = await _context.Article.Where(x => x.Approved == true && x.SummaryShort.Contains("Editorial")).ToListAsync();
+            while (editorial.Count < 4) editorial.Add(placeholder);
+            articles.Add(editorial);
+
+            return View(articles);
         }
 
         [Route("/article/{*id}")]
