@@ -34,6 +34,31 @@ namespace EarthsTimeline.Controllers
             return View();
         }
 
+
+        public IActionResult ApproveArticle(int id)
+        {
+            Article article = _context.Article.Where(x => x.Id == id).FirstOrDefault();
+            if (article != null)
+            {
+                article.Approved = true;
+                _context.SaveChanges();
+            }
+
+            return Redirect("~/admin");
+        }
+
+        public IActionResult ApproveComment(int id)
+        {
+            Comment comment = _context.Comment.Where(x => x.Id == id).FirstOrDefault();
+            if (comment != null)
+            {
+                comment.Approved = true;
+                _context.SaveChanges();
+            }
+
+            return Redirect("~/admin");
+        }
+
         public async Task<IActionResult> Index()
         {
             List<List<Article>> articles = new List<List<Article>>();

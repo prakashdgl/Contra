@@ -28,6 +28,7 @@
     </section>
     <div class="section-title">
         <h2>Article Approvals</h2>
+        <a href="~/articles">View All Articles</a>
     </div>
     @foreach (Article article in (List<Article>)ViewData["ArticlesList"])
     {
@@ -47,6 +48,7 @@
     }
     <div class="section-title">
         <h2>Comment Approvals</h2>
+        <a href="~/comments">View All Comments</a>
     </div>
     @foreach (Comment comment in (List<Comment>)ViewData["CommentsList"])
     {
