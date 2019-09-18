@@ -4,8 +4,34 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
+<div class="content">
+    <div class="section-title">
+        <h2>Comment (Admin) - @Model.AuthorName (@Model.AuthorId) </h2>
+    </div>
+    @if (Model.Approved)
+    {
+        <section>
+            <div class="card card-search">
+                <div>
+                    <h3>@Model.Approved - @Model.Date</h3>
+                    <br />
+                    <p>@Model.Content</p>
+                </div>
+            </div>
+        </section>
+    }
+    else
+    {
+        <section>
+            <div class="card card-search">
+                <h2>This Article is Not Approved Yet</h2>
+                <p>This article has not been approved by our moderation team, and as such, cannot be displayed yet.</p>
+                <br />
+                <a href="~/">Meanwhile, check out some of our other articles.</a>
+            </div>
+        </section>
+    }
+</div>
 <div>
     <h4>Comment</h4>
     <hr />

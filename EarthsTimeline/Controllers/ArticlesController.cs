@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EarthsTimeline.Models;
 
@@ -27,61 +25,46 @@ namespace EarthsTimeline.Controllers
                 return false;
         }
 
-        // GET: Articles
         public async Task<IActionResult> Index()
         {
             if (!LoggedIn()) return Redirect("~/login");
             return View(await _context.Article.ToListAsync());
         }
 
-        // GET: Articles/Details/5
+        [Route("/articlemanager/{*id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (!LoggedIn()) return Redirect("~/login");
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var article = await _context.Article
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null)
-            {
-                return NotFound();
-            }
+            if (article == null) return NotFound();
+
+            List<Comment> comments = await _context.Comment.Where(c => c.PostId == article.Id && c.Approved).ToListAsync();
+            ViewData["Comments"] = comments;
+            ViewData["PendingComments"] = (await _context.Comment.Where(c => c.PostId == article.Id && !c.Approved).ToListAsync()).Count();
 
             return View(article);
         }
 
-        // GET: Articles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (!LoggedIn()) return Redirect("~/login");
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var article = await _context.Article.FindAsync(id);
-            if (article == null)
-            {
-                return NotFound();
-            }
+            if (article == null) return NotFound();
+
             return View(article);
         }
 
-        // POST: Articles/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Approved,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,Date,SummaryShort,SummaryLong,Content")] Article article)
         {
             if (!LoggedIn()) return Redirect("~/login");
-            if (id != article.Id)
-            {
-                return NotFound();
-            }
+            if (id != article.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -92,14 +75,8 @@ namespace EarthsTimeline.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArticleExists(article.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!ArticleExists(article.Id)) return NotFound();
+                    else throw;
                 }
                 return RedirectToAction(nameof(Index));
             }

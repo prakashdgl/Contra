@@ -18,7 +18,7 @@
                 <div>
                     <h3>@Model.AuthorName - @Model.Date.ToShortDateString()</h3>
                     <br />
-                    <p>@Model.Content</p>
+                    <p>@Html.Raw(Model.Content)</p>
                 </div>
             </div>
         </section>

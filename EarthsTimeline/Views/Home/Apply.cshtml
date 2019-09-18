@@ -4,6 +4,10 @@
     ViewData["Title"] = "Apply";
 }
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
+
 <div class="content">
     <div class="section-title">
         <h2>Submit an Article</h2>
@@ -21,24 +25,24 @@
                 </div>
                 <div>
                     <label class="control-label">Author Name(s)</label>
-                    <input asp-for="AuthorName" class="form-control" />
+                    <input asp-for="AuthorName" class="form-control" maxlength="50" />
                     <span asp-validation-for="AuthorName" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="Title" class="control-label"></label>
-                    <input asp-for="Title" class="form-control" />
+                    <input asp-for="Title" class="form-control" maxlength="40" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
             </section>
         </div>
         <div class="form-group">
-            <label asp-for="LargeThumbnailURL" class="control-label"></label>
+            <label class="control-label">Large Thumbnail URL</label>
             <input asp-for="LargeThumbnailURL" class="form-control" />
             <span asp-validation-for="LargeThumbnailURL" class="text-danger"></span>
-            <p>Please provide a link to an image (not a file) to use as a thumbnail.</p>
+            <p>Please provide a link to an image to use as a thumbnail.</p>
         </div>
         <div class="form-group">
-            <label asp-for="SmallThumbnailURL" class="control-label"></label>
+            <label class="control-label">Small Thumbnail URL</label>
             <input asp-for="SmallThumbnailURL" class="form-control" />
             <span asp-validation-for="SmallThumbnailURL" class="text-danger"></span>
             <p>If there is an alternate small image you'd like to use for certain parts of this site, you can insert a second url here.</p>
@@ -46,16 +50,22 @@
         <div class="form-group">
             <label class="control-label">Article Tags</label>
             <input asp-for="SummaryShort" class="form-control" />
-            <p>We recommend using tags like "News" or "Sports" as those get put into special categories for better viewability.</p>
+            <p>Use tags like "News" or "Sports" to get indexed in our search function.</p>
             <span asp-validation-for="SummaryShort" class="text-danger"></span>
         </div>
         <div class="form-group">
+            <label class="control-label">Summary</label>
+            <input asp-for="SummaryLong" class="form-control" maxlength="60" />
+            <p>A short summary of your article that will appear in search results and on the front page.</p>
+            <span asp-validation-for="SummaryLong" class="text-danger"></span>
+        </div>
+        <div class="form-group">
             <label asp-for="Content" class="control-label"></label>
-            <input asp-for="Content" class="form-control" />
+            <textarea asp-for="Content" id="summernote">Paste your article in here!</textarea>
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input type="submit" value="Submit Article" class="btn btn-primary" />
+            <input type="submit" value="Submit Article" class="btn btn-primary" onmouseover="generateSummary()" />
             <a href="~/">
                 <input type="button" value="Cancel" class="btn btn-outline-dark" />
             </a>

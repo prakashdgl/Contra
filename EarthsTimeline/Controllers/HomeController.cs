@@ -47,7 +47,7 @@ namespace EarthsTimeline.Controllers
         [HttpPost]
         public IActionResult Login(string User)
         {
-            if (User == "admin")
+            if (User == "epstein, please no")
             {
                 Response.Cookies.Append("AntiForge", "UUDDLRLRBABAS", 
                         new CookieOptions() { Path = "/", Expires = DateTime.Now.AddDays(1), IsEssential = true } );
@@ -188,16 +188,14 @@ namespace EarthsTimeline.Controllers
 
         [HttpPost("/apply")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Apply([Bind("Id,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,SummaryShort,Content")] Article article)
+        public async Task<IActionResult> Apply([Bind("Id,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,SummaryShort,SummaryLong,Content")] Article article)
         {
             if (ModelState.IsValid)
             {
+                if (article.SummaryLong.Length > 60) 
+                    article.SummaryLong = article.SummaryLong.Substring(0, 60) + "...";
                 article.Approved = false;
                 article.Date = DateTime.Now;
-                if (article.Content.Length >= 60)
-                    article.SummaryLong = article.Content.Substring(0, 60) + "...";
-                else
-                    article.SummaryLong = article.Content;
 
                 _context.Add(article);
                 await _context.SaveChangesAsync();

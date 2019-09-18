@@ -4,57 +4,73 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="content">
+    <div class="section-title">
+        <h2>Article (Admin) - @Html.DisplayFor(model => model.Title)</h2>
+    </div>
+    <section>
+        <div class="card article">
+            <span class="image-container">
+                <img src="@Model.LargeThumbnailURL" />
+            </span>
+            <div>
+                <h3>@Model.AuthorName (@Model.AuthorId) - @Model.Date</h3>
+                <p>Large Thumbnail - @Model.LargeThumbnailURL</p>
+                <p>Small Thumbnail - @Model.SmallThumbnailURL</p>
+                <p>
+                    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                    <a asp-action="Index">All Articles</a>
+                </p>
+                <br />
+                <p>@Html.Raw(Model.Content)</p>
+            </div>
+        </div>
+    </section>
 
-<div>
-    <h4>Article</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AuthorId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AuthorId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AuthorName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AuthorName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LargeThumbnailURL)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LargeThumbnailURL)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SmallThumbnailURL)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SmallThumbnailURL)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="section-title">
+        <h2>Comments (@ViewData["PendingComments"] Pending)</h2>
+    </div>
+    <section>
+        <div class="card card-search">
+            <div>
+                <form asp-action="Comment">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" name="PostId" value="@Model.Id" />
+                    <div class="form-group">
+                        <section>
+                            <div>
+                                <label class="control-label">MVLA Email ID (1000xxxxx)</label>
+                                <input asp-for="AuthorId" class="form-control" autocomplete="off" value="" />
+                                <span asp-validation-for="AuthorId" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <label class="control-label">Name</label>
+                                <input asp-for="AuthorName" class="form-control" autocomplete="off" value="" />
+                                <span asp-validation-for="AuthorName" class="text-danger"></span>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Content" class="control-label"></label>
+                        <input asp-for="Content" class="form-control" autocomplete="off" value="" />
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit Comment" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
+    {
+        <section>
+            <div class="card card-search">
+                <div>
+                    <h3>@comment.AuthorName - @comment.Date</h3>
+                    <p>@comment.Content</p>
+                </div>
+            </div>
+        </section>
+    }
 </div>

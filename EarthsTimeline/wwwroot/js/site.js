@@ -3,6 +3,7 @@
 document.addEventListener("DOMContentLoaded", function (event) {
     menu = document.getElementById("links");
     nav = document.getElementById("nav");
+    $('#summernote').summernote({ height: 300 });
 });
 
 function showMenu() {
