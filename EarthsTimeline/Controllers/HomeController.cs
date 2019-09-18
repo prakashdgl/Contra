@@ -36,11 +36,14 @@ namespace EarthsTimeline.Controllers
         }
 
         [Route("/login")]
+        [HttpGet]
         public IActionResult Login()
         {
+            if (LoggedIn()) return Redirect("~/admin");
             return View();
         }
 
+        [Route("/login")]
         [HttpPost]
         public IActionResult Login(string User)
         {
@@ -48,7 +51,7 @@ namespace EarthsTimeline.Controllers
             {
                 Response.Cookies.Append("AntiForge", "UUDDLRLRBABAS", 
                         new CookieOptions() { Path = "/", Expires = DateTime.Now.AddDays(1), IsEssential = true } );
-                return Redirect("~/");
+                return Redirect("~/admin");
             }
             else
             {
