@@ -19,6 +19,7 @@ nav {
     height: 50px;
     line-height: 50px;
     position: relative;
+    padding: 0 15px;
 }
 
 nav #links {
@@ -85,6 +86,7 @@ a {
 
 .container {
     max-width: 100%;
+    padding: 0;
 }
 
 .content {
