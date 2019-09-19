@@ -175,6 +175,10 @@ section {
     left: 0;
 }
 
+.encapsulate-big > div {
+    width: 200px;
+}
+
 .card-search {
     min-height: 50px; 
 }

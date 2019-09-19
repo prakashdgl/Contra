@@ -144,6 +144,12 @@ namespace EarthsTimeline.Controllers
             return View(articles);
         }
 
+        [Route("/about")]
+        public IActionResult About()
+        {
+            return View();
+        }
+
         [Route("/article/{*id}")]
         public async Task<IActionResult> Article(int? id)
         {
