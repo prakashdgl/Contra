@@ -105,6 +105,7 @@ namespace EarthsTimeline.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Route("/delete/{*id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
