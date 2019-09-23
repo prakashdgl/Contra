@@ -34,7 +34,7 @@
     <section>
         <div class="card card-search">
             <div>
-                <form asp-action="Comment">
+                <form asp-controller="Home" asp-action="Comment">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" name="PostId" value="@Model.Id" />
                     <div class="form-group">
