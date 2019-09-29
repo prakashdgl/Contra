@@ -20,48 +20,46 @@
             <section>
                 <div>
                     <label class="control-label">MVLA Email ID (1000xxxxx)</label>
-                    <input asp-for="AuthorId" class="form-control" />
+                    <input asp-for="AuthorId" class="form-control" placeholder="Ex: 100023457@mvla.net"/>
                     <span asp-validation-for="AuthorId" class="text-danger"></span>
                 </div>
                 <div>
                     <label class="control-label">Author Name(s)</label>
-                    <input asp-for="AuthorName" class="form-control" maxlength="50" />
+                    <input asp-for="AuthorName" class="form-control" maxlength="50" placeholder="Your Name" />
                     <span asp-validation-for="AuthorName" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="Title" class="control-label"></label>
-                    <input asp-for="Title" class="form-control" maxlength="40" />
+                    <input asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
             </section>
         </div>
         <div class="form-group">
             <label class="control-label">Large Thumbnail URL</label>
-            <input asp-for="LargeThumbnailURL" class="form-control" />
+            <input asp-for="LargeThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr" />
             <span asp-validation-for="LargeThumbnailURL" class="text-danger"></span>
-            <p>Please provide a link to an image to use as a thumbnail.</p>
+            <p>Please provide an external URL to an image to use as a thumbnail.</p>
         </div>
         <div class="form-group">
             <label class="control-label">Small Thumbnail URL</label>
-            <input asp-for="SmallThumbnailURL" class="form-control" />
+            <input asp-for="SmallThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr" />
             <span asp-validation-for="SmallThumbnailURL" class="text-danger"></span>
-            <p>If there is an alternate small image you'd like to use for certain parts of this site, you can insert a second url here.</p>
+            <p>If there is an alternate small image you'd like to use for certain parts of this site, you can insert a second URL here.</p>
         </div>
         <div class="form-group">
             <label class="control-label">Article Tags</label>
-            <input asp-for="SummaryShort" class="form-control" />
-            <p>Use tags like "News" or "Sports" to get indexed in our search function.</p>
+            <input asp-for="SummaryShort" class="form-control" placeholder="e.g. News, Sports, Opinion" />
             <span asp-validation-for="SummaryShort" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label class="control-label">Summary</label>
-            <input asp-for="SummaryLong" class="form-control" maxlength="60" />
-            <p>A short summary of your article that will appear in search results and on the front page.</p>
+            <input asp-for="SummaryLong" class="form-control" maxlength="60" placeholder="A short summary of your article about this length." />
             <span asp-validation-for="SummaryLong" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Content" class="control-label"></label>
-            <textarea asp-for="Content" id="summernote">Paste your article in here!</textarea>
+            <textarea asp-for="Content" id="summernote"></textarea>
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
         <div class="form-group">

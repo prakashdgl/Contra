@@ -63,7 +63,7 @@
             <section>
                 <div class="card card-search">
                     <div>
-                        <h3>@comment.AuthorName - @comment.Date</h3>
+                        <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
                         <p>@comment.Content</p>
                     </div>
                 </div>

@@ -53,11 +53,7 @@ namespace EarthsTimeline.Controllers
                         new CookieOptions() { Path = "/", Expires = DateTime.Now.AddDays(1), IsEssential = true } );
                 return Redirect("~/admin");
             }
-            else
-            {
-                return View();
-            }
-
+            else return View();
         }
 
         [Route("/admin")]
@@ -77,7 +73,6 @@ namespace EarthsTimeline.Controllers
 
             return View();
         }
-
 
         public IActionResult ApproveArticle(int id)
         {

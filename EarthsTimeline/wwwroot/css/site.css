@@ -141,14 +141,14 @@ section {
 }
 
 .story > div {
-    width: 160px;
+    width: 200px;
     height: 100%;
 }
 
 .card .image-container {
     position: absolute;
     top: 0;
-    left: 180px;
+    left: 220px;
     bottom: 0;
     min-width: 100%;
     max-height: 100%;
@@ -159,7 +159,7 @@ section {
 }
 
 .card-big .image-container {
-    left: 200px;
+    left: 240px;
 }
 
 .card-encapsulate {
@@ -169,7 +169,7 @@ section {
 .card-encapsulate > div {
     backdrop-filter: blur(2px);
     z-index: 69;
-    width: 160px;
+    width: 200px;
     height: 100%;
 }
 
