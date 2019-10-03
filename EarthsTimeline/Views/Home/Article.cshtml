@@ -16,7 +16,13 @@
                     <img src="@Model.LargeThumbnailURL" />
                 </span>
                 <div>
-                    <h3>@Model.AuthorName - @Model.Date.ToShortDateString()</h3>
+                    <h3>@Model.AuthorName - @Model.Date.ToShortDateString() - 
+                        <span class="social-links">
+                            <a href="https://twitter.com/intent/tweet?text=@System.Net.WebUtility.UrlEncode(Model.Title)+@(System.Net.WebUtility.UrlEncode(Context.Request.Host+Context.Request.Path))"><img src="~/img/twitter.svg" alt="Share on Twitter" /></a>
+                            <a href="https://facebook.com/sharer/sharer.php?u=@(System.Net.WebUtility.UrlEncode(Context.Request.Host+Context.Request.Path))"><img src="~/img/facebook.svg" alt="Share on Facebook" /></a>
+                            <a href="#discuss"><img src="~/img/discuss.svg" alt="Discuss Here" /></a>
+                        </span>
+                    </h3>
                     <br />
                     <p>@Html.Raw(Model.Content)</p>
                 </div>
@@ -25,6 +31,7 @@
 
         <div class="section-title">
             <h2>Comments (@ViewData["PendingComments"] Pending)</h2>
+            <a name="discuss"></a>
         </div>
         <section>
             <div class="card card-search">
