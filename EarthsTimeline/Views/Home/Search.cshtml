@@ -10,11 +10,11 @@
     </div>
 @foreach (var item in Model) {
     <section>
-        <div class="card card-big card-search">
+        <div class="card card-big card-search story">
             <div>
                 <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
                 <p>@Html.DisplayFor(modelItem => item.AuthorName) - @Html.DisplayFor(modelItem => item.Date)</p>
-                <hr />
+                <br />
                 <p>@Html.DisplayFor(modelItem => item.SummaryLong)</p>
                 <a asp-action="Article" asp-route-id="@item.Id">Read More</a>
             </div>

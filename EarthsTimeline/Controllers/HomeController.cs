@@ -193,11 +193,10 @@ namespace EarthsTimeline.Controllers
                              select a).ToList());
 
             ViewData["Query"] = "- " + param;
-            param = param.ToLower();
             return View((from a in _context.Article
                          where a.Approved
-                         || a.Title.ToLower().Contains(param)
-                         || a.SummaryShort.ToLower().Contains(param)
+                         || a.Title.Contains(param)
+                         || a.SummaryShort.Contains(param)
                          orderby a.Date descending
                          select a).ToList());
         }
