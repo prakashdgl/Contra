@@ -11,12 +11,11 @@
     <section>
         <div class="card article">
             <span class="image-container">
-                <img src="@Model.LargeThumbnailURL" />
+                <img src="@Model.ThumbnailURL" />
             </span>
             <div>
                 <h3>@Model.AuthorName (@Model.AuthorId) - @Model.Date</h3>
-                <p>Large Thumbnail - @Model.LargeThumbnailURL</p>
-                <p>Small Thumbnail - @Model.SmallThumbnailURL</p>
+                <p>Thumbnail URL - @Model.ThumbnailURL</p>
                 <p>
                     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
                     <a asp-action="Index">All Articles</a> |

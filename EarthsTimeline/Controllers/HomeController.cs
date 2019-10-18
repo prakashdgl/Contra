@@ -119,7 +119,7 @@ namespace EarthsTimeline.Controllers
                                  select a).ToList();
             while (top.Count < 4)
             {
-                placeholder.SmallThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".png";
+                placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".png";
                 top.Add(placeholder);
             }
             articles.Add(top);
@@ -131,7 +131,7 @@ namespace EarthsTimeline.Controllers
                                        select a).ToList();
             while (editorial.Count < 4)
             {
-                placeholder.SmallThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".png";
+                placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".png";
                 editorial.Add(placeholder);
             }
             articles.Add(editorial);

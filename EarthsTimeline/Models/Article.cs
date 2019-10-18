@@ -8,8 +8,7 @@ namespace EarthsTimeline.Models
         public bool Approved { get; set; }
         public int AuthorId { get; set; }
         public string AuthorName { get; set; }
-        public string LargeThumbnailURL { get; set; }
-        public string SmallThumbnailURL { get; set; }
+        public string ThumbnailURL { get; set; }
 
         public string Title { get; set; }
         public DateTime Date { get; set; }

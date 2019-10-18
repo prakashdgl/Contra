@@ -13,12 +13,11 @@
     <section>
         <div class="card article">
             <span class="image-container">
-                <img src="@Model.LargeThumbnailURL" />
+                <img src="@Model.ThumbnailURL" />
             </span>
             <div>
                 <h3>@Model.AuthorName (@Model.AuthorId) - @Model.Date</h3>
-                <p>Large Thumbnail - @Model.LargeThumbnailURL</p>
-                <p>Small Thumbnail - @Model.SmallThumbnailURL</p>
+                <p>Thumbnail URL - @Model.ThumbnailURL</p>
                 <form asp-action="Delete" class="m-0">
                     <input type="hidden" asp-for="Id" />
                     <input type="submit" value="Delete" class="btn btn-danger" /> |
