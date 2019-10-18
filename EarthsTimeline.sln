@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29230.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EarthsTimeline", "EarthsTimeline\EarthsTimeline.csproj", "{47131690-1963-4C00-896A-B3761AA09053}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isomorph", "Isomorph\Isomorph.csproj", "{631CF690-68DD-43FA-9268-0686C86D6B79}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{47131690-1963-4C00-896A-B3761AA09053}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47131690-1963-4C00-896A-B3761AA09053}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47131690-1963-4C00-896A-B3761AA09053}.Release|Any CPU.Build.0 = Release|Any CPU
-		{631CF690-68DD-43FA-9268-0686C86D6B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{631CF690-68DD-43FA-9268-0686C86D6B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{631CF690-68DD-43FA-9268-0686C86D6B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{631CF690-68DD-43FA-9268-0686C86D6B79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
