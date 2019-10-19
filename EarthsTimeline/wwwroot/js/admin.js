@@ -3,6 +3,7 @@
 function confirmAction(sender, route) {
     if (!(lastSender === null || lastSenderContent === null) && !handled)
         cancelAction();
+
     lastSender = sender.parentNode;
     lastSenderContent = sender.parentNode.innerHTML;
 
