@@ -110,9 +110,13 @@ namespace EarthsTimeline.Controllers
             if (id == null) return "Requested resource not found.";
 
             Article article = await _context.Article.FindAsync(id);
+            List<Comment> comments = (from c in _context.Comment
+                                      where c.PostId == id
+                                      select c).ToList();
             if (article != null)
             {
                 _context.Article.Remove(article);
+                _context.Comment.RemoveRange(comments);
                 await _context.SaveChangesAsync();
             }
             else return $"Article {id} does not exist in the database.";

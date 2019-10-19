@@ -24,7 +24,7 @@
                     @if (Model.Approved)
                     {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@Model.Id')">Delist</a> }
                     else
-                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@Model.Id')">Approve</a>}
+                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@Model.Id')">Approve</a> }
                 </div>
                 <br />
                 <p>@Html.Raw(Model.Content)</p>
