@@ -103,6 +103,31 @@ namespace EarthsTimeline.Controllers
             return View(comment);
         }
 
+        // GET: Comments/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (!LoggedIn()) return Redirect("~/login");
+            if (id == null) return NotFound();
+
+            var comment = await _context.Comment
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (comment == null) return NotFound();
+
+            return View(comment);
+        }
+
+        // POST: Comments/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (!LoggedIn()) return Redirect("~/login");
+            var comment = await _context.Comment.FindAsync(id);
+            _context.Comment.Remove(comment);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
         private bool CommentExists(int id)
         {
             return _context.Comment.Any(e => e.Id == id);

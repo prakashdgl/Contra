@@ -28,20 +28,6 @@ namespace EarthsTimeline.Controllers
                 return false;
         }
 
-        public IActionResult ApproveArticle(int id)
-        {
-            if (!LoggedIn()) return Redirect("~/");
-
-            Article article = _context.Article.Where(x => x.Id == id).FirstOrDefault();
-            if (article != null)
-            {
-                article.Approved = true;
-                _context.SaveChanges();
-            }
-
-            return Redirect("~/admin");
-        }
-
         public IActionResult Index()
         {
             List<List<Article>> articles = new List<List<Article>>();
