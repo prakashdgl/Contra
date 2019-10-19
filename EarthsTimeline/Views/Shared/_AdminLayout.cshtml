@@ -1,0 +1,46 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Earth's Timeline</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body onresize="onResize()">
+    <header>
+        <nav id="nav">
+            <div class="container">
+                <a class="navbar-brand" href="~/">Timeline</a>
+                <button id="menu-button" onclick="showMenu()">Menu</button>
+                <div id="links">
+                    <a class="nav-link text-light" href="~/search/News">News</a>
+                    <a class="nav-link text-light" href="~/search/Sports">Sports</a>
+                    <a class="nav-link text-light" href="~/search/Editorial">Editorial</a>
+                    <a class="nav-link text-light" href="~/search/Opinion">Opinion</a>
+                    <a class="nav-link text-light" href="~/search/Arts">Arts & Culture</a>
+                    <a class="nav-link text-light" href="https://www.paypal.me/">Donate</a>
+                    <a class="nav-link text-light" href="~/apply">Submit an Article</a>
+                </div>
+            </div>
+        </nav>
+        <div class="header">
+            <img src="~/img/banner.svg" />
+            <div id="border-gradient"></div>
+        </div>
+    </header>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - Earth's Timeline - <a href="~/privacy">Privacy</a> - <a href="~/about">About</a> - <a href="~/login">Admin</a>
+        </div>
+    </footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/admin.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

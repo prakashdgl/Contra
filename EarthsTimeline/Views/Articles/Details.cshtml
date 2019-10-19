@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "_AdminLayout";
 }
 
 <div class="content">
@@ -16,11 +17,15 @@
             <div>
                 <h3>@Model.AuthorName (@Model.AuthorId) - @Model.Date</h3>
                 <p>Thumbnail URL - @Model.ThumbnailURL</p>
-                <p>
+                <div class="actions">
                     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
                     <a asp-action="Index">All Articles</a> |
-                    <a asp-action="Delete" asp-route-id="@Model.Id" class="text-danger">Delete</a>
-                </p>
+                    <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@Model.Id')">Remove</a> -
+                    @if (Model.Approved)
+                    {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@Model.Id')">Delist</a> }
+                    else
+                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@Model.Id')">Approve</a>}
+                </div>
                 <br />
                 <p>@Html.Raw(Model.Content)</p>
             </div>
