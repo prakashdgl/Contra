@@ -1,7 +1,7 @@
 ﻿var lastSender = null, lastSenderContent = null, handled = false;
 
 function confirmAction(sender, route) {
-    if (!(lastSender === null || lastSenderContent === null) && !handled)
+    if (lastSender !== null && !handled)
         cancelAction();
 
     lastSender = sender.parentNode;
