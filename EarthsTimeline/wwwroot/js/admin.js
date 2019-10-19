@@ -15,6 +15,7 @@ function confirmAction(sender, route) {
 
 function cancelAction() {
     lastSender.innerHTML = lastSenderContent;
+    handled = false;
 }
 
 function postToAPI(route) {

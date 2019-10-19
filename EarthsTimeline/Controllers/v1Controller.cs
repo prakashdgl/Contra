@@ -31,6 +31,22 @@ namespace EarthsTimeline.Controllers
             return $"Approved comment {id} successfully!";
         }
 
+        [Route("comment/delist/{*id}")]
+        public async Task<string> CommentDelist(int? id)
+        {
+            if (id == null) return "Requested resource not found.";
+
+            Comment comment = await _context.Comment.FindAsync(id);
+            if (comment != null)
+            {
+                comment.Approved = false;
+                await _context.SaveChangesAsync();
+            }
+            else return $"Comment {id} does not exist in the database.";
+
+            return $"Delisted comment {id} successfully!";
+        }
+
         [Route("comment/delete/{*id}")]
         public async Task<string> CommentDelete(int? id)
         {
@@ -61,6 +77,22 @@ namespace EarthsTimeline.Controllers
             else return $"Article {id} does not exist in the database.";
 
             return $"Approved article {id} successfully!";
+        }
+
+        [Route("article/delist/{*id}")]
+        public async Task<string> ArticleDelist(int? id)
+        {
+            if (id == null) return "Requested resource not found.";
+
+            Article article = await _context.Article.FindAsync(id);
+            if (article != null)
+            {
+                article.Approved = false;
+                await _context.SaveChangesAsync();
+            }
+            else return $"Article {id} does not exist in the database.";
+
+            return $"Delisted article {id} successfully!";
         }
 
         [Route("article/delete/{*id}")]

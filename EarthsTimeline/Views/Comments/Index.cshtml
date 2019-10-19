@@ -4,63 +4,33 @@
     ViewData["Title"] = "Comments";
 }
 
+<script src="~/js/admin.js"></script>
+
 <div class="content">
     <div class="section-title">
         <h2>All Comments (Admin)</h2>
     </div>
     <br />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Approved)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PostId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AuthorId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AuthorName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Content)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Approved)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PostId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AuthorId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AuthorName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Content)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+    @foreach (var item in Model)
+    {
+        <section>
+            <div class="card card-big card-search">
+                <div>
+                    <h5>@item.AuthorName (@item.AuthorId) - @item.Date</h5>
+                    <p>Approved: @Html.DisplayFor(modelItem => item.Approved) (Attached to Post @item.PostId)</p>
+                    <p>@Html.DisplayFor(modelItem => item.Content)</p>
+                    <div class="actions">
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-controller="Home" asp-action="Article" asp-route-id="@item.PostId">Read Article</a> -
+                        <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delete/@item.Id')">Remove</a> -
+                        @if (item.Approved)
+                        {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delist/@item.Id')">Delist</a> }
+                        else
+                        { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/approve/@item.Id')">Approve</a>}
+                    </div>
+                </div>
+            </div>
+        </section>
     }
-        </tbody>
-    </table>
 </div>
