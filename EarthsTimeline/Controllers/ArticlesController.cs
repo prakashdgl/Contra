@@ -69,7 +69,7 @@ namespace EarthsTimeline.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Approved,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,Date,SummaryShort,SummaryLong,Content")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Approved,AuthorId,AuthorName,ThumbnailURL,Title,Date,SummaryShort,SummaryLong,Content")] Article article)
         {
             if (!LoggedIn()) return Redirect("~/login");
             if (id != article.Id) return NotFound();

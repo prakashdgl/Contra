@@ -136,12 +136,14 @@ namespace EarthsTimeline.Controllers
 
         [HttpPost("/apply")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Apply([Bind("Id,AuthorId,AuthorName,LargeThumbnailURL,SmallThumbnailURL,Title,SummaryShort,SummaryLong,Content")] Article article)
+        public async Task<IActionResult> Apply([Bind("Id,AuthorId,AuthorName,ThumbnailURL,Title,SummaryShort,SummaryLong,Content")] Article article)
         {
             if (ModelState.IsValid)
             {
                 if (article.SummaryLong.Length > 60) 
                     article.SummaryLong = article.SummaryLong.Substring(0, 60) + "...";
+                if (string.IsNullOrWhiteSpace(article.ThumbnailURL))
+                    article.ThumbnailURL = "../img/img05.png";
                 article.Approved = false;
                 article.Date = DateTime.Now;
 

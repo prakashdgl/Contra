@@ -142,7 +142,7 @@ section {
 }
 
 .story:hover {
-    transform: translate(15px, -15px);
+    transform: translate(8px, -8px);
 }
 
 .story > div {
@@ -209,7 +209,7 @@ section {
     min-width: 100%;
     max-width: 150%;
     min-height: 100%;
-    max-height: unset;
+    max-height: 150%;
 }
 
 .article > div {
