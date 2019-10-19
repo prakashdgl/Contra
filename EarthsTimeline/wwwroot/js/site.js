@@ -50,6 +50,8 @@ function loadContent(query) {
                 if (http.responseText === "" && enabled) {
                     enabled = false;
                     setTimeout(function () {
+                        if (loadTarget.innerHTML === "")
+                            document.getElementById("loadSection").style.display = "none";
                         loadTarget.innerHTML += "<div class='section-title'><h2>No more content! :(</h2></div>";
                     }, 100);
                 }
