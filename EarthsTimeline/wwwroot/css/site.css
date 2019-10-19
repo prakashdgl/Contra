@@ -55,6 +55,10 @@ a {
     color: #6daedb;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .header {
     background-color: #000;
     position: relative;

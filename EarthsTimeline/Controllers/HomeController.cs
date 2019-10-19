@@ -42,20 +42,6 @@ namespace EarthsTimeline.Controllers
             return Redirect("~/admin");
         }
 
-        public IActionResult ApproveComment(int id)
-        {
-            if (!LoggedIn()) return Redirect("~/");
-
-            Comment comment = _context.Comment.Where(x => x.Id == id).FirstOrDefault();
-            if (comment != null)
-            {
-                comment.Approved = true;
-                _context.SaveChanges();
-            }
-
-            return Redirect("~/admin");
-        }
-
         public IActionResult Index()
         {
             List<List<Article>> articles = new List<List<Article>>();

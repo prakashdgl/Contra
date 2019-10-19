@@ -4,6 +4,8 @@
     ViewData["Title"] = "Admin";
 }
 
+<script src="~/js/admin.js"></script>
+
 <div class="content">
     <div class="section-title">
         <h2>Aministrator Panel</h2>
@@ -42,8 +44,8 @@
                     <p>@article.AuthorName - @article.Date</p>
                     <br />
                     <p>@article.SummaryLong</p>
-                    <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id">Read More</a> - 
-                    <a class="text-danger" asp-controller="Articles" asp-action="Delete" asp-route-id="@article.Id">Reject Article</a> - 
+                    <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id">Read More</a> -
+                    <a class="text-danger" asp-controller="Articles" asp-action="Delete" asp-route-id="@article.Id">Reject Article</a> -
                     <a class="text-danger" asp-action="ApproveArticle" asp-route-id="@article.Id">Approve Article</a>
                 </div>
             </div>
@@ -61,9 +63,11 @@
                     <h2>@comment.AuthorName - @comment.Date</h2>
                     <p>Attached to Post @comment.PostId</p>
                     <p>@comment.Content</p>
-                    <a asp-action="Article" asp-route-id="@comment.PostId">Read Article</a> - 
-                    <a class="text-danger" asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id">Reject Comment</a> - 
-                    <a class="text-danger" asp-action="ApproveComment" asp-route-id="@comment.Id">Approve Comment</a>
+                    <div class="actions">
+                        <a asp-controller="Home" asp-action="Article" asp-route-id="@comment.PostId">Read Article</a> -
+                        <a class="text-danger" asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id">Reject Comment</a> -
+                        <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/approve/@comment.Id')">Approve Comment</a>
+                    </div>
                 </div>
             </div>
         </section>
