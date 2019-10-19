@@ -20,17 +20,35 @@ namespace EarthsTimeline.Controllers
         }
 
         [Route("comment/approve/{*id}")]
-        public string CommentApprove(int id)
+        public async Task<string> CommentApprove(int? id)
         {
-            Comment comment = _context.Comment.Where(x => x.Id == id).FirstOrDefault();
+            if (id == null) return "Requested resource not found.";
+
+            Comment comment = await _context.Comment.FindAsync(id);
             if (comment != null)
             {
                 comment.Approved = true;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             else return $"Comment {id} does not exist in the database.";
 
             return $"Approved comment {id} successfully!";
+        }
+
+        [Route("comment/delete/{*id}")]
+        public async Task<string> CommentDelete(int? id)
+        {
+            if (id == null) return "Requested resource not found.";
+
+            Comment comment = await _context.Comment.FindAsync(id);
+            if (comment != null)
+            {
+                _context.Comment.Remove(comment);
+                await _context.SaveChangesAsync();
+            }
+            else return $"Comment {id} does not exist in the database.";
+
+            return $"Deleted comment {id} successfully!";
         }
     }
 }

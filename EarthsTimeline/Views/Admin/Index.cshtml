@@ -65,7 +65,7 @@
                     <p>@comment.Content</p>
                     <div class="actions">
                         <a asp-controller="Home" asp-action="Article" asp-route-id="@comment.PostId">Read Article</a> -
-                        <a class="text-danger" asp-controller="Comments" asp-action="Delete" asp-route-id="@comment.Id">Reject Comment</a> -
+                        <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delete/@comment.Id')">Reject Comment</a> -
                         <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/approve/@comment.Id')">Approve Comment</a>
                     </div>
                 </div>
