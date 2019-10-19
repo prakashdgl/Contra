@@ -139,6 +139,7 @@ section {
 
 .story {
     cursor: pointer;
+    padding: 0;
 }
 
 .story:hover {
@@ -148,6 +149,7 @@ section {
 .story > div {
     width: 200px;
     height: 100%;
+    padding: 25px;
 }
 
 .card .image-container {
@@ -172,6 +174,7 @@ section {
 }
 
 .card-encapsulate > div {
+    background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(2px);
     z-index: 69;
     width: 200px;
