@@ -20,7 +20,7 @@ function cancelAction() {
 
 function postToAPI(route) {
     var http = new XMLHttpRequest();
-    http.open('POST', route, true);
+    http.open('POST', "https://" + window.location.host + "/" + route, true);
 
     http.onreadystatechange = function () {
         if (http.readyState === 4 && http.status === 200) {

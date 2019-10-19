@@ -194,6 +194,10 @@ section {
     width: 100%;
 }
 
+.comment {
+    box-shadow: none;
+}
+
 .article .image-container {
     position: absolute;
     top: 0;

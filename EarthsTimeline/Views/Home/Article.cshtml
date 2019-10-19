@@ -31,7 +31,8 @@
         </section>
 
         <div class="section-title">
-            <h2>Comments (@ViewData["PendingComments"] Pending)</h2>
+            <h2>Comments</h2>
+            <h4>@ViewData["PendingComments"] Pending</h4>
             <a name="discuss"></a>
         </div>
         <section>
@@ -66,17 +67,22 @@
                 </div>
             </div>
         </section>
-        foreach (Comment comment in (List<Comment>)ViewData["Comments"])
-        {
-            <section>
-                <div class="card card-search">
-                    <div>
-                        <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
-                        <p>@comment.Content</p>
+        <section>
+            <div class="card">
+                @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
+                 {
+                 <section>
+                    <div class="card card-search comment">
+                        <div>
+                            <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
+                            <p>@comment.Content</p>
+                        </div>
                     </div>
-                </div>
-            </section>
-        }
+                 </section>
+                 <hr />
+                 }
+            </div>
+        </section>
     }
     else
     {
