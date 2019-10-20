@@ -69,13 +69,14 @@ function loadContent(query) {
                     else {
                         var biggify = true;
                         if (i % 2 === 0) {
-                            if (i % 4 === 2) biggify = false;
+                            if (i % 4 === 2) biggify = !biggify;
                             html += "<section>" + formatCard(obj.id, obj.image,
-                                obj.title, obj.summary, !biggify, false);
+                                obj.title, obj.summary, !biggify, biggify);
                         }
                         else {
+                            if (i % 4 === 3) biggify = !biggify;
                             html += formatCard(obj.id, obj.image, obj.title,
-                                obj.summary, biggify, true) + "</section>";
+                                obj.summary, biggify, !biggify) + "</section>";
                         }
                     }
                     i++;

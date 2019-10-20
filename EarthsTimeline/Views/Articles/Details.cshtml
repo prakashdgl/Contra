@@ -68,6 +68,8 @@
             </div>
         </div>
     </section>
+    @if (((List<Comment>)ViewData["Comments"]).Count != 0)
+    {
     <section>
         <div class="card">
             @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
@@ -84,4 +86,5 @@
                 }
         </div>
     </section>
+    }
 </div>

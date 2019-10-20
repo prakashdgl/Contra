@@ -19,15 +19,6 @@ namespace EarthsTimeline.Controllers
             _context = context;
         }
 
-        private bool LoggedIn()
-        {
-            if (Request.Cookies.ContainsKey("AntiForge") &&
-                Request.Cookies["AntiForge"] == "UUDDLRLRBABAS")
-                return true;
-            else
-                return false;
-        }
-
         public IActionResult Index()
         {
             List<List<Article>> articles = new List<List<Article>>();

@@ -35,17 +35,11 @@ namespace EarthsTimeline.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (!LoggedIn()) return Redirect("~/login");
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var comment = await _context.Comment
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (comment == null)
-            {
-                return NotFound();
-            }
+            if (comment == null) return NotFound();
 
             return View(comment);
         }
@@ -54,16 +48,11 @@ namespace EarthsTimeline.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (!LoggedIn()) return Redirect("~/login");
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var comment = await _context.Comment.FindAsync(id);
-            if (comment == null)
-            {
-                return NotFound();
-            }
+            if (comment == null) return NotFound();
+
             return View(comment);
         }
 
@@ -75,10 +64,7 @@ namespace EarthsTimeline.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("Id,Approved,PostId,Date,AuthorId,AuthorName,Content")] Comment comment)
         {
             if (!LoggedIn()) return Redirect("~/login");
-            if (id != comment.Id)
-            {
-                return NotFound();
-            }
+            if (id != comment.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -89,14 +75,8 @@ namespace EarthsTimeline.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CommentExists(comment.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!CommentExists(comment.Id)) return NotFound();
+                    else throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
