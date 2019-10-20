@@ -64,7 +64,7 @@ function loadContent(query) {
                 var html = "";
                 json.forEach(obj => {
                     if (formatSearch) {
-                        html += formatSearchCard(obj.id, obj.title, obj.author, obj.date, obj.summary);
+                        html += formatSearchCard(obj.id, obj.image, obj.title, obj.author, obj.date, obj.summary);
                     }
                     else {
                         var biggify = true;
@@ -100,8 +100,9 @@ function formatCard(id, image, title, summary, big, encapsulate) {
            "<div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
 }
 
-function formatSearchCard(id, title, author, date, summary) {
-    return "<div class='card card-big card-search'><div><h2>" + title +
+function formatSearchCard(id, image, title, author, date, summary) {
+    return "<div class='card card-big card-search'><span class='image-container'>" +
+        "<img src='" + image + "' /></span><div><h2>" + title +
         "</h2><p>" + author + " - " + date + "</p><hr /><p>" + summary +
         "</p><a href='article/" + id + "'>Read More</a></div></div>";
 }
