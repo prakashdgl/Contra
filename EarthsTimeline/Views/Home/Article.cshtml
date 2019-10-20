@@ -5,11 +5,11 @@
     string url = System.Net.WebUtility.UrlEncode("https://" + Context.Request.Host + Context.Request.Path);
 }
 
-<div class="content">
-    <div class="section-title">
-        <h2>Article - @Html.DisplayFor(model => model.Title)</h2>
-    </div>
-    @if (Model.Approved)
+    <div class="content">
+        <div class="section-title">
+            <h2>Article - @Html.DisplayFor(model => model.Title)</h2>
+        </div>
+        @if (Model.Approved)
     {
         <section>
             <div class="card article">
@@ -17,13 +17,15 @@
                     <img src="@Model.ThumbnailURL" />
                 </span>
                 <div>
-                    <h3>@Model.AuthorName - @Model.Date.ToShortDateString() - 
+                    <h3>
+                        @Model.AuthorName - @Model.Date.ToShortDateString() -
                         <span class="social-links">
                             <a href="https://twitter.com/intent/tweet?text=@System.Net.WebUtility.UrlEncode(Model.Title)+@(url)"><img src="~/img/twitter.svg" alt="Share on Twitter" /></a>
                             <a href="https://facebook.com/sharer/sharer.php?u=@(url)"><img src="~/img/facebook.svg" alt="Share on Facebook" /></a>
                             <a href="#discuss"><img src="~/img/discuss.svg" alt="Discuss Here" /></a>
                         </span>
                     </h3>
+                    <h5>Views: @Model.Views</h5>
                     <br />
                     @Html.Raw(Model.Content)
                 </div>
@@ -67,22 +69,24 @@
                 </div>
             </div>
         </section>
+        @if (((List<Comment>)ViewData["Comments"]).Count != 0) {
         <section>
             <div class="card">
                 @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
                  {
-                 <section>
+                <section>
                     <div class="card card-search comment">
                         <div>
                             <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
                             <p>@comment.Content</p>
                         </div>
                     </div>
-                 </section>
-                 <hr />
+                </section>
+                <hr />
                  }
             </div>
         </section>
+        }
     }
     else
     {
@@ -95,4 +99,4 @@
             </div>
         </section>
     }
-</div>
+    </div>

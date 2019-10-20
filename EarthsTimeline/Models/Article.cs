@@ -15,6 +15,8 @@ namespace EarthsTimeline.Models
         public string SummaryShort { get; set; }
         public string SummaryLong { get; set; }
 
+        public int Views { get; set; }
+
         public string Content { get; set; }
     }
 }

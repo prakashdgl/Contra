@@ -79,6 +79,9 @@ namespace EarthsTimeline.Controllers
             var article = await _context.Article.FirstOrDefaultAsync(m => m.Id == id);
             if (article == null) return NotFound();
 
+            article.Views++;
+            await _context.SaveChangesAsync();
+
             List<Comment> comments = await (from c in _context.Comment
                                             where c.PostId == article.Id
                                             && c.Approved
@@ -146,6 +149,7 @@ namespace EarthsTimeline.Controllers
                     article.ThumbnailURL = "../img/img05.png";
                 article.Approved = false;
                 article.Date = DateTime.Now;
+                article.Views = 0;
 
                 _context.Add(article);
                 await _context.SaveChangesAsync();
