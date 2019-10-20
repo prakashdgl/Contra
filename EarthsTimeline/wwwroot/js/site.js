@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
     }
     var search = document.getElementById("search");
-    if (search) formatSearch = true;
+    if (search) { formatSearch = true; skip = 2 }
 });
 
 function showMenu() {
@@ -41,7 +41,6 @@ function redirect(id) {
 function loadContent(query) {
     loadTarget = document.getElementById("loadTarget");
     if (!loadTarget || !enabled) return;
-    if (formatSearch) skip = 2;
 
     if (document.body.scrollHeight - (window.scrollY + window.innerHeight) < 100) {
         var http = new XMLHttpRequest();
@@ -50,7 +49,6 @@ function loadContent(query) {
 
         http.onreadystatechange = function () {
             if (http.readyState === 4 && http.status === 200) {
-                console.log(http.responseText);
                 if (http.responseText === "" && enabled) {
                     enabled = false;
                     setTimeout(function () {
@@ -69,13 +67,15 @@ function loadContent(query) {
                         html += formatSearchCard(obj.id, obj.title, obj.author, obj.date, obj.summary);
                     }
                     else {
+                        var biggify = true;
                         if (i % 2 === 0) {
+                            if (i % 4 === 2) biggify = false;
                             html += "<section>" + formatCard(obj.id, obj.image,
-                                obj.title, obj.summary, true, false);
+                                obj.title, obj.summary, !biggify, false);
                         }
                         else {
                             html += formatCard(obj.id, obj.image, obj.title,
-                                obj.summary, false, true) + "</section>";
+                                obj.summary, biggify, true) + "</section>";
                         }
                     }
                     i++;
@@ -102,5 +102,5 @@ function formatCard(id, image, title, summary, big, encapsulate) {
 function formatSearchCard(id, title, author, date, summary) {
     return "<div class='card card-big card-search'><div><h2>" + title +
         "</h2><p>" + author + " - " + date + "</p><hr /><p>" + summary +
-        "</p><a href='article/" + id + ">Read More</a></div></div>";
+        "</p><a href='article/" + id + "'>Read More</a></div></div>";
 }
