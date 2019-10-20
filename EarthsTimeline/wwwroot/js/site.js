@@ -102,5 +102,5 @@ function formatCard(id, image, title, summary, big, encapsulate) {
 function formatSearchCard(id, title, author, date, summary) {
     return "<div class='card card-big card-search'><div><h2>" + title +
         "</h2><p>" + author + " - " + date + "</p><hr /><p>" + summary +
-        "</p><a asp-action='Article' asp-route-id=" + id + ">Read More</a></div></div>";
+        "</p><a href='article/" + id + ">Read More</a></div></div>";
 }
