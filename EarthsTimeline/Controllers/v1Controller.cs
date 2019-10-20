@@ -135,6 +135,7 @@ namespace EarthsTimeline.Controllers
 
             Dictionary<string, string> info = new Dictionary<string, string>()
             {
+                { "id", article.Id.ToString() },
                 { "title", article.Title },
                 { "author", article.AuthorName },
                 { "date", article.Date.ToString() },
@@ -159,7 +160,12 @@ namespace EarthsTimeline.Controllers
                           orderby a.Date descending
                           select a)
                           .Skip(skip * 4).Take(4).ToList(),
-                _ => new List<Article>(),
+                _ => (from a in _context.Article
+                      where a.Approved == true &&
+                      a.Title.Contains(query) || a.SummaryShort.Contains(query)
+                      orderby a.Date descending
+                      select a)
+                      .Skip(skip * 4).Take(4).ToList()
             };
 
             if (articles.Count == 0) return "";
@@ -169,6 +175,7 @@ namespace EarthsTimeline.Controllers
             {
                 Dictionary<string, string> i = new Dictionary<string, string>()
                 {
+                    { "id", a.Id.ToString() },
                     { "title", a.Title },
                     { "author", a.AuthorName },
                     { "date", a.Date.ToString() },

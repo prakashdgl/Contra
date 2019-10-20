@@ -1,5 +1,6 @@
 ﻿var menu, nav;
-var enabled = true, loadTarget, targetPos, skip = 0;
+var loadTarget, targetPos, skip = 0;
+var enabled = true, formatSearch = false;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     menu = document.getElementById("links");
@@ -11,6 +12,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
             loadContent(query.innerText);
         });
     }
+    var search = document.getElementById("search");
+    if (search) formatSearch = true;
 });
 
 function showMenu() {
@@ -38,6 +41,7 @@ function redirect(id) {
 function loadContent(query) {
     loadTarget = document.getElementById("loadTarget");
     if (!loadTarget || !enabled) return;
+    if (formatSearch) skip = 2;
 
     if (document.body.scrollHeight - (window.scrollY + window.innerHeight) < 100) {
         var http = new XMLHttpRequest();
@@ -61,13 +65,18 @@ function loadContent(query) {
                 var i = 0;
                 var html = "";
                 json.forEach(obj => {
-                    if (i % 2 === 0) {
-                        html += "<section>" + formatCard(obj.id, obj.image,
-                                obj.title, obj.summary, true, false);
+                    if (formatSearch) {
+                        html += formatSearchCard(obj.id, obj.title, obj.author, obj.date, obj.summary);
                     }
                     else {
-                        html += formatCard(obj.id, obj.image, obj.title,
+                        if (i % 2 === 0) {
+                            html += "<section>" + formatCard(obj.id, obj.image,
+                                obj.title, obj.summary, true, false);
+                        }
+                        else {
+                            html += formatCard(obj.id, obj.image, obj.title,
                                 obj.summary, false, true) + "</section>";
+                        }
                     }
                     i++;
                 });
@@ -88,4 +97,10 @@ function formatCard(id, image, title, summary, big, encapsulate) {
     return "<div class='" + classes + "' onclick='redirect(" + id + ")'>" +
            "<span class='image-container'><img src='" + image + "' /></span>" +
            "<div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
+}
+
+function formatSearchCard(id, title, author, date, summary) {
+    return "<div class='card card-big card-search'><div><h2>" + title +
+        "</h2><p>" + author + " - " + date + "</p><hr /><p>" + summary +
+        "</p><a asp-action='Article' asp-route-id=" + id + ">Read More</a></div></div>";
 }

@@ -6,9 +6,9 @@
 
 <div class="content">
     <div class="section-title">
-        <h2>Search @ViewData["Query"]</h2>
+        <h2 id="search">Search - <span id="query">@ViewData["Query"]</span></h2>
     </div>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
     <section>
         <div class="card card-big card-search">
             <div>
@@ -20,5 +20,6 @@
             </div>
         </div>
     </section>
-}
+    }
+    <div id="loadTarget"></div>
 </div>
