@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
     }
     var search = document.getElementById("search");
-    if (search) { formatSearch = true; skip = 2 }
+    if (search) { formatSearch = true; skip = 2; }
 });
 
 function showMenu() {
@@ -54,7 +54,7 @@ function loadContent(query) {
                     setTimeout(function () {
                         if (loadTarget.innerHTML === "")
                             document.getElementById("loadSection").style.display = "none";
-                        loadTarget.innerHTML += "<div class='section-title'><h2>No more content! :(</h2></div>";
+                        loadTarget.innerHTML += "<div class='section-title text-center'><h2>No more content! :(</h2></div>";
                     }, 100);
                 }
 
