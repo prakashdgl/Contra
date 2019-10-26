@@ -9,7 +9,7 @@ using OpenTalon.Models;
 
 namespace OpenTalon.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;

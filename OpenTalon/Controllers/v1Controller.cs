@@ -21,7 +21,7 @@ namespace OpenTalon.Controllers
             _context = context;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [Route("comment/approve/{*id}")]
         [HttpPost]
         public async Task<string> CommentApprove(int? id)
@@ -39,7 +39,7 @@ namespace OpenTalon.Controllers
             return $"Approved comment {id} successfully!";
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [Route("comment/delist/{*id}")]
         [HttpPost]
         public async Task<string> CommentDelist(int? id)
@@ -57,7 +57,7 @@ namespace OpenTalon.Controllers
             return $"Delisted comment {id} successfully!";
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [Route("comment/delete/{*id}")]
         [HttpPost]
         public async Task<string> CommentDelete(int? id)
@@ -75,7 +75,7 @@ namespace OpenTalon.Controllers
             return $"Deleted comment {id} successfully!";
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [Route("article/approve/{*id}")]
         [HttpPost]
         public async Task<string> ArticleApprove(int? id)
@@ -93,7 +93,7 @@ namespace OpenTalon.Controllers
             return $"Approved article {id} successfully!";
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [Route("article/delist/{*id}")]
         [HttpPost]
         public async Task<string> ArticleDelist(int? id)
@@ -111,7 +111,7 @@ namespace OpenTalon.Controllers
             return $"Delisted article {id} successfully!";
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [Route("article/delete/{*id}")]
         [HttpPost]
         public async Task<string> ArticleDelete(int? id)
@@ -133,7 +133,6 @@ namespace OpenTalon.Controllers
             return $"Deleted article {id} successfully!";
         }
 
-        [Authorize]
         [Route("article/info/{*id}")]
         [HttpGet]
         public async Task<string> ArticleInfo(int? id)
@@ -200,14 +199,14 @@ namespace OpenTalon.Controllers
             return JsonConvert.SerializeObject(info);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [Route("generate")]
         public async Task<string> Generate()
         {
             Article placeholder = new Article
             {
                 Approved = ApprovalStatus.Approved,
-                AuthorName = "Kayla!",
+                AuthorName = "Sei",
                 AuthorId = 100023440,
                 Date = DateTime.Now,
                 Title = "Autogen",
@@ -217,17 +216,19 @@ namespace OpenTalon.Controllers
                 Views = 0
             };
 
-            string[] urls = new string[3] { "https://media.giphy.com/media/l3fQ9icfExRfiePrq/source.gif",
-                                            "https://media.giphy.com/media/MJ6SslGZEYKhG/giphy.gif",
-                                            "https://static1.e621.net/data/e2/cb/e2cb8f4ffe0e05ddcc8ae93adef08a0e.gif" };
+            string[] urls = new string[5] { "../img/img01.png",
+                                            "../img/img02.png",
+                                            "../img/img03.png",
+                                            "../img/img04.png",
+                                            "../img/img05.png" };
             Random rnd = new Random();
-            placeholder.ThumbnailURL = urls[rnd.Next(0, 3)];
+            placeholder.ThumbnailURL = urls[rnd.Next(0, 5)];
             _context.Article.Add(placeholder);
             await _context.SaveChangesAsync();
             return "201 Created";
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [Route("degenerate")]
         public async Task<string> Degenerate()
         {
