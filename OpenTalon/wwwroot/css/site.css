@@ -163,12 +163,6 @@ section {
     transform: none !important;
 }
 
-.note-editing-area img {
-    position: unset !important;
-    float: none !important;
-    transform: none !important;
-}
-
 .story {
     cursor: pointer;
     padding: 0;
