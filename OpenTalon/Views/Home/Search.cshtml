@@ -1,0 +1,26 @@
+﻿@model IEnumerable<OpenTalon.Models.Article>
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="content">
+    <div class="section-title">
+        <h2 id="search">Search - <span id="query">@ViewData["Query"]</span></h2>
+    </div>
+    @foreach (var item in Model) {
+    <section>
+        <div class="card card-search">
+            <span class="image-container"><img src="@item.ThumbnailURL" /></span>
+            <div>
+                <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+                <p>@Html.DisplayFor(modelItem => item.AuthorName) - @Html.DisplayFor(modelItem => item.Date)</p>
+                <hr />
+                <p>@Html.DisplayFor(modelItem => item.SummaryLong)</p>
+                <a asp-action="Article" asp-route-id="@item.Id">Read More</a>
+            </div>
+        </div>
+    </section>
+    }
+    <div id="loadTarget"></div>
+</div>

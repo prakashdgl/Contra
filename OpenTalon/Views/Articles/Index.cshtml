@@ -1,0 +1,34 @@
+﻿@model IEnumerable<OpenTalon.Models.Article>
+
+@{
+    ViewData["Title"] = "Articles";
+    Layout = "_AdminLayout";
+}
+
+<div class="content">
+    <div class="section-title">
+        <h2>All Articles (Admin)</h2>
+    </div>
+    <br />
+    @foreach (var item in Model)
+    {
+        <section>
+            <div class="card card-big card-search">
+                <div>
+                    <h5>@item.AuthorName (@item.AuthorId) - @item.Date</h5>
+                    <p>Approved: @Html.DisplayFor(modelItem => item.Approved) (@item.SummaryShort)</p>
+                    <p>@Html.DisplayFor(modelItem => item.SummaryLong)</p>
+                    <div class="actions">
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@item.Id')">Remove</a> -
+                        @if (item.Approved)
+                        {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@item.Id')">Delist</a> }
+                        else
+                        { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@item.Id')">Approve</a>}
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+</div>
