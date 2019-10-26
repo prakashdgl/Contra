@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Earth's ApplicationDb</title>
+    <title>@ViewData["Title"] - OpenTalon</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body onresize="onResize()">
     <header>
-        <nav id="nav">
+        <nav id="nav" class="solo-nav">
             <div class="container">
                 <a class="navbar-brand" href="~/"><img src="~/img/open-talon.svg" /></a>
                 <button id="menu-button" onclick="showMenu()">Menu</button>
@@ -32,7 +32,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - Earth's ApplicationDb - <a href="~/about">About</a> - <a href="~/login">Admin</a> - <a href="~/privacy">Privacy</a>
+            &copy; 2019 - OpenTalon Project - <a href="~/about">About</a> - <a href="~/login">Admin</a> - <a href="~/privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/js/site.js" asp-append-version="true"></script>

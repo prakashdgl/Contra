@@ -28,13 +28,26 @@ nav #links {
     flex-direction: column;
     flex: 1 1;
     align-items: center;
+    height: 100%;
+    margin: 0;
+
+}
+
+nav #links a {
+    color: #555;
+    margin: 0;
+    padding: 0 1rem;
+}
+
+nav #links a:hover {
+    color: #6daedb;
 }
 
 nav #menu-button {
     background-color: inherit;
-    border: solid 2px #fff;
+    border: solid 2px #6bd;
     border-radius: 10px;
-    color: #fff;
+    color: #6bd;
     float: right;
     padding: 0 24px;
     line-height: 40px;
@@ -56,12 +69,21 @@ a.navbar-brand img {
     height: 40px;
 }
 
-a {
-    color: #555;
+.solo-nav #links {
+    position: absolute;
+    top: 0;
 }
 
-a:hover {
-    color: #5af;
+.solo-nav img {
+    vertical-align: unset;
+}
+
+.solo-nav #menu-button {
+    line-height: 30px;
+}
+
+a {
+    color: #6daedb;
 }
 
 .clickable {
