@@ -22,7 +22,7 @@
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                         <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@item.Id')">Remove</a> -
-                        @if (item.Approved)
+                        @if (item.Approved == ApprovalStatus.Approved)
                         {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@item.Id')">Delist</a> }
                         else
                         { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@item.Id')">Approve</a>}

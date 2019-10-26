@@ -32,7 +32,7 @@ namespace OpenTalon.Controllers
 
             Random rnd = new Random();
             List<Article> top = (from a in _context.Article
-                                 where a.Approved == true
+                                 where a.Approved == ApprovalStatus.Approved
                                  orderby a.Date descending
                                  select a).ToList();
             while (top.Count < 4)
@@ -43,7 +43,7 @@ namespace OpenTalon.Controllers
             articles.Add(top);
 
             List<Article> editorial = (from a in _context.Article
-                                       where a.Approved == true && 
+                                       where a.Approved == ApprovalStatus.Approved && 
                                        a.SummaryShort.Contains("Featured Editorial")
                                        orderby a.Date descending
                                        select a).ToList();
@@ -109,14 +109,14 @@ namespace OpenTalon.Controllers
         {
             if (string.IsNullOrEmpty(param))
                 return View((from a in _context.Article
-                             where a.Approved
+                             where a.Approved == ApprovalStatus.Approved
                              orderby a.Date descending
                              select a).Take(8).ToList());
 
             ViewData["Query"] = param;
             param = param.ToLower();
             return View((from a in _context.Article
-                         where a.Approved
+                         where a.Approved == ApprovalStatus.Approved
                          && (a.Title.ToLower().Contains(param)
                          || a.SummaryShort.ToLower().Contains(param))
                          orderby a.Date descending
@@ -139,7 +139,7 @@ namespace OpenTalon.Controllers
                     article.SummaryLong = article.SummaryLong.Substring(0, 60) + "...";
                 if (string.IsNullOrWhiteSpace(article.ThumbnailURL))
                     article.ThumbnailURL = "../img/img05.png";
-                article.Approved = false;
+                article.Approved = ApprovalStatus.Submitted;
                 article.Date = DateTime.Now;
                 article.Views = 0;
 
