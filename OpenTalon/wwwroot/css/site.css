@@ -65,9 +65,14 @@ a.navbar-brand img {
     height: 40px;
 }
 
-.solo-nav .links {
+.solo-nav .links .nav-link {
+    padding: 0 1rem;
+}
+
+.solo-nav .links:first-of-type {
     position: absolute;
     top: 0;
+    line-height: 50px;
 }
 
 .solo-nav img {
