@@ -20,8 +20,8 @@
                     <p>Status: @Html.DisplayFor(modelItem => item.Approved) (@item.SummaryShort)</p>
                     <p>@Html.DisplayFor(modelItem => item.SummaryLong)</p>
                     <div class="actions">
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-controller="Articles" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id">Details</a> |
                         <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@item.Id')">Remove</a> -
                         @if (item.Approved == ApprovalStatus.Approved)
                         {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@item.Id')">Delist</a> }
