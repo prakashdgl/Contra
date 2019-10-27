@@ -1,5 +1,8 @@
 ﻿@model OpenTalon.Models.Article
 
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
 @{
     ViewData["Title"] = "Apply";
 }
@@ -10,57 +13,115 @@
     </div>
     <hr />
     <br />
-    <form asp-action="Apply">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <section>
-                <div>
-                    <label class="control-label">MVLA Email ID (1000xxxxx)</label>
-                    <input asp-for="AuthorId" class="form-control" placeholder="Ex: 100023457@mvla.net" />
-                    <span asp-validation-for="AuthorId" class="text-danger"></span>
-                </div>
-                <div>
-                    <label class="control-label">Author Name(s)</label>
-                    <input asp-for="AuthorName" class="form-control" maxlength="50" placeholder="Your Name" />
-                    <span asp-validation-for="AuthorName" class="text-danger"></span>
-                </div>
-                <div>
-                    <label asp-for="Title" class="control-label"></label>
-                    <input asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-            </section>
+    <section>
+        <div class="card submit">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <section>
+                    <div class="submit-form submit">
+                        <h2>Article Info (Step 1)</h2>
+                        <form asp-action="Apply">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div id="step-1">
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <p><b>@User.Identity.Name</b></p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Author Name(s)</label>
+                                    <input asp-for="AuthorName" class="form-control" maxlength="50" placeholder="Your Name" />
+                                    <span asp-validation-for="AuthorName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Title" class="control-label"></label>
+                                    <input asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
+                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div id="step-2">
+                                <div class="form-group">
+                                    <label class="control-label">Thumbnail URL</label>
+                                    <input asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
+                                    <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
+                                    <p>Please provide an external URL to an image to use as a thumbnail.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Article Tags</label>
+                                    <input asp-for="SummaryShort" class="form-control" placeholder="e.g. News, Sports, Opinion" />
+                                    <span asp-validation-for="SummaryShort" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Summary</label>
+                                    <input asp-for="SummaryLong" class="form-control" maxlength="60" placeholder="A short summary of your article about this length." />
+                                    <span asp-validation-for="SummaryLong" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div id="step-3">
+                                <div class="form-group">
+                                    <label asp-for="Content" class="control-label"></label>
+                                    <textarea asp-for="Content" id="summernote"></textarea>
+                                    <span asp-validation-for="Content" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Submit Article" class="btn btn-primary" />
+                                    <a href="~/">
+                                        <input type="button" value="Cancel" class="btn btn-outline-dark" />
+                                    </a>
+                                    <br />
+                                    <p>By submitting an article, you agree to our <a href="~/privacy">Terms of Service and Privacy Policy</a>.</p>
+                                </div>
+                            </div>
+                            <br />
+                            <div id="submit-controls">
+                                <button class="btn btn-outline-info disabled">Previous</button>
+                                <button class="btn btn-outline-info">Next</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="article-preview submit">
+                        <h2>Article Preview</h2>
+                        <div class="card article">
+                            <span class="image-container"><img src="../img/img05.png" /></span>
+                            <div>
+                                <h3>
+                                    Name - @DateTime.Now.ToShortDateString() -
+                                    <span class="social-links">
+                                        <img src="~/img/twitter.svg" alt="Share on Twitter" />
+                                        <img src="~/img/facebook.svg" alt="Share on Facebook" />
+                                        <img src="~/img/discuss.svg" alt="Discuss Here" />
+                                    </span>
+                                </h3>
+                                <br />
+                                Content
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            }
+            else
+            {
+                <section>
+                    <div class="submit-form submit">
+                        <h2>Not Signed In</h2>
+                        <br />
+                        <div class="mx-md-3">
+                            <p>Register or login to an account to submit an article. This will allow you to track your submitted articles, edit them, and comment on articles.</p>
+                            <br />
+                            <section>
+                                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info w-50 flex-fill mr-3">Register</a>
+                                <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Apply", "Home", new { area = "" })" class="btn btn-outline-info w-50 flex-fill mr-3">Login</a>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="article-preview submit">
+                        <div class="card article">
+                            <span class="image-container"><img src="../img/img05.png" /></span>
+                        </div>
+                    </div>
+                </section>
+            }
         </div>
-        <div class="form-group">
-            <label class="control-label">Thumbnail URL</label>
-            <input asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
-            <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
-            <p>Please provide an external URL to an image to use as a thumbnail.</p>
-        </div>
-        <div class="form-group">
-            <label class="control-label">Article Tags</label>
-            <input asp-for="SummaryShort" class="form-control" placeholder="e.g. News, Sports, Opinion" />
-            <span asp-validation-for="SummaryShort" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label class="control-label">Summary</label>
-            <input asp-for="SummaryLong" class="form-control" maxlength="60" placeholder="A short summary of your article about this length." />
-            <span asp-validation-for="SummaryLong" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Content" class="control-label"></label>
-            <textarea asp-for="Content" id="summernote"></textarea>
-            <span asp-validation-for="Content" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Submit Article" class="btn btn-primary" />
-            <a href="~/">
-                <input type="button" value="Cancel" class="btn btn-outline-dark" />
-            </a>
-            <br />
-            <p>By submitting an article, you agree to our <a href="~/privacy">Terms of Service and Privacy Policy</a>.</p>
-        </div>
-    </form>
+    </section>
 </div>
 
 @section Scripts {

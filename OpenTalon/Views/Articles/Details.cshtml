@@ -73,17 +73,17 @@
     <section>
         <div class="card">
             @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
-                {
-                <section>
+            {
+            <section>
                 <div class="card card-search comment">
                     <div>
                         <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
                         <p>@comment.Content</p>
                     </div>
                 </div>
-                </section>
-                <hr />
-                }
+            </section>
+            <hr />
+            }
         </div>
     </section>
     }

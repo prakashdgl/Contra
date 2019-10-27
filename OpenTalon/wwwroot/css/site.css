@@ -252,6 +252,32 @@ section {
     font-size: 18px;
 }
 
+.article-preview {
+    flex: 1 1;
+}
+
+.article-preview .card {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.submit {
+    padding: 0;
+    margin: 10px;
+}
+
+.submit > h2 {
+    margin: 15px;
+}
+
+#step-2 {
+    display: none;
+}
+
+#step-3 {
+    display: none;
+}
+
 .banner {
     background-color: #fff;
     border-radius: 10px;
@@ -284,9 +310,14 @@ section {
     padding: 0.3rem;
 }
 
-form section div {
-    width: 100%;
-    margin-right: 20px;
+.submit-form {
+    flex: 1 1;
+}
+
+.submit-form form {
+    width: 95%;
+    margin: auto;
+    margin-top: 20px;
 }
 
 form section div:last-of-type {
@@ -304,7 +335,7 @@ form section div:last-of-type {
 
 @media (min-width: 512px) {
     .container {
-        max-width: 95%;
+        max-width: 98%;
     }
 }
 
@@ -349,5 +380,11 @@ form section div:last-of-type {
     }
     .container {
         max-width: 1200px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1300px;
     }
 }
