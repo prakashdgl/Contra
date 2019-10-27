@@ -16,14 +16,14 @@
             <div class="card card-big card-search">
                 <div>
                     <h5>@item.AuthorName (@item.AuthorId) - @item.Date</h5>
-                    <p>Approved: @Html.DisplayFor(modelItem => item.Approved) (Attached to Post @item.PostId)</p>
+                    <p>Status: @Html.DisplayFor(modelItem => item.Approved) (Attached to Post @item.PostId)</p>
                     <p>@Html.DisplayFor(modelItem => item.Content)</p>
                     <div class="actions">
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                         <a asp-controller="Home" asp-action="Article" asp-route-id="@item.PostId">Read Article</a> -
                         <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delete/@item.Id')">Remove</a> -
-                        @if (item.Approved)
+                        @if (item.Approved == ApprovalStatus.Approved)
                         {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delist/@item.Id')">Delist</a> }
                         else
                         { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/approve/@item.Id')">Approve</a>}

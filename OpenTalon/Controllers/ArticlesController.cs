@@ -35,13 +35,13 @@ namespace OpenTalon.Controllers
 
             List<Comment> comments = await (from c in _context.Comment
                                             where c.PostId == article.Id
-                                            && c.Approved
+                                            && c.Approved == ApprovalStatus.Approved
                                             orderby c.Date descending
                                             select c).ToListAsync();
             ViewData["Comments"] = comments;
             ViewData["PendingComments"] = (await (from c in _context.Comment
                                                   where c.PostId == article.Id
-                                                  && !c.Approved
+                                                  && c.Approved != ApprovalStatus.Approved
                                                   orderby c.Date descending
                                                   select c).ToListAsync()).Count;
 

@@ -6,7 +6,7 @@
 {
     <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name</a>
     <form class="form-inline nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+        <button type="submit" class="nav-link btn btn-link text-dark text-center">Logout</button>
     </form>
 }
 else

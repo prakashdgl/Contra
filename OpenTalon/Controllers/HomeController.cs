@@ -76,13 +76,13 @@ namespace OpenTalon.Controllers
 
             List<Comment> comments = await (from c in _context.Comment
                                             where c.PostId == article.Id
-                                            && c.Approved
+                                            && c.Approved == ApprovalStatus.Approved
                                             orderby c.Date descending
                                             select c).ToListAsync();
             ViewData["Comments"] = comments;
             ViewData["PendingComments"] = (await (from c in _context.Comment
                                                   where c.PostId == article.Id
-                                                  && !c.Approved
+                                                  && c.Approved != ApprovalStatus.Approved
                                                   select c).ToListAsync()).Count;
 
             return View(article);
@@ -94,7 +94,7 @@ namespace OpenTalon.Controllers
             if (ModelState.IsValid)
             {
                 comment.PostId = PostId;
-                comment.Approved = false;
+                comment.Approved = ApprovalStatus.Submitted;
                 comment.Date = DateTime.Now;
 
                 _context.Add(comment);

@@ -27,7 +27,7 @@ namespace OpenTalon.Controllers
             ViewData["ArticlesList"] = articles;
             ViewData["ArticlesLeft"] = articles.Count;
 
-            List<Comment> comments = await _context.Comment.Where((x) => x.Approved == false).ToListAsync();
+            List<Comment> comments = await _context.Comment.Where((x) => x.Approved != ApprovalStatus.Approved).ToListAsync();
             ViewData["Comments"] = _context.Comment.Count();
             ViewData["CommentsList"] = comments;
             ViewData["CommentsLeft"] = comments.Count;

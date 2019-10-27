@@ -31,7 +31,7 @@ namespace OpenTalon.Controllers
             Comment comment = await _context.Comment.FindAsync(id);
             if (comment != null)
             {
-                comment.Approved = true;
+                comment.Approved = ApprovalStatus.Approved;
                 await _context.SaveChangesAsync();
             }
             else return $"Comment {id} does not exist in the database.";
@@ -49,7 +49,7 @@ namespace OpenTalon.Controllers
             Comment comment = await _context.Comment.FindAsync(id);
             if (comment != null)
             {
-                comment.Approved = false;
+                comment.Approved = ApprovalStatus.Rejected;
                 await _context.SaveChangesAsync();
             }
             else return $"Comment {id} does not exist in the database.";

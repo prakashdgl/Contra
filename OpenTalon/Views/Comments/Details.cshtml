@@ -21,7 +21,7 @@
                 <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
                 <a asp-action="Index">Back to List</a> |
                 <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@Model.Id')">Remove</a> -
-                @if (@Model.Approved)
+                @if (@Model.Approved == ApprovalStatus.Approved)
                 {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@Model.Id')">Delist</a> }
                 else
                 { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@Model.Id')">Approve</a>}
