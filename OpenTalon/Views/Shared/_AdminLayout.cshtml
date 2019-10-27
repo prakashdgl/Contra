@@ -6,37 +6,40 @@
     <title>@ViewData["Title"] - OpenTalon</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/admin.css" />
 </head>
 <body onresize="onResize()">
     <header>
         <nav id="nav" class="solo-nav">
-            <div class="container">
-                <a class="navbar-brand" href="~/"><img src="~/img/open-talon.svg" /></a>
-                <button id="menu-button" onclick="showMenu()">Menu</button>
-                <div class="links">
-                    <a class="nav-link" href="~/search/News">News</a>
-                    <a class="nav-link" href="~/search/Sports">Sports</a>
-                    <a class="nav-link" href="~/search/Editorial">Editorial</a>
-                    <a class="nav-link" href="~/search/Opinion">Opinion</a>
-                    <a class="nav-link" href="~/search/Arts">Arts & Culture</a>
-                    <a class="nav-link" href="https://www.paypal.me/">Donate</a>
-                    <a class="nav-link" href="~/apply">Submit an Article</a>
-                </div>
-                <div class="links float-right">
-                    <partial name="_LoginPartial" />
-                </div>
+            <a class="navbar-brand" href="~/"><img src="~/img/open-talon.svg" /></a>
+            <button id="menu-button" onclick="showMenu()">Menu</button>
+            <div class="links">
+                <a class="nav-link" href="~/search/News">News</a>
+                <a class="nav-link" href="~/search/Sports">Sports</a>
+                <a class="nav-link" href="~/search/Editorial">Editorial</a>
+                <a class="nav-link" href="~/search/Opinion">Opinion</a>
+                <a class="nav-link" href="~/search/Arts">Arts & Culture</a>
+                <a class="nav-link" href="~/apply">Submit an Article</a>
+            </div>
+            <div class="links float-right">
+                <partial name="_LoginPartial" />
             </div>
         </nav>
     </header>
 
-    <div class="container">
-        @RenderBody()
+    <div class="fullscreen">
+        <div class="dashboard-controls">
+            <a class="nav-link" href="~/admin">Home</a>
+            <a class="nav-link" href="~/articles">Articles</a>
+            <a class="nav-link" href="~/comments">Comments</a>
+        </div>
+        <div class="dashboard-content">
+            @RenderBody()
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - OpenTalon Project - <a href="~/about">About</a> - <a href="~/admin">Admin</a> - <a href="~/privacy">Privacy</a>
-        </div>
+        &copy; 2019 - OpenTalon Project - <a href="~/about">About</a> - <a href="~/admin">Admin</a> - <a href="~/privacy">Privacy</a>
     </footer>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/admin.js" asp-append-version="true"></script>
