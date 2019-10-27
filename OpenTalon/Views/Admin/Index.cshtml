@@ -29,45 +29,4 @@
             </div>
         </div>
     </section>
-    <div class="section-title">
-        <h2>Article Approvals</h2>
-        <a href="~/articles">View All Articles</a>
-    </div>
-    @foreach (Article article in (List<Article>)ViewData["ArticlesList"])
-    {
-        <section>
-            <div class="card card-big card-search">
-                <div>
-                    <h5>@article.AuthorName (@article.AuthorId) - @article.Date</h5>
-                    <p>Tags: @article.SummaryShort</p>
-                    <p>@Html.DisplayFor(modelItem => article.SummaryLong)</p>
-                    <div class="actions">
-                        <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id">Read More</a> -
-                        <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@article.Id')">Reject Article</a> -
-                        <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@article.Id')">Approve Article</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    }
-    <div class="section-title">
-        <h2>Comment Approvals</h2>
-        <a href="~/comments">View All Comments</a>
-    </div>
-    @foreach (Comment comment in (List<Comment>)ViewData["CommentsList"])
-    {
-        <section>
-            <div class="card card-big card-search">
-                <div>
-                    <h5>@comment.AuthorName - @comment.Date (Attached to Post @comment.PostId)</h5>
-                    <p>@comment.Content</p>
-                    <div class="actions">
-                        <a asp-controller="Home" asp-action="Article" asp-route-id="@comment.PostId">Read Article</a> -
-                        <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delete/@comment.Id')">Reject Comment</a> -
-                        <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/approve/@comment.Id')">Approve Comment</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    }
 </div>

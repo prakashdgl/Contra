@@ -19,11 +19,6 @@ namespace OpenTalon.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Article.ToListAsync());
-        }
-
         [Route("/articlemanager/{*id}")]
         public async Task<IActionResult> Details(int? id)
         {
@@ -76,7 +71,7 @@ namespace OpenTalon.Controllers
                     if (!ArticleExists(article.Id)) return NotFound();
                     else throw;
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/articles");
             }
             return View(article);
         }

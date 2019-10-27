@@ -2,9 +2,8 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "_AdminLayout";
 }
-
-<partial name="_SummernoteScriptsPartial" />
 
 <div class="content">
     <div class="section-title">
@@ -34,9 +33,13 @@
             </section>
         </div>
         <div class="form-group">
-            <label class="control-label">Approved</label>
-            <input asp-for="Approved" type="checkbox" />
-            <span asp-validation-for="Approved" class="text-danger"></span>
+            <div class="actions">
+                <p>Status: @Model.Approved</p>
+                @if (Model.Approved == ApprovalStatus.Approved)
+                { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@Model.Id')">Delist</a> }
+                else
+                { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@Model.Id')">Approve</a> }
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label">Thumbnail URL</label>
@@ -74,4 +77,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_SummernoteScriptsPartial" />
 }

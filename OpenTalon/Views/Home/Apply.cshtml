@@ -4,8 +4,6 @@
     ViewData["Title"] = "Apply";
 }
 
-<partial name="_SummernoteScriptsPartial" />
-
 <div class="content">
     <div class="section-title">
         <h2>Submit an Article</h2>
@@ -18,7 +16,7 @@
             <section>
                 <div>
                     <label class="control-label">MVLA Email ID (1000xxxxx)</label>
-                    <input asp-for="AuthorId" class="form-control" placeholder="Ex: 100023457@mvla.net"/>
+                    <input asp-for="AuthorId" class="form-control" placeholder="Ex: 100023457@mvla.net" />
                     <span asp-validation-for="AuthorId" class="text-danger"></span>
                 </div>
                 <div>
@@ -67,4 +65,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_SummernoteScriptsPartial" />
 }

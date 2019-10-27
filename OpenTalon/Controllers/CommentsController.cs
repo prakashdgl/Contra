@@ -18,12 +18,6 @@ namespace OpenTalon.Controllers
             _context = context;
         }
 
-        // GET: Comments
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Comment.ToListAsync());
-        }
-
         // GET: Comments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -68,7 +62,7 @@ namespace OpenTalon.Controllers
                     if (!CommentExists(comment.Id)) return NotFound();
                     else throw;
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/comments");
             }
             return View(comment);
         }

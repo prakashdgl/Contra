@@ -24,15 +24,39 @@ namespace OpenTalon.Controllers
         {
             List<Article> articles = await _context.Article.Where((x) => x.Approved != ApprovalStatus.Approved).ToListAsync();
             ViewData["Articles"] = _context.Article.Count();
-            ViewData["ArticlesList"] = articles;
             ViewData["ArticlesLeft"] = articles.Count;
 
             List<Comment> comments = await _context.Comment.Where((x) => x.Approved != ApprovalStatus.Approved).ToListAsync();
             ViewData["Comments"] = _context.Comment.Count();
-            ViewData["CommentsList"] = comments;
             ViewData["CommentsLeft"] = comments.Count;
 
             return View();
+        }
+
+        [Route("/articles/{*filter}")]
+        public async Task<IActionResult> Articles(string filter)
+        {
+            if (filter == "submitted")
+            {
+                ViewData["Message"] = "Submissions";
+                return View(await _context.Article.Where(x => x.Approved == ApprovalStatus.Submitted).ToListAsync());
+            }
+
+            ViewData["Message"] = "All Articles";
+            return View(await _context.Article.ToListAsync());
+        }
+
+        [Route("/comments/{*filter}")]
+        public async Task<IActionResult> Comments(string filter)
+        {
+            if (filter == "submitted")
+            {
+                ViewData["Message"] = "Submissions";
+                return View(await _context.Comment.Where(x => x.Approved == ApprovalStatus.Submitted).ToListAsync());
+            }
+
+            ViewData["Message"] = "All Comments";
+            return View(await _context.Comment.ToListAsync());
         }
     }
 }

@@ -7,13 +7,14 @@
 
 <div class="content">
     <div class="section-title">
-        <h2>All Articles (Admin)</h2>
+        <h2>@ViewData["Message"]</h2>
     </div>
     <br />
     @foreach (var item in Model)
     {
         <section>
             <div class="card card-big card-search">
+                <span class="image-container"><img src="@item.ThumbnailURL" /></span>
                 <div>
                     <h5>@item.AuthorName (@item.AuthorId) - @item.Date</h5>
                     <p>Status: @Html.DisplayFor(modelItem => item.Approved) (@item.SummaryShort)</p>
