@@ -6,6 +6,11 @@
     right: 0;
 }
 
+.dashboard-header {
+    margin: 15px;
+    margin-left: 30px;
+}
+
 .dashboard-controls {
     background-color: #f5f6f8;
     position: absolute;

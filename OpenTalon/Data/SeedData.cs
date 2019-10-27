@@ -8,16 +8,16 @@ namespace OpenTalon.Data
 {
     public static class SeedData
     {
-        public static async Task Initialize(IServiceProvider serviceProvider, string testUserPw)
+        public static async Task Initialize(IServiceProvider serviceProvider)
         {
+            // Use this password to create a new user account, then delete the account with this password.
+            string testUserPw = "Testing1!";
+
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
                 var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@opentalon.ml");
                 await EnsureRole(serviceProvider, adminID, "Administrator");
-
-                var managerID = await EnsureUser(serviceProvider, testUserPw, "manager@opentalon.ml");
-                await EnsureRole(serviceProvider, managerID, "Manager");
             }
         }
 
