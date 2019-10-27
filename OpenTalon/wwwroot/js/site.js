@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
     var search = document.getElementById("search");
     if (search) { formatSearch = true; skip = 2; }
+
+    window.addEventListener("resize", function () {
+        onResize();
+    });
 });
 
 function showMenu() {

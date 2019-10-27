@@ -35,15 +35,21 @@ nav .links {
     flex-direction: column;
     flex: 1 1;
     align-items: center;
+    min-width: 200px;
 }
 
 nav .links a {
     color: #555;
     margin: 0;
+    padding: 0.2rem 1rem;
 }
 
 nav .links a:hover {
     color: #6daedb;
+}
+
+.nav-link button {
+    padding-left: 0;
 }
 
 nav #menu-button {
@@ -346,7 +352,10 @@ form section div:last-of-type {
         display: none;
     }
     nav #links {
-        display: unset;
+        position: absolute;
+        display: inline-block;
+        left: 130px;
+        right: 0;
     }
     nav .links {
         display: inline-flex;
@@ -354,6 +363,7 @@ form section div:last-of-type {
     }
     nav .links a {
         float: right;
+    padding: 0.5rem 1rem;
     }
     .container {
         max-width: 1200px;

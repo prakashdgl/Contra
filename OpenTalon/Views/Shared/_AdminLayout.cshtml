@@ -13,16 +13,19 @@
         <nav id="nav" class="solo-nav">
             <a class="navbar-brand" href="~/"><img src="~/img/open-talon.svg" /></a>
             <button id="menu-button" onclick="showMenu()">Menu</button>
-            <div class="links">
-                <a class="nav-link" href="~/search/News">News</a>
-                <a class="nav-link" href="~/search/Sports">Sports</a>
-                <a class="nav-link" href="~/search/Editorial">Editorial</a>
-                <a class="nav-link" href="~/search/Opinion">Opinion</a>
-                <a class="nav-link" href="~/search/Arts">Arts & Culture</a>
-                <a class="nav-link" href="~/apply">Submit an Article</a>
-            </div>
-            <div class="links float-right">
-                <partial name="_LoginPartial" />
+            <div id="links">
+                <div class="links">
+                    <a class="nav-link" href="~/search/News">News</a>
+                    <a class="nav-link" href="~/search/Sports">Sports</a>
+                    <a class="nav-link" href="~/search/Editorial">Editorial</a>
+                    <a class="nav-link" href="~/search/Opinion">Opinion</a>
+                    <a class="nav-link" href="~/search/Arts">Arts & Culture</a>
+                    <a class="nav-link" href="https://www.paypal.me/">Donate</a>
+                    <a class="nav-link" href="~/apply">Submit an Article</a>
+                </div>
+                <div class="links float-right">
+                    <partial name="_LoginPartial" />
+                </div>
             </div>
         </nav>
     </header>
