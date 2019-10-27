@@ -78,24 +78,6 @@ a.navbar-brand img {
     height: 40px;
 }
 
-.solo-nav .links .nav-link {
-    padding: 0 1rem;
-}
-
-.solo-nav .links:first-of-type {
-    position: absolute;
-    top: 0;
-    line-height: 50px;
-}
-
-.solo-nav img {
-    vertical-align: unset;
-}
-
-.solo-nav #menu-button {
-    line-height: 30px;
-}
-
 a {
     color: #6daedb;
     transition-duration: 0.2s;
@@ -217,7 +199,7 @@ section {
 .card-encapsulate > div {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(2px);
-    z-index: 69;
+    z-index: 5;
     width: 200px;
     height: 100%;
 }

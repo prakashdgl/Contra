@@ -1,4 +1,21 @@
-﻿.fullscreen {
+﻿
+.solo-nav {
+    z-index: 7;
+}
+
+.solo-nav .links:first-of-type {
+    line-height: 50px;
+}
+
+.solo-nav img {
+    vertical-align: unset;
+}
+
+.solo-nav #menu-button {
+    line-height: 30px;
+}
+
+.fullscreen {
     position: absolute;
     top: 50px;
     bottom: 60px;
@@ -7,6 +24,7 @@
 }
 
 .dashboard-header {
+    display: none;
     margin: 15px;
     margin-left: 30px;
 }
@@ -48,6 +66,9 @@
 }
 
 @media (min-width: 768px) {
+    .dashboard-header {
+        display: unset;
+    }
     .dashboard-controls {
         width: 200px;
     }
@@ -66,6 +87,9 @@
 }
 
 @media (min-width: 1000px) {
+    .solo-nav .links .nav-link {
+        padding: 0 1rem;
+    }
     .dashboard-controls {
         width: 300px;
     }
