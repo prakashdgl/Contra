@@ -1,4 +1,4 @@
-# EarthsTimeline
+# OpenTalon
 LAHS Newspaper project.
 
 # What
@@ -8,4 +8,4 @@ Freelance contracted to make this.
 lol, what's that
 
 # Done
-yes
+no
