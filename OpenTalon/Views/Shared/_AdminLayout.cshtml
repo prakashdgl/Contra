@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/admin.css" />
 </head>
-<body onresize="onResize()">
+<body>
     <header>
         <nav id="nav" class="solo-nav">
             <a class="navbar-brand" href="~/"><img src="~/img/open-talon.svg" /></a>
@@ -29,9 +29,9 @@
 
     <div class="fullscreen">
         <div class="dashboard-controls">
-            <a class="nav-link" href="~/admin">Home</a>
-            <a class="nav-link" href="~/articles">Articles</a>
-            <a class="nav-link" href="~/comments">Comments</a>
+            <a class="nav-link" href="~/admin">🏡 <span class="hideable">Home</span></a>
+            <a class="nav-link" href="~/articles">📃 <span class="hideable">Articles</span></a>
+            <a class="nav-link" href="~/comments">💬 <span class="hideable">Comments</span></a>
         </div>
         <div class="dashboard-content">
             @RenderBody()

@@ -23,8 +23,15 @@ nav {
     padding: 0 15px;
 }
 
-nav .links {
+nav #links {
+    background-color: #fff;
     display: none;
+    flex-direction: column;
+    flex: 1 1;
+    align-items: center;
+}
+
+nav .links {
     flex-direction: column;
     flex: 1 1;
     align-items: center;
@@ -85,6 +92,7 @@ a.navbar-brand img {
 
 a {
     color: #6daedb;
+    transition-duration: 0.2s;
 }
 
 .clickable {
@@ -122,6 +130,7 @@ a {
 }
 
 .container {
+    position: relative;
     max-width: 100%;
     padding: 0;
 }
@@ -332,9 +341,12 @@ form section div:last-of-type {
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
     nav #menu-button {
         display: none;
+    }
+    nav #links {
+        display: unset;
     }
     nav .links {
         display: inline-flex;
@@ -343,12 +355,6 @@ form section div:last-of-type {
     nav .links a {
         float: right;
     }
-    .container {
-        max-width: 950px;
-    }
-}
-
-@media (min-width: 1200px) {
     .container {
         max-width: 1200px;
     }

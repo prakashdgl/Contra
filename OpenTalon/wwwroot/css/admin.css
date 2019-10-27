@@ -12,7 +12,7 @@
     top: 0;
     bottom: 0;
     left: 0;
-    width: 300px;
+    width: 50px;
 }
 
 .dashboard-controls a {
@@ -20,22 +20,52 @@
     border-bottom: 1px solid #ddd;
     color: #555;
     padding: 15px;
-    padding-left: 30px;
+    transition-duration: 0.2s;
 }
 
 .dashboard-controls a:hover {
     background-color: #ddd;
-    padding: 15px;
-    padding-left: 30px;
-    transition-duration: 0.2s;
+    padding-left: 20px;
 }
 
 .dashboard-content {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 300px;
+    left: 50px;
     right: 0;
-    padding: 0 50px;
+    padding: 0 20px;
     overflow: auto;
+}
+
+.hideable {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .dashboard-controls {
+        width: 200px;
+    }
+    .dashboard-controls a {
+        padding-left: 30px;
+    }
+    .dashboard-controls a:hover {
+        padding-left: 40px;
+    }
+    .dashboard-content {
+        left: 200px;
+    }
+    .hideable {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 1000px) {
+    .dashboard-controls {
+        width: 300px;
+    }
+    .dashboard-content {
+        left: 300px;
+        padding: 0 50px;
+    }
 }
