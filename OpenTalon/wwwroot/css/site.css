@@ -212,7 +212,7 @@ section {
     width: 200px;
 }
 
-.card-search {
+.card-search, .card-compact {
     min-height: 50px; 
 }
 

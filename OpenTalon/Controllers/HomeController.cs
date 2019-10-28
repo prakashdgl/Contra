@@ -94,17 +94,19 @@ namespace OpenTalon.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Comment([Bind("Id,AuthorId,AuthorName,Content")] Comment comment, int PostId)
+        public async Task<IActionResult> Comment([Bind("Id,Content")] Comment comment, int PostId)
         {
             if (ModelState.IsValid)
             {
+                comment.OwnerID = _userManager.GetUserId(User);
+                comment.AuthorName = _userManager.GetUserAsync(User).Result.Name;
                 comment.PostId = PostId;
                 comment.Approved = ApprovalStatus.Submitted;
                 comment.Date = DateTime.Now;
 
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return Redirect($"~/article/{comment.PostId}");
+                return Redirect($"~/article/{PostId}");
             }
             return View(comment);
         }
@@ -140,12 +142,13 @@ namespace OpenTalon.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (article.SummaryLong.Length > 60) 
+                if (string.IsNullOrWhiteSpace(article.SummaryLong) || article.SummaryLong.Length > 60) 
                     article.SummaryLong = article.SummaryLong.Substring(0, 60) + "...";
                 if (string.IsNullOrWhiteSpace(article.ThumbnailURL))
                     article.ThumbnailURL = "../img/img05.png";
 
                 article.OwnerID = _userManager.GetUserId(User);
+                article.AuthorName = _userManager.GetUserAsync(User).Result.Name + ", " + article.AuthorName;
                 article.Approved = ApprovalStatus.Submitted;
                 article.Date = DateTime.Now;
                 article.Views = 0;

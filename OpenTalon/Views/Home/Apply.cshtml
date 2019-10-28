@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Identity
 @using OpenTalon.Areas.Identity.Data
 @inject SignInManager<OpenTalonUser> SignInManager
+@inject UserManager<OpenTalonUser> UserManager
 
 @{
     ViewData["Title"] = "Apply";
@@ -26,11 +27,15 @@
                                 <h2>Article Info (Step 1)</h2>
                                 <div class="form-group">
                                     <label class="control-label">Email</label>
-                                    <p><b>@User.Identity.Name</b></p>
+                                    <p><b>@UserManager.GetUserAsync(User).Result.Email</b></p>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Author Name(s)</label>
-                                    <input asp-for="AuthorName" class="form-control" maxlength="50" placeholder="Your Name" />
+                                    <label class="control-label">Author Name</label>
+                                    <p><b>@UserManager.GetUserAsync(User).Result.Name</b></p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Co-Author Names</label>
+                                    <input asp-for="AuthorName" class="form-control" maxlength="50" placeholder="Ex) Sei, Armitage, Dana" />
                                     <span asp-validation-for="AuthorName" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
@@ -49,7 +54,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Article Tags</label>
-                                    <input asp-for="SummaryShort" class="form-control" placeholder="e.g. News, Sports, Opinion" />
+                                    <input asp-for="SummaryShort" class="form-control" placeholder="Ex) News, Sports, Opinion" />
                                     <span asp-validation-for="SummaryShort" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
@@ -87,7 +92,7 @@
                             <span class="image-container"><img src="../img/img05.png" /></span>
                             <div>
                                 <h3>
-                                    Name - @DateTime.Now.ToShortDateString() -
+                                    @UserManager.GetUserAsync(User).Result.Name - @DateTime.Now.ToShortDateString() -
                                     <span class="social-links">
                                         <img src="~/img/twitter.svg" alt="Share on Twitter" />
                                         <img src="~/img/facebook.svg" alt="Share on Facebook" />

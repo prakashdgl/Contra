@@ -14,12 +14,8 @@ namespace OpenTalon.Data
             // Use this password to create a new user account, then delete the account with this password.
             string testUserPw = "Testing1!";
 
-            using (var context = new ApplicationDbContext(
-                serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
-            {
-                var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@opentalon.ml");
-                await EnsureRole(serviceProvider, adminID, "Administrator");
-            }
+            var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@opentalon.ml");
+            await EnsureRole(serviceProvider, adminID, "Administrator");
         }
 
         private static async Task<string> EnsureUser(IServiceProvider serviceProvider, string testUserPw, string UserName)
@@ -31,6 +27,7 @@ namespace OpenTalon.Data
             {
                 user = new OpenTalonUser
                 {
+                    Name = "Sei",
                     UserName = UserName,
                     Email = UserName,
                     EmailConfirmed = true
@@ -49,7 +46,7 @@ namespace OpenTalon.Data
 
             IdentityResult IR;
             if (!await roleManager.RoleExistsAsync(role))
-                IR = await roleManager.CreateAsync(new IdentityRole(role));
+                _ = await roleManager.CreateAsync(new IdentityRole(role));
 
             var userManager = serviceProvider.GetService<UserManager<OpenTalonUser>>();
             var user = await userManager.FindByIdAsync(uid);

@@ -7,10 +7,20 @@
     Layout = "_AdminLayout";
 }
 
-<h1>Users</h1>
-
-@foreach (OpenTalonUser user in UserManager.Users.ToList())
-{
-<p>@user.Id - @user.UserName - @user.Articles</p>
-}
-
+<div class="content">
+    <div class="section-title">
+        <h2>Users</h2>
+    </div>
+    <br />
+    @foreach (OpenTalonUser user in UserManager.Users.ToList())
+    {
+        <section>
+            <div class="card card-big card-compact">
+                <div>
+                    <h5>@user.Name - @user.Email</h5>
+                    <p>Id: @user.Id</p>
+                </div>
+            </div>
+        </section>
+    }
+</div>
