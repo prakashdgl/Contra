@@ -15,7 +15,7 @@
                 <img src="@Model.ThumbnailURL" />
             </span>
             <div>
-                <h3>@Model.AuthorName (@Model.AuthorId) - @Model.Date</h3>
+                <h3>@Model.AuthorName - @Model.Date</h3>
                 <p>Thumbnail URL - @Model.ThumbnailURL</p>
                 <div class="actions">
                     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
@@ -44,11 +44,6 @@
                     <input type="hidden" name="PostId" value="@Model.Id" />
                     <div class="form-group">
                         <section>
-                            <div>
-                                <label class="control-label">MVLA Email ID (1000xxxxx)</label>
-                                <input asp-for="AuthorId" class="form-control" autocomplete="off" value="" />
-                                <span asp-validation-for="AuthorId" class="text-danger"></span>
-                            </div>
                             <div>
                                 <label class="control-label">Name</label>
                                 <input asp-for="AuthorName" class="form-control" autocomplete="off" value="" />

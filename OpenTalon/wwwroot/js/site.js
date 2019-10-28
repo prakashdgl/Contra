@@ -1,6 +1,7 @@
 ﻿var menu, nav;
 var loadTarget, targetPos, skip = 0;
 var enabled = true, formatSearch = false;
+var submitStep = 1;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     menu = document.getElementById("links");
@@ -46,7 +47,7 @@ function loadContent(query) {
     loadTarget = document.getElementById("loadTarget");
     if (!loadTarget || !enabled) return;
 
-    if (document.body.scrollHeight - (window.scrollY + window.innerHeight) < 100) {
+    if (document.body.scrollHeight - (window.scrollY + window.innerHeight) < 200) {
         var http = new XMLHttpRequest();
         http.open('GET', "https://" + window.location.host + "/api/v1/article/list/" + query + "/" + skip, true);
         skip++;
@@ -109,4 +110,34 @@ function formatSearchCard(id, image, title, author, date, summary) {
         "<img src='" + image + "' /></span><div><h2>" + title +
         "</h2><p>" + author + " - " + date + "</p><hr /><p>" + summary +
         "</p><a href='article/" + id + "'>Read More</a></div></div>";
+}
+
+function submitUndoStep() {
+    if (submitStep > 1) submitStep--;
+    else submitStep = 1;
+
+    var toShow = document.getElementById("step-" + submitStep);
+    var shown = document.getElementById("step-" + (submitStep + 1));
+    toShow.style.display = "unset";
+    shown.style.display = "none";
+
+    if (submitStep === 1) document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
+    document.getElementById("submit-wrapper").style.flexDirection = "row";
+    document.getElementById("nextButton").classList = "btn btn-outline-info";
+}
+
+function submitNextStep() {
+    if (submitStep < 3) submitStep++;
+    else submitStep = 3;
+
+    var toShow = document.getElementById("step-" + submitStep);
+    var shown = document.getElementById("step-" + (submitStep - 1));
+    toShow.style.display = "unset";
+    shown.style.display = "none";
+
+    if (submitStep === 3) {
+        document.getElementById("nextButton").classList = "btn btn-outline-dark disabled";
+        document.getElementById("submit-wrapper").style.flexDirection = "column";
+    }
+    document.getElementById("prevButton").classList = "btn btn-outline-info";
 }

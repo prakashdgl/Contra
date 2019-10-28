@@ -266,8 +266,12 @@ section {
     margin: 10px;
 }
 
-.submit > h2 {
+.submit h2 {
     margin: 15px;
+}
+
+.submit form h2 {
+    margin-left: 0;
 }
 
 #step-2 {

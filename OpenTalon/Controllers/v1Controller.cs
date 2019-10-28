@@ -207,7 +207,7 @@ namespace OpenTalon.Controllers
             {
                 Approved = ApprovalStatus.Approved,
                 AuthorName = "Sei",
-                AuthorId = 100023440,
+                OwnerID = "",
                 Date = DateTime.Now,
                 Title = "Autogen",
                 SummaryShort = "Arts, Opinion, Autogen",

@@ -17,12 +17,12 @@
         <div class="card submit">
             @if (User.Identity.IsAuthenticated)
             {
-                <section>
+                <section id="submit-wrapper">
                     <div class="submit-form submit">
-                        <h2>Article Info (Step 1)</h2>
                         <form asp-action="Apply">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div id="step-1">
+                                <h2>Article Info (Step 1)</h2>
                                 <div class="form-group">
                                     <label class="control-label">Email</label>
                                     <p><b>@User.Identity.Name</b></p>
@@ -39,6 +39,7 @@
                                 </div>
                             </div>
                             <div id="step-2">
+                                <h2>Meta Info (Step 2)</h2>
                                 <div class="form-group">
                                     <label class="control-label">Thumbnail URL</label>
                                     <input asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
@@ -57,6 +58,7 @@
                                 </div>
                             </div>
                             <div id="step-3">
+                                <h2>Content (Step 3)</h2>
                                 <div class="form-group">
                                     <label asp-for="Content" class="control-label"></label>
                                     <textarea asp-for="Content" id="summernote"></textarea>
@@ -73,8 +75,8 @@
                             </div>
                             <br />
                             <div id="submit-controls">
-                                <button class="btn btn-outline-info disabled">Previous</button>
-                                <button class="btn btn-outline-info">Next</button>
+                                <button id="prevButton" class="btn btn-outline-dark disabled" type="button" onclick="submitUndoStep()">Previous Step</button>
+                                <button id="nextButton" class="btn btn-outline-info" type="button" onclick="submitNextStep()">Next Step</button>
                             </div>
                         </form>
                     </div>

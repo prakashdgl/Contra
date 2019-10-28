@@ -8,16 +8,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using OpenTalon.Data;
 using OpenTalon.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace OpenTalon.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context,
+                              UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -131,7 +135,7 @@ namespace OpenTalon.Controllers
 
         [HttpPost("/apply")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Apply([Bind("Id,AuthorId,AuthorName,ThumbnailURL,Title,SummaryShort,SummaryLong,Content")] Article article)
+        public async Task<IActionResult> Apply([Bind("Id,AuthorName,ThumbnailURL,Title,SummaryShort,SummaryLong,Content")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -139,6 +143,8 @@ namespace OpenTalon.Controllers
                     article.SummaryLong = article.SummaryLong.Substring(0, 60) + "...";
                 if (string.IsNullOrWhiteSpace(article.ThumbnailURL))
                     article.ThumbnailURL = "../img/img05.png";
+
+                article.OwnerID = _userManager.GetUserId(User);
                 article.Approved = ApprovalStatus.Submitted;
                 article.Date = DateTime.Now;
                 article.Views = 0;
