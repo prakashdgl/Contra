@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using OpenTalon.Areas.Identity.Data
+@inject UserManager<OpenTalonUser> UserManager
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "_AdminLayout";
+}
+
+<h1>Users</h1>
+
+@foreach (OpenTalonUser user in UserManager.Users.ToList())
+{
+<p>@user.Id - @user.UserName - @user.Articles</p>
+}
+

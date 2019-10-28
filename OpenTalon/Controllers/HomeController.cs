@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using OpenTalon.Areas.Identity.Data;
 using OpenTalon.Data;
 using OpenTalon.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace OpenTalon.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<OpenTalonUser> _userManager;
 
         public HomeController(ApplicationDbContext context,
-                              UserManager<IdentityUser> userManager)
+                              UserManager<OpenTalonUser> userManager)
         {
             _context = context;
             _userManager = userManager;

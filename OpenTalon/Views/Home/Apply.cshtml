@@ -1,7 +1,8 @@
 ﻿@model OpenTalon.Models.Article
 
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
+@using OpenTalon.Areas.Identity.Data
+@inject SignInManager<OpenTalonUser> SignInManager
 
 @{
     ViewData["Title"] = "Apply";

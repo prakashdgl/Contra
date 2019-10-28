@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using OpenTalon.Areas.Identity.Data
+@inject SignInManager<OpenTalonUser> SignInManager
+@inject UserManager<OpenTalonUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {

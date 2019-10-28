@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using OpenTalon.Areas.Identity.Data;
 using System;
 using System.Threading.Tasks;
 
@@ -23,12 +24,12 @@ namespace OpenTalon.Data
 
         private static async Task<string> EnsureUser(IServiceProvider serviceProvider, string testUserPw, string UserName)
         {
-            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+            var userManager = serviceProvider.GetService<UserManager<OpenTalonUser>>();
 
             var user = await userManager.FindByNameAsync(UserName);
             if (user == null)
             {
-                user = new IdentityUser
+                user = new OpenTalonUser
                 {
                     UserName = UserName,
                     Email = UserName,
@@ -50,7 +51,7 @@ namespace OpenTalon.Data
             if (!await roleManager.RoleExistsAsync(role))
                 IR = await roleManager.CreateAsync(new IdentityRole(role));
 
-            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+            var userManager = serviceProvider.GetService<UserManager<OpenTalonUser>>();
             var user = await userManager.FindByIdAsync(uid);
 
             if (user == null)

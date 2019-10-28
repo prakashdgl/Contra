@@ -58,5 +58,11 @@ namespace OpenTalon.Controllers
             ViewData["Message"] = "All Comments";
             return View(await _context.Comment.ToListAsync());
         }
+
+        [Route("/users")]
+        public async Task<IActionResult> Users()
+        {
+            return View();
+        }
     }
 }
