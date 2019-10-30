@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Co-Author Names</label>
-                                    <input asp-for="AuthorName" class="form-control" maxlength="50" placeholder="Ex) Sei, Armitage, Dana" />
+                                    <input id="input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="Ex) Sei, Armitage, Dana" />
                                     <span asp-validation-for="AuthorName" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
@@ -48,7 +48,7 @@
                                 <h2>Meta Info (Step 2)</h2>
                                 <div class="form-group">
                                     <label class="control-label">Thumbnail URL</label>
-                                    <input asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
+                                    <input id="input-img" asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
                                     <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
                                     <p>Please provide an external URL to an image to use as a thumbnail.</p>
                                 </div>
@@ -89,10 +89,10 @@
                     <div class="article-preview submit">
                         <h2>Article Preview</h2>
                         <div class="card article">
-                            <span class="image-container"><img src="../img/img05.png" /></span>
+                            <span class="image-container"><img id="thumbnail-img" src="../img/img05.png" /></span>
                             <div>
                                 <h3>
-                                    @UserManager.GetUserAsync(User).Result.Name - @DateTime.Now.ToShortDateString() -
+                                    @UserManager.GetUserAsync(User).Result.Name<span id="coauthors"></span> - @DateTime.Now.ToShortDateString() -
                                     <span class="social-links">
                                         <img src="~/img/twitter.svg" alt="Share on Twitter" />
                                         <img src="~/img/facebook.svg" alt="Share on Facebook" />
@@ -100,7 +100,7 @@
                                     </span>
                                 </h3>
                                 <br />
-                                Content
+                                <span id="content">Content</span>
                             </div>
                         </div>
                     </div>

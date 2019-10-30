@@ -154,9 +154,8 @@ section {
     transition-duration: 0.3s;
 }
 
-.card > div img {
+.note-editor > div img, .card > div img {
     position: unset !important;
-    float: none !important;
     transform: none !important;
 }
 

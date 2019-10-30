@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener("resize", function () {
         onResize();
     });
+    
+    coauthors = document.getElementById("coauthors");
+    inputCoauthors = document.getElementById("input-coauthors");
+    image = document.getElementById("thumbnail-img");
+    inputImage = document.getElementById("input-img");
+    content = document.getElementById("content");
 });
 
 function showMenu() {
@@ -124,6 +130,8 @@ function submitUndoStep() {
     if (submitStep === 1) document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
     document.getElementById("submit-wrapper").style.flexDirection = "row";
     document.getElementById("nextButton").classList = "btn btn-outline-info";
+
+    updateLivePreview();
 }
 
 function submitNextStep() {
@@ -138,6 +146,29 @@ function submitNextStep() {
     if (submitStep === 3) {
         document.getElementById("nextButton").classList = "btn btn-outline-dark disabled";
         document.getElementById("submit-wrapper").style.flexDirection = "column";
+        if (!contentUpdateTimer) contentUpdateTimer = setInterval(function () {
+            content.innerHTML = $("#summernote").summernote('code');
+        }, 2000);
     }
     document.getElementById("prevButton").classList = "btn btn-outline-info";
+
+    updateLivePreview();
+}
+
+var coauthors, inputCoauthors;
+var image, inputImage;
+var content, contentUpdateTimer;
+
+function updateLivePreview() {
+    if (inputCoauthors.value)
+        coauthors.innerText = ", " + inputCoauthors.value;
+    else
+        coauthors.innerText = "";
+
+    if (inputImage.value)
+        image.src = inputImage.value;
+    else
+        image.src = "../img/img05.png";
+
+    content.innerHTML = $("#summernote").summernote('code');
 }
