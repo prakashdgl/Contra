@@ -14,11 +14,17 @@
     <br />
     @foreach (OpenTalonUser user in UserManager.Users.ToList())
     {
+        var roles = UserManager.GetRolesAsync(user).Result;
         <section>
             <div class="card card-big card-compact">
                 <div>
                     <h5>@user.Name - @user.Email</h5>
                     <p>Id: @user.Id</p>
+                    @if (roles.Count > 0)
+                    {
+                        <p>Roles: @foreach (string r in (IList<string>)roles)
+                        {<span>@r </span>}</p>
+                    }
                 </div>
             </div>
         </section>
