@@ -63,6 +63,22 @@ nav #menu-button {
     margin-top: 10px;
 }
 
+.solo-nav {
+    z-index: 7;
+}
+
+.solo-nav .links:first-of-type {
+    line-height: 50px;
+}
+
+.solo-nav img {
+    vertical-align: unset;
+}
+
+.solo-nav #menu-button {
+    line-height: 30px;
+}
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -360,6 +376,12 @@ form section div:last-of-type {
     }
     .article > div {
         padding: 0 2rem;
+    }
+}
+
+@media (min-width: 1000px) {
+    .solo-nav .links .nav-link {
+        padding: 0 1rem;
     }
 }
 
