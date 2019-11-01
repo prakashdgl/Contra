@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using OpenTalon.Areas.Identity.Data;
 using OpenTalon.Data;
 using OpenTalon.Models;
 
