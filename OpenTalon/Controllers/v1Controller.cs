@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OpenTalon.Data;
@@ -15,10 +16,76 @@ namespace OpenTalon.Controllers
     public class v1Controller : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<OpenTalonUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public v1Controller(ApplicationDbContext context)
+        public v1Controller(ApplicationDbContext context,
+                            UserManager<OpenTalonUser> userManager,
+                            RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [Route("role/create/{*role}")]
+        [HttpPost]
+        public async Task<string> CreateRole(string role)
+        {
+            if (_roleManager.RoleExistsAsync(role).Result)
+                return "Role already exists!";
+
+            await _roleManager.CreateAsync(new IdentityRole(role));
+
+            return $"Created {role} successfully!";
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [Route("role/delete/{*role}")]
+        [HttpPost]
+        public async Task<string> DeleteRole(string role)
+        {
+            if (!_roleManager.RoleExistsAsync(role).Result)
+                return "Role does not exist!";
+            if (role == "Administrator") 
+                return "Role cannot be deleted!";
+
+            await _roleManager.DeleteAsync(_roleManager.FindByNameAsync(role).Result);
+
+            return $"Deleted {role} successfully!";
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [Route("user/{userID}/ensure/{*role}")]
+        [HttpPost]
+        public async Task<string> EnsureRole(string userID, string role)
+        {
+            if (!_roleManager.RoleExistsAsync(role).Result)
+                return "Requested role not found.";
+
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userID);
+            if (user == null)
+                return "Requested user not found.";
+
+            await _userManager.AddToRoleAsync(user, role);
+            return $"Added {role} successfully!";
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [Route("user/{userID}/enfeeble/{*role}")]
+        [HttpPost]
+        public async Task<string> EnfeebleRole(string userID, string role)
+        {
+            if (!_roleManager.RoleExistsAsync(role).Result)
+                return "Requested role not found.";
+
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userID);
+            if (user == null)
+                return "Requested user not found.";
+
+            await _userManager.RemoveFromRoleAsync(user, role);
+            return $"Removed {role} successfully!";
         }
 
         [Authorize(Roles = "Administrator")]

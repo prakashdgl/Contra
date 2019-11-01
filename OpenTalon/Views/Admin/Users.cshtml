@@ -1,4 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@model IEnumerable<OpenTalonUser>
+
+@using Microsoft.AspNetCore.Identity
 @using OpenTalon.Areas.Identity.Data
 @inject UserManager<OpenTalonUser> UserManager
 
@@ -9,10 +11,10 @@
 
 <div class="content">
     <div class="section-title">
-        <h2>Users</h2>
+        <h2>@ViewData["Message"]</h2>
     </div>
     <br />
-    @foreach (OpenTalonUser user in UserManager.Users.ToList())
+    @foreach (OpenTalonUser user in Model)
     {
         var roles = UserManager.GetRolesAsync(user).Result;
         <section>
