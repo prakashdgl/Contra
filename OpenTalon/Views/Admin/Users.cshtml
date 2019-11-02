@@ -25,10 +25,9 @@
                     <p>Id: @user.Id</p>
                     @foreach (IdentityRole role in RoleManager.Roles)
                     {
-                        <div class="role">
-                            <label for="@role.Name">@role.Name</label>
-                            <input type="checkbox" id="@role.Name" @(UserManager.IsInRoleAsync(user, role.Name).Result ? "checked" : null) onclick="updateRoles(this, '@user.Id', '@role.Name')" />
-                        </div>
+                        <label for="@role.Name-@user.Name" class="role">@role.Name
+                        <input type="checkbox" id="@role.Name-@user.Name" @(UserManager.IsInRoleAsync(user, role.Name).Result ? "checked" : null) onclick="updateRoles(this, '@user.Id', '@role.Name')">
+                        <span class="checkmark"></span></label>
                     }
                 </div>
                 <div class="user-controls">
