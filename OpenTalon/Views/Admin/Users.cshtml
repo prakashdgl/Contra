@@ -1,8 +1,7 @@
-﻿@model IEnumerable<OpenTalonUser>
+﻿@model Dictionary<OpenTalonUser, List<string>>
 
 @using Microsoft.AspNetCore.Identity
 @using OpenTalon.Areas.Identity.Data
-@inject UserManager<OpenTalonUser> UserManager
 @inject RoleManager<IdentityRole> RoleManager
 
 @{
@@ -15,7 +14,7 @@
         <h2>@ViewData["Message"]</h2>
     </div>
     <br />
-    @foreach (OpenTalonUser user in Model)
+    @foreach (OpenTalonUser user in Model.Keys)
     {
         <section>
             <div class="card card-big card-compact card-user">
@@ -25,7 +24,7 @@
                     @foreach (IdentityRole role in RoleManager.Roles)
                     {
                         <label for="@role.Name-@user.Name" class="role">@role.Name
-                        <input type="checkbox" id="@role.Name-@user.Name" @(UserManager.IsInRoleAsync(user, role.Name).Result ? "checked" : null) onclick="updateRoles(this, '@user.Id', '@role.Name')">
+                        <input type="checkbox" id="@role.Name-@user.Name" @(Model[user].Contains(role.Name)? "checked" : null) onclick="updateRoles(this, '@user.Id', '@role.Name')">
                         <span class="checkmark"></span></label>
                     }
                 </div>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -69,16 +70,26 @@ namespace OpenTalon.Controllers
         }
 
         [Route("/users/{*filter}")]
-        public async Task<IActionResult> Users(string filter)
+        public IActionResult Users(string filter)
         {
-            if (filter == "staff")
+            List<OpenTalonUser> users;
+            switch (filter)
             {
-                ViewData["Message"] = "Staff Members";
-                return View(_userManager.GetUsersInRoleAsync("Administrator").Result);
+                case "staff":
+                    ViewData["Message"] = "Staff Members";
+                    users = _userManager.GetUsersInRoleAsync("Administrator").Result.ToList();
+                    break;
+                default:
+                    ViewData["Message"] = "Users";
+                    users = _context.Users.ToList();
+                    break;
             }
 
-            ViewData["Message"] = "Users";
-            return View(await _context.Users.ToListAsync());
+            Dictionary<OpenTalonUser, List<string>> userRoles = new Dictionary<OpenTalonUser, List<string>>();
+            foreach (OpenTalonUser user in users)
+                userRoles.Add(user, _userManager.GetRolesAsync(user).Result.ToList());
+
+            return View(userRoles);
         }
     }
 }
