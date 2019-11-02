@@ -23,8 +23,8 @@
                     <p>Id: @user.Id</p>
                     @foreach (IdentityRole role in RoleManager.Roles)
                     {
-                        <label for="@role.Name-@user.Name" class="role">@role.Name
-                        <input type="checkbox" id="@role.Name-@user.Name" @(Model[user].Contains(role.Name)? "checked" : null) onclick="updateRoles(this, '@user.Id', '@role.Name')">
+                        <label for="@role.Name-@user.Id" class="role">@role.Name
+                        <input type="checkbox" id="@role.Name-@user.Id" @(Model[user].Contains(role.Name)? "checked" : null) onclick="updateRoles(this, '@user.Id', '@role.Name')">
                         <span class="checkmark"></span></label>
                     }
                 </div>
