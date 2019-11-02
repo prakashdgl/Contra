@@ -17,7 +17,6 @@
     <br />
     @foreach (OpenTalonUser user in Model)
     {
-        var roles = UserManager.GetRolesAsync(user).Result;
         <section>
             <div class="card card-big card-compact card-user">
                 <div class="user-info">

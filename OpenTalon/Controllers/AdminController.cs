@@ -28,12 +28,12 @@ namespace OpenTalon.Controllers
         public async Task<IActionResult> Index()
         {
             List<Article> articles = await _context.Article.Where((x) => 
-                                     x.Approved != ApprovalStatus.Approved).ToListAsync();
+                                     x.Approved == ApprovalStatus.Submitted).ToListAsync();
             ViewData["Articles"] = _context.Article.Count();
             ViewData["ArticlesLeft"] = articles.Count;
 
             List<Comment> comments = await _context.Comment.Where((x) => 
-                                     x.Approved != ApprovalStatus.Approved).ToListAsync();
+                                     x.Approved == ApprovalStatus.Submitted).ToListAsync();
             ViewData["Comments"] = _context.Comment.Count();
             ViewData["CommentsLeft"] = comments.Count;
 
