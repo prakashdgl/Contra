@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Identity
 @using OpenTalon.Areas.Identity.Data
 @inject UserManager<OpenTalonUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
 
 @{
     ViewData["Title"] = "Users";
@@ -18,15 +19,24 @@
     {
         var roles = UserManager.GetRolesAsync(user).Result;
         <section>
-            <div class="card card-big card-compact">
-                <div>
+            <div class="card card-big card-compact card-user">
+                <div class="user-info">
                     <h5>@user.Name - @user.Email</h5>
                     <p>Id: @user.Id</p>
-                    @if (roles.Count > 0)
+                    @foreach (IdentityRole role in RoleManager.Roles)
                     {
-                        <p>Roles: @foreach (string r in (IList<string>)roles)
-                        {<span>@r </span>}</p>
+                        <div class="role">
+                            <label for="@role.Name">@role.Name</label>
+                            <input type="checkbox" id="@role.Name" @(UserManager.IsInRoleAsync(user, role.Name).Result ? "checked" : null) onclick="updateRoles(this, '@user.Id', '@role.Name')" />
+                        </div>
                     }
+                </div>
+                <div class="user-controls">
+                    <a class="nav-link" href="~/articles">📃 Articles</a>
+                    <a class="nav-link" href="~/comments">💬 Comments</a>
+                    <a class="nav-link" href="~/comments">❔ Tickets</a>
+                </div>
+                <div class="user-role-editor">
                 </div>
             </div>
         </section>

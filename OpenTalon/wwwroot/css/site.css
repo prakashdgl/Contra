@@ -289,11 +289,7 @@ section {
     margin-left: 0;
 }
 
-#step-2 {
-    display: none;
-}
-
-#step-3 {
+#step-2, #step-3 {
     display: none;
 }
 

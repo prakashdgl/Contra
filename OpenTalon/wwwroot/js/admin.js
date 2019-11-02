@@ -18,12 +18,19 @@ function cancelAction() {
     handled = false;
 }
 
-function postToAPI(route) {
+function updateRoles(sender, id, role) {
+    if (sender.checked)
+        postToAPI("api/v1/user/" + id + "/ensure/" + role, false);
+    else
+        postToAPI("api/v1/user/" + id + "/enfeeble/" + role, false);
+}
+
+function postToAPI(route, updateResponseText = true) {
     var http = new XMLHttpRequest();
     http.open('POST', "https://" + window.location.host + "/" + route, true);
 
     http.onreadystatechange = function () {
-        if (http.readyState === 4 && http.status === 200) {
+        if (http.readyState === 4 && http.status === 200 && updateResponseText) {
             lastSender.innerHTML = "<h5>" + http.responseText + "</h5>";
             handled = true;
         }

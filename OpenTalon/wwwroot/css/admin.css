@@ -42,12 +42,32 @@
     bottom: 0;
     left: 50px;
     right: 0;
-    padding: 0 20px;
+    padding: 0;
     overflow: auto;
 }
 
 .hideable {
     display: none;
+}
+
+.card-user {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info {
+    flex: 3 1;
+}
+
+.user-controls {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1;
+}
+
+.user-role-editor {
+    display: none;
+    flex: 1 1;
 }
 
 @media (min-width: 768px) {
@@ -65,9 +85,16 @@
     }
     .dashboard-content {
         left: 200px;
+        padding: 0 20px;
     }
     .hideable {
         display: inline-block;
+    }
+    .card-user {
+        flex-direction: row;
+    }
+    .user-controls {
+        flex-direction: column;
     }
 }
 
