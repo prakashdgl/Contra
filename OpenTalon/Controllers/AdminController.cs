@@ -97,5 +97,11 @@ namespace OpenTalon.Controllers
         {
             return View(_context.Ticket.ToList());
         }
+
+        [Route("/roles")]
+        public IActionResult Roles()
+        {
+            return View();
+        }
     }
 }

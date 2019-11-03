@@ -1,0 +1,28 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@inject RoleManager<IdentityRole> RoleManager
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "_AdminLayout";
+}
+
+<div class="content">
+    <div class="section-title">
+        <h2>Roles</h2>
+    </div>
+    <br />
+    @foreach (IdentityRole role in RoleManager.Roles)
+    {
+        <section>
+            <div class="card card-big card-compact card-user">
+                <div class="user-info">
+                    <h5>@role.Name</h5>
+                </div>
+                <div class="user-controls">
+                    <a class="nav-link" href="~/articles">🙋‍ Users</a>
+                </div>
+            </div>
+        </section>
+    }
+</div>
