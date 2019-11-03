@@ -1,0 +1,7 @@
+language: csharp
+solution: OpenTalon.sln
+
+mono: none
+dotnet: 3.1.100-preview1-014459
+script:
+ - dotnet restore
