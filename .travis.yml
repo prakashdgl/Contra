@@ -1,7 +1,14 @@
 language: csharp
 solution: OpenTalon.sln
 
+dist: xenial
+addons:
+  snaps:
+  - name: dotnet-sdk
+    classic: true
+    channel: latest/beta
+sudo: required
 mono: none
-dotnet: 3.1.100-preview1-014459
 script:
- - dotnet restore
+  - sudo snap alias dotnet-sdk.dotnet dotnet
+  - dotnet --version
