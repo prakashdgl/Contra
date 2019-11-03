@@ -14,5 +14,7 @@ namespace OpenTalon.Data
         public DbSet<Models.Comment> Comment { get; set; }
 
         public DbSet<Models.Article> Article { get; set; }
+
+        public DbSet<Models.Ticket> Ticket { get; set; }
     }
 }

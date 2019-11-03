@@ -91,5 +91,11 @@ namespace OpenTalon.Controllers
 
             return View(userRoles);
         }
+
+        [Route("/tickets")]
+        public IActionResult Tickets()
+        {
+            return View(_context.Ticket.ToList());
+        }
     }
 }
