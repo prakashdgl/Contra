@@ -161,6 +161,34 @@ namespace OpenTalon.Controllers
             return View(article);
         }
 
+        [HttpGet("/feedback")]
+        public IActionResult Feedback()
+        {
+            return View();
+        }
+
+        [HttpPost("/feedback")]
+        public async Task<IActionResult> Feedback([Bind("Id,Title,Tags,Content")] Ticket ticket)
+        {
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(ticket.Title) && string.IsNullOrEmpty(ticket.Content))
+                    return View(ticket);
+
+                ticket.OwnerID = _userManager.GetUserId(User);
+                ticket.AuthorName = _userManager.GetUserAsync(User).Result.Name;
+                ticket.Approved = HandledStatus.Submitted;
+                ticket.Date = DateTime.Now;
+                ticket.AssignedTo = "None";
+
+                _context.Add(ticket);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(ticket);
+        }
+
         [Route("/privacy")]
         public IActionResult Privacy()
         {

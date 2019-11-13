@@ -152,8 +152,20 @@ a {
     width: 375px;
 }
 
+#extras .section-title {
+    margin-bottom: 10px;
+}
+
 #extras section {
     flex-direction: column;
+}
+
+.flex-big {
+    flex: 3 1 !important;
+}
+
+.flex-small {
+    flex: 1 1 !important;
 }
 
 .section-title {
@@ -388,7 +400,8 @@ form section div:last-of-type {
         padding: 0 1rem;
     }
     #extras {
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
 }
 
