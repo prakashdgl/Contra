@@ -143,9 +143,22 @@ a {
     margin-bottom: 100px;
 }
 
+#main {
+    flex: 1 1;
+}
+
+#extras {
+    display: none;
+    width: 375px;
+}
+
+#extras section {
+    flex-direction: column;
+}
+
 .section-title {
     margin: 20px;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .section-title > h2 {
@@ -159,7 +172,7 @@ section {
 
 .card {
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: -10px 15px 5px #cacaca;
     flex: 2 1;
     min-height: 300px;
@@ -294,20 +307,15 @@ section {
 }
 
 .banner {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: -10px 10px 5px #ddd;
     display: flex;
     align-items: center;
-    height: 200px;
-    margin: 15px;
-    padding: 25px;
+    justify-content: center;
+    height: 100%;
     flex: 1 1;
 }
 
 .banner img {
-    flex: 1 1;
-    height: 80%;
+    width: 50%;
 }
 
 .box-shadow {
@@ -362,7 +370,7 @@ form section div:last-of-type {
         height: 200px;
     }
     .section-title {
-        margin-top: 70px;
+        margin-top: 50px;
     }
     #border-gradient {
         top: 200px;
@@ -378,6 +386,9 @@ form section div:last-of-type {
 @media (min-width: 1000px) {
     .solo-nav .links .nav-link {
         padding: 0 1rem;
+    }
+    #extras {
+        display: block;
     }
 }
 
@@ -406,6 +417,6 @@ form section div:last-of-type {
 
 @media (min-width: 1400px) {
     .container {
-        max-width: 1300px;
+        max-width: 1400px;
     }
 }
