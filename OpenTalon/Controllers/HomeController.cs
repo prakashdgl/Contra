@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using OpenTalon.Areas.Identity.Data;
 using OpenTalon.Data;
 using OpenTalon.Models;
+using Microsoft.AspNetCore.Routing;
 
 namespace OpenTalon.Controllers
 {
@@ -71,10 +72,10 @@ namespace OpenTalon.Controllers
         [Route("/article/{*id}")]
         public async Task<IActionResult> Article(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null) return Redirect("~/404");
 
             var article = await _context.Article.FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null) return NotFound();
+            if (article == null) return Redirect("~/404");
 
             article.Views++;
             await _context.SaveChangesAsync();
@@ -155,7 +156,7 @@ namespace OpenTalon.Controllers
 
                 _context.Add(article);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/success");
             }
 
             return View(article);
@@ -183,7 +184,7 @@ namespace OpenTalon.Controllers
 
                 _context.Add(ticket);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/success");
             }
 
             return View(ticket);
@@ -191,6 +192,18 @@ namespace OpenTalon.Controllers
 
         [Route("/privacy")]
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [Route("/404")]
+        public IActionResult ItemNotFound()
+        {
+            return View();
+        }
+
+        [Route("/success")]
+        public IActionResult ItemSubmitSuccess()
         {
             return View();
         }
