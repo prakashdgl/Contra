@@ -21,7 +21,6 @@
     left: 0;
     width: 50px;
     overflow: auto;
-    transition-duration: 0.3s;
 }
 
 .dashboard-controls a {

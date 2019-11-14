@@ -42,36 +42,70 @@ namespace OpenTalon.Controllers
         }
 
         [Route("/articles/{*filter}")]
-        public async Task<IActionResult> Articles(string filter)
+        public IActionResult Articles(string filter)
         {
-            if (filter == "submitted")
+            if (string.IsNullOrEmpty(filter)) filter = "all";
+
+            List<Article> articles;
+            switch (filter)
             {
-                ViewData["Message"] = "Article Submissions";
-                return View(await _context.Article.Where(x => 
-                            x.Approved == ApprovalStatus.Submitted).ToListAsync());
+                case "submitted":
+                    ViewData["Message"] = "Article Submissions";
+                    articles = _context.Article.Where(x =>
+                                   x.Approved == ApprovalStatus.Submitted).ToList();
+                    break;
+                case "all":
+                    ViewData["Message"] = "All Articles";
+                    articles = _context.Article.ToList();
+                    break;
+                default:
+                    ViewData["Message"] = "Articles - " + filter;
+                    articles = (from a in _context.Article
+                                where a.OwnerID == filter ||
+                                      a.Content.Contains(filter) ||
+                                      a.AuthorName.Contains(filter)
+                                select a).ToList();
+                    break;
             }
 
-            ViewData["Message"] = "All Articles";
-            return View(await _context.Article.ToListAsync());
+            return View(articles);
         }
 
         [Route("/comments/{*filter}")]
-        public async Task<IActionResult> Comments(string filter)
+        public IActionResult Comments(string filter)
         {
-            if (filter == "submitted")
+            if (string.IsNullOrEmpty(filter)) filter = "all";
+
+            List<Comment> comments;
+            switch (filter)
             {
-                ViewData["Message"] = "Comment Submissions";
-                return View(await _context.Comment.Where(x => 
-                            x.Approved == ApprovalStatus.Submitted).ToListAsync());
+                case "submitted":
+                    ViewData["Message"] = "Comment Submissions";
+                    comments = _context.Comment.Where(x =>
+                                   x.Approved == ApprovalStatus.Submitted).ToList();
+                    break;
+                case "all":
+                    ViewData["Message"] = "All Comments";
+                    comments = _context.Comment.ToList();
+                    break;
+                default:
+                    ViewData["Message"] = "Comments - " + filter;
+                    comments = (from c in _context.Comment
+                                where c.OwnerID == filter ||
+                                      c.Content.Contains(filter) ||
+                                      c.AuthorName.Contains(filter)
+                                select c).ToList();
+                    break;
             }
 
-            ViewData["Message"] = "All Comments";
-            return View(await _context.Comment.ToListAsync());
+            return View(comments);
         }
 
         [Route("/users/{*filter}")]
         public IActionResult Users(string filter)
         {
+            if (string.IsNullOrEmpty(filter)) filter = "all";
+
             List<OpenTalonUser> users;
             switch (filter)
             {
@@ -79,9 +113,17 @@ namespace OpenTalon.Controllers
                     ViewData["Message"] = "Staff Members";
                     users = _userManager.GetUsersInRoleAsync("Administrator").Result.ToList();
                     break;
-                default:
+                case "all":
                     ViewData["Message"] = "Users";
                     users = _context.Users.ToList();
+                    break;
+                default:
+                    ViewData["Message"] = "Users - " + filter;
+                    users = (from u in _context.Users
+                             where u.UserName.Contains(filter) || 
+                                   u.Email.Contains(filter)
+                             select u).ToList();
+                    users.AddRange(_userManager.GetUsersInRoleAsync(filter).Result.ToList());
                     break;
             }
 
@@ -92,10 +134,33 @@ namespace OpenTalon.Controllers
             return View(userRoles);
         }
 
-        [Route("/tickets")]
-        public IActionResult Tickets()
+        [Route("/tickets/{*filter}")]
+        public IActionResult Tickets(string filter)
         {
-            return View(_context.Ticket.ToList());
+            List<Ticket> tickets;
+            switch (filter)
+            {
+                case "submitted":
+                    ViewData["Message"] = "Submitted Tickets";
+                    tickets = _context.Ticket.Where(x =>
+                                   x.Approved == HandledStatus.Submitted).ToList();
+                    break;
+                case "all":
+                    ViewData["Message"] = "All Tickets";
+                    tickets = _context.Ticket.ToList();
+                    break;
+                default:
+                    ViewData["Message"] = "Tickets - " + filter;
+                    tickets = (from t in _context.Ticket
+                               where t.OwnerID == filter ||
+                                     t.Content.Contains(filter) ||
+                                     t.AuthorName.Contains(filter) ||
+                                     t.AssignedTo.Contains(filter)
+                               select t).ToList();
+                    break;
+            }
+
+            return View(tickets);
         }
 
         [Route("/roles")]
