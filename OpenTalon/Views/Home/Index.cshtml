@@ -11,14 +11,14 @@
         </div>
         <section>
             <div class="card card-big story" onclick="redirect(@Model.ElementAt(0)[0].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(0)[0].ThumbnailURL /></span>
+                <span class="image-container"><img src=@Model.ElementAt(0)[0].ThumbnailURL alt="Article Thumbnail" /></span>
                 <div>
                     <h2>@Model.ElementAt(0)[0].Title</h2>
                     <p>@Model.ElementAt(0)[0].SummaryLong</p>
                 </div>
             </div>
             <div class="card card-encapsulate story" onclick="redirect(@Model.ElementAt(0)[1].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(0)[1].ThumbnailURL /></span>
+                <span class="image-container"><img src=@Model.ElementAt(0)[1].ThumbnailURL alt="Article Thumbnail" /></span>
                 <div>
                     <h2>@Model.ElementAt(0)[1].Title</h2>
                     <p>@Model.ElementAt(0)[1].SummaryLong</p>
@@ -27,14 +27,14 @@
         </section>
         <section>
             <div class="card card-encapsulate story" onclick="redirect(@Model.ElementAt(0)[2].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(0)[2].ThumbnailURL /></span>
+                <span class="image-container"><img src=@Model.ElementAt(0)[2].ThumbnailURL alt="Article Thumbnail" /></span>
                 <div>
                     <h2>@Model.ElementAt(0)[2].Title</h2>
                     <p>@Model.ElementAt(0)[2].SummaryLong</p>
                 </div>
             </div>
             <div class="card card-big story" onclick="redirect(@Model.ElementAt(0)[3].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(0)[3].ThumbnailURL /></span>
+                <span class="image-container"><img src=@Model.ElementAt(0)[3].ThumbnailURL alt="Article Thumbnail" /></span>
                 <div>
                     <h2>@Model.ElementAt(0)[3].Title</h2>
                     <p>@Model.ElementAt(0)[3].SummaryLong</p>
@@ -46,14 +46,14 @@
         </div>
         <section>
             <div class="card card-big card-encapsulate story" onclick="redirect(@Model.ElementAt(1)[0].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(1)[0].ThumbnailURL /></span>
+                <span class="image-container"><img src=@Model.ElementAt(1)[0].ThumbnailURL alt="Article Thumbnail" /></span>
                 <div>
                     <h2>@Model.ElementAt(1)[0].Title</h2>
                     <p>@Model.ElementAt(1)[0].SummaryLong</p>
                 </div>
             </div>
             <div class="card story" onclick="redirect(@Model.ElementAt(1)[1].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(1)[1].ThumbnailURL /></span>
+                <span class="image-container"><img src=@Model.ElementAt(1)[1].ThumbnailURL alt="Article Thumbnail" /></span>
                 <div>
                     <h2>@Model.ElementAt(1)[1].Title</h2>
                     <p>@Model.ElementAt(1)[1].SummaryLong</p>
@@ -69,7 +69,7 @@
             <div class="card flex-big">
                 <h2>Spotify</h2>
                 <br />
-                <iframe src="https://open.spotify.com/embed/album/7JsqDNhfReIz6aG6irMa4D" name="Spotify" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <iframe src="https://open.spotify.com/embed/album/7JsqDNhfReIz6aG6irMa4D" title="Spotify Playlist" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
             <div class="card">
                 <h2>Support Us</h2>

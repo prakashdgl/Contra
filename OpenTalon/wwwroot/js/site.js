@@ -107,14 +107,14 @@ function formatCard(id, image, title, summary, big, encapsulate) {
     if (encapsulate) classes += " card-encapsulate";
 
     return "<div class='" + classes + "' onclick='redirect(" + id + ")'>" +
-           "<span class='image-container'><img src='" + image + "' /></span>" +
+           "<span class='image-container'><img src='" + image + "' alt='" + title + " Thumbnail Image' /></span>" +
            "<div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
 }
 
 function formatSearchCard(id, image, title, author, date, summary) {
     return "<div class='card card-big card-search'><span class='image-container'>" +
-        "<img src='" + image + "' /></span><div><h2>" + title +
-        "</h2><p>" + author + " - " + date + "</p><hr /><p>" + summary +
+        "<img src='" + image + "' alt='" + title + " Thumbnail Image' /></span><div><h2>" +
+        title + "</h2><p>" + author + " - " + date + "</p><hr /><p>" + summary +
         "</p><a href='article/" + id + "'>Read More</a></div></div>";
 }
 
