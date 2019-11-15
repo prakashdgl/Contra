@@ -43,7 +43,7 @@ namespace OpenTalon.Controllers
                                  select a).ToList();
             while (top.Count < 4)
             {
-                placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".png";
+                placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".jpg";
                 top.Add(placeholder);
             }
             articles.Add(top);
@@ -55,7 +55,7 @@ namespace OpenTalon.Controllers
                                        select a).ToList();
             while (editorial.Count < 4)
             {
-                placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".png";
+                placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".jpg";
                 editorial.Add(placeholder);
             }
             articles.Add(editorial);
@@ -146,7 +146,7 @@ namespace OpenTalon.Controllers
                 if (string.IsNullOrWhiteSpace(article.SummaryLong) || article.SummaryLong.Length > 60) 
                     article.SummaryLong = article.SummaryLong.Substring(0, 60) + "...";
                 if (string.IsNullOrWhiteSpace(article.ThumbnailURL))
-                    article.ThumbnailURL = "../img/img05.png";
+                    article.ThumbnailURL = "../img/img05.jpg";
 
                 article.OwnerID = _userManager.GetUserId(User);
                 article.AuthorName = _userManager.GetUserAsync(User).Result.Name + ", " + article.AuthorName;
@@ -155,6 +155,7 @@ namespace OpenTalon.Controllers
                 article.Views = 0;
 
                 _context.Add(article);
+                _userManager.GetUserAsync(User).Result.Articles.Add(article);
                 await _context.SaveChangesAsync();
                 return Redirect("~/success");
             }

@@ -95,7 +95,6 @@ a.navbar-brand img {
 }
 
 a {
-    color: #6daedb;
     transition-duration: 0.2s;
 }
 
@@ -206,7 +205,7 @@ section {
 }
 
 .story:hover {
-    box-shadow: -10px 10px 5px #ccc;
+    box-shadow: -10px 10px 5px #bbb;
     transform: translate(8px, -8px);
 }
 
@@ -342,8 +341,10 @@ section {
 
 .social-links img {
     display: inline-block;
-    width: 40px;
+    width: 35px;
     padding: 0.3rem;
+    padding-left: 0;
+    margin-right: 0.3rem;
 }
 
 .submit-form {

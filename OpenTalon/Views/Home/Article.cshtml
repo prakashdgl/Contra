@@ -17,14 +17,14 @@ string url = System.Net.WebUtility.UrlEncode("https://" + Context.Request.Host +
                     <img src="@Model.ThumbnailURL" />
                 </span>
                 <div>
-                    <h3>
-                        @Model.AuthorName - @Model.Date.ToShortDateString() -
+                    <h3>@Model.AuthorName - @Model.Date.ToShortDateString()</h3>
+                    <h4>
                         <span class="social-links">
                             <a href="https://twitter.com/intent/tweet?text=@System.Net.WebUtility.UrlEncode(Model.Title)+@(url)"><img src="~/img/twitter.svg" alt="Share on Twitter" /></a>
                             <a href="https://facebook.com/sharer/sharer.php?u=@(url)"><img src="~/img/facebook.svg" alt="Share on Facebook" /></a>
                             <a href="#discuss"><img src="~/img/discuss.svg" alt="Discuss Here" /></a>
                         </span>
-                    </h3>
+                    </h4>
                     <h5>Views: @Model.Views</h5>
                     <br />
                     @Html.Raw(Model.Content)

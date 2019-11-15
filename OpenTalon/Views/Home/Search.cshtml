@@ -11,7 +11,7 @@
     @foreach (var item in Model) {
     <section>
         <div class="card card-search">
-            <span class="image-container"><img src="@item.ThumbnailURL" /></span>
+            <span class="image-container"><img src="@item.ThumbnailURL" alt="'@item.Title' Thumbnail Image" /></span>
             <div>
                 <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
                 <p>@Html.DisplayFor(modelItem => item.AuthorName) - @Html.DisplayFor(modelItem => item.Date)</p>

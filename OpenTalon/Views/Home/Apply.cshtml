@@ -90,16 +90,18 @@
                     <div class="article-preview submit">
                         <h2>Article Preview</h2>
                         <div class="card article">
-                            <span class="image-container"><img id="thumbnail-img" src="../img/img05.png" /></span>
+                            <span class="image-container"><img id="thumbnail-img" src="../img/img05.jpg" alt="Article Preview Image" /></span>
                             <div>
                                 <h3>
-                                    @UserManager.GetUserAsync(User).Result.Name<span id="coauthors"></span> - @DateTime.Now.ToShortDateString() -
+                                    @UserManager.GetUserAsync(User).Result.Name<span id="coauthors"></span> - @DateTime.Now.ToShortDateString()
+                                </h3>
+                                <h4>
                                     <span class="social-links">
                                         <img src="~/img/twitter.svg" alt="Share on Twitter" />
                                         <img src="~/img/facebook.svg" alt="Share on Facebook" />
                                         <img src="~/img/discuss.svg" alt="Discuss Here" />
                                     </span>
-                                </h3>
+                                </h4>
                                 <br />
                                 <span id="content">Content</span>
                             </div>
@@ -124,7 +126,7 @@
                     </div>
                     <div class="article-preview submit">
                         <div class="card article">
-                            <span class="image-container"><img src="../img/img05.png" /></span>
+                            <span class="image-container"><img src="../img/img05.jpg" /></span>
                         </div>
                     </div>
                 </section>

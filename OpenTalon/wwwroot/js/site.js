@@ -168,7 +168,7 @@ function updateLivePreview() {
     if (inputImage.value)
         image.src = inputImage.value;
     else
-        image.src = "../img/img05.png";
+        image.src = "../img/img05.jpg";
 
     content.innerHTML = $("#summernote").summernote('code');
 }

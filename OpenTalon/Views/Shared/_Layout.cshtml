@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="description" content="OpenTalon is an open source news site designed to facilitate student journalism and engage readers more than solutions used today." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OpenTalon</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -11,7 +12,7 @@
     <header>
         <nav id="nav">
             <div class="container">
-                <a class="navbar-brand" href="~/"><img src="~/img/open-talon.svg" /></a>
+                <a class="navbar-brand" href="~/"><img src="~/img/open-talon.svg" alt="OpenTalon Home" /></a>
                 <button id="menu-button" onclick="showMenu()">Menu</button>
                 <div id="links">
                     <div class="links">
@@ -30,7 +31,7 @@
             </div>
         </nav>
         <div class="header">
-            <img src="~/img/banner.svg" />
+            <img src="~/img/banner.svg" alt="OpenTalon Banner" />
             <div id="border-gradient"></div>
         </div>
     </header>
@@ -45,7 +46,7 @@
         </div>
     </footer>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
