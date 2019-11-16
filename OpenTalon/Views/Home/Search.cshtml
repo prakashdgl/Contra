@@ -17,7 +17,7 @@
                 <p>@Html.DisplayFor(modelItem => item.AuthorName) - @Html.DisplayFor(modelItem => item.Date)</p>
                 <hr />
                 <p>@Html.DisplayFor(modelItem => item.SummaryLong)</p>
-                <a asp-action="Article" asp-route-id="@item.Id">Read More</a>
+                <a asp-controller="Home" asp-action="Article" asp-route-id="@item.Id">Read More</a>
             </div>
         </div>
     </section>

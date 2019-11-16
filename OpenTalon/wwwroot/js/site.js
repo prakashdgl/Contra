@@ -7,12 +7,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     menu = document.getElementById("links");
     nav = document.getElementById("nav");
 
-    var query = document.getElementById("query");
-    if (query)
-        loadContent(query.innerText);
-
     var search = document.getElementById("search");
     if (search) { formatSearch = true; skip = 2; }
+
+    var query = document.getElementById("query");
+    if (query) { loadContent(query.innerText); }
 
     window.addEventListener("resize", function () {
         onResize();
@@ -112,7 +111,7 @@ function formatSearchCard(id, image, title, author, date, summary) {
     return "<div class='card card-big card-search'><span class='image-container'>" +
         "<img src='" + image + "' alt='" + title + " Thumbnail Image' /></span><div><h2>" +
         title + "</h2><p>" + author + " - " + date + "</p><hr /><p>" + summary +
-        "</p><a href='article/" + id + "'>Read More</a></div></div>";
+        "</p><a href='https://" + window.location.host + "/article/" + id + "'>Read More</a></div></div>";
 }
 
 function submitUndoStep() {
