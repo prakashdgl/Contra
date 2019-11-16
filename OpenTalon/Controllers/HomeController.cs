@@ -106,6 +106,7 @@ namespace OpenTalon.Controllers
                 comment.Date = DateTime.Now;
 
                 _context.Add(comment);
+                _userManager.GetUserAsync(User).Result.Comments.Add(comment);
                 await _context.SaveChangesAsync();
                 return Redirect($"~/article/{PostId}");
             }

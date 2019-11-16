@@ -8,11 +8,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     nav = document.getElementById("nav");
 
     var query = document.getElementById("query");
-    if (query) {
-        document.addEventListener("scroll", function () {
-            loadContent(query.innerText);
-        });
-    }
+    if (query)
+        loadContent(query.innerText);
+
     var search = document.getElementById("search");
     if (search) { formatSearch = true; skip = 2; }
 
@@ -53,52 +51,51 @@ function loadContent(query) {
     loadTarget = document.getElementById("loadTarget");
     if (!loadTarget || !enabled) return;
 
-    if (document.body.scrollHeight - (window.scrollY + window.innerHeight) < 200) {
-        var http = new XMLHttpRequest();
-        http.open('GET', "https://" + window.location.host + "/api/v1/article/list/" + query + "/" + skip, true);
-        skip++;
+    var http = new XMLHttpRequest();
+    http.open('GET', "https://" + window.location.host + "/api/v1/article/list/" + query + "/" + skip, true);
+    skip++;
 
-        http.onreadystatechange = function () {
-            if (http.readyState === 4 && http.status === 200) {
-                if (http.responseText === "" && enabled) {
-                    enabled = false;
-                    setTimeout(function () {
-                        if (loadTarget.innerHTML === "")
-                            document.getElementById("loadSection").style.display = "none";
-                        loadTarget.innerHTML += "<div class='section-title text-center'><h2>No more content! :(</h2></div>";
-                    }, 100);
+    http.onreadystatechange = function () {
+        if (http.readyState === 4 && http.status === 200) {
+            if (http.responseText === "" && enabled) {
+                enabled = false;
+                setTimeout(function () {
+                    if (loadTarget.innerHTML === "")
+                        document.getElementById("loadSection").style.display = "none";
+                    document.getElementById("loadButton").style.display = "none";
+                    loadTarget.innerHTML += "<div class='section-title text-center'><h2>No more content! :(</h2></div>";
+                }, 100);
+            }
+
+            var json = JSON.parse(http.responseText);
+
+            var i = 0;
+            var html = "";
+            json.forEach(obj => {
+                if (formatSearch) {
+                    html += formatSearchCard(obj.id, obj.image, obj.title, obj.author, obj.date, obj.summary);
                 }
-
-                var json = JSON.parse(http.responseText);
-
-                var i = 0;
-                var html = "";
-                json.forEach(obj => {
-                    if (formatSearch) {
-                        html += formatSearchCard(obj.id, obj.image, obj.title, obj.author, obj.date, obj.summary);
+                else {
+                    var biggify = true;
+                    if (i % 2 === 0) {
+                        if (i % 4 === 2) biggify = !biggify;
+                        html += "<section>" + formatCard(obj.id, obj.image,
+                            obj.title, obj.summary, !biggify, biggify);
                     }
                     else {
-                        var biggify = true;
-                        if (i % 2 === 0) {
-                            if (i % 4 === 2) biggify = !biggify;
-                            html += "<section>" + formatCard(obj.id, obj.image,
-                                obj.title, obj.summary, !biggify, biggify);
-                        }
-                        else {
-                            if (i % 4 === 3) biggify = !biggify;
-                            html += formatCard(obj.id, obj.image, obj.title,
-                                obj.summary, biggify, !biggify) + "</section>";
-                        }
+                        if (i % 4 === 3) biggify = !biggify;
+                        html += formatCard(obj.id, obj.image, obj.title,
+                            obj.summary, biggify, !biggify) + "</section>";
                     }
-                    i++;
-                });
+                }
+                i++;
+            });
 
-                loadTarget.innerHTML += html;
-            }
-        };
+            loadTarget.innerHTML += html;
+        }
+    };
 
-        http.send();
-    }
+    http.send();
 }
 
 function formatCard(id, image, title, summary, big, encapsulate) {

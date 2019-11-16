@@ -237,13 +237,13 @@ namespace OpenTalon.Controllers
                           where a.Approved == ApprovalStatus.Approved
                           orderby a.Date descending
                           select a)
-                          .Skip(skip * 4).Take(4).ToList(),
+                          .Skip(skip * 8).Take(8).ToList(),
                 _ => (from a in _context.Article
                       where a.Approved == ApprovalStatus.Approved &&
                       a.Title.Contains(query) || a.SummaryShort.Contains(query)
                       orderby a.Date descending
                       select a)
-                      .Skip(skip * 4).Take(4).ToList()
+                      .Skip(skip * 8).Take(8).ToList()
             };
 
             if (articles.Count == 0) return "";
