@@ -16,6 +16,7 @@ namespace OpenTalon.Data
 
             var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@opentalon.ml");
             await EnsureRole(serviceProvider, adminID, "Administrator");
+            await EnsureRole(serviceProvider, adminID, "Staff");
         }
 
         private static async Task<string> EnsureUser(IServiceProvider serviceProvider, string testUserPw, string UserName)

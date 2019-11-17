@@ -1,4 +1,10 @@
 ﻿
+@model IEnumerable<OpenTalonUser>
+
+@using Microsoft.AspNetCore.Identity
+@using OpenTalon.Areas.Identity.Data
+@inject UserManager<OpenTalonUser> UserManager
+
 @{
     ViewData["Title"] = "About";
 }
@@ -27,21 +33,26 @@
     <div class="section-title">
         <h2>Meet The Staff</h2>
     </div>
-    <section>
-        <div class="card card-encapsulate">
-            <span class="image-container"><img src="../img/img04.jpg" /></span>
-            <div>
-                <h2>Staff Member</h2>
-                <p>Text</p>
+    <section class="flex-wrap">
+        @foreach (OpenTalonUser u in Model)
+        {
+            <div class="card card-encapsulate card-profile">
+                <span class="image-container"><img src="../img/img04.jpg" /></span>
+                <div>
+                    <h2>@u.Name</h2>
+                    <p><b>
+                   @foreach (string role in UserManager.GetRolesAsync(u).Result)
+                   {
+                        if (role == UserManager.GetRolesAsync(u).Result.Last())
+                        { <span>@role </span> }
+                        else
+                        { <span>@role, </span>}
+                   }
+                    </b></p>
+                    <p>Staff biography here.</p>
+                </div>
             </div>
-        </div>
-        <div class="card card-encapsulate">
-            <span class="image-container"><img src="../img/img03.jpg" /></span>
-            <div>
-                <h2>Staff Member</h2>
-                <p>Text</p>
-            </div>
-        </div>
+        }
     </section>
     <div class="section-title">
         <h2>For Developers</h2>

@@ -223,10 +223,13 @@ section {
     flex: 2 1;
     min-height: 300px;
     margin: 10px;
-    padding: 25px;
     position: relative;
     overflow: hidden;
     transition-duration: 0.3s;
+}
+
+.card > div {
+    padding: 25px;
 }
 
 .note-editor > div img, .card > div img {
@@ -277,6 +280,11 @@ section {
     z-index: 5;
     width: 200px;
     height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .card-encapsulate .image-container {
@@ -284,7 +292,7 @@ section {
 }
 
 .encapsulate-big > div {
-    width: 200px;
+    width: 240px;
 }
 
 .card-search, .card-compact {
@@ -298,6 +306,10 @@ section {
 .card-search .image-container {
     left: 60%;
     min-width: 50%;
+}
+
+.card-profile > div {
+    width: 100%;
 }
 
 .comment {
@@ -425,6 +437,13 @@ form section div:last-of-type {
     section {
         flex-direction: row;
     }
+    .flex-wrap {
+        justify-content: center;
+    }
+    .flex-wrap .card {
+        flex: none;
+        width: 45%;
+    }
     .article > div {
         padding: 0 2rem;
     }
@@ -455,6 +474,10 @@ form section div:last-of-type {
     #extras {
         display: flex;
         flex-direction: column;
+    }
+    .flex-wrap .card {
+        flex: none;
+        width: 31%;
     }
 }
 

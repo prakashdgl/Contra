@@ -66,7 +66,7 @@ namespace OpenTalon.Controllers
         [Route("/about")]
         public IActionResult About()
         {
-            return View();
+            return View(_userManager.GetUsersInRoleAsync("Staff").Result);
         }
 
         [Route("/article/{*id}")]
