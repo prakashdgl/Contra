@@ -166,3 +166,41 @@ function updateLivePreview() {
 
     content.innerHTML = $("#summernote").summernote('code');
 }
+
+function showComfortable() {
+    var elements = document.getElementsByClassName("compact-hidden");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].style.display = "flex";
+    }
+
+    var cards = document.getElementsByClassName("card-user");
+    for (var j = 0; j < cards.length; j++) {
+        cards[j].style.marginTop = "15px";
+        cards[j].style.marginBottom = "15px";
+        cards[j].style.paddingBottom = "25px";
+        cards[j].style.borderRadius = "10px";
+        cards[j].style.borderBottom = "none";
+    }
+
+    document.getElementById("comfortableButton").classList = "btn btn-info";
+    document.getElementById("compactButton").classList = "btn btn-outline-info";
+}
+
+function showCompact() {
+    var elements = document.getElementsByClassName("compact-hidden");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].style.display = "none";
+    }
+
+    var cards = document.getElementsByClassName("card-user");
+    for (var j = 0; j < cards.length; j++) {
+        cards[j].style.marginTop = 0;
+        cards[j].style.marginBottom = 0;
+        cards[j].style.paddingBottom = "10px";
+        cards[j].style.borderRadius = 0;
+        cards[j].style.borderBottom = "2px solid #abc";
+    }
+
+    document.getElementById("comfortableButton").classList = "btn btn-outline-info";
+    document.getElementById("compactButton").classList = "btn btn-info";
+}

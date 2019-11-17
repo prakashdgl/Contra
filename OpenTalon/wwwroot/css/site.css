@@ -181,21 +181,17 @@ a {
 }
 
 .filters {
-    display: flex;
     margin-top: 20px;
 }
 
 .filter-group {
-    display: inline-flex;
+    display: flex;
+    margin: 10px 0;
 }
 
 .filter-group h5 {
-    line-height: 35px;
-    margin: 0 1rem;
-}
-
-.filter-group:first-of-type h5 {
-    margin-left: 0;
+    line-height: 30px;
+    margin-right: 1rem;
 }
 
 .filter-group .btn {
@@ -437,6 +433,15 @@ form section div:last-of-type {
 @media (min-width: 1000px) {
     .solo-nav .links .nav-link {
         padding: 0 1rem;
+    }
+    .filters {
+        display: flex;
+    }
+    .filter-group h5 {
+        margin: 0 1rem;
+    }
+    .filter-group:first-of-type h5 {
+        margin-left: 0;
     }
     .header {
         height: 200px;

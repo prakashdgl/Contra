@@ -14,14 +14,14 @@
         <h2>@ViewData["Message"]</h2>
         <div class="filters">
             <div class="filter-group">
-                <h5>View:</h5>
-                <button class="btn btn-info">Comfortable</button>
-                <button class="btn btn-outline-info">Compact</button>
+                <h5 class="hideable">View:</h5>
+                <button id="comfortableButton" class="btn btn-info" onclick="showComfortable()">Comfortable</button>
+                <button id="compactButton" class="btn btn-outline-info" onclick="showCompact()">Compact</button>
             </div>
             <div class="filter-group">
-                <h5>Sort By:</h5>
-                <a class="btn @(ViewData["SortBy"].Equals("Contributions")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/contributions">Contributions</a>
-                <a class="btn @(ViewData["SortBy"].Equals("Date")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/date">Date Joined</a>
+                <h5 class="hideable">Sort:</h5>
+                <a class="btn @(ViewData["SortBy"].Equals("Activity")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/activity">Activity</a>
+                <a class="btn @(ViewData["SortBy"].Equals("Date")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/date">Date</a>
                 <a class="btn @(ViewData["SortBy"].Equals("Email")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/email">Email</a>
                 <a class="btn @(ViewData["SortBy"].Equals("Name")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/name">Name</a>
             </div>
@@ -37,12 +37,12 @@
                     <p>Id: @user.Id</p>
                     @foreach (IdentityRole role in RoleManager.Roles)
                     {
-                        <label for="@role.Name-@user.Id" class="role">@role.Name
+                        <label for="@role.Name-@user.Id" class="role compact-hidden">@role.Name
                         <input type="checkbox" id="@role.Name-@user.Id" @(Model[user].Contains(role.Name)? "checked" : null) onclick="updateRoles(this, '@user.Id', '@role.Name')">
                         <span class="checkmark"></span></label>
                     }
                 </div>
-                <div class="user-controls">
+                <div class="user-controls compact-hidden">
                     <a class="nav-link" href="~/articles/@user.Id">📃 Articles</a>
                     <a class="nav-link" href="~/comments/@user.Id">💬 Comments</a>
                     <a class="nav-link" href="~/tickets/@user.Id">❔ Tickets</a>

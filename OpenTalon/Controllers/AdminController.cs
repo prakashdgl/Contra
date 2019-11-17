@@ -129,8 +129,8 @@ namespace OpenTalon.Controllers
             }
             switch (sortBy)
             {
-                case "contributions":
-                    ViewData["SortBy"] = "Contributions";
+                case "activity":
+                    ViewData["SortBy"] = "Activity";
                     users = users.OrderBy(u => u.Articles).ToList();
                     break;
                 case "date":
