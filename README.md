@@ -1,6 +1,6 @@
 # OpenTalon
 
-[![Build Status](https://travis-ci.com/SDBagel/OpenTalon.svg?branch=master)](https://travis-ci.com/SDBagel/OpenTalon) [![Build Status](https://dev.azure.com/douchebagelthemagnaflorious/OpenTalon/_apis/build/status/OpenTalon?branchName=master)](https://dev.azure.com/douchebagelthemagnaflorious/OpenTalon/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://travis-ci.com/SDBagel/OpenTalon.svg?branch=master)](https://travis-ci.com/SDBagel/OpenTalon) [![Build Status](https://dev.azure.com/sdbagel/OpenTalon/_apis/build/status/SDBagel.OpenTalon?branchName=master)](https://dev.azure.com/sdbagel/OpenTalon/_build/latest?definitionId=1&branchName=master)
 
 So.. our school's newspaper, The Talon (not very creative - but, they rank first in search results so it doesn't matter), like many other school newspapers, still uses a Wordpress site for their online presence. Wordpress, while capable of doing what they need, is outdated and isn't ideal for engaging readers today who rely primarily on mobile devices, as well as needing a more modern UI.
 
