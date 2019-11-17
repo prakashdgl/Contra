@@ -148,7 +148,7 @@ a {
 
 #extras {
     display: none;
-    width: 375px;
+    width: 370px;
 }
 
 #extras .section-title {
@@ -157,6 +157,10 @@ a {
 
 #extras section {
     flex-direction: column;
+}
+
+#extras .card {
+    padding: 20px;
 }
 
 .flex-big {
@@ -174,6 +178,39 @@ a {
 
 .section-title > h2 {
     font-size: 42px;
+}
+
+.filters {
+    display: flex;
+    margin-top: 20px;
+}
+
+.filter-group {
+    display: inline-flex;
+}
+
+.filter-group h5 {
+    line-height: 35px;
+    margin: 0 1rem;
+}
+
+.filter-group:first-of-type h5 {
+    margin-left: 0;
+}
+
+.filter-group .btn {
+    border-radius: 0;
+    margin: 0;
+}
+
+.filter-group .btn:first-of-type {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.filter-group .btn:last-of-type {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 section {

@@ -12,6 +12,20 @@
 <div class="content">
     <div class="section-title">
         <h2>@ViewData["Message"]</h2>
+        <div class="filters">
+            <div class="filter-group">
+                <h5>View:</h5>
+                <button class="btn btn-info">Comfortable</button>
+                <button class="btn btn-outline-info">Compact</button>
+            </div>
+            <div class="filter-group">
+                <h5>Sort By:</h5>
+                <a class="btn @(ViewData["SortBy"].Equals("Contributions")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/contributions">Contributions</a>
+                <a class="btn @(ViewData["SortBy"].Equals("Date")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/date">Date Joined</a>
+                <a class="btn @(ViewData["SortBy"].Equals("Email")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/email">Email</a>
+                <a class="btn @(ViewData["SortBy"].Equals("Name")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/name">Name</a>
+            </div>
+        </div>
     </div>
     <br />
     @foreach (OpenTalonUser user in Model.Keys)

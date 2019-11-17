@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -79,7 +80,7 @@ namespace OpenTalon.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new OpenTalonUser { Name = Input.Name, UserName = Input.Email, Email = Input.Email };
+                var user = new OpenTalonUser { Name = Input.Name, UserName = Input.Email, Email = Input.Email, DateJoined = DateTime.Now };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

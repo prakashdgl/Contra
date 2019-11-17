@@ -1,7 +1,6 @@
 ﻿var menu, nav;
 var loadTarget, targetPos, skip = 0;
-var enabled = true, formatSearch = false;
-var submitStep = 1;
+var formatSearch = false;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     menu = document.getElementById("links");
@@ -48,7 +47,7 @@ function redirect(id) {
 
 function loadContent(query) {
     loadTarget = document.getElementById("loadTarget");
-    if (!loadTarget || !enabled) return;
+    if (!loadTarget) return;
 
     var http = new XMLHttpRequest();
     http.open('GET', "https://" + window.location.host + "/api/v1/article/list/" + query + "/" + skip, true);
@@ -56,14 +55,12 @@ function loadContent(query) {
 
     http.onreadystatechange = function () {
         if (http.readyState === 4 && http.status === 200) {
-            if (http.responseText === "" && enabled) {
-                enabled = false;
-                setTimeout(function () {
-                    if (loadTarget.innerHTML === "")
-                        document.getElementById("loadSection").style.display = "none";
-                    document.getElementById("loadButton").style.display = "none";
-                    loadTarget.innerHTML += "<div class='section-title text-center'><h2>No more content! :(</h2></div>";
-                }, 100);
+            if (http.responseText === "") {
+                if (document.getElementById("loadSection") && loadTarget.innerHTML === "")
+                    document.getElementById("loadSection").style.display = "none";
+                document.getElementById("loadButton").style.display = "none";
+                loadTarget.innerHTML += "<div class='section-title text-center'><h2>No more content! :(</h2></div>";
+                return;
             }
 
             var json = JSON.parse(http.responseText);
@@ -154,6 +151,7 @@ function submitNextStep() {
 var coauthors, inputCoauthors;
 var image, inputImage;
 var content, contentUpdateTimer;
+var submitStep = 1;
 
 function updateLivePreview() {
     if (inputCoauthors.value)

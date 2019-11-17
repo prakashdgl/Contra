@@ -101,10 +101,11 @@ namespace OpenTalon.Controllers
             return View(comments);
         }
 
-        [Route("/users/{*filter}")]
-        public IActionResult Users(string filter)
+        [Route("/users/{filter}/{*sortBy}")]
+        public IActionResult Users(string filter, string sortBy = "name")
         {
             if (string.IsNullOrEmpty(filter)) filter = "all";
+            ViewData["Filter"] = filter;
 
             List<OpenTalonUser> users;
             switch (filter)
@@ -124,6 +125,25 @@ namespace OpenTalon.Controllers
                                    u.Email.Contains(filter)
                              select u).ToList();
                     users.AddRange(_userManager.GetUsersInRoleAsync(filter).Result.ToList());
+                    break;
+            }
+            switch (sortBy)
+            {
+                case "contributions":
+                    ViewData["SortBy"] = "Contributions";
+                    users = users.OrderBy(u => u.Articles).ToList();
+                    break;
+                case "date":
+                    ViewData["SortBy"] = "Date";
+                    users = users.OrderBy(u => u.DateJoined).ToList();
+                    break;
+                case "email":
+                    ViewData["SortBy"] = "Email";
+                    users = users.OrderBy(u => u.Email).ToList();
+                    break;
+                default:
+                    ViewData["SortBy"] = "Name";
+                    users = users.OrderBy(u => u.Name).ToList();
                     break;
             }
 
