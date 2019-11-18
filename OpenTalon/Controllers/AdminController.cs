@@ -121,7 +121,7 @@ namespace OpenTalon.Controllers
                 default:
                     ViewData["Message"] = "Users - " + filter;
                     users = (from u in _context.Users
-                             where u.UserName.Contains(filter) || 
+                             where u.Name.Contains(filter) || 
                                    u.Email.Contains(filter)
                              select u).ToList();
                     users.AddRange(_userManager.GetUsersInRoleAsync(filter).Result.ToList());
