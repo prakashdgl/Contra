@@ -113,23 +113,52 @@ namespace OpenTalon.Controllers
             return View(comment);
         }
 
-        [Route("/search/{*param}")]
-        public IActionResult Search(string param)
+        [Route("/search/{filter}/{*sortBy}")]
+        public IActionResult Search(string filter, string sortBy = "name")
         {
-            if (string.IsNullOrEmpty(param))
-                return View((from a in _context.Article
-                             where a.Approved == ApprovalStatus.Approved
-                             orderby a.Date descending
-                             select a).Take(8).ToList());
+            if (string.IsNullOrEmpty(filter)) filter = "all";
+            ViewData["Filter"] = filter;
 
-            ViewData["Query"] = param;
-            param = param.ToLower();
-            return View((from a in _context.Article
-                         where a.Approved == ApprovalStatus.Approved
-                         && (a.Title.ToLower().Contains(param)
-                         || a.SummaryShort.ToLower().Contains(param))
-                         orderby a.Date descending
-                         select a).Take(8).ToList());
+            List<Article> articles;
+            switch (filter)
+            {
+                case "all":
+                    ViewData["Message"] = "Users";
+                    articles = _context.Article.ToList();
+                    break;
+                default:
+                    ViewData["Message"] = "Users - " + filter;
+                    articles = (from u in _context.Article
+                                where u.Approved == ApprovalStatus.Approved &&
+                                      (u.Title.ToLower().Contains(filter) || 
+                                       u.SummaryShort.ToLower().Contains(filter) || 
+                                       u.SummaryLong.ToLower().Contains(filter))
+                                select u).ToList();
+                    break;
+            }
+
+            switch (sortBy)
+            {
+                case "author":
+                    ViewData["SortBy"] = "Author";
+                    articles = articles.OrderBy(u => u.AuthorName).Take(8).ToList();
+                    break;
+                case "new":
+                    ViewData["SortBy"] = "New";
+                    articles = articles.OrderBy(u => u.Date).Take(8).ToList();
+                    break;
+                case "top":
+                    ViewData["SortBy"] = "Top";
+                    articles = articles.OrderBy(u => u.Views).Take(8).ToList();
+                    break;
+                default:
+                    ViewData["SortBy"] = "Trending";
+                    articles = articles.OrderBy(u => u.Views).Take(8).ToList();
+                    break;
+            }
+
+            ViewData["Query"] = filter;
+            return View(articles);
         }
 
         [HttpGet("/apply")]
