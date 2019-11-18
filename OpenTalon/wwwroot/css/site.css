@@ -364,6 +364,8 @@ section {
 }
 
 .submit {
+    display: flex;
+    flex-direction: column;
     padding: 0;
     margin: 10px;
 }
@@ -462,7 +464,7 @@ form section div:last-of-type {
         width: 45%;
     }
     .article > div {
-        padding: 0 2rem;
+        padding: 1rem 2rem;
     }
     .footer {
         line-height: 60px;
