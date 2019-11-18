@@ -2,6 +2,24 @@
 var loadTarget, targetPos, skip = 0;
 var formatSearch = false;
 
+// https://stackoverflow.com/a/24103596
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function eraseCookie(name) {
+    var date = new Date();
+    date.setTime(date.getTime() - 1000);
+    expires = "; expires=" + date.toUTCString();
+    document.cookie = name + '=' + expires + ';path=/;';
+}
+
 document.addEventListener("DOMContentLoaded", function (event) {
     menu = document.getElementById("links");
     nav = document.getElementById("nav");
@@ -11,6 +29,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     var query = document.getElementById("query");
     if (query) { loadContent(query.innerText); }
+
+    if (document.cookie.includes("compact=yes") &&
+        document.getElementsByClassName("compact-hidden"))
+        showCompact();
 
     window.addEventListener("resize", function () {
         onResize();
@@ -177,10 +199,11 @@ function showComfortable() {
     for (var j = 0; j < cards.length; j++) {
         cards[j].style.marginTop = "15px";
         cards[j].style.marginBottom = "15px";
-        cards[j].style.paddingBottom = "25px";
         cards[j].style.borderRadius = "10px";
         cards[j].style.borderBottom = "none";
     }
+
+    eraseCookie("compact");
 
     document.getElementById("comfortableButton").classList = "btn btn-info";
     document.getElementById("compactButton").classList = "btn btn-outline-info";
@@ -196,10 +219,11 @@ function showCompact() {
     for (var j = 0; j < cards.length; j++) {
         cards[j].style.marginTop = 0;
         cards[j].style.marginBottom = 0;
-        cards[j].style.paddingBottom = "10px";
         cards[j].style.borderRadius = 0;
         cards[j].style.borderBottom = "2px solid #abc";
     }
+
+    setCookie("compact", "yes", 0);
 
     document.getElementById("comfortableButton").classList = "btn btn-outline-info";
     document.getElementById("compactButton").classList = "btn btn-info";

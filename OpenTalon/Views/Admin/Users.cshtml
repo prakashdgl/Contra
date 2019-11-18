@@ -25,6 +25,13 @@
                 <a class="btn @(ViewData["SortBy"].Equals("Email")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/email">Email</a>
                 <a class="btn @(ViewData["SortBy"].Equals("Name")? "btn-info" : "btn-outline-info")" href="~/users/@ViewData["Filter"]/name">Name</a>
             </div>
+            <div class="filter-group search">
+                <h5 class="hideable">Search:</h5>
+                <form asp-action="Users">
+                    <input name="filter" type="text" placeholder="Search users" />
+                    <button class="btn btn-info" type="submit">Search</button>
+                </form>
+            </div>
         </div>
     </div>
     <br />

@@ -187,21 +187,21 @@ a {
 .filter-group {
     display: flex;
     margin: 10px 0;
+    flex: 1 1;
 }
 
 .filter-group h5 {
-    display: block;
-    line-height: 30px;
-    margin-right: 1rem;
+    line-height: 35px;
+    width: 80px;
 }
 
 .filter-group .btn {
-    display: block;
     border-radius: 0;
     margin: 0;
+    flex: 1 1;
 }
 
-.filter-group .btn:first-of-type {
+.filter-group .btn:first-of-type, .search input {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -209,6 +209,23 @@ a {
 .filter-group .btn:last-of-type {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+.search form {
+    display: inline-flex;
+    flex: 2 1;
+}
+
+.search input {
+    border: none;
+    padding-left: 10px;
+    flex: 3 1;
+}
+
+.search .btn {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    flex: 1 1;
 }
 
 section {
@@ -458,12 +475,24 @@ form section div:last-of-type {
     }
     .filters {
         display: flex;
+        flex-wrap: wrap;
+    }
+    .filter-group {
+        flex: none;
+        width: 50%;
     }
     .filter-group h5 {
         margin: 0 1rem;
+        width: unset;
     }
     .filter-group:first-of-type h5 {
         margin-left: 0;
+    }
+    .filter-group:last-of-type h5 {
+        margin-left: 0;
+    }
+    .search {
+        width: 100%;
     }
     .header {
         height: 200px;
@@ -507,5 +536,18 @@ form section div:last-of-type {
 @media (min-width: 1400px) {
     .container {
         max-width: 1400px;
+    }
+    .filters {
+        flex-wrap: nowrap;
+    }
+    .filter-group {
+        flex: 1 1;
+        width: unset;
+    }
+    .filter-group:last-of-type h5 {
+        margin-left: 1rem;
+    }
+    .search {
+        flex: 2 1;
     }
 }
