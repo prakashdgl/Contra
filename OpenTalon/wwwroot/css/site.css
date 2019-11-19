@@ -370,7 +370,6 @@ section {
 }
 
 .submit {
-    display: flex;
     flex-direction: column;
     padding: 0;
     margin: 10px;
@@ -424,7 +423,6 @@ section {
 .submit-form form {
     width: 95%;
     margin: auto;
-    margin-top: 20px;
 }
 
 form section div:last-of-type {

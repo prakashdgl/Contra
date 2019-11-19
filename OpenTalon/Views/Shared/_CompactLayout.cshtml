@@ -10,7 +10,7 @@
 <body>
     <header>
         <nav id="nav" class="solo-nav">
-            <div>
+            <div class="container">
                 <a class="navbar-brand" href="~/"><img src="~/img/open-talon.svg" /></a>
                 <button id="menu-button" onclick="showMenu()">Menu</button>
                 <div id="links">
@@ -36,7 +36,15 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        &copy; 2019 - OpenTalon Project - <a href="~/about">About</a> - <a href="~/admin">Admin</a> - <a href="~/privacy">Privacy</a>
+        <div class="container">
+            &copy; 2019 OpenTalon Project -
+            <a href="~/about">About</a> -
+            @if (User.IsInRole("Administrator"))
+            {
+                <span><a href="~/admin">Admin</a> - </span>
+            }
+            <a href="~/privacy">Privacy</a>
+        </div>
     </footer>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

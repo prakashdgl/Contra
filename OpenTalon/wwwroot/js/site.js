@@ -143,7 +143,6 @@ function submitUndoStep() {
     shown.style.display = "none";
 
     if (submitStep === 1) document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
-    document.getElementById("submit-wrapper").style.flexDirection = "row";
     document.getElementById("nextButton").classList = "btn btn-outline-info";
 
     updateLivePreview();
@@ -160,7 +159,6 @@ function submitNextStep() {
 
     if (submitStep === 3) {
         document.getElementById("nextButton").classList = "btn btn-outline-dark disabled";
-        document.getElementById("submit-wrapper").style.flexDirection = "column";
         if (!contentUpdateTimer) contentUpdateTimer = setInterval(function () {
             content.innerHTML = $("#summernote").summernote('code');
         }, 2000);
