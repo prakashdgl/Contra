@@ -102,6 +102,10 @@ a {
     cursor: pointer;
 }
 
+.hideable {
+    display: none;
+}
+
 .header {
     background-color: #fff;
     position: relative;
@@ -240,13 +244,10 @@ section {
     flex: 2 1;
     min-height: 300px;
     margin: 10px;
+    padding: 25px;
     position: relative;
     overflow: hidden;
     transition-duration: 0.3s;
-}
-
-.card > div {
-    padding: 25px;
 }
 
 .note-editor > div img, .card > div img {
@@ -314,6 +315,7 @@ section {
 
 .card-search, .card-compact {
     min-height: 50px; 
+    padding: 20px;
 }
 
 .card-search > div {
@@ -347,6 +349,10 @@ section {
     left: 0;
     min-width: 100%;
     min-height: 100%;
+}
+
+.article {
+    padding: 20px;
 }
 
 .article > div {
@@ -450,6 +456,9 @@ form section div:last-of-type {
     html {
         font-size: 16px;
     }
+    .hideable {
+        display: inline-block;
+    }
     .section-title {
         margin-top: 50px;
     }
@@ -462,6 +471,9 @@ form section div:last-of-type {
     .flex-wrap .card {
         flex: none;
         width: 45%;
+    }
+    .card-compact {
+        padding: 25px;
     }
     .article > div {
         padding: 1rem 2rem;

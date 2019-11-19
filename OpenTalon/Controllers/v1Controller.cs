@@ -284,11 +284,11 @@ namespace OpenTalon.Controllers
                 Views = 0
             };
 
-            string[] urls = new string[5] { "../img/img01.jpg",
-                                            "../img/img02.jpg",
-                                            "../img/img03.jpg",
-                                            "../img/img04.jpg",
-                                            "../img/img05.jpg" };
+            string[] urls = new string[5] { "/img/img01.jpg",
+                                            "/img/img02.jpg",
+                                            "/img/img03.jpg",
+                                            "/img/img04.jpg",
+                                            "/img/img05.jpg" };
             Random rnd = new Random();
             placeholder.ThumbnailURL = urls[rnd.Next(0, 5)];
             _context.Article.Add(placeholder);

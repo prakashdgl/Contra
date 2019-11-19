@@ -47,10 +47,6 @@
     transition-duration: 0.3s;
 }
 
-.hideable {
-    display: none;
-}
-
 .card-user {
     display: flex;
     flex-direction: column;
@@ -156,9 +152,6 @@
     .dashboard-content {
         left: 200px;
         padding: 0 20px;
-    }
-    .hideable {
-        display: inline-block;
     }
     .card-user {
         flex-direction: row;
