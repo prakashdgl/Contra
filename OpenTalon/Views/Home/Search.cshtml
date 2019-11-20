@@ -4,7 +4,7 @@
     ViewData["Title"] = "Search";
 }
 
-<div class="content">
+<div id="compact-compatible" class="content">
     <div class="section-title">
         <h2 id="search">Search - <span id="query">@ViewData["Query"]</span></h2>
         <div class="filters">
@@ -36,7 +36,7 @@
             <div>
                 <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
                 <p>@Html.DisplayFor(modelItem => item.AuthorName) - @Html.DisplayFor(modelItem => item.Date)</p>
-                <hr />
+                <hr class="compact-hidden" />
                 <p>@Html.DisplayFor(modelItem => item.SummaryLong)</p>
                 <a asp-controller="Home" asp-action="Article" asp-route-id="@item.Id">Read More</a>
             </div>

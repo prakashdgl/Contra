@@ -262,7 +262,7 @@ section {
 
 .story:hover {
     box-shadow: -10px 10px 5px #bbb;
-    transform: translate(8px, -8px);
+    transform: translate(4px, -4px);
 }
 
 .story > div {
@@ -309,7 +309,7 @@ section {
     left: 0;
 }
 
-.encapsulate-big > div {
+.encapsulate-big > div, .card-big > div {
     width: 240px;
 }
 
@@ -539,9 +539,6 @@ form section div:last-of-type {
     nav .links a {
         float: right;
     padding: 0.5rem 1rem;
-    }
-    .container {
-        max-width: 1200px;
     }
 }
 

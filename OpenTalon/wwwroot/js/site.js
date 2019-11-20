@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     if (query) { loadContent(query.innerText); }
 
     if (document.cookie.includes("compact=yes") &&
-        document.getElementsByClassName("compact-hidden"))
+        document.getElementById("compact-compatible"))
         showCompact();
 
     window.addEventListener("resize", function () {
@@ -193,7 +193,7 @@ function showComfortable() {
         elements[i].style.display = "flex";
     }
 
-    var cards = document.getElementsByClassName("card-user");
+    var cards = document.getElementsByClassName("card");
     for (var j = 0; j < cards.length; j++) {
         cards[j].style.marginTop = "15px";
         cards[j].style.marginBottom = "15px";
@@ -213,7 +213,7 @@ function showCompact() {
         elements[i].style.display = "none";
     }
 
-    var cards = document.getElementsByClassName("card-user");
+    var cards = document.getElementsByClassName("card");
     for (var j = 0; j < cards.length; j++) {
         cards[j].style.marginTop = 0;
         cards[j].style.marginBottom = 0;
