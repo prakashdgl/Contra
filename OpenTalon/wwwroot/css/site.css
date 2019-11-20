@@ -239,7 +239,7 @@ section {
 
 .card {
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: -6px 6px 5px #ddd;
     flex: 2 1;
     min-height: 300px;
@@ -285,7 +285,7 @@ section {
 }
 
 .card-big .image-container {
-    left: 240px;
+    left: 220px;
 }
 
 .card-encapsulate {
@@ -298,6 +298,7 @@ section {
     z-index: 5;
     width: 200px;
     height: 100%;
+    padding: 25px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -309,8 +310,8 @@ section {
     left: 0;
 }
 
-.encapsulate-big > div, .card-big > div {
-    width: 240px;
+.encapsulate-big > div {
+    width: 200px;
 }
 
 .card-search, .card-compact {
@@ -540,12 +541,12 @@ form section div:last-of-type {
         float: right;
     padding: 0.5rem 1rem;
     }
+    .container {
+        max-width: 95%;
+    }
 }
 
 @media (min-width: 1400px) {
-    .container {
-        max-width: 1400px;
-    }
     .filters {
         flex-wrap: nowrap;
     }
@@ -558,5 +559,11 @@ form section div:last-of-type {
     }
     .search {
         flex: 2 1;
+    }
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1600px;
     }
 }
