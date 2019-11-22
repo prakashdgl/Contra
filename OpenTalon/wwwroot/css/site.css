@@ -59,7 +59,7 @@ nav #menu-button {
     color: #6bd;
     float: right;
     padding: 0 24px;
-    line-height: 40px;
+    line-height: 30px;
     margin-top: 10px;
 }
 
@@ -69,10 +69,6 @@ nav #menu-button {
 
 .solo-nav .links:first-of-type {
     line-height: 50px;
-}
-
-.solo-nav img {
-    vertical-align: unset;
 }
 
 .solo-nav #menu-button {
@@ -91,6 +87,7 @@ a.navbar-brand:hover {
 }
 
 a.navbar-brand img {
+    vertical-align: unset;
     height: 40px;
 }
 
@@ -108,6 +105,7 @@ a {
 
 .header {
     background-color: #fff;
+    display: none;
     position: relative;
     top: -1px;
     z-index: -1;
@@ -128,6 +126,7 @@ a {
 
 #border-gradient {
     background-image: linear-gradient(#fff, #edeef3);
+    display: none;
     position: absolute;
     top: 100px;
     left: 0;
@@ -440,10 +439,18 @@ form section div:last-of-type {
 }
 
 @media (min-width: 512px) {
+    nav #menu-button {
+        line-height: 40px;
+    }
+    a.navbar-brand img {
+        vertical-align: middle;
+    }
     .header {
+        display: block;
         height: 150px;
     }
     #border-gradient {
+        display: block;
         top: 150px;
     }
     .container {
