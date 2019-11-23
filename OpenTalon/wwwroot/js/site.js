@@ -110,6 +110,10 @@ function loadContent(query) {
             });
 
             loadTarget.innerHTML += html;
+
+            if (document.cookie.includes("compact=yes") &&
+                document.getElementById("compact-compatible"))
+                showCompact();
         }
     };
 
@@ -129,8 +133,8 @@ function formatCard(id, image, title, summary, big, encapsulate) {
 function formatSearchCard(id, image, title, author, date, summary) {
     return "<div class='card card-big card-search'><span class='image-container'>" +
         "<img src='" + image + "' alt='" + title + " Thumbnail Image' /></span><div><h2>" +
-        title + "</h2><p>" + author + " - " + date + "</p><hr /><p>" + summary +
-        "</p><a href='https://" + window.location.host + "/article/" + id + "'>Read More</a></div></div>";
+        title + "</h2><p class='compact-hidden'>" + author + " - " + date + "</p><hr class='compact-hidden' /><p>" +
+        summary + "</p><a href='https://" + window.location.host + "/article/" + id + "'>Read More</a></div></div>";
 }
 
 function submitUndoStep() {
