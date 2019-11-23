@@ -99,14 +99,18 @@ namespace OpenTalon.Controllers
         {
             if (ModelState.IsValid)
             {
+                OpenTalonUser user = _userManager.GetUserAsync(User).Result;
                 comment.OwnerID = _userManager.GetUserId(User);
-                comment.AuthorName = _userManager.GetUserAsync(User).Result.Name;
+                comment.AuthorName = user.Name;
                 comment.PostId = PostId;
                 comment.Approved = ApprovalStatus.Submitted;
                 comment.Date = DateTime.Now;
 
+                if (user.Comments == null)
+                    user.Comments = new List<Comment>();
+                user.Comments.Add(comment);
+
                 _context.Add(comment);
-                _userManager.GetUserAsync(User).Result.Comments.Add(comment);
                 await _context.SaveChangesAsync();
                 return Redirect($"~/article/{PostId}");
             }
@@ -173,19 +177,25 @@ namespace OpenTalon.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrWhiteSpace(article.SummaryLong) || article.SummaryLong.Length > 60) 
+                if (string.IsNullOrWhiteSpace(article.SummaryLong))
+                    article.SummaryLong = article.Content.Substring(0, 60) + "...";
+                else if (article.SummaryLong.Length > 60)
                     article.SummaryLong = article.SummaryLong.Substring(0, 60) + "...";
                 if (string.IsNullOrWhiteSpace(article.ThumbnailURL))
-                    article.ThumbnailURL = "../img/img05.jpg";
+                    article.ThumbnailURL = "/img/img05.jpg";
 
-                article.OwnerID = _userManager.GetUserId(User);
-                article.AuthorName = _userManager.GetUserAsync(User).Result.Name + ", " + article.AuthorName;
+                OpenTalonUser user = _userManager.GetUserAsync(User).Result;
+                article.OwnerID = user.Id;
+                article.AuthorName = user.Name + ", " + article.AuthorName;
                 article.Approved = ApprovalStatus.Submitted;
                 article.Date = DateTime.Now;
                 article.Views = 0;
 
+                if (user.Articles == null)
+                    user.Articles = new List<Article>();
+                user.Articles.Add(article);
+
                 _context.Add(article);
-                _userManager.GetUserAsync(User).Result.Articles.Add(article);
                 await _context.SaveChangesAsync();
                 return Redirect("~/success");
             }

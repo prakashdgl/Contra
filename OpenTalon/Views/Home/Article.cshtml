@@ -1,16 +1,16 @@
 ﻿@model OpenTalon.Models.Article
 
 @{
-ViewData["Title"] = "Article";
-string url = System.Net.WebUtility.UrlEncode("https://" + Context.Request.Host + Context.Request.Path);
+    ViewData["Title"] = "Article";
+    string url = System.Net.WebUtility.UrlEncode("https://" + Context.Request.Host + Context.Request.Path);
 }
 
 <div class="content">
-    <div class="section-title">
-        <h2>Article - @Html.DisplayFor(model => model.Title)</h2>
-    </div>
     @if (Model.Approved == ApprovalStatus.Approved)
     {
+        <div class="section-title">
+            <h2>@Html.DisplayFor(model => model.Title)</h2>
+        </div>
         <section>
             <div class="card article">
                 <span class="image-container">
@@ -44,17 +44,17 @@ string url = System.Net.WebUtility.UrlEncode("https://" + Context.Request.Host +
         <section>
             <div class="card">
                 @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
-                    {
-                <section>
-                    <div class="card card-search comment">
-                        <div>
-                            <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
-                            <p>@comment.Content</p>
+                {
+                    <section>
+                        <div class="card card-search comment">
+                            <div>
+                                <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
+                                <p>@comment.Content</p>
+                            </div>
                         </div>
-                    </div>
-                </section>
-                <hr />
-                    }
+                    </section>
+                    <hr />
+                }
             </div>
         </section>
         }
@@ -63,11 +63,21 @@ string url = System.Net.WebUtility.UrlEncode("https://" + Context.Request.Host +
     {
         <section>
             <div class="card card-search">
-                <h2>This Article is Not Approved Yet</h2>
-                <p>This article has not been approved by our moderation team, and as such, cannot be displayed yet.</p>
-                <br />
-                <a href="~/">Meanwhile, check out some of our other articles.</a>
+                <div>
+                    <h2>This Article is Not Approved Yet</h2>
+                    <p>This article has not been approved by our moderation team, and as such, cannot be displayed yet.</p>
+                    <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
+                    <a class="btn btn-outline-info" href="~/apply">Submit an Article</a>
+                    <a class="btn btn-outline-info" href="https://paypal.me">Donate</a>
+                </div>
             </div>
         </section>
     }
+    <div id="loadSection">
+        <div class="section-title">
+            <h2><span id="query">New</span> Articles</h2>
+        </div>
+        <div id="loadTarget"></div>
+        <button id="loadButton" onclick="loadContent('New')" class="btn btn-outline-info w-100">Load More</button>
+    </div>
 </div>
