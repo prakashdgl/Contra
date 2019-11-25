@@ -49,7 +49,7 @@ namespace OpenTalon.Controllers
         {
             if (!_roleManager.RoleExistsAsync(role).Result)
                 return "Role does not exist!";
-            if (role == "Administrator") 
+            if (role == "Administrator" || role == "Staff") 
                 return "Role cannot be deleted!";
 
             await _roleManager.DeleteAsync(_roleManager.FindByNameAsync(role).Result);

@@ -1,26 +1,63 @@
-﻿
+﻿@model IEnumerable<IdentityRole>
+
 @using Microsoft.AspNetCore.Identity
-@inject RoleManager<IdentityRole> RoleManager
+@using OpenTalon.Areas.Identity.Data
+@inject UserManager<OpenTalonUser> UserManager
 
 @{
     ViewData["Title"] = "Users";
     Layout = "_AdminLayout";
 }
 
-<div class="content">
+<div id="compact-compatible" class="content">
     <div class="section-title">
-        <h2>Roles</h2>
+        <h2>@ViewData["Message"]</h2>
+        <div class="filters">
+            <div class="filter-group">
+                <h5 class="hideable">View:</h5>
+                <button id="comfortableButton" class="btn btn-info" onclick="showComfortable()">Comfortable</button>
+                <button id="compactButton" class="btn btn-outline-info" onclick="showCompact()">Compact</button>
+            </div>
+            <div class="filter-group">
+                <h5 class="hideable">Sort:</h5>
+                <a class="btn @(ViewData["SortBy"].Equals("Users")? "btn-info" : "btn-outline-info")" href="~/roles/@ViewData["Filter"]/users">Users</a>
+                <a class="btn @(ViewData["SortBy"].Equals("Name")? "btn-info" : "btn-outline-info")" href="~/roles/@ViewData["Filter"]/name">Name</a>
+            </div>
+            <div class="filter-group search">
+                <h5 class="hideable">Search:</h5>
+                <form asp-action="Roles">
+                    <input name="filter" type="text" placeholder="Search roles" />
+                    <button class="btn btn-info" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
     </div>
     <br />
-    @foreach (IdentityRole role in RoleManager.Roles)
+    <section>
+        <div class="card card-big card-compact card-user">
+            <div class="user-info search">
+                <h5>Create a New Role</h5>
+                <div class="d-flex">
+                    <input type="text" id="roleName" name="role" placeholder="Role Name" />
+                    <button class="btn btn-info" onclick="createRole()">Create</button>
+                </div>
+                <p id="message"></p>
+            </div>
+        </div>
+    </section>
+    @foreach (IdentityRole role in Model)
     {
         <section>
-            <div class="card card-big card-compact card-user">
-                <div class="user-info">
+            <div class="card card-big card-compact card-search">
+                <div>
                     <h5>@role.Name</h5>
-                </div>
-                <div class="user-controls">
-                    <a class="nav-link" href="~/users/@role.Name">🙋‍ Users</a>
+                    <div class="actions compact-hidden">
+                        <a href="~/users/@role.Name">🙋‍ Users (@UserManager.GetUsersInRoleAsync(role.Name).Result.Count)</a>
+                        @if (!(role.Name == "Staff") && !(role.Name == "Administrator") && User.IsInRole("Administrator"))
+                        {
+                            <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/role/delete/@role.Name')">❌ Delete</a>
+                        }
+                    </div>
                 </div>
             </div>
         </section>

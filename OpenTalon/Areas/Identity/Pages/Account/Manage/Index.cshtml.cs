@@ -35,23 +35,17 @@ namespace OpenTalon.Areas.Identity.Pages.Account.Manage
             [DataType(DataType.Text)]
             [Display(Name = "Full name")]
             public string Name { get; set; }
-
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
         }
 
         private async Task LoadAsync(OpenTalonUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
 
             Input = new InputModel
             {
-                Name = user.Name,
-                PhoneNumber = phoneNumber
+                Name = user.Name
             };
         }
 
@@ -84,17 +78,6 @@ namespace OpenTalon.Areas.Identity.Pages.Account.Manage
             if (Input.Name != user.Name)
             {
                 user.Name = Input.Name;
-            }
-
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
-                }
             }
 
             await _userManager.UpdateAsync(user);

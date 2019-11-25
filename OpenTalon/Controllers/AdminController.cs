@@ -183,10 +183,39 @@ namespace OpenTalon.Controllers
             return View(tickets);
         }
 
-        [Route("/roles")]
-        public IActionResult Roles()
+        [Route("/roles/{filter}/{*sortBy}")]
+        public IActionResult Roles(string filter, string sortBy = "name")
         {
-            return View();
+            if (string.IsNullOrEmpty(filter)) filter = "all";
+            ViewData["Filter"] = filter;
+
+            List<IdentityRole> roles;
+            switch (filter)
+            {
+                case "all":
+                    ViewData["Message"] = "Roles";
+                    roles = _context.Roles.ToList();
+                    break;
+                default:
+                    ViewData["Message"] = "Roles - " + filter;
+                    roles = (from r in _context.Roles
+                             where r.Name.Contains(filter)
+                             select r).ToList();
+                    break;
+            }
+            switch (sortBy)
+            {
+                case "users":
+                    ViewData["SortBy"] = "Users";
+                    roles = roles.OrderByDescending(r => _userManager.GetUsersInRoleAsync(r.Name).Result.Count).ToList();
+                    break;
+                default:
+                    ViewData["SortBy"] = "Name";
+                    roles = roles.OrderBy(r => r.Name).ToList();
+                    break;
+            }
+
+            return View(roles);
         }
     }
 }

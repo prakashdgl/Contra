@@ -25,6 +25,13 @@ function updateRoles(sender, id, role) {
         postToAPI("api/v1/user/" + id + "/enfeeble/" + role, false);
 }
 
+function createRole() {
+    var nameEl = document.getElementById("roleName");
+    lastSender = document.getElementById("message");
+    postToAPI("api/v1/role/create/" + nameEl.value, true);
+    nameEl.value = "";
+}
+
 function postToAPI(route, updateResponseText = true) {
     var http = new XMLHttpRequest();
     http.open('POST', "https://" + window.location.host + "/" + route, true);

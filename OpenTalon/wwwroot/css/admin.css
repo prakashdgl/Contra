@@ -133,6 +133,10 @@
     transform: rotate(45deg);
 }
 
+.actions a {
+    margin-right: 15px;
+}
+
 @media (min-width: 768px) {
     .fullscreen {
         bottom: 60px;

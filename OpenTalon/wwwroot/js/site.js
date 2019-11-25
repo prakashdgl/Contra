@@ -199,8 +199,8 @@ function showComfortable() {
 
     var cards = document.getElementsByClassName("card");
     for (var j = 0; j < cards.length; j++) {
-        cards[j].style.marginTop = "15px";
-        cards[j].style.marginBottom = "15px";
+        cards[j].style.marginTop = "10px";
+        cards[j].style.marginBottom = "10px";
         cards[j].style.borderRadius = "10px";
         cards[j].style.borderBottom = "none";
     }
