@@ -118,7 +118,7 @@ namespace OpenTalon.Controllers
         }
 
         [Route("/search/{filter}/{*sortBy}")]
-        public IActionResult Search(string filter, string sortBy = "name")
+        public IActionResult Search(string filter, string sortBy = "trending")
         {
             if (string.IsNullOrEmpty(filter)) filter = "all";
             ViewData["Filter"] = filter;

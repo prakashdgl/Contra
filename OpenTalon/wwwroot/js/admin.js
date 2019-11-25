@@ -9,7 +9,7 @@ function confirmAction(sender, route) {
 
     route = "\"" + route + "\"";
     sender.parentNode.innerHTML = "<h5>Are you sure? " +
-        "<a class='text-danger clickable' onclick='postToAPI("+route+")'>Yes</a> | " +
+        "<a class='text-danger clickable' onclick='postToAPI("+route+")'>Yes</a>" +
         "<a class='text-info clickable' onclick='cancelAction()'>No</a></h5>";
 }
 

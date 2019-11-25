@@ -41,48 +41,68 @@ namespace OpenTalon.Controllers
             return View();
         }
 
-        [Route("/articles/{*filter}")]
-        public IActionResult Articles(string filter)
+        [Route("/articles/{filter}/{*sortBy}")]
+        public IActionResult Articles(string filter, string sortBy = "trending")
         {
             if (string.IsNullOrEmpty(filter)) filter = "all";
+            ViewData["Filter"] = filter;
 
             List<Article> articles;
             switch (filter)
             {
                 case "submitted":
-                    ViewData["Message"] = "Article Submissions";
-                    articles = _context.Article.Where(x =>
-                                   x.Approved == ApprovalStatus.Submitted).ToList();
+                    ViewData["Message"] = "Article Approvals";
+                    articles = _context.Article.Where(a => a.Approved != ApprovalStatus.Approved).ToList();
                     break;
                 case "all":
-                    ViewData["Message"] = "All Articles";
+                    ViewData["Message"] = "Articles";
                     articles = _context.Article.ToList();
                     break;
                 default:
                     ViewData["Message"] = "Articles - " + filter;
                     articles = (from a in _context.Article
-                                where a.OwnerID == filter ||
-                                      a.Content.Contains(filter) ||
-                                      a.AuthorName.Contains(filter)
+                                where a.Approved == ApprovalStatus.Approved &&
+                                     (a.Title.ToLower().Contains(filter) ||
+                                      a.SummaryShort.ToLower().Contains(filter) ||
+                                      a.SummaryLong.ToLower().Contains(filter))
                                 select a).ToList();
+                    break;
+            }
+            switch (sortBy)
+            {
+                case "author":
+                    ViewData["SortBy"] = "Author";
+                    articles = articles.OrderBy(u => u.AuthorName).ToList();
+                    break;
+                case "new":
+                    ViewData["SortBy"] = "New";
+                    articles = articles.OrderBy(u => u.Date).ToList();
+                    break;
+                case "top":
+                    ViewData["SortBy"] = "Top";
+                    articles = articles.OrderBy(u => u.Views).ToList();
+                    break;
+                default:
+                    ViewData["SortBy"] = "Trending";
+                    articles = articles.OrderBy(u => u.Views).ToList();
                     break;
             }
 
             return View(articles);
         }
 
-        [Route("/comments/{*filter}")]
-        public IActionResult Comments(string filter)
+        [Route("/comments/{filter}/{*sortBy}")]
+        public IActionResult Comments(string filter, string sortBy = "new")
         {
             if (string.IsNullOrEmpty(filter)) filter = "all";
+            ViewData["Filter"] = filter;
 
             List<Comment> comments;
             switch (filter)
             {
                 case "submitted":
-                    ViewData["Message"] = "Comment Submissions";
-                    comments = _context.Comment.Where(x =>
-                                   x.Approved == ApprovalStatus.Submitted).ToList();
+                    ViewData["Message"] = "Comment Approvals";
+                    comments = _context.Comment.Where(a => a.Approved != ApprovalStatus.Approved).ToList();
                     break;
                 case "all":
                     ViewData["Message"] = "All Comments";
@@ -95,6 +115,17 @@ namespace OpenTalon.Controllers
                                       c.Content.Contains(filter) ||
                                       c.AuthorName.Contains(filter)
                                 select c).ToList();
+                    break;
+            }
+            switch (sortBy)
+            {
+                case "author":
+                    ViewData["SortBy"] = "Author";
+                    comments = comments.OrderBy(u => u.AuthorName).ToList();
+                    break;
+                default:
+                    ViewData["SortBy"] = "New";
+                    comments = comments.OrderBy(u => u.Date).ToList();
                     break;
             }
 
