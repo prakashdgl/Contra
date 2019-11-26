@@ -21,6 +21,10 @@ nav {
     padding: 0 15px;
     z-index: 5;
 }
+nav .container {
+    position: relative;
+    margin-bottom: 0;
+}
 nav #links {
     display: none;
     flex-direction: column;
@@ -71,6 +75,9 @@ a.navbar-brand img {
     height: 40px;
 }
 
+.text-secondary {
+    font-size: 1rem;
+}
 a {
     transition-duration: 0.2s;
 }
@@ -98,12 +105,8 @@ a {
 }
 
 .container {
-    position: relative;
     max-width: 100%;
     padding: 0;
-}
-
-.content {
     margin-bottom: 100px;
 }
 
@@ -231,6 +234,13 @@ section {
     min-width: 100%;
     min-height: 100%;
 }
+.image-container .secondary-info {
+    position: absolute;
+    bottom: 10px;
+    right: 40px;
+    color: #fff;
+    mix-blend-mode: difference;
+}
 
 .card-big {
     flex: 3 1;
@@ -245,6 +255,8 @@ section {
 .card-encapsulate > div {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(2px);
+    color: #fff;
+    mix-blend-mode: difference;
     z-index: 5;
     width: 200px;
     height: 100%;
@@ -288,7 +300,7 @@ section {
     height: 150px;
     overflow: hidden;
 }
-.article > div {
+.article > .content {
     margin-top: 150px;
     font-size: 18px;
 }
@@ -351,12 +363,12 @@ form section div:last-of-type {
 }
 .social-links img {
     display: inline-block;
-    width: 35px;
+    width: 30px;
     padding: 0.3rem;
     padding-left: 0;
-    margin-right: 0.3rem;
+    margin-right: 0.2rem;
 }
-
+                                
 .footer {
   position: absolute;
   bottom: 0;
@@ -364,6 +376,9 @@ form section div:last-of-type {
   right: 20px;
   white-space: nowrap;
   line-height: 30px;
+}
+.footer .container {
+    margin-bottom: 0;
 }
 
 @media (min-width: 512px) {
@@ -415,7 +430,7 @@ form section div:last-of-type {
     .article .image-container {
         height: 200px;
     }
-    .article > div {
+    .article > .content {
         padding: 1rem 2rem;
         margin-top: 200px;
     }
@@ -457,7 +472,7 @@ form section div:last-of-type {
     .article .image-container {
         height: 300px;
     }
-    .article > div {
+    .article > .content {
         margin-top: 300px;
     }
 }

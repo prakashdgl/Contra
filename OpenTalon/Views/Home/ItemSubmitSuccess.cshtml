@@ -3,27 +3,25 @@
     ViewData["Title"] = "Success";
 }
 
-<section class="content">
-    <div id="main">
-        <div class="section-title">
-            <h2>Submission Success</h2>
-        </div>
-        <section>
-            <div class="card card-compact">
-                <div>
-                    <h2>Item successfully submitted.</h2>
-                    <p>Congratulations! Your request has been successfully submitted and will be reviewed by our staff before being published. While you wait, why not check out one of our other articles?</p>
-                    <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
-                </div>
-            </div>
-        </section>
-
-        <div id="loadSection">
-            <div class="section-title">
-                <h2><span id="query">New</span> Articles</h2>
-            </div>
-            <div id="loadTarget"></div>
-            <button id="loadButton" onclick="loadContent('New')" class="btn btn-outline-info w-100">Load More</button>
-        </div>
+<div id="main">
+    <div class="section-title">
+        <h2>Submission Success</h2>
     </div>
-</section>
+    <section>
+        <div class="card card-compact">
+            <div>
+                <h2>Item successfully submitted.</h2>
+                <p>Congratulations! Your request has been successfully submitted and will be reviewed by our staff before being published. While you wait, why not check out one of our other articles?</p>
+                <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="loadSection">
+        <div class="section-title">
+            <h2><span id="query">New</span> Articles</h2>
+        </div>
+        <div id="loadTarget"></div>
+        <button id="loadButton" onclick="loadContent('New')" class="btn btn-outline-info w-100">Load More</button>
+    </div>
+</div>

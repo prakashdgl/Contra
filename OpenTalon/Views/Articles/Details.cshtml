@@ -5,57 +5,58 @@
     Layout = "_AdminLayout";
 }
 
-<div class="content">
-    <div class="section-title">
-        <h2>Article (Admin) - @Html.DisplayFor(model => model.Title)</h2>
-    </div>
-    <section>
-        <div class="card article">
-            <span class="image-container">
-                <img src="@Model.ThumbnailURL" />
-            </span>
-            <div>
-                <h3>@Model.AuthorName - @Model.Date</h3>
-                <p>Thumbnail URL - @Model.ThumbnailURL</p>
-                <div class="actions">
-                    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-                    <a asp-action="Index">All Articles</a> |
-                    <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@Model.Id')">Remove</a> -
-                    @if (Model.Approved == ApprovalStatus.Approved)
-                    {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@Model.Id')">Delist</a> }
-                    else
-                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@Model.Id')">Approve</a> }
-                </div>
-                <br />
-                <p>@Html.Raw(Model.Content)</p>
-            </div>
-        </div>
-    </section>
-    
-    <div class="section-title">
-        <h2>Comments</h2>
-        <h4>@ViewData["PendingComments"] Pending</h4>
-    </div>
-    <section>
-        <partial name="_CommentPartial" />
-    </section>
-    @if (((List<Comment>)ViewData["Comments"]).Count != 0)
-    {
-    <section>
-        <div class="card">
-            @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
-            {
-            <section>
-                <div class="card card-search comment">
-                    <div>
-                        <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
-                        <p>@comment.Content</p>
-                    </div>
-                </div>
-            </section>
-            <hr />
-            }
-        </div>
-    </section>
-    }
+<div class="section-title">
+    <h2>Article (Admin) - @Html.DisplayFor(model => model.Title)</h2>
 </div>
+<section>
+    <div class="card article">
+        <span class="image-container">
+            <img src="@Model.ThumbnailURL" />
+            <div class="secondary-info">
+                <p>Views: @Model.Views</p>
+            </div>
+        </span>
+        <div class="content">
+            <h3>@Model.AuthorName - @Model.Date</h3>
+            <p>Thumbnail URL - @Model.ThumbnailURL</p>
+            <div class="actions">
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Index">All Articles</a> |
+                <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@Model.Id')">Remove</a> -
+                @if (Model.Approved == ApprovalStatus.Approved)
+                {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@Model.Id')">Delist</a> }
+                else
+                { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@Model.Id')">Approve</a> }
+            </div>
+            <br />
+            <p>@Html.Raw(Model.Content)</p>
+        </div>
+    </div>
+</section>
+    
+<div class="section-title">
+    <h2>Comments</h2>
+    <h4>@ViewData["PendingComments"] Pending</h4>
+</div>
+<section>
+    <partial name="_CommentPartial" />
+</section>
+@if (((List<Comment>)ViewData["Comments"]).Count != 0)
+{
+<section>
+    <div class="card">
+        @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
+        {
+        <section>
+            <div class="card card-search comment">
+                <div>
+                    <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
+                    <p>@comment.Content</p>
+                </div>
+            </div>
+        </section>
+        <hr />
+        }
+    </div>
+</section>
+}

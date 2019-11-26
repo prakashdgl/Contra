@@ -4,45 +4,43 @@
     ViewData["Title"] = "Search";
 }
 
-<div id="compact-compatible" class="content">
-    <div class="section-title">
-        <h2 id="search">Search - <span id="query">@ViewData["Query"]</span></h2>
-        <div class="filters">
-            <div class="filter-group">
-                <h5 class="hideable">View:</h5>
-                <button id="comfortableButton" class="btn btn-info" onclick="showComfortable()">Comfortable</button>
-                <button id="compactButton" class="btn btn-outline-info" onclick="showCompact()">Compact</button>
-            </div>
-            <div class="filter-group">
-                <h5 class="hideable">Sort:</h5>
-                <a class="btn @(ViewData["SortBy"].Equals("Author")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/author">Author</a>
-                <a class="btn @(ViewData["SortBy"].Equals("New")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/new">New</a>
-                <a class="btn @(ViewData["SortBy"].Equals("Top")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/top">Top</a>
-                <a class="btn @(ViewData["SortBy"].Equals("Trending")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/trending">Trending</a>
-            </div>
-            <div class="filter-group search">
-                <h5 class="hideable">Search:</h5>
-                <form asp-action="Search">
-                    <input name="filter" type="text" placeholder="Search articles" />
-                    <button class="btn btn-info" type="submit">Search</button>
-                </form>
-            </div>
+<div class="section-title" id="compact-compatible" >
+    <h2 id="search">Search - <span id="query">@ViewData["Query"]</span></h2>
+    <div class="filters">
+        <div class="filter-group">
+            <h5 class="hideable">View:</h5>
+            <button id="comfortableButton" class="btn btn-info" onclick="showComfortable()">Comfortable</button>
+            <button id="compactButton" class="btn btn-outline-info" onclick="showCompact()">Compact</button>
+        </div>
+        <div class="filter-group">
+            <h5 class="hideable">Sort:</h5>
+            <a class="btn @(ViewData["SortBy"].Equals("Author")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/author">Author</a>
+            <a class="btn @(ViewData["SortBy"].Equals("New")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/new">New</a>
+            <a class="btn @(ViewData["SortBy"].Equals("Top")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/top">Top</a>
+            <a class="btn @(ViewData["SortBy"].Equals("Trending")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/trending">Trending</a>
+        </div>
+        <div class="filter-group search">
+            <h5 class="hideable">Search:</h5>
+            <form asp-action="Search">
+                <input name="filter" type="text" placeholder="Search articles" />
+                <button class="btn btn-info" type="submit">Search</button>
+            </form>
         </div>
     </div>
-    @foreach (var item in Model) {
-    <section>
-        <div class="card card-search">
-            <span class="image-container"><img src="@item.ThumbnailURL" alt="'@item.Title' Thumbnail Image" /></span>
-            <div>
-                <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
-                <p class="compact-hidden">@Html.DisplayFor(modelItem => item.AuthorName) - @Html.DisplayFor(modelItem => item.Date)</p>
-                <hr class="compact-hidden" />
-                <p>@Html.DisplayFor(modelItem => item.SummaryLong)</p>
-                <a asp-controller="Home" asp-action="Article" asp-route-id="@item.Id">Read More</a>
-            </div>
-        </div>
-    </section>
-    }
-    <div id="loadTarget"></div>
-    <button id="loadButton" onclick="loadContent('@ViewData["Query"]')" class="btn btn-outline-info w-100">Load More</button>
 </div>
+@foreach (var item in Model) {
+<section>
+    <div class="card card-search">
+        <span class="image-container"><img src="@item.ThumbnailURL" alt="'@item.Title' Thumbnail Image" /></span>
+        <div>
+            <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+            <p class="compact-hidden">@Html.DisplayFor(modelItem => item.AuthorName) - @Html.DisplayFor(modelItem => item.Date)</p>
+            <hr class="compact-hidden" />
+            <p>@Html.DisplayFor(modelItem => item.SummaryLong)</p>
+            <a asp-controller="Home" asp-action="Article" asp-route-id="@item.Id">Read More</a>
+        </div>
+    </div>
+</section>
+}
+<div id="loadTarget"></div>
+<button id="loadButton" onclick="loadContent('@ViewData["Query"]')" class="btn btn-outline-info w-100">Load More</button>

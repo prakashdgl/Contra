@@ -5,28 +5,26 @@
     Layout = "_AdminLayout";
 }
 
-<div class="content">
-    <div class="section-title">
-        <h2>Aministrator Panel</h2>
-    </div>
-    <section>
-        <div class="card card-big">
-            <div>
-                <h2>@ViewData["ArticlesLeft"] Articles</h2>
-                <p>There are @ViewData["ArticlesLeft"] articles pending approval.</p>
-                <h2>@ViewData["CommentsLeft"] Comments</h2>
-                <p>There are @ViewData["CommentsLeft"] comments pending approval.</p>
-            </div>
-        </div>
-        <div class="card card-encapsulate">
-            <span class="image-container">
-                <img src="../img/img02.jpg" />
-            </span>
-            <div>
-                <h2>Site Status</h2>
-                <p>@ViewData["Articles"] total articles.</p>
-                <p>@ViewData["Comments"] total comments.</p>
-            </div>
-        </div>
-    </section>
+<div class="section-title">
+    <h2>Aministrator Panel</h2>
 </div>
+<section>
+    <div class="card card-big">
+        <div>
+            <h2>@ViewData["ArticlesLeft"] Articles</h2>
+            <p>There are @ViewData["ArticlesLeft"] articles pending approval.</p>
+            <h2>@ViewData["CommentsLeft"] Comments</h2>
+            <p>There are @ViewData["CommentsLeft"] comments pending approval.</p>
+        </div>
+    </div>
+    <div class="card card-encapsulate">
+        <span class="image-container">
+            <img src="../img/img02.jpg" />
+        </span>
+        <div>
+            <h2>Site Status</h2>
+            <p>@ViewData["Articles"] total articles.</p>
+            <p>@ViewData["Comments"] total comments.</p>
+        </div>
+    </div>
+</section>

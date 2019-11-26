@@ -5,79 +5,79 @@
     string url = System.Net.WebUtility.UrlEncode("https://" + Context.Request.Host + Context.Request.Path);
 }
 
-<div class="content">
-    @if (Model.Approved == ApprovalStatus.Approved)
-    {
-        <div class="section-title">
-            <h2>@Html.DisplayFor(model => model.Title)</h2>
-        </div>
-        <section>
-            <div class="card article">
-                <span class="image-container">
-                    <img src="@Model.ThumbnailURL" />
-                </span>
-                <div>
-                    <h3>@Model.AuthorName - @Model.Date.ToShortDateString()</h3>
-                    <h4>
-                        <span class="social-links">
-                            <a href="https://twitter.com/intent/tweet?text=@System.Net.WebUtility.UrlEncode(Model.Title)+@(url)"><img src="~/img/twitter.svg" alt="Share on Twitter" /></a>
-                            <a href="https://facebook.com/sharer/sharer.php?u=@(url)"><img src="~/img/facebook.svg" alt="Share on Facebook" /></a>
-                            <a href="#discuss"><img src="~/img/discuss.svg" alt="Discuss Here" /></a>
-                        </span>
-                    </h4>
-                    <h5>Views: @Model.Views</h5>
-                    <br />
-                    @Html.Raw(Model.Content)
-                </div>
-            </div>
-        </section>
-
-        <div class="section-title">
-            <h2>Comments</h2>
-            <h4>@ViewData["PendingComments"] Pending</h4>
-            <a name="discuss"></a>
-        </div>
-        <section>
-            <partial name="_CommentPartial" />
-        </section>
-        @if (((List<Comment>)ViewData["Comments"]).Count != 0) {
-        <section>
-            <div class="card">
-                @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
-                {
-                    <section>
-                        <div class="card card-search comment">
-                            <div>
-                                <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
-                                <p>@comment.Content</p>
-                            </div>
-                        </div>
-                    </section>
-                    <hr />
-                }
-            </div>
-        </section>
-        }
-    }
-    else
-    {
-        <section>
-            <div class="card card-search">
-                <div>
-                    <h2>This Article is Not Approved Yet</h2>
-                    <p>This article has not been approved by our moderation team, and as such, cannot be displayed yet.</p>
-                    <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
-                    <a class="btn btn-outline-info" href="~/apply">Submit an Article</a>
-                    <a class="btn btn-outline-info" href="https://paypal.me">Donate</a>
-                </div>
-            </div>
-        </section>
-    }
-    <div id="loadSection">
-        <div class="section-title">
-            <h2><span id="query">New</span> Articles</h2>
-        </div>
-        <div id="loadTarget"></div>
-        <button id="loadButton" onclick="loadContent('New')" class="btn btn-outline-info w-100">Load More</button>
+@if (Model.Approved == ApprovalStatus.Approved)
+{
+    <div class="section-title">
+        <h2>@Html.DisplayFor(model => model.Title)</h2>
     </div>
+    <section>
+        <div class="card article">
+            <div class="image-container">
+                <img src="@Model.ThumbnailURL" alt="Article Thumbnail Image" />
+                <div class="secondary-info">
+                    <p>Views: @Model.Views</p>
+                </div>
+            </div>
+            <div class="content">
+                <h3>@Model.AuthorName - @Model.Date.ToShortDateString()</h3>
+                <h4>
+                    <span class="social-links">
+                        <a href="https://twitter.com/intent/tweet?text=@System.Net.WebUtility.UrlEncode(Model.Title)+@(url)"><img src="~/img/twitter.svg" alt="Share on Twitter" /></a>
+                        <a href="https://facebook.com/sharer/sharer.php?u=@(url)"><img src="~/img/facebook.svg" alt="Share on Facebook" /></a>
+                        <a href="#discuss"><img src="~/img/discuss.svg" alt="Discuss Here" /></a>
+                    </span>
+                </h4>
+                <br />
+                @Html.Raw(Model.Content)
+            </div>
+        </div>
+    </section>
+
+    <div class="section-title">
+        <h2>Comments</h2>
+        <h4>@ViewData["PendingComments"] Pending</h4>
+        <a name="discuss"></a>
+    </div>
+    <section>
+        <partial name="_CommentPartial" />
+    </section>
+    @if (((List<Comment>)ViewData["Comments"]).Count != 0) {
+    <section>
+        <div class="card">
+            @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
+            {
+                <section>
+                    <div class="card card-search comment">
+                        <div>
+                            <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
+                            <p>@comment.Content</p>
+                        </div>
+                    </div>
+                </section>
+                <hr />
+            }
+        </div>
+    </section>
+    }
+}
+else
+{
+    <section>
+        <div class="card card-search">
+            <div>
+                <h2>This Article is Not Approved Yet</h2>
+                <p>This article has not been approved by our moderation team, and as such, cannot be displayed yet.</p>
+                <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
+                <a class="btn btn-outline-info" href="~/apply">Submit an Article</a>
+                <a class="btn btn-outline-info" href="https://paypal.me">Donate</a>
+            </div>
+        </div>
+    </section>
+}
+<div id="loadSection">
+    <div class="section-title">
+        <h2><span id="query">New</span> Articles</h2>
+    </div>
+    <div id="loadTarget"></div>
+    <button id="loadButton" onclick="loadContent('New')" class="btn btn-outline-info w-100">Load More</button>
 </div>

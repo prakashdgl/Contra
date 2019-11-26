@@ -10,130 +10,128 @@
     Layout = "_CompactLayout";
 }
 
-<div class="content">
-    <div class="section-title">
-        <h2>Submit an Article</h2>
-    </div>
-    <hr />
-    <br />
-    <section>
-        <div class="card submit">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <section id="submit-wrapper">
-                    <div class="submit-form submit">
-                        <form asp-action="Apply">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div id="step-1">
-                                <h2>Article Info (Step 1)</h2>
-                                <div class="form-group">
-                                    <label class="control-label">Email</label>
-                                    <p><b>@UserManager.GetUserAsync(User).Result.Email</b></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Author Name</label>
-                                    <p><b>@UserManager.GetUserAsync(User).Result.Name</b></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Co-Author Names</label>
-                                    <input id="input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="Ex) Sei, Armitage, Dana" />
-                                    <span asp-validation-for="AuthorName" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="Title" class="control-label"></label>
-                                    <input asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
-                                    <span asp-validation-for="Title" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div id="step-2">
-                                <h2>Meta Info (Step 2)</h2>
-                                <div class="form-group">
-                                    <label class="control-label">Thumbnail URL</label>
-                                    <input id="input-img" asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
-                                    <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
-                                    <p>Please provide an external URL to an image to use as a thumbnail.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Article Tags</label>
-                                    <input asp-for="SummaryShort" class="form-control" placeholder="Ex) News, Sports, Opinion" />
-                                    <span asp-validation-for="SummaryShort" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Summary</label>
-                                    <input asp-for="SummaryLong" class="form-control" maxlength="60" placeholder="A short summary of your article about this length." />
-                                    <span asp-validation-for="SummaryLong" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div id="step-3">
-                                <h2>Content (Step 3)</h2>
-                                <div class="form-group">
-                                    <label asp-for="Content" class="control-label"></label>
-                                    <textarea asp-for="Content" id="summernote"></textarea>
-                                    <span asp-validation-for="Content" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Submit Article" class="btn btn-primary" />
-                                    <a href="~/">
-                                        <input type="button" value="Cancel" class="btn btn-outline-dark" />
-                                    </a>
-                                    <br />
-                                    <p>By submitting an article, you agree to our <a href="~/privacy">Terms of Service and Privacy Policy</a>.</p>
-                                </div>
-                            </div>
-                            <br />
-                            <div id="submit-controls">
-                                <button id="prevButton" class="btn btn-outline-dark disabled" type="button" onclick="submitUndoStep()">Previous Step</button>
-                                <button id="nextButton" class="btn btn-outline-info" type="button" onclick="submitNextStep()">Next Step</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="article-preview submit">
-                        <h2 class="ml-0">Article Preview</h2>
-                        <div class="card article">
-                            <span class="image-container"><img id="thumbnail-img" src="../img/img05.jpg" alt="Article Preview Image" /></span>
-                            <div>
-                                <h3>
-                                    @UserManager.GetUserAsync(User).Result.Name<span id="coauthors"></span> - @DateTime.Now.ToShortDateString()
-                                </h3>
-                                <h4>
-                                    <span class="social-links">
-                                        <img src="~/img/twitter.svg" alt="Share on Twitter" />
-                                        <img src="~/img/facebook.svg" alt="Share on Facebook" />
-                                        <img src="~/img/discuss.svg" alt="Discuss Here" />
-                                    </span>
-                                </h4>
-                                <br />
-                                <span id="content">Content</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            }
-            else
-            {
-                <section>
-                    <div class="submit-form submit">
-                        <h2>Not Signed In</h2>
-                        <br />
-                        <div class="mx-md-3">
-                            <p>Register or login to an account to submit an article. This will allow you to track your submitted articles, edit them, and comment on articles.</p>
-                            <br />
-                            <section>
-                                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info w-50 flex-fill mr-3">Register</a>
-                                <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Apply", "Home", new { area = "" })" class="btn btn-outline-info w-50 flex-fill mr-3">Login</a>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="article-preview submit">
-                        <div class="card article">
-                            <span class="image-container"><img src="../img/img05.jpg" /></span>
-                        </div>
-                    </div>
-                </section>
-            }
-        </div>
-    </section>
+<div class="section-title">
+    <h2>Submit an Article</h2>
 </div>
+<hr />
+<br />
+<section>
+    <div class="card submit">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <section id="submit-wrapper">
+                <div class="submit-form submit">
+                    <form asp-action="Apply">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div id="step-1">
+                            <h2>Article Info (Step 1)</h2>
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <p><b>@UserManager.GetUserAsync(User).Result.Email</b></p>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Author Name</label>
+                                <p><b>@UserManager.GetUserAsync(User).Result.Name</b></p>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Co-Author Names</label>
+                                <input id="input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="Ex) Sei, Armitage, Dana" />
+                                <span asp-validation-for="AuthorName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label"></label>
+                                <input asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div id="step-2">
+                            <h2>Meta Info (Step 2)</h2>
+                            <div class="form-group">
+                                <label class="control-label">Thumbnail URL</label>
+                                <input id="input-img" asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
+                                <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
+                                <p>Please provide an external URL to an image to use as a thumbnail.</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Article Tags</label>
+                                <input asp-for="SummaryShort" class="form-control" placeholder="Ex) News, Sports, Opinion" />
+                                <span asp-validation-for="SummaryShort" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Summary</label>
+                                <input asp-for="SummaryLong" class="form-control" maxlength="60" placeholder="A short summary of your article about this length." />
+                                <span asp-validation-for="SummaryLong" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div id="step-3">
+                            <h2>Content (Step 3)</h2>
+                            <div class="form-group">
+                                <label asp-for="Content" class="control-label"></label>
+                                <textarea asp-for="Content" id="summernote"></textarea>
+                                <span asp-validation-for="Content" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Submit Article" class="btn btn-primary" />
+                                <a href="~/">
+                                    <input type="button" value="Cancel" class="btn btn-outline-dark" />
+                                </a>
+                                <br />
+                                <p>By submitting an article, you agree to our <a href="~/privacy">Terms of Service and Privacy Policy</a>.</p>
+                            </div>
+                        </div>
+                        <br />
+                        <div id="submit-controls">
+                            <button id="prevButton" class="btn btn-outline-dark disabled" type="button" onclick="submitUndoStep()">Previous Step</button>
+                            <button id="nextButton" class="btn btn-outline-info" type="button" onclick="submitNextStep()">Next Step</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="article-preview submit">
+                    <h2 class="ml-0">Article Preview</h2>
+                    <div class="card article">
+                        <span class="image-container"><img id="thumbnail-img" src="../img/img05.jpg" alt="Article Preview Image" /></span>
+                        <div>
+                            <h3>
+                                @UserManager.GetUserAsync(User).Result.Name<span id="coauthors"></span> - @DateTime.Now.ToShortDateString()
+                            </h3>
+                            <h4>
+                                <span class="social-links">
+                                    <img src="~/img/twitter.svg" alt="Share on Twitter" />
+                                    <img src="~/img/facebook.svg" alt="Share on Facebook" />
+                                    <img src="~/img/discuss.svg" alt="Discuss Here" />
+                                </span>
+                            </h4>
+                            <br />
+                            <span id="content">Content</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+        else
+        {
+            <section>
+                <div class="submit-form submit">
+                    <h2>Not Signed In</h2>
+                    <br />
+                    <div class="mx-md-3">
+                        <p>Register or login to an account to submit an article. This will allow you to track your submitted articles, edit them, and comment on articles.</p>
+                        <br />
+                        <section>
+                            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info w-50 flex-fill mr-3">Register</a>
+                            <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Apply", "Home", new { area = "" })" class="btn btn-outline-info w-50 flex-fill mr-3">Login</a>
+                        </section>
+                    </div>
+                </div>
+                <div class="article-preview submit">
+                    <div class="card article">
+                        <span class="image-container"><img src="../img/img05.jpg" /></span>
+                    </div>
+                </div>
+            </section>
+        }
+    </div>
+</section>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

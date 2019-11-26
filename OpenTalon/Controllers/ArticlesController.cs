@@ -71,7 +71,7 @@ namespace OpenTalon.Controllers
                     if (!ArticleExists(article.Id)) return NotFound();
                     else throw;
                 }
-                return Redirect("~/articles");
+                return Redirect("~/articles/all");
             }
             return View(article);
         }

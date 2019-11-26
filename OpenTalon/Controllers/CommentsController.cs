@@ -62,7 +62,7 @@ namespace OpenTalon.Controllers
                     if (!CommentExists(comment.Id)) return NotFound();
                     else throw;
                 }
-                return Redirect("~/comments");
+                return Redirect("~/comments/all");
             }
             return View(comment);
         }

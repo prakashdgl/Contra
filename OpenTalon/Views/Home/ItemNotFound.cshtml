@@ -3,29 +3,27 @@
     ViewData["Title"] = "Not Found";
 }
 
-<section class="content">
-    <div id="main">
-        <div class="section-title">
-            <h2>Item Not Found</h2>
-        </div>
-        <section>
-            <div class="card card-compact">
-                <div>
-                    <h2>Whoops!</h2>
-                    <p>Looks like we couldn't find the thing you wanted. Meanwhile, check out some of our other articles!</p>
-                    <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
-                    <a class="btn btn-outline-info" href="~/apply">Submit an Article</a>
-                    <a class="btn btn-outline-info" href="https://paypal.me">Donate</a>
-                </div>
-            </div>
-        </section>
-
-        <div id="loadSection">
-            <div class="section-title">
-                <h2><span id="query">New</span> Articles</h2>
-            </div>
-            <div id="loadTarget"></div>
-            <button id="loadButton" onclick="loadContent('New')" class="btn btn-outline-info w-100">Load More</button>
-        </div>
+<div id="main">
+    <div class="section-title">
+        <h2>Item Not Found</h2>
     </div>
-</section>
+    <section>
+        <div class="card card-compact">
+            <div>
+                <h2>Whoops!</h2>
+                <p>Looks like we couldn't find the thing you wanted. Meanwhile, check out some of our other articles!</p>
+                <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
+                <a class="btn btn-outline-info" href="~/apply">Submit an Article</a>
+                <a class="btn btn-outline-info" href="https://paypal.me">Donate</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="loadSection">
+        <div class="section-title">
+            <h2><span id="query">New</span> Articles</h2>
+        </div>
+        <div id="loadTarget"></div>
+        <button id="loadButton" onclick="loadContent('New')" class="btn btn-outline-info w-100">Load More</button>
+    </div>
+</div>
