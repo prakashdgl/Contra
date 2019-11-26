@@ -6,23 +6,23 @@
 }
 
 <div class="section-title">
-    <h2>Article (Admin) - @Html.DisplayFor(model => model.Title)</h2>
+    <h2>@Html.DisplayFor(model => model.Title)</h2>
 </div>
 <section>
     <div class="card article">
-        <span class="image-container">
+        <div class="image-container">
             <img src="@Model.ThumbnailURL" />
             <div class="secondary-info">
                 <p>Views: @Model.Views</p>
             </div>
-        </span>
+        </div>
         <div class="content">
             <h3>@Model.AuthorName - @Model.Date</h3>
             <p>Thumbnail URL - @Model.ThumbnailURL</p>
             <div class="actions">
-                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-                <a asp-action="Index">All Articles</a> |
-                <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@Model.Id')">Remove</a> -
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                <a asp-action="Index">All Articles</a>
+                <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@Model.Id')">Remove</a>
                 @if (Model.Approved == ApprovalStatus.Approved)
                 {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@Model.Id')">Delist</a> }
                 else
@@ -36,7 +36,7 @@
     
 <div class="section-title">
     <h2>Comments</h2>
-    <h4>@ViewData["PendingComments"] Pending</h4>
+    <p class="text-secondary">@ViewData["PendingComments"] Pending</p>
 </div>
 <section>
     <partial name="_CommentPartial" />

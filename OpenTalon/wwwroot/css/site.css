@@ -235,11 +235,17 @@ section {
     min-height: 100%;
 }
 .image-container .secondary-info {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 10px;
     position: absolute;
     bottom: 10px;
     right: 40px;
     color: #fff;
     mix-blend-mode: difference;
+}
+.image-container .secondary-info p {
+    margin: 0;
 }
 
 .card-big {
