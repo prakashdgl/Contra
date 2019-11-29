@@ -5,8 +5,11 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserAsync(User).Result.Name</a>
-    <form class="form-inline nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+        <img src="@UserManager.GetUserAsync(User).Result.ProfilePictureURL" alt="User Profile Picture" />
+        @UserManager.GetUserAsync(User).Result.Name
+    </a>
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
         <button type="submit" class="nav-link btn btn-link text-dark text-center">Logout</button>
     </form>
 }

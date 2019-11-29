@@ -64,7 +64,7 @@ function onResize() {
 }
 
 function redirect(id) {
-    window.location = "article/"+id;
+    window.location = "/article/"+id;
 }
 
 function loadContent(query) {

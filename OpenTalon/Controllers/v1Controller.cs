@@ -231,21 +231,33 @@ namespace OpenTalon.Controllers
         {
             if (string.IsNullOrEmpty(query)) return "";
 
-            var articles = query.ToLower() switch
+            List<Article> articles;
+            if (_userManager.GetUserId(User) == query)
             {
-                "new" => (from a in _context.Article
-                          where a.Approved == ApprovalStatus.Approved
+                articles = (from a in _context.Article
+                            where a.OwnerID == query
+                            orderby a.Date descending
+                            select a).ToList();
+            }
+            else
+            {
+                articles = (query.ToLower()) switch
+                {
+                    "new" => (from a in _context.Article
+                              where a.Approved == ApprovalStatus.Approved
+                              orderby a.Date descending
+                              select a).ToList(),
+                    _ => (from a in _context.Article
+                          where a.Approved == ApprovalStatus.Approved &&
+                              (a.Title.Contains(query) ||
+                              a.SummaryShort.Contains(query) ||
+                              a.OwnerID == query)
                           orderby a.Date descending
-                          select a)
-                          .Skip(skip * 8).Take(8).ToList(),
-                _ => (from a in _context.Article
-                      where a.Approved == ApprovalStatus.Approved &&
-                      a.Title.Contains(query) || a.SummaryShort.Contains(query)
-                      orderby a.Date descending
-                      select a)
-                      .Skip(skip * 8).Take(8).ToList()
-            };
+                          select a).ToList()
+                };
+            }
 
+            articles.Skip(skip * 8).Take(8).ToList();
             if (articles.Count == 0) return "";
 
             List<Dictionary<string, string>> info = new List<Dictionary<string, string>>();

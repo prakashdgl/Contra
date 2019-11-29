@@ -38,6 +38,8 @@ namespace OpenTalon.Controllers
             ViewData["Comments"] = _context.Comment.Count();
             ViewData["CommentsLeft"] = comments.Count;
 
+            ViewData["TicketsLeft"] = _context.Ticket.Count();
+
             return View();
         }
 

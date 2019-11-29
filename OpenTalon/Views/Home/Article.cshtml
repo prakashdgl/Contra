@@ -41,7 +41,7 @@
     <section>
         <partial name="_CommentPartial" />
     </section>
-    @if (((List<Comment>)ViewData["Comments"]).Count != 0) 
+    @if (((List<Comment>)ViewData["Comments"]).Count != 0)
     {
         <section>
             <div class="card">
@@ -63,6 +63,9 @@
 }
 else
 {
+    <div class="section-title">
+        <h2>Access Denied</h2>
+    </div>
     <section>
         <div class="card card-search">
             <div>

@@ -80,8 +80,25 @@ namespace OpenTalon.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new OpenTalonUser { Name = Input.Name, UserName = Input.Email, Email = Input.Email, DateJoined = DateTime.Now };
+                StringBuilder sb = new StringBuilder();
+                using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+                {
+                    byte[] inputBytes = Encoding.ASCII.GetBytes(Input.Email.Trim().ToLower());
+                    byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                    for (int i = 0; i < hashBytes.Length; i++)
+                        sb.Append(hashBytes[i].ToString("X2"));
+                }
+
+                var user = new OpenTalonUser {
+                    Name = Input.Name,
+                    ProfilePictureURL = "https://gravatar.com/avatar/" + sb.ToString() + "?d=identicon",
+                    UserName = Input.Email, 
+                    Email = Input.Email, 
+                    DateJoined = DateTime.Now 
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

@@ -1,23 +1,27 @@
-﻿@{
-    Layout = "/Views/Shared/_Layout.cshtml";
+﻿@using Microsoft.AspNetCore.Identity
+@using OpenTalon.Areas.Identity.Data
+@inject UserManager<OpenTalonUser> UserManager
+
+@{
+    Layout = "/Views/Shared/_CompactLayout.cshtml";
+    OpenTalonUser user = UserManager.GetUserAsync(User).Result;
 }
 
-<div class="section-title ml-0">
-    <h2>Manage your account</h2>
-</div>
-<br />
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <section>
-        <div class="flex-small m-1">
+<section class="profile-dashboard">
+    <div class="profile-controls">
+        <img class="profile-picture" src="@(user.ProfilePictureURL + "&s=512")" />
+        <hr />
+        <div>
+            <h2>@user.Name</h2>
+            <h5>Joined: @user.DateJoined.ToShortDateString()</h5>
+            <br />
             <partial name="_ManageNav" />
         </div>
-        <div class="flex-big m-1">
-            @RenderBody()
-        </div>
-    </section>
-</div>
+    </div>
+    <div class="profile-page flex-big">
+        @RenderBody()
+    </div>
+</section>
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

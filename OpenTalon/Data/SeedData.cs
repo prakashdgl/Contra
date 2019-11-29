@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OpenTalon.Areas.Identity.Data;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenTalon.Data
@@ -11,7 +12,7 @@ namespace OpenTalon.Data
     {
         public static async Task Initialize(IServiceProvider serviceProvider)
         {
-            // Use this password to create a new user account, then delete the account with this password.
+            // Use this password to login and set up perms, and change this password.
             string testUserPw = "Testing1!";
 
             var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@opentalon.ml");
@@ -26,9 +27,21 @@ namespace OpenTalon.Data
             var user = await userManager.FindByNameAsync(UserName);
             if (user == null)
             {
+                // Create MD5 Hash for Gravatar
+                StringBuilder sb = new StringBuilder();
+                using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+                {
+                    byte[] inputBytes = Encoding.ASCII.GetBytes(UserName);
+                    byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                    for (int i = 0; i < hashBytes.Length; i++)
+                        sb.Append(hashBytes[i].ToString("X2"));
+                }
+
                 user = new OpenTalonUser
                 {
                     Name = "Sei",
+                    ProfilePictureURL = "https://gravatar.com/avatar/" + sb.ToString() + "?d=identicon",
                     UserName = UserName,
                     Email = UserName,
                     EmailConfirmed = true

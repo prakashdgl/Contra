@@ -9,6 +9,9 @@ namespace OpenTalon.Areas.Identity.Data
     {
         [PersonalData]
         public string Name { get; set; }
+        [PersonalData]
+        public string ProfilePictureURL { get; set; }
+        [PersonalData]
         public DateTime DateJoined { get; set; }
 
         public List<Article> Articles { get; set; }

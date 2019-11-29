@@ -9,14 +9,14 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    background-color: #edeef3;
+    background-color: #eeeff5;
     margin-bottom: 60px;
 }
 
 nav {
     background-color: #fff;
     height: 50px;
-    line-height: 50px;
+    line-height: 48px;
     position: relative;
     padding: 0 15px;
     z-index: 5;
@@ -34,7 +34,6 @@ nav #links {
 nav .links {
     flex-direction: column;
     flex: 1 1;
-    align-items: center;
     min-width: 200px;
 }
 nav .links a {
@@ -42,8 +41,16 @@ nav .links a {
     margin: 0;
     padding: 0.2rem 1rem;
 }
+nav .links button {
+    height: 100%;
+}
 nav .links a:hover {
-    color: #6daedb;
+        color: #6daedb;
+    }
+nav .links img {
+    border-radius: 5px;
+    height: 30px;
+    margin-right: 10px;
 }
 
 .nav-link button {
@@ -107,7 +114,7 @@ a {
 .container {
     max-width: 100%;
     padding: 0;
-    margin-bottom: 100px;
+    margin-bottom: 60px;
 }
 
 #main {
@@ -387,6 +394,28 @@ form section div:last-of-type {
     margin-bottom: 0;
 }
 
+.profile-dashboard {
+    margin-top: 20px;
+}
+.profile-controls {
+    display: flex;
+    flex-direction: column;
+}
+.profile-controls > div {
+    flex: 1 1;
+    width: 80%;
+    margin: auto;
+}
+.profile-picture {
+    width: 50%;
+    margin: auto;
+}
+.profile-page {
+    width: 95%;
+    margin: auto;
+    margin-top: 30px;
+}
+
 @media (min-width: 512px) {
     .header img {
         display: block;
@@ -402,6 +431,15 @@ form section div:last-of-type {
     .story > div {
         padding: 25px;
     }
+    .profile-controls {
+        flex-direction: row;
+    }
+    .profile-controls > div {
+        margin-left: 30px;
+    }
+    .profile-picture {
+        width: 20rem;
+    }
 }
 
 @media (min-width: 768px) {
@@ -410,6 +448,9 @@ form section div:last-of-type {
     }
     .hideable {
         display: inline-block;
+    }
+    .container {
+        margin-bottom: 100px;
     }
     .header img {
         width: 768px;
@@ -442,6 +483,16 @@ form section div:last-of-type {
     }
     .footer {
         line-height: 60px;
+    }
+    .profile-controls {
+        flex-direction: column;
+    }
+    .profile-controls > div {
+        margin: 0;
+        width: 100%;
+    }
+    .profile-page {
+        margin-left: 20px;
     }
 }
 
@@ -481,6 +532,9 @@ form section div:last-of-type {
     .article > .content {
         margin-top: 300px;
     }
+    .profile-page {
+        margin-left: 40px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -496,6 +550,7 @@ form section div:last-of-type {
     nav .links {
         display: inline-flex;
         flex-direction: row;
+        min-width: 0;
     }
     nav .links a {
         float: right;
