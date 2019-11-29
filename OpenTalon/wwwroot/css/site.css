@@ -143,7 +143,7 @@ a {
 
 .section-title {
     margin: 10px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .section-title > h2 {
     font-size: 42px;
@@ -202,11 +202,11 @@ section {
 
 .card {
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: -6px 6px 5px #ddd;
     flex: 2 1;
     min-height: 200px;
-    margin: 10px;
+    margin: 4px 10px;
     padding: 25px;
     position: relative;
     overflow: hidden;
@@ -427,6 +427,10 @@ form section div:last-of-type {
     }
     .container {
         max-width: 98%;
+    }
+    .card {
+        border-radius: 5px;
+        margin: 10px;
     }
     .story > div {
         padding: 25px;

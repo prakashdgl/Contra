@@ -57,7 +57,7 @@ function showMenu() {
 }
 
 function onResize() {
-    if (menu.style.height !== "" || nav.style.height !== "") {
+    if ((menu.style.height !== "" || nav.style.height !== "") && window.innerWidth > 768) {
         menu.style.display = "";
         nav.style.height = "";
     }
