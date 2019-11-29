@@ -9,7 +9,20 @@
 
 <section class="profile-dashboard">
     <div class="profile-controls">
-        <img class="profile-picture" src="@(user.ProfilePictureURL + "&s=512")" />
+        <div class="image-container">
+            <img class="profile-picture" src="@(user.ProfilePictureURL + "&s=512")" />
+            <div class="secondary-info">
+                @if (!string.IsNullOrEmpty(user.ProfilePictureURL) && 
+                      user.ProfilePictureURL.Contains("gravatar"))
+                {
+                    <p>Change Picture</p>
+                }
+                else
+                {
+                    <a class="clickable" onclick="post('api/v1/account/picture/@user.Id/reset')">Reset Picture</a>
+                }
+            </div>
+        </div>
         <hr />
         <div>
             <h2>@user.Name</h2>

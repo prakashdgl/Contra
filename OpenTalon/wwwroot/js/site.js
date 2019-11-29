@@ -67,6 +67,12 @@ function redirect(id) {
     window.location = "/article/"+id;
 }
 
+function post(route) {
+    var http = new XMLHttpRequest();
+    http.open('POST', "https://" + window.location.host + "/" + route, true);
+    http.send();
+}
+
 function loadContent(query) {
     loadTarget = document.getElementById("loadTarget");
     if (!loadTarget) return;

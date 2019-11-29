@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -199,6 +200,38 @@ namespace OpenTalon.Controllers
             else return $"Article {id} does not exist in the database.";
 
             return $"Deleted article {id} successfully!";
+        }
+
+        [Route("account/picture/{id}/{*url}")]
+        [HttpPost]
+        public async Task<string> ChangeProfilePicture(string id, string url)
+        {
+            if (_userManager.GetUserId(User) == id)
+            {
+                OpenTalonUser user = await _userManager.GetUserAsync(User);
+                if (url == "reset")
+                {
+                    StringBuilder sb = new StringBuilder();
+                    using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+                    {
+                        byte[] inputBytes = Encoding.ASCII.GetBytes(user.Email.Trim().ToLower());
+                        byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                        for (int i = 0; i < hashBytes.Length; i++)
+                            sb.Append(hashBytes[i].ToString("X2"));
+                    }
+                    user.ProfilePictureURL = "https://gravatar.com/avatar/" + sb.ToString() + "?d=identicon";
+                    await _userManager.UpdateAsync(user);
+                }
+                else
+                {
+                    user.ProfilePictureURL = url;
+                    await _userManager.UpdateAsync(user);
+                }
+
+                return "Successfully changed profile picture!";
+            }
+            else return "Not authorized!";
         }
 
         [Route("article/info/{*id}")]
