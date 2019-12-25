@@ -1,12 +1,4 @@
 ﻿
-.fullscreen {
-    position: absolute;
-    top: 50px;
-    bottom: 30px;
-    left: 0;
-    right: 0;
-}
-
 .dashboard-header {
     display: none;
     margin: 15px;
@@ -138,9 +130,6 @@
 }
 
 @media (min-width: 768px) {
-    .fullscreen {
-        bottom: 60px;
-    }
     .dashboard-header {
         display: block;
     }

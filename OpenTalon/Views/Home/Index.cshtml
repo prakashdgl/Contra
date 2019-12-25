@@ -66,24 +66,24 @@
             <h2>Extras</h2>
         </div>
         <section class="flex-fill">
-            <div class="card flex-big">
-                <h2>Spotify</h2>
-                <br />
-                <iframe src="https://open.spotify.com/embed/album/7JsqDNhfReIz6aG6irMa4D" title="Spotify Playlist" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            </div>
             <div class="card">
-                <h2>Support Us</h2>
-                <br />
-                <div class="banner">
-                    <img src="~/img/paypal.svg" alt="PayPal Logo" />
-                </div>
-                <br />
-            </div>
-            <div class="card card-compact flex-small">
-                <h2>Feedback</h2>
-                <br />
-                <a href="~/feedback" class="btn btn-outline-info">Give Feedback</a>
-                <br />
+                <h2>Newsbeat</h2>
+                <section>
+                    <div class="card card-big card-encapsulate card-newsbeat" onclick="redirect(@Model.ElementAt(1)[0].Id)">
+                        <span class="image-container"><img src=@Model.ElementAt(1)[0].ThumbnailURL alt="Article Thumbnail" /></span>
+                        <div>
+                            <h2>@Model.ElementAt(1)[0].Title</h2>
+                            <p>@Model.ElementAt(1)[0].SummaryLong</p>
+                        </div>
+                    </div>
+                    <div class="card card-big card-encapsulate card-newsbeat" onclick="redirect(@Model.ElementAt(1)[1].Id)">
+                        <span class="image-container"><img src=@Model.ElementAt(1)[1].ThumbnailURL alt="Article Thumbnail" /></span>
+                        <div>
+                            <h2>@Model.ElementAt(1)[1].Title</h2>
+                            <p>@Model.ElementAt(1)[1].SummaryLong</p>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
     </div>

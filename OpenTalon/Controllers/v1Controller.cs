@@ -202,7 +202,8 @@ namespace OpenTalon.Controllers
             return $"Deleted article {id} successfully!";
         }
 
-        [Route("account/picture/{id}/{*url}")]
+        [Authorize]
+        [Route("account/{id}/picture/{*url}")]
         [HttpPost]
         public async Task<string> ChangeProfilePicture(string id, string url)
         {
@@ -232,6 +233,16 @@ namespace OpenTalon.Controllers
                 return "Successfully changed profile picture!";
             }
             else return "Not authorized!";
+        }
+
+        [Route("account/{id}/picture")]
+        [HttpGet]
+        public async Task<string> GetProfilePicture(string id)
+        {
+            OpenTalonUser user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+                return user.ProfilePictureURL;
+            else return "Not found!";
         }
 
         [Route("article/info/{*id}")]
@@ -290,7 +301,7 @@ namespace OpenTalon.Controllers
                 };
             }
 
-            articles.Skip(skip * 8).Take(8).ToList();
+            articles = articles.Skip(skip * 8).Take(8).ToList();
             if (articles.Count == 0) return "";
 
             List<Dictionary<string, string>> info = new List<Dictionary<string, string>>();

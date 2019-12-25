@@ -15,11 +15,11 @@
                 @if (!string.IsNullOrEmpty(user.ProfilePictureURL) && 
                       user.ProfilePictureURL.Contains("gravatar"))
                 {
-                    <p>Change Picture</p>
+                    <a class="clickable" onclick="show">Change Picture</a>
                 }
                 else
                 {
-                    <a class="clickable" onclick="post('api/v1/account/picture/@user.Id/reset')">Reset Picture</a>
+                    <a class="clickable" onclick="changePFP('@user.Id', 'reset')">Reset Picture</a>
                 }
             </div>
         </div>
@@ -35,6 +35,18 @@
         @RenderBody()
     </div>
 </section>
+
+<div class="fullscreen query" id="dialog" onclick="hideDialog()">
+    <div id="changePFP" class="align-content-center" onclick="stopPropogation(event)">
+        <div class="card card-compact search shadow-none">
+            <h2>Change profile picture</h2>
+            <form action="~/create" method="post">
+                <input type="text" id="serverName" name="Name" class="text-input" placeholder="Ex: Gamer Den 1337" />
+                <button type="submit" class="btn btn-primary w-100">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

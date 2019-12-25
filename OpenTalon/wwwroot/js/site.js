@@ -67,9 +67,27 @@ function redirect(id) {
     window.location = "/article/"+id;
 }
 
-function post(route) {
+function changePFP(id, url) {
+    if (url === "reset")
+        request("POST", "api/v1/account/" + id + "/picture/" + url, () => {
+            request("GET", "api/v1/account/" + id + "/picture",
+                (x) => document.getElementById("user-picture").src = x);
+        });
+    else {
+        request("POST", "api/v1/account/" + id + "/picture/" + url);
+        document.getElementById("user-picture").src = url;
+    }
+}
+
+function request(method, route, callback = null) {
     var http = new XMLHttpRequest();
-    http.open('POST', "https://" + window.location.host + "/" + route, true);
+    http.open(method, "https://" + window.location.host + "/" + route, true);
+
+    http.onreadystatechange = function () {
+        if (http.readyState === 4 && http.status === 200)
+            callback(http.responseText);
+    };
+
     http.send();
 }
 
@@ -235,4 +253,28 @@ function showCompact() {
 
     document.getElementById("comfortableButton").classList = "btn btn-outline-info";
     document.getElementById("compactButton").classList = "btn btn-info";
+}
+
+function setDialog(selector) {
+    var dialog = document.getElementById("dialog");
+    var selected = document.getElementById(selector);
+
+    if (!dialog.style.display) dialog.style.display = "none";
+
+    if (dialog.style.display !== "none") {
+        dialog.style.display = "none";
+        dialog.childNodes.forEach((value) => value.style.display = "none");
+    }
+    else {
+        dialog.style.display = "flex";
+        selected.style.display = "flex";
+    }
+}
+
+function hideDialog() {
+    dialog.style.display = "none";
+}
+
+function stopPropogation(event) {
+    event.stopPropagation();
 }

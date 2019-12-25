@@ -68,6 +68,16 @@ nav #menu-button {
     margin-top: 5px;
 }
 
+.nav-search {
+    line-height: 30px;
+}
+.nav-search > form {
+    display: flex !important;
+}
+.nav-search > form > input {
+    background-color: #eeeff5;
+}
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -93,6 +103,22 @@ a {
 }
 .hideable {
     display: none;
+}
+.fullscreen {
+    position: absolute;
+    top: 50px;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+.query {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.query > div {
+    width: 60%;
+    margin: auto;
 }
 
 .header {
@@ -146,7 +172,7 @@ a {
     margin-top: 20px;
 }
 .section-title > h2 {
-    font-size: 42px;
+    font-size: 32px;
 }
 
 .filters {
@@ -214,11 +240,11 @@ section {
 }
 
 .story {
-    cursor: pointer;
     padding: 0;
 }
-.story:hover {
+.story:hover, .card-newsbeat:hover {
     box-shadow: -10px 10px 5px #bbb;
+    cursor: pointer;
     transform: translate(4px, -4px);
 }
 .story > div {
@@ -242,14 +268,13 @@ section {
     min-height: 100%;
 }
 .image-container .secondary-info {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #0007;
     border-radius: 5px;
     padding: 10px;
     position: absolute;
     bottom: 10px;
     right: 10px;
     color: #fff;
-    mix-blend-mode: difference;
 }
 .image-container .secondary-info p {
     margin: 0;
@@ -292,6 +317,24 @@ section {
 .card-search .image-container {
     left: 60%;
     min-width: 50%;
+}
+
+.card-newsbeat {
+    min-height: 100px;
+    margin: 10px 0 !important;
+    padding: 0 !important;
+}
+.card-newsbeat > div {
+    padding: 15px;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+.card-newsbeat > div > h2 {
+    font-size: 16px;
+}
+.card-newsbeat > div > p {
+    font-size: 14px;
 }
 
 .card-profile > div {
@@ -450,25 +493,43 @@ form section div:last-of-type {
 
 @media (min-width: 768px) {
     html {
-        font-size: 16px;
+        font-size: 14px;
+    }
+    nav #menu-button {
+        display: none;
+    }
+    nav #links {
+        position: absolute;
+        display: inline-flex;
+        flex-direction: row;
+        left: 200px;
+        right: 0;
+    }
+    nav .links {
+        flex-direction: row;
+        min-width: 0;
+        flex: 1 1;
+    }
+    nav .links a {
+        float: right;
     }
     .hideable {
         display: inline-block;
     }
+    .fullscreen {
+        bottom: 60px;
+    }
     .container {
         margin-bottom: 100px;
     }
-    .header img {
-        width: 768px;
-    }
     .section-title {
-        margin-top: 50px;
+        margin-top: 40px;
     }
     section {
         flex-direction: row;
     }
     .story, .card-profile {
-        min-height: 300px;
+        min-height: 250px;
     }
     .flex-wrap {
         justify-content: center;
@@ -545,29 +606,15 @@ form section div:last-of-type {
 }
 
 @media (min-width: 1200px) {
-    nav #menu-button {
-        display: none;
-    }
-    nav #links {
-        position: absolute;
-        display: inline-block;
-        left: 130px;
-        right: 0;
-    }
-    nav .links {
-        display: inline-flex;
-        flex-direction: row;
-        min-width: 0;
-    }
-    nav .links a {
-        float: right;
-    }
     .container {
-        max-width: 95%;
+        max-width: 90%;
     }
 }
 
 @media (min-width: 1400px) {
+    .container {
+        max-width: 1260px;
+    }
     .filters {
         flex-wrap: nowrap;
     }
@@ -580,11 +627,5 @@ form section div:last-of-type {
     }
     .search {
         flex: 2 1;
-    }
-}
-
-@media (min-width: 1600px) {
-    .container {
-        max-width: 1600px;
     }
 }
