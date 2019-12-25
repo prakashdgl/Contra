@@ -71,11 +71,12 @@ function changePFP(id, url) {
     if (url === "reset")
         request("POST", "api/v1/account/" + id + "/picture/" + url, () => {
             request("GET", "api/v1/account/" + id + "/picture",
-                (x) => document.getElementById("user-picture").src = x);
+                (x) => document.getElementById("user-picture").src = x + "&s=512");
         });
     else {
         request("POST", "api/v1/account/" + id + "/picture/" + url);
         document.getElementById("user-picture").src = url;
+        hideDialog();
     }
 }
 

@@ -182,11 +182,13 @@ a {
     width: 80px;
 }
 .filter-group .btn {
+    border-left: 0;
     border-radius: 0;
     margin: 0;
     flex: 1 1;
 }
 .filter-group .btn:first-of-type, .search input {
+    border-left: 1px solid var(--info);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -262,13 +264,14 @@ section {
     min-height: 100%;
 }
 .image-container .secondary-info {
-    background-color: #0007;
+    background-color: #fff;
     border-radius: 5px;
-    padding: 10px;
+    display: inline-block;
+    padding: 5px 10px;
     position: absolute;
     bottom: 10px;
     right: 10px;
-    color: #fff;
+    color: #000;
 }
 .image-container .secondary-info p {
     margin: 0;
@@ -566,6 +569,9 @@ form section div:last-of-type {
     .filters {
         display: flex;
         flex-wrap: wrap;
+    }
+    .filters-small {
+        width: 800px;
     }
     .filter-group {
         flex: none;

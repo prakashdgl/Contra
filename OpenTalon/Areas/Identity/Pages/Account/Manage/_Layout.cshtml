@@ -5,17 +5,20 @@
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
     OpenTalonUser user = UserManager.GetUserAsync(User).Result;
+    string pfpURL = user.ProfilePictureURL;
+    if (user.ProfilePictureURL.Contains("gravatar"))
+        pfpURL += "&s=512";
 }
 
 <section class="profile-dashboard">
     <div class="profile-controls">
         <div class="image-container">
-            <img class="profile-picture" src="@(user.ProfilePictureURL + "&s=512")" />
+            <img class="profile-picture" id="user-picture" src="@pfpURL" />
             <div class="secondary-info">
                 @if (!string.IsNullOrEmpty(user.ProfilePictureURL) && 
                       user.ProfilePictureURL.Contains("gravatar"))
                 {
-                    <a class="clickable" onclick="show">Change Picture</a>
+                    <a class="clickable" onclick="setDialog('changePFP')">Change Picture</a>
                 }
                 else
                 {
@@ -40,10 +43,8 @@
     <div id="changePFP" class="align-content-center" onclick="stopPropogation(event)">
         <div class="card card-compact search shadow-none">
             <h2>Change profile picture</h2>
-            <form action="~/create" method="post">
-                <input type="text" id="serverName" name="Name" class="text-input" placeholder="Ex: Gamer Den 1337" />
-                <button type="submit" class="btn btn-primary w-100">Create</button>
-            </form>
+            <input type="text" id="pfpURL" name="url" class="text-input" placeholder="Ex: https://example.com/example.png" />
+            <button type="submit" class="btn btn-primary w-100" onclick="changePFP('@user.Id', document.getElementById('pfpURL').value)">Update</button>
         </div>
     </div>
 </div>

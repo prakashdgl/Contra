@@ -6,7 +6,7 @@
 
 <div class="section-title" id="compact-compatible" >
     <h2 id="search">Search - <span id="query">@ViewData["Query"]</span></h2>
-    <div class="filters">
+    <div class="filters filters-small">
         <div class="filter-group">
             <h5 class="hideable">View:</h5>
             <button id="comfortableButton" class="btn btn-info" onclick="showComfortable()">Comfortable</button>
@@ -18,13 +18,6 @@
             <a class="btn @(ViewData["SortBy"].Equals("New")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/new">New</a>
             <a class="btn @(ViewData["SortBy"].Equals("Top")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/top">Top</a>
             <a class="btn @(ViewData["SortBy"].Equals("Trending")? "btn-info" : "btn-outline-info")" href="~/search/@ViewData["Filter"]/trending">Trending</a>
-        </div>
-        <div class="filter-group search">
-            <h5 class="hideable">Search:</h5>
-            <form asp-action="Search">
-                <input name="filter" type="text" placeholder="Search articles" />
-                <button class="btn btn-info" type="submit">Search</button>
-            </form>
         </div>
     </div>
 </div>

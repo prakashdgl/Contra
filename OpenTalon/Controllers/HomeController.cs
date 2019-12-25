@@ -121,7 +121,7 @@ namespace OpenTalon.Controllers
         [Route("/Home/Search")]
         public IActionResult Search(string filter)
         {
-            return Search(filter);
+            return Redirect($"/search/{filter}");
         }
 
         [HttpGet]

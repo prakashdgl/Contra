@@ -7,26 +7,23 @@
 
 @if (Model.Approved == ApprovalStatus.Approved)
 {
-    <div class="section-title">
-        <h2>@Html.DisplayFor(model => model.Title)</h2>
-    </div>
+    <br />
     <section>
         <div class="card article">
             <div class="image-container">
                 <img src="@Model.ThumbnailURL" alt="Article Thumbnail Image" />
                 <div class="secondary-info">
                     <p>Views: @Model.Views</p>
-                </div>
-            </div>
-            <div class="content">
-                <h3>@Model.AuthorName - @Model.Date.ToShortDateString()</h3>
-                <h4>
                     <span class="social-links">
                         <a href="https://twitter.com/intent/tweet?text=@System.Net.WebUtility.UrlEncode(Model.Title)+@(url)"><img src="~/img/twitter.svg" alt="Share on Twitter" /></a>
                         <a href="https://facebook.com/sharer/sharer.php?u=@(url)"><img src="~/img/facebook.svg" alt="Share on Facebook" /></a>
                         <a href="#discuss"><img src="~/img/discuss.svg" alt="Discuss Here" /></a>
                     </span>
-                </h4>
+                </div>
+            </div>
+            <div class="content">
+                <h1>@Html.DisplayFor(model => model.Title)</h1>
+                <p>@Model.AuthorName - @Model.Date.ToShortDateString()</p>
                 <br />
                 @Html.Raw(Model.Content)
             </div>
