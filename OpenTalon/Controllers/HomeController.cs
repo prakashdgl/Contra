@@ -117,6 +117,14 @@ namespace OpenTalon.Controllers
             return View(comment);
         }
 
+        [HttpPost]
+        [Route("/Home/Search")]
+        public IActionResult Search(string filter)
+        {
+            return Search(filter);
+        }
+
+        [HttpGet]
         [Route("/search/{filter}/{*sortBy}")]
         public IActionResult Search(string filter, string sortBy = "trending")
         {

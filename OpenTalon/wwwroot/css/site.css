@@ -16,7 +16,7 @@ body {
 nav {
     background-color: #fff;
     height: 50px;
-    line-height: 48px;
+    line-height: 45px;
     position: relative;
     padding: 0 15px;
     z-index: 5;
@@ -28,12 +28,10 @@ nav .container {
 nav #links {
     display: none;
     flex-direction: column;
-    flex: 1 1;
     align-items: center;
 }
 nav .links {
     flex-direction: column;
-    flex: 1 1;
     min-width: 200px;
 }
 nav .links a {
@@ -70,6 +68,9 @@ nav #menu-button {
 
 .nav-search {
     line-height: 30px;
+    margin: 0 20px;
+    width: unset !important;
+    flex: 1 1;
 }
 .nav-search > form {
     display: flex !important;
@@ -121,13 +122,6 @@ a {
     margin: auto;
 }
 
-.header {
-    background-color: #fff;
-    width: 100%;
-}
-.header img {
-    display: none;
-}
 #border-gradient {
     background-image: linear-gradient(#fff, #edeef3);
     position: absolute;
@@ -157,7 +151,7 @@ a {
     flex-direction: column;
 }
 #extras .card {
-    padding: 20px;
+    padding: 10px 15px;
 }
 
 .flex-big {
@@ -242,7 +236,7 @@ section {
 .story {
     padding: 0;
 }
-.story:hover, .card-newsbeat:hover {
+.story:hover {
     box-shadow: -10px 10px 5px #bbb;
     cursor: pointer;
     transform: translate(4px, -4px);
@@ -321,8 +315,13 @@ section {
 
 .card-newsbeat {
     min-height: 100px;
-    margin: 10px 0 !important;
+    margin: 5px 0 !important;
     padding: 0 !important;
+}
+.card-newsbeat:hover {
+    box-shadow: -8px 8px 5px #bbb;
+    cursor: pointer;
+    transform: translate(2px, -2px);
 }
 .card-newsbeat > div {
     padding: 15px;
@@ -493,7 +492,7 @@ form section div:last-of-type {
 
 @media (min-width: 768px) {
     html {
-        font-size: 14px;
+        font-size: 16px;
     }
     nav #menu-button {
         display: none;
@@ -502,16 +501,15 @@ form section div:last-of-type {
         position: absolute;
         display: inline-flex;
         flex-direction: row;
-        left: 200px;
+        left: 150px;
         right: 0;
     }
     nav .links {
+        display: inline-flex;
         flex-direction: row;
         min-width: 0;
-        flex: 1 1;
     }
     nav .links a {
-        float: right;
     }
     .hideable {
         display: inline-block;

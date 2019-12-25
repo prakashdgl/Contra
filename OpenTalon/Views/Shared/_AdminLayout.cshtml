@@ -12,22 +12,18 @@
 <body>
     <header>
         <nav id="nav">
-            <div>
-                <a class="navbar-brand" href="~/"><img src="~/img/open-talon.svg" alt="OpenTalon Home" /></a>
-                <button id="menu-button" onclick="showMenu()">Menu</button>
-                <div id="links">
-                    <div class="links">
-                        <a class="nav-link" href="~/search/News">News</a>
-                        <a class="nav-link" href="~/search/Sports">Sports</a>
-                        <a class="nav-link" href="~/search/Editorial">Editorial</a>
-                        <a class="nav-link" href="~/search/Opinion">Opinion</a>
-                        <a class="nav-link" href="~/search/Arts">Arts & Culture</a>
-                        <a class="nav-link" href="https://www.paypal.me/">Donate</a>
-                        <a class="nav-link" href="~/apply">Submit an Article</a>
-                    </div>
-                    <div class="links float-right">
-                        <partial name="_LoginPartial" />
-                    </div>
+            <a class="navbar-brand" href="~/"><img src="~/img/open-talon.svg" alt="OpenTalon Home" /></a>
+            <button id="menu-button" onclick="showMenu()">Menu</button>
+            <div id="links">
+                <div class="links nav-search search">
+                    <form asp-controller="Home" asp-action="Search">
+                        <input name="filter" type="text" placeholder="Search articles" />
+                        <button class="btn btn-info" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="links float-right">
+                    <a class="nav-link" href="~/apply">Create Post</a>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
@@ -53,9 +49,6 @@
         </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        &copy; 2019 OpenTalon Project - <a href="~/about">About</a> - <a href="~/privacy">Privacy</a>
-    </footer>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/admin.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>

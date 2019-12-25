@@ -1,4 +1,7 @@
-﻿
+﻿.fullscreen {
+    bottom: 0;
+}
+
 .dashboard-header {
     display: none;
     margin: 15px;

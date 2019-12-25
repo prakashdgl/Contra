@@ -3,7 +3,7 @@
 @inject UserManager<OpenTalonUser> UserManager
 
 @{
-    Layout = "/Views/Shared/_CompactLayout.cshtml";
+    Layout = "/Views/Shared/_Layout.cshtml";
     OpenTalonUser user = UserManager.GetUserAsync(User).Result;
 }
 
