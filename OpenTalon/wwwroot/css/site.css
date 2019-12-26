@@ -78,6 +78,14 @@ nav #menu-button {
 .nav-search > form > input {
     background-color: #eeeff5;
 }
+.nav-search > form > .btn {
+    flex: none;
+}
+.nav-search > form > .btn img {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+}
 
 a.navbar-brand {
     white-space: normal;

@@ -18,11 +18,10 @@
                     <div class="links nav-search search">
                         <form asp-controller="Home" asp-action="Search">
                             <input name="filter" type="text" placeholder="Search articles" />
-                            <button class="btn btn-info" type="submit">Search</button>
+                            <button class="btn btn-info" type="submit"><img src="~/img/search.png" /></button>
                         </form>
                     </div>
                     <div class="links float-right">
-                        <a class="nav-link" href="~/apply">Create Post</a>
                         <partial name="_LoginPartial" />
                     </div>
                 </div>
@@ -41,10 +40,6 @@
         <div class="container">
             &copy; 2019 OpenTalon -
             <a href="~/about">About</a> -
-            @if (User.IsInRole("Administrator"))
-            {
-                <span><a href="~/admin">Admin</a> - </span>
-            }
             <a href="~/feedback">Feedback</a> -
             <a href="~/privacy">Privacy</a>
         </div>
