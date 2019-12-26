@@ -62,7 +62,7 @@ nav #menu-button {
     color: #6bd;
     float: right;
     padding: 0 24px;
-    line-height: 40px;
+    line-height: 35px;
     margin-top: 5px;
 }
 
@@ -79,12 +79,15 @@ nav #menu-button {
     background-color: #eeeff5;
 }
 .nav-search > form > .btn {
+    background-image: linear-gradient(to right, #ff6c97, #7b19ff);
+    border: 0;
     flex: none;
 }
 .nav-search > form > .btn img {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     margin: 0;
+    margin-top: -5px;
 }
 
 a.navbar-brand {
@@ -97,8 +100,9 @@ a.navbar-brand:hover {
     color: #edeef3;
 }
 a.navbar-brand img {
-    vertical-align: unset;
-    height: 40px;
+    vertical-align: text-bottom;
+    height: 30px;
+    margin-top: 6px;
 }
 
 .text-secondary {
@@ -505,23 +509,6 @@ form section div:last-of-type {
     html {
         font-size: 16px;
     }
-    nav #menu-button {
-        display: none;
-    }
-    nav #links {
-        position: absolute;
-        display: inline-flex;
-        flex-direction: row;
-        left: 150px;
-        right: 0;
-    }
-    nav .links {
-        display: inline-flex;
-        flex-direction: row;
-        min-width: 0;
-    }
-    nav .links a {
-    }
     .hideable {
         display: inline-block;
     }
@@ -574,6 +561,23 @@ form section div:last-of-type {
 }
 
 @media (min-width: 1000px) {
+    nav #menu-button {
+        display: none;
+    }
+    nav #links {
+        position: absolute;
+        display: inline-flex;
+        flex-direction: row;
+        left: 150px;
+        right: 0;
+    }
+    nav .links {
+        display: inline-flex;
+        flex-direction: row;
+        min-width: 0;
+    }
+    nav .links a {
+    }
     .filters {
         display: flex;
         flex-wrap: wrap;
