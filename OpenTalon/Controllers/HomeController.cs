@@ -103,8 +103,12 @@ namespace OpenTalon.Controllers
                 comment.OwnerID = _userManager.GetUserId(User);
                 comment.AuthorName = user.Name;
                 comment.PostId = PostId;
-                comment.Approved = ApprovalStatus.Submitted;
                 comment.Date = DateTime.Now;
+
+                if (User.IsInRole("Staff"))
+                    comment.Approved = ApprovalStatus.Approved;
+                else
+                    comment.Approved = ApprovalStatus.Submitted;
 
                 if (user.Comments == null)
                     user.Comments = new List<Comment>();
@@ -195,9 +199,13 @@ namespace OpenTalon.Controllers
                 OpenTalonUser user = _userManager.GetUserAsync(User).Result;
                 article.OwnerID = user.Id;
                 article.AuthorName = user.Name + ", " + article.AuthorName;
-                article.Approved = ApprovalStatus.Submitted;
                 article.Date = DateTime.Now;
                 article.Views = 0;
+
+                if (User.IsInRole("Staff"))
+                    article.Approved = ApprovalStatus.Approved;
+                else
+                    article.Approved = ApprovalStatus.Submitted;
 
                 if (user.Articles == null)
                     user.Articles = new List<Article>();

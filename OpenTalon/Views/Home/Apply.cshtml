@@ -11,15 +11,18 @@
 
 <div class="section-title">
     <h2>Submit an Article</h2>
+    @if (User.IsInRole("Staff"))
+    {
+        <span class="secondary-info"><img src="~/img/superuser.png" alt="Superuser" /> - Your article will be published immediately.</span>
+    }
 </div>
-<hr />
 <br />
 <section>
     <div class="card submit">
         @if (User.Identity.IsAuthenticated)
         {
             <section id="submit-wrapper">
-                <div class="submit-form submit">
+                <div id="submit" class="submit-form submit">
                     <form asp-action="Apply">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div id="step-1">
@@ -33,14 +36,57 @@
                                 <p><b>@UserManager.GetUserAsync(User).Result.Name</b></p>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Co-Author Names</label>
-                                <input id="input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="Ex) Sei, Armitage, Dana" />
+                                <label asp-for="AuthorName" class="control-label">Co-Author Names</label>
+                                <input id="input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="E.g. Sei, Armitage, Dana" />
                                 <span asp-validation-for="AuthorName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Title" class="control-label"></label>
-                                <input asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
+                                <input id="input-title" asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
                                 <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Article Options</label>
+                                <section>
+                                    <label for="content-sensitive" class="toggle compact-hidden">
+                                        Sensitive Content
+                                        <input type="checkbox" id="content-sensitive" onclick="toggleTag('Sensitive')">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="content-spoiler" class="toggle compact-hidden">
+                                        Spoiler Content
+                                        <input type="checkbox" id="content-spoiler" onclick="toggleTag('Spoiler')">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="content-anonymous" class="toggle compact-hidden">
+                                        Post Anonymously
+                                        <input type="checkbox" id="content-anonymous" onclick="toggleTag('Anonymous')">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </section>
+                            </div>
+                            <div class="form-group">
+                                @if (User.IsInRole("Staff"))
+                                {
+                                    <label class="control-label"><span class="secondary-info p-0"><img src="~/img/supericon.png" alt="Superuser Icon" /> - Options</span></label>
+                                    <section>
+                                        <label for="content-newsbeat" class="toggle compact-hidden">
+                                            Newsbeat
+                                            <input type="checkbox" id="content-newsbeat" onclick="toggleTag('Newsbeat')">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label for="content-featured" class="toggle compact-hidden">
+                                            Featured
+                                            <input type="checkbox" id="content-featured" onclick="toggleTag('Featured')">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label for="content-nocheck" class="toggle compact-hidden">
+                                            <span class="text-danger">No Automod</span>
+                                            <input type="checkbox" id="content-nocheck">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </section>
+                                }
                             </div>
                         </div>
                         <div id="step-2">
@@ -52,9 +98,42 @@
                                 <p>Please provide an external URL to an image to use as a thumbnail.</p>
                             </div>
                             <div class="form-group">
+                                <input id="tags" asp-for="SummaryShort" type="hidden" />
                                 <label class="control-label">Article Tags</label>
-                                <input asp-for="SummaryShort" class="form-control" placeholder="Ex) News, Sports, Opinion" />
-                                <span asp-validation-for="SummaryShort" class="text-danger"></span>
+                                <section>
+                                    <label for="tag-news" class="toggle compact-hidden">
+                                        News
+                                        <input type="checkbox" id="tag-news" onclick="toggleTag('News')">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="tag-opinion" class="toggle compact-hidden">
+                                        Opinion
+                                        <input type="checkbox" id="tag-opinion" onclick="toggleTag('Opinion')">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="tag-entertainment" class="toggle compact-hidden">
+                                        Entertainment &amp; Culture
+                                        <input type="checkbox" id="tag-entertainment" onclick="toggleTag('Entertainment & Culture')">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </section>
+                                <section>
+                                    <label for="tag-politics" class="toggle compact-hidden">
+                                        Politics
+                                        <input type="checkbox" id="tag-politics" onclick="toggleTag('Politics')">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="tag-sports" class="toggle compact-hidden">
+                                        Sports
+                                        <input type="checkbox" id="tag-sports" onclick="toggleTag('Sports')">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="tag-event" class="toggle compact-hidden">
+                                        Local Events
+                                        <input type="checkbox" id="tag-event" onclick="toggleTag('Event')">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </section>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Summary</label>
@@ -69,6 +148,32 @@
                                 <textarea asp-for="Content" id="summernote"></textarea>
                                 <span asp-validation-for="Content" class="text-danger"></span>
                             </div>
+                        </div>
+                        <div id="step-4" class="article-preview submit">
+                            <h2 class="ml-0">Article Preview</h2>
+                            <div class="card article">
+                                <div class="image-container">
+                                    <img id="thumbnail-img" src="../img/img05.jpg" alt="Article Preview Image" />
+                                    <div class="secondary-info">
+                                        <p>Views: 0</p>
+                                        <span class="social-links">
+                                            <img src="~/img/twitter.svg" alt="Share on Twitter" />
+                                            <img src="~/img/facebook.svg" alt="Share on Facebook" />
+                                            <img src="~/img/discuss.svg" alt="Discuss Here" />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <h2 id="title">Title</h2>
+                                    <p>
+                                        @UserManager.GetUserAsync(User).Result.Name<span id="coauthors"></span> - @DateTime.Now.ToShortDateString()
+                                    </p>
+                                    <br />
+                                    <span id="content"></span>
+                                </div>
+                            </div>
+                            <br />
+                            <h2 class="ml-0">Submit Your Article</h2>
                             <div class="form-group">
                                 <input type="submit" value="Submit Article" class="btn btn-primary" />
                                 <a href="~/">
@@ -84,26 +189,6 @@
                             <button id="nextButton" class="btn btn-outline-info" type="button" onclick="submitNextStep()">Next Step</button>
                         </div>
                     </form>
-                </div>
-                <div class="article-preview submit">
-                    <h2 class="ml-0">Article Preview</h2>
-                    <div class="card article">
-                        <span class="image-container"><img id="thumbnail-img" src="../img/img05.jpg" alt="Article Preview Image" /></span>
-                        <div class="content">
-                            <h3>
-                                @UserManager.GetUserAsync(User).Result.Name<span id="coauthors"></span> - @DateTime.Now.ToShortDateString()
-                            </h3>
-                            <h4>
-                                <span class="social-links">
-                                    <img src="~/img/twitter.svg" alt="Share on Twitter" />
-                                    <img src="~/img/facebook.svg" alt="Share on Facebook" />
-                                    <img src="~/img/discuss.svg" alt="Discuss Here" />
-                                </span>
-                            </h4>
-                            <br />
-                            <span id="content">Content</span>
-                        </div>
-                    </div>
                 </div>
             </section>
         }

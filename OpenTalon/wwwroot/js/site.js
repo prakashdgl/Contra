@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
     
     coauthors = document.getElementById("coauthors");
     inputCoauthors = document.getElementById("input-coauthors");
+    title = document.getElementById("title");
+    inputTitle = document.getElementById("input-title");
     image = document.getElementById("thumbnail-img");
     inputImage = document.getElementById("input-img");
     content = document.getElementById("content");
@@ -171,33 +173,38 @@ function submitUndoStep() {
     toShow.style.display = "unset";
     shown.style.display = "none";
 
-    if (submitStep === 1) document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
+    if (submitStep === 1) {
+        document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
+    }
     document.getElementById("nextButton").classList = "btn btn-outline-info";
 
     updateLivePreview();
 }
 
 function submitNextStep() {
-    if (submitStep < 3) submitStep++;
-    else submitStep = 3;
+    if (submitStep < 4) submitStep++;
+    else submitStep = 4;
 
     var toShow = document.getElementById("step-" + submitStep);
     var shown = document.getElementById("step-" + (submitStep - 1));
     toShow.style.display = "unset";
     shown.style.display = "none";
 
-    if (submitStep === 3) {
+    if (submitStep === 4) {
         document.getElementById("nextButton").classList = "btn btn-outline-dark disabled";
-        if (!contentUpdateTimer) contentUpdateTimer = setInterval(function () {
-            content.innerHTML = $("#summernote").summernote('code');
-        }, 2000);
+        content.innerHTML = $("#summernote").summernote('code');
     }
     document.getElementById("prevButton").classList = "btn btn-outline-info";
 
     updateLivePreview();
 }
 
+function addTag(tag) {
+    document.getElementById("tags").value += " " + tag;
+}
+
 var coauthors, inputCoauthors;
+var title, inputTitle;
 var image, inputImage;
 var content, contentUpdateTimer;
 var submitStep = 1;
@@ -207,6 +214,11 @@ function updateLivePreview() {
         coauthors.innerText = ", " + inputCoauthors.value;
     else
         coauthors.innerText = "";
+
+    if (inputTitle.value)
+        title.innerText = inputTitle.value;
+    else
+        title.innerText = "Title";
 
     if (inputImage.value)
         image.src = inputImage.value;

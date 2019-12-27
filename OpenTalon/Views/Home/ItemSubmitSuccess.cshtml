@@ -11,7 +11,15 @@
         <div class="card card-compact">
             <div>
                 <h2>Item successfully submitted.</h2>
-                <p>Congratulations! Your request has been successfully submitted and will be reviewed by our staff before being published. While you wait, why not check out one of our other articles?</p>
+                @if (User.IsInRole("Staff"))
+                {
+                    <span class="secondary-info"><img src="~/img/superuser.png" alt="Superuser" /></span>
+                    <p>Your item has been published.</p>
+                }
+                else
+                {
+                    <p>Congratulations! Your item has been successfully submitted and will be reviewed by our staff before being published. While you wait, why not check out one of our other articles?</p>
+                }
                 <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
             </div>
         </div>
