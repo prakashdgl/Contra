@@ -78,7 +78,7 @@ namespace OpenTalon.Controllers
                     break;
                 case "new":
                     ViewData["SortBy"] = "New";
-                    articles = articles.OrderBy(u => u.Date).ToList();
+                    articles = articles.OrderByDescending(u => u.Date).ToList();
                     break;
                 case "top":
                     ViewData["SortBy"] = "Top";

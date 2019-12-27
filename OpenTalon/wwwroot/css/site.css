@@ -160,6 +160,7 @@ a {
 #extras {
     display: none;
     width: 360px;
+    position: relative;
 }
 #extras .section-title {
     margin-bottom: 0;
@@ -167,8 +168,16 @@ a {
 #extras section {
     flex-direction: column;
 }
+#extras > section {
+    position: absolute;
+    top: 88px;
+    bottom: 0;
+}
 #extras .card {
     padding: 10px 15px;
+}
+#extras > section > .card {
+    overflow: auto;
 }
 
 .flex-big {

@@ -50,7 +50,8 @@ namespace OpenTalon.Controllers
 
             List<Article> editorial = (from a in _context.Article
                                        where a.Approved == ApprovalStatus.Approved && 
-                                       a.SummaryShort.Contains("Featured Editorial")
+                                       a.SummaryShort.Contains("Featured") &&
+                                       a.SummaryShort.Contains("Editorial")
                                        orderby a.Date descending
                                        select a).ToList();
             while (editorial.Count < 4)
@@ -59,6 +60,19 @@ namespace OpenTalon.Controllers
                 editorial.Add(placeholder);
             }
             articles.Add(editorial);
+
+            List<Article> newsbeat = (from a in _context.Article
+                                      where a.Approved == ApprovalStatus.Approved &&
+                                      a.SummaryShort.Contains("Newsbeat") ||
+                                      a.SummaryShort.Contains("Event")
+                                      orderby a.Date descending
+                                      select a).ToList();
+            while (newsbeat.Count < 8)
+            {
+                placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".jpg";
+                newsbeat.Add(placeholder);
+            }
+            articles.Add(newsbeat);
 
             return View(articles);
         }
@@ -95,6 +109,7 @@ namespace OpenTalon.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Comment([Bind("Id,Content")] Comment comment, int PostId)
         {
             if (ModelState.IsValid)
@@ -121,15 +136,13 @@ namespace OpenTalon.Controllers
             return View(comment);
         }
 
-        [HttpPost]
-        [Route("/Home/Search")]
+        [HttpPost("/Home/Search")]
         public IActionResult Search(string filter)
         {
             return Redirect($"/search/{filter}");
         }
 
-        [HttpGet]
-        [Route("/search/{filter}/{*sortBy}")]
+        [HttpGet("/search/{filter}/{*sortBy}")]
         public IActionResult Search(string filter, string sortBy = "trending")
         {
             if (string.IsNullOrEmpty(filter)) filter = "all";
@@ -203,7 +216,10 @@ namespace OpenTalon.Controllers
                 article.Views = 0;
 
                 if (User.IsInRole("Staff"))
+                {
                     article.Approved = ApprovalStatus.Approved;
+                    article.SummaryShort += " Editorial";
+                }
                 else
                     article.Approved = ApprovalStatus.Submitted;
 

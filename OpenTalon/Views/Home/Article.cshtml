@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = Model.Title;
+    ViewData["Description"] = Model.SummaryLong;
     string url = System.Net.WebUtility.UrlEncode("https://" + Context.Request.Host + Context.Request.Path);
 }
 

@@ -13,8 +13,7 @@
                 <h2>Item successfully submitted.</h2>
                 @if (User.IsInRole("Staff"))
                 {
-                    <span class="secondary-info"><img src="~/img/superuser.png" alt="Superuser" /></span>
-                    <p>Your item has been published.</p>
+                    <p><span class="secondary-info pl-0"><img src="~/img/superuser.png" alt="Superuser" /> - Your item has been published.</span></p>
                 }
                 else
                 {
