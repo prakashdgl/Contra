@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using OpenTalon.Areas.Identity.Data;
+using OpenTalon.Models;
 
 namespace OpenTalon.Areas.Identity.Pages.Account
 {
@@ -92,6 +93,13 @@ namespace OpenTalon.Areas.Identity.Pages.Account
 
                 var user = new OpenTalonUser {
                     Name = Input.Name,
+
+                    Articles = new List<Article>(),
+                    ArticlesLiked = new List<Article>(),
+                    ArticlesViewed = new List<Article>(),
+                    Comments = new List<Comment>(),
+                    CommentsLiked = new List<Comment>(),
+
                     ProfilePictureURL = "https://gravatar.com/avatar/" + sb.ToString() + "?d=identicon",
                     UserName = Input.Email, 
                     Email = Input.Email, 

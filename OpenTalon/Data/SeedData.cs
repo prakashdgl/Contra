@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OpenTalon.Areas.Identity.Data;
+using OpenTalon.Models;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +17,7 @@ namespace OpenTalon.Data
             // Use this password to login and set up perms, and change this password.
             string testUserPw = "Testing1!";
 
-            var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@opentalon.ml");
+            var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@contraga.com");
             await EnsureRole(serviceProvider, adminID, "Administrator");
             await EnsureRole(serviceProvider, adminID, "Staff");
         }
@@ -41,6 +43,13 @@ namespace OpenTalon.Data
                 user = new OpenTalonUser
                 {
                     Name = "Sei",
+
+                    Articles = new List<Article>(),
+                    ArticlesLiked = new List<Article>(),
+                    ArticlesViewed = new List<Article>(),
+                    Comments = new List<Comment>(),
+                    CommentsLiked = new List<Comment>(),
+
                     ProfilePictureURL = "https://gravatar.com/avatar/" + sb.ToString() + "?d=identicon",
                     UserName = UserName,
                     Email = UserName,

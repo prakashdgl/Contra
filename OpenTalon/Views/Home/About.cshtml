@@ -15,8 +15,8 @@
 <section>
     <div class="card card-big">
         <div>
-            <h2>Powering the Future</h2>
-            <p>OpenTalon is an open source project meant to modernize the aging Wordpress sites that school newspapers use today. OpenTalon was specifically designed for LAHS's Talon Newspaper, but can be adapted to others as well. OpenTalon provides a cleaner, more community-centric experience that engages readers better and longer.</p>
+            <h2>Contraga for the Future</h2>
+            <p>Your voice matters. Contraga aims to target the closed nature of the Talon Newspaper at Los Altos High School, allowing anyone to write a quality article to be published, without penalty of a bad grade or disapproval from others. We do not claim to be bias-free. We do claim that we allow more to be said, and more people to get in.</p>
         </div>
     </div>
     <div class="card card-encapsulate encapsulate-big">
@@ -24,8 +24,7 @@
         <div>
             <h2>Sei</h2>
             <p><> with ❤🧡💛💚💙💜.</p>
-            <p>I do freelance web design for incredibly reasonable fees.</p>
-            <p><a href="mailto:sdbagel@outlook.com">Email me!</a></p>
+            <p>I made this entire thing!</p>
         </div>
     </div>
 </section>
@@ -38,7 +37,8 @@
         <div class="card card-encapsulate card-profile">
             <span class="image-container"><img src="../img/img04.jpg" /></span>
             <div>
-                <h2>@u.Name</h2>
+                <img class="pfp" src="@u.ProfilePictureURL" alt="@u.Name's Profile Picture" />
+                <h2 class="d-inline-block">@u.Name</h2>
                 <p><b>
                 @foreach (string role in UserManager.GetRolesAsync(u).Result)
                 {
@@ -50,25 +50,11 @@
                 </b></p>
                 <hr />
                 <p>Staff biography here.</p>
+                @if (u.EmailConfirmed)
+                {
+                    <p>Contact: <a href="mailto:@u.Email">@u.Email</a></p>
+                }
             </div>
         </div>
     }
-</section>
-<div class="section-title">
-    <h2>For Developers</h2>
-</div>
-<section>
-    <div class="card">
-        <div>
-            <h2>Community-Focused</h2>
-            <p>OpenTalon is designed to be as much of a catch-all as possible - the code is open sourced, and easily adaptable to modernize legacy systems. However, we want to take that one step further - by providing our own set of developer tools and services, built right into the app to allow your readership to make something great.</p>
-        </div>
-    </div>
-    <div class="card card-big encapsulate-big">
-        <span class="image-container"><img src="../img/img05.jpg" /></span>
-        <div>
-            <h2>RESTful API</h2>
-            <p>This web app includes a RESTful API which can be accessed by registering a developer application with us. This allows you to programatically access site resources and more. Documentation available soon.</p>
-        </div>
-    </div>
 </section>

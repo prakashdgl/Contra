@@ -100,8 +100,8 @@ a.navbar-brand:hover {
 }
 a.navbar-brand img {
     vertical-align: text-bottom;
-    height: 30px;
-    margin-top: 6px;
+    height: 40px;
+    margin-top: 2px;
 }
 
 .text-secondary {
@@ -366,9 +366,17 @@ section {
 .card-profile > div {
     width: 100%;
 }
+.card-profile .pfp {
+    border-radius: 20%;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: text-bottom;
+    width: 30px;
+}
 
 .comment {
     box-shadow: none;
+    padding: 0 !important;
 }
 
 .article {
