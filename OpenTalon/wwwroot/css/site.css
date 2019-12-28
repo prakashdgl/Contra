@@ -324,7 +324,6 @@ section {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(2px);
     color: #fff;
-    mix-blend-mode: difference;
     z-index: 5;
     width: 200px;
     height: 100%;

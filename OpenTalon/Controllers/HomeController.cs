@@ -149,20 +149,20 @@ namespace OpenTalon.Controllers
             ViewData["Filter"] = filter;
 
             List<Article> articles;
-            switch (filter)
+            switch (filter.ToLower())
             {
                 case "all":
-                    ViewData["Message"] = "Users";
+                    ViewData["Message"] = "Search All";
                     articles = _context.Article.ToList();
                     break;
                 default:
-                    ViewData["Message"] = "Users - " + filter;
-                    articles = (from u in _context.Article
-                                where u.Approved == ApprovalStatus.Approved &&
-                                      (u.Title.ToLower().Contains(filter) || 
-                                       u.SummaryShort.ToLower().Contains(filter) || 
-                                       u.SummaryLong.ToLower().Contains(filter))
-                                select u).ToList();
+                    ViewData["Message"] = "Search - " + filter;
+                    articles = (from a in _context.Article
+                                where a.Approved == ApprovalStatus.Approved &&
+                                      (a.Title.ToLower().Contains(filter.ToLower()) || 
+                                       a.SummaryShort.ToLower().Contains(filter.ToLower()) || 
+                                       a.SummaryLong.ToLower().Contains(filter.ToLower()))
+                                select a).ToList();
                     break;
             }
 
@@ -170,19 +170,19 @@ namespace OpenTalon.Controllers
             {
                 case "author":
                     ViewData["SortBy"] = "Author";
-                    articles = articles.OrderBy(u => u.AuthorName).Take(8).ToList();
+                    articles = articles.OrderBy(a => a.AuthorName).Take(8).ToList();
                     break;
                 case "new":
                     ViewData["SortBy"] = "New";
-                    articles = articles.OrderBy(u => u.Date).Take(8).ToList();
+                    articles = articles.OrderByDescending(a => a.Date).Take(8).ToList();
                     break;
                 case "top":
                     ViewData["SortBy"] = "Top";
-                    articles = articles.OrderBy(u => u.Views).Take(8).ToList();
+                    articles = articles.OrderBy(a => a.Views).Take(8).ToList();
                     break;
                 default:
                     ViewData["SortBy"] = "Trending";
-                    articles = articles.OrderBy(u => u.Views).Take(8).ToList();
+                    articles = articles.OrderBy(a => a.Views).Take(8).ToList();
                     break;
             }
 
