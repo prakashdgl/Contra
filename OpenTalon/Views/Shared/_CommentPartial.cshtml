@@ -20,6 +20,10 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Submit Comment" class="btn btn-primary" />
+                @if (User.IsInRole("Staff"))
+                {
+                    <p class="text-info"><span class="secondary-info"><img src="~/img/superuser.png" /> - Your comment will be published immediately.</span></p>
+                }
             </div>
         </form>
     }

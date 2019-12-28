@@ -199,8 +199,12 @@ function submitNextStep() {
     updateLivePreview();
 }
 
-function addTag(tag) {
-    document.getElementById("tags").value += " " + tag;
+function toggleTag(tag) {
+    var tags = document.getElementById("tags");
+    if (tags.value.includes(tag))
+        tags.value.replace(tag, "");
+    else
+        tags.value += " " + tag;
 }
 
 var coauthors, inputCoauthors;
