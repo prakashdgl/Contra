@@ -1,0 +1,60 @@
+﻿
+@model IEnumerable<OpenTalonUser>
+
+@using Microsoft.AspNetCore.Identity
+@using Contra.Areas.Identity.Data
+@inject UserManager<OpenTalonUser> UserManager
+
+@{
+    ViewData["Title"] = "About";
+}
+
+<div class="section-title">
+    <h2>About Us</h2>
+</div>
+<section>
+    <div class="card card-big">
+        <div>
+            <h2>Contra for the Future</h2>
+            <p>Your voice matters. Contra aims to target the closed nature of the Talon Newspaper at Los Altos High School, allowing anyone to write a quality article to be published, without penalty of a bad grade or disapproval from others. We do not claim to be bias-free. We do claim that we allow more to be said, and more people to get in.</p>
+        </div>
+    </div>
+    <div class="card card-encapsulate encapsulate-big">
+        <span class="image-container"><img src="../img/img02.jpg" /></span>
+        <div>
+            <h2>Sei</h2>
+            <p><> with ❤🧡💛💚💙💜.</p>
+            <p>I made this entire thing!</p>
+        </div>
+    </div>
+</section>
+<div class="section-title">
+    <h2>Meet The Staff</h2>
+</div>
+<section class="flex-wrap">
+    @foreach (OpenTalonUser u in Model)
+    {
+        <div class="card card-encapsulate card-profile">
+            <span class="image-container"><img src="../img/img04.jpg" /></span>
+            <div>
+                <img class="pfp" src="@u.ProfilePictureURL" alt="@u.Name's Profile Picture" />
+                <h2 class="d-inline-block">@u.Name</h2>
+                <p><b>
+                @foreach (string role in UserManager.GetRolesAsync(u).Result)
+                {
+                    if (role == UserManager.GetRolesAsync(u).Result.Last())
+                    { <span>@role </span> }
+                    else
+                    { <span>@role, </span>}
+                }
+                </b></p>
+                <hr />
+                <p>Staff biography here.</p>
+                @if (u.EmailConfirmed)
+                {
+                    <p>Contact: <a href="mailto:@u.Email">@u.Email</a></p>
+                }
+            </div>
+        </div>
+    }
+</section>

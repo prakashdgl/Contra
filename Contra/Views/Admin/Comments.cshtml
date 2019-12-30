@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Contra.Models.Comment>
+
+@{
+    ViewData["Title"] = "Comments";
+    Layout = "_AdminLayout";
+}
+
+<div class="section-title" id="compact-compatible" >
+    <h2>@ViewData["Message"]</h2>
+    <div class="filters">
+        <div class="filter-group">
+            <h5 class="hideable">View:</h5>
+            <button id="comfortableButton" class="btn btn-info" onclick="showComfortable()">Comfortable</button>
+            <button id="compactButton" class="btn btn-outline-info" onclick="showCompact()">Compact</button>
+        </div>
+        <div class="filter-group">
+            <h5 class="hideable">Sort:</h5>
+            <a class="btn @(ViewData["SortBy"].Equals("Author")? "btn-info" : "btn-outline-info")" href="~/comments/@ViewData["Filter"]/author">Author</a>
+            <a class="btn @(ViewData["SortBy"].Equals("New")? "btn-info" : "btn-outline-info")" href="~/comments/@ViewData["Filter"]/new">New</a>
+        </div>
+        <div class="filter-group search">
+            <h5 class="hideable">Search:</h5>
+            <form asp-action="Comments">
+                <input name="filter" type="text" placeholder="Search comments" />
+                <button class="btn btn-info" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+@foreach (var item in Model)
+{
+    <section>
+        <div class="card card-big card-search">
+            <div>
+                <h5>@item.AuthorName - @item.Date</h5>
+                <p class="compact-hidden">Status: @Html.DisplayFor(modelItem => item.Approved) (Attached to Post @item.PostId)</p>
+                <p>@Html.DisplayFor(modelItem => item.Content)</p>
+                <div class="actions">
+                    <a asp-controller="Comments" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-controller="Comments" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-controller="Home" asp-action="Article" asp-route-id="@item.PostId">Read Article</a>
+                    <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delete/@item.Id')">Remove</a>
+                    @if (item.Approved == ApprovalStatus.Approved)
+                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delist/@item.Id')">Delist</a> }
+                    else
+                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/approve/@item.Id')">Approve</a> }
+                </div>
+            </div>
+        </div>
+    </section>
+}

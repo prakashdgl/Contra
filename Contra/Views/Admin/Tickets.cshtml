@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Contra.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Tickets";
+    Layout = "_AdminLayout";
+}
+
+<div class="section-title">
+    <h2>@ViewData["Message"]</h2>
+</div>
+<br />
+@foreach (Ticket t in Model)
+{
+    <section>
+        <div class="card card-big card-compact">
+            <div>
+                <h5>@t.Title - @t.Approved</h5>
+                <p>@t.Date | Tags: @t.Tags</p>
+                <p>User: @t.AuthorName | Assigned to: @t.AssignedTo</p>
+            </div>
+        </div>
+    </section>
+}

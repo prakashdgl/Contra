@@ -1,0 +1,92 @@
+﻿@model Contra.Models.Article
+
+@{
+    ViewData["Title"] = Model.Title;
+    ViewData["Description"] = Model.SummaryLong;
+    string url = System.Net.WebUtility.UrlEncode("https://" + Context.Request.Host + Context.Request.Path);
+}
+
+@if (Model.Approved == ApprovalStatus.Approved || User.IsInRole("Administrator"))
+{
+    <br />
+    <section>
+        <div class="card article">
+            <div class="image-container">
+                <img src="@Model.ThumbnailURL" alt="Article Thumbnail Image" />
+                <div class="secondary-info">
+                    <p>Views: @Model.Views</p>
+                    <span class="social-links">
+                        <a href="https://twitter.com/intent/tweet?text=@System.Net.WebUtility.UrlEncode(Model.Title)+@(url)"><img src="~/img/twitter.svg" alt="Share on Twitter" /></a>
+                        <a href="https://facebook.com/sharer/sharer.php?u=@(url)"><img src="~/img/facebook.svg" alt="Share on Facebook" /></a>
+                        <a href="#discuss"><img src="~/img/discuss.svg" alt="Discuss Here" /></a>
+                    </span>
+                </div>
+            </div>
+            <div class="content">
+                @if (User.IsInRole("Administrator"))
+                {
+                    <span class="secondary-info p-0"><img src="~/img/supericon.png"/> - <a href="~/articlemanager/@Model.Id">Manage Article</a></span>
+                    if (Model.Approved != ApprovalStatus.Approved)
+                    {
+                        <p class="text-info">This article is not viewable to the public.</p>
+                    }
+                }
+                <h1>@Html.DisplayFor(model => model.Title)</h1>
+                <p>@Model.AuthorName - @Model.Date.ToShortDateString()</p>
+                <br />
+                @Html.Raw(Model.Content)
+            </div>
+        </div>
+    </section>
+
+    <div class="section-title">
+        <h2>Comments</h2>
+        <p class="text-secondary">@ViewData["PendingComments"] Pending</p>
+        <a name="discuss"></a>
+    </div>
+    <section>
+        <partial name="_CommentPartial" />
+    </section>
+    @if (((List<Comment>)ViewData["Comments"]).Count != 0)
+    {
+        <section>
+            <div class="card">
+                @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
+                {
+                    <section>
+                        <div class="card card-compact comment">
+                            <div>
+                                <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
+                                <p>@comment.Content</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr />
+                }
+            </div>
+        </section>
+    }
+}
+else
+{
+    <div class="section-title">
+        <h2>Access Denied</h2>
+    </div>
+    <section>
+        <div class="card card-search">
+            <div>
+                <h2>This Article is Not Approved Yet</h2>
+                <p>This article has not been approved by our moderation team, and as such, cannot be displayed yet.</p>
+                <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
+                <a class="btn btn-outline-info" href="~/apply">Submit an Article</a>
+            </div>
+        </div>
+    </section>
+}
+<div id="loadSection">
+    <div class="section-title">
+        <h2><span id="query">New</span> Articles</h2>
+    </div>
+    <div id="loadTarget"></div>
+    <button id="loadButton" onclick="loadContent('New')" class="btn btn-outline-info w-100">Load More</button>
+</div>
