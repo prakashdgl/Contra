@@ -113,7 +113,7 @@ function neoload(target, query, amount, type) {
             if (type === "search") {
                 html += formatSearchCard(obj.id, obj.image, obj.title, obj.author, obj.date, obj.summary);
             }
-            else {
+            else if (type === "block") {
                 var biggify = false;
                 if (i % 2 === 0) {
                     if (i % 4 === 2) biggify = !biggify;
@@ -125,6 +125,9 @@ function neoload(target, query, amount, type) {
                     html += formatCard(obj.id, obj.image, obj.title,
                         obj.summary, biggify, !biggify) + "</section>";
                 }
+            }
+            else if (type === "mini") {
+                html += formatNewsbeat(obj.id, obj.image, obj.title, obj.summary);
             }
             i++;
         });
@@ -198,9 +201,15 @@ function formatCard(id, image, title, summary, big, encapsulate) {
 
 function formatSearchCard(id, image, title, author, date, summary) {
     return "<div class='card card-big card-search'><span class='image-container'>" +
-        "<img src='" + image + "' alt='" + title + " Thumbnail Image' /></span><div><h2>" +
-        title + "</h2><p class='compact-hidden'>" + author + " - " + date + "</p><hr class='compact-hidden' /><p>" +
-        summary + "</p><a href='https://" + window.location.host + "/article/" + id + "'>Read More</a></div></div>";
+           "<img src='" + image + "' alt='" + title + " Thumbnail Image' /></span><div><h2>" +
+           title + "</h2><p class='compact-hidden'>" + author + " - " + date + "</p><hr class='compact-hidden' /><p>" +
+           summary + "</p><a href='https://" + window.location.host + "/article/" + id + "'>Read More</a></div></div>";
+}
+
+function formatNewsbeat(id, image, title, summary) {
+    return "<div class='card card-big card-encapsulate card-newsbeat' onclick='redirect(" +
+           id + ")'><span class='image-container'><img src='" + image + "' alt='" + title +
+           " Thumbnail' /></span><div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
 }
 
 function submitUndoStep() {

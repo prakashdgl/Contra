@@ -22,7 +22,6 @@
     </div>
 </div>
 @foreach (var item in Model) {
-<section>
     <div class="card card-search">
         <span class="image-container"><img src="@item.ThumbnailURL" alt="'@item.Title' Thumbnail Image" /></span>
         <div>
@@ -33,7 +32,6 @@
             <a asp-controller="Home" asp-action="Article" asp-route-id="@item.Id">Read More</a>
         </div>
     </div>
-</section>
 }
 <div id="loadTarget"></div>
 <button id="loadButton" onclick="loadContent('@ViewData["Query"]')" class="btn btn-outline-info w-100">Load More</button>

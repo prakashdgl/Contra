@@ -153,30 +153,27 @@ a {
     margin-bottom: 60px;
 }
 
+#main-wrapper {
+    flex-direction: column;
+}
 #main {
     flex: 1 1;
 }
 #extras {
-    display: none;
-    width: 360px;
     position: relative;
 }
 #extras .section-title {
     margin-bottom: 0;
-}
-#extras section {
-    flex-direction: column;
-}
-#extras > section {
-    position: absolute;
-    top: 88px;
-    bottom: 0;
 }
 #extras .card {
     padding: 10px 15px;
 }
 #extras > section > .card {
     overflow: auto;
+}
+#newsbeat > section {
+    height: 100%;
+    flex-direction: row;
 }
 
 .flex-big {
@@ -324,15 +321,11 @@ section {
     backdrop-filter: blur(2px);
     color: #fff;
     z-index: 5;
-    width: 200px;
+    width: 220px;
     height: 100%;
 }
 .card-encapsulate .image-container {
     left: 0;
-}
-
-.encapsulate-big > div {
-    width: 200px;
 }
 
 .card-search, .card-compact {
@@ -348,9 +341,12 @@ section {
 }
 
 .card-newsbeat {
-    min-height: 100px;
-    margin: 5px 0 !important;
     padding: 0 !important;
+    flex: none;
+    width: 250px;
+    min-height: 170px;
+    margin: 5px 0;
+    margin-right: 10px;
 }
 .card-newsbeat:hover {
     box-shadow: -8px 8px 5px #bbb;
@@ -675,9 +671,27 @@ form section div:last-of-type {
     .search {
         width: 100%;
     }
+    #main-wrapper {
+        flex-direction: row;
+    }
     #extras {
-        display: flex;
+        width: 360px;
+    }
+    #extras section {
         flex-direction: column;
+    }
+    #extras > section {
+        position: absolute;
+        top: 88px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .card-newsbeat {
+        flex: unset;
+        width: unset;
+        min-height: unset;
+        margin: 5px 0;
     }
     .flex-wrap .card {
         flex: none;
