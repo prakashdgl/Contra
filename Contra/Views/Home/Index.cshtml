@@ -44,22 +44,7 @@
         <div class="section-title">
             <h2>Editorials</h2>
         </div>
-        <section>
-            <div class="card card-big card-encapsulate story" onclick="redirect(@Model.ElementAt(1)[0].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(1)[0].ThumbnailURL alt="Article Thumbnail" /></span>
-                <div>
-                    <h2>@Model.ElementAt(1)[0].Title</h2>
-                    <p>@Model.ElementAt(1)[0].SummaryLong</p>
-                </div>
-            </div>
-            <div class="card story" onclick="redirect(@Model.ElementAt(1)[1].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(1)[1].ThumbnailURL alt="Article Thumbnail" /></span>
-                <div>
-                    <h2>@Model.ElementAt(1)[1].Title</h2>
-                    <p>@Model.ElementAt(1)[1].SummaryLong</p>
-                </div>
-            </div>
-        </section>
+        <div class="neoload" data-amount="2" data-query="new" data-type="block"></div>
     </div>
     <div id="extras">
         <div class="section-title">

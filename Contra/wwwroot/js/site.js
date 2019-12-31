@@ -24,6 +24,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
     menu = document.getElementById("links");
     nav = document.getElementById("nav");
 
+    var nltargets = document.getElementsByClassName("neoload");
+    for (var i = 0; i < nltargets.length; i++) {
+        var el = nltargets[i];
+        neoload(el,
+                el.getAttribute("data-query"),
+                el.getAttribute("data-amount"),
+                el.getAttribute("data-type"));
+    }
+
     var search = document.getElementById("search");
     if (search) { formatSearch = true; skip = 2; }
 
@@ -94,12 +103,42 @@ function request(method, route, callback = null) {
     http.send();
 }
 
+function neoload(target, query, amount, type) {
+    request("GET", "api/v1/article/list/" + query + "/" + amount, x => {
+        var json = JSON.parse(x);
+
+        var i = 0;
+        var html = "";
+        json.forEach(obj => {
+            if (type === "search") {
+                html += formatSearchCard(obj.id, obj.image, obj.title, obj.author, obj.date, obj.summary);
+            }
+            else {
+                var biggify = false;
+                if (i % 2 === 0) {
+                    if (i % 4 === 2) biggify = !biggify;
+                    html += "<section>" + formatCard(obj.id, obj.image,
+                        obj.title, obj.summary, !biggify, biggify);
+                }
+                else {
+                    if (i % 4 === 3) biggify = !biggify;
+                    html += formatCard(obj.id, obj.image, obj.title,
+                        obj.summary, biggify, !biggify) + "</section>";
+                }
+            }
+            i++;
+        });
+
+        target.innerHTML += html;
+    });
+}
+
 function loadContent(query) {
     loadTarget = document.getElementById("loadTarget");
     if (!loadTarget) return;
 
     var http = new XMLHttpRequest();
-    http.open('GET', "https://" + window.location.host + "/api/v1/article/list/" + query + "/" + skip, true);
+    http.open('GET', "https://" + window.location.host + "/api/v1/article/list/" + query + "/8/" + skip, true);
     skip++;
 
     http.onreadystatechange = function () {

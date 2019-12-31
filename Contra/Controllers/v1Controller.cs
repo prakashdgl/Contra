@@ -31,8 +31,7 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("role/create/{*role}")]
-        [HttpPost]
+        [HttpPost("role/create/{*role}")]
         public async Task<string> CreateRole(string role)
         {
             if (_roleManager.RoleExistsAsync(role).Result)
@@ -44,8 +43,7 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("role/delete/{*role}")]
-        [HttpPost]
+        [HttpPost("role/delete/{*role}")]
         public async Task<string> DeleteRole(string role)
         {
             if (!_roleManager.RoleExistsAsync(role).Result)
@@ -59,8 +57,7 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("user/{userID}/ensure/{*role}")]
-        [HttpPost]
+        [HttpPost("user/{userID}/ensure/{*role}")]
         public async Task<string> EnsureRole(string userID, string role)
         {
             if (!_roleManager.RoleExistsAsync(role).Result)
@@ -75,8 +72,7 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("user/{userID}/enfeeble/{*role}")]
-        [HttpPost]
+        [HttpPost("user/{userID}/enfeeble/{*role}")]
         public async Task<string> EnfeebleRole(string userID, string role)
         {
             if (!_roleManager.RoleExistsAsync(role).Result)
@@ -91,8 +87,7 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("comment/approve/{*id}")]
-        [HttpPost]
+        [HttpPost("comment/approve/{*id}")]
         public async Task<string> CommentApprove(int? id)
         {
             if (id == null) return "Requested resource not found.";
@@ -109,8 +104,7 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("comment/delist/{*id}")]
-        [HttpPost]
+        [HttpPost("comment/delist/{*id}")]
         public async Task<string> CommentDelist(int? id)
         {
             if (id == null) return "Requested resource not found.";
@@ -127,8 +121,7 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("comment/delete/{*id}")]
-        [HttpPost]
+        [HttpPost("comment/delete/{*id}")]
         public async Task<string> CommentDelete(int? id)
         {
             if (id == null) return "Requested resource not found.";
@@ -145,8 +138,7 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("article/approve/{*id}")]
-        [HttpPost]
+        [HttpPost("article/approve/{*id}")]
         public async Task<string> ArticleApprove(int? id)
         {
             if (id == null) return "Requested resource not found.";
@@ -163,8 +155,7 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("article/delist/{*id}")]
-        [HttpPost]
+        [HttpPost("article/delist/{*id}")]
         public async Task<string> ArticleDelist(int? id)
         {
             if (id == null) return "Requested resource not found.";
@@ -181,8 +172,7 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("article/delete/{*id}")]
-        [HttpPost]
+        [HttpPost("article/delete/{*id}")]
         public async Task<string> ArticleDelete(int? id)
         {
             if (id == null) return "Requested resource not found.";
@@ -203,8 +193,7 @@ namespace Contra.Controllers
         }
 
         [Authorize]
-        [Route("account/{id}/picture/{*url}")]
-        [HttpPost]
+        [HttpPost("account/{id}/picture/{*url}")]
         public async Task<string> ChangeProfilePicture(string id, string url)
         {
             if (_userManager.GetUserId(User) == id)
@@ -235,8 +224,7 @@ namespace Contra.Controllers
             else return "Not authorized!";
         }
 
-        [Route("account/{id}/picture")]
-        [HttpGet]
+        [HttpGet("account/{id}/picture")]
         public async Task<string> GetProfilePicture(string id)
         {
             OpenTalonUser user = await _userManager.FindByIdAsync(id);
@@ -245,8 +233,7 @@ namespace Contra.Controllers
             else return "Not found!";
         }
 
-        [Route("article/info/{*id}")]
-        [HttpGet]
+        [HttpGet("article/info/{*id}")]
         public async Task<string> ArticleInfo(int? id)
         {
             if (id == null) return "Requested resource not found.";
@@ -269,9 +256,8 @@ namespace Contra.Controllers
             return JsonConvert.SerializeObject(info);
         }
 
-        [Route("article/list/{query}/{*skip}")]
-        [HttpGet]
-        public string ArticleGetBulk(string query, int skip)
+        [HttpGet("article/list/{query}/{amount}/{*skip}")]
+        public string ArticleGetBulk(string query, int amount, int skip)
         {
             if (string.IsNullOrEmpty(query)) return "";
 
@@ -301,7 +287,7 @@ namespace Contra.Controllers
                 };
             }
 
-            articles = articles.Skip(skip * 8).Take(8).ToList();
+            articles = articles.Skip(skip * amount).Take(amount).ToList();
             if (articles.Count == 0) return "";
 
             List<Dictionary<string, string>> info = new List<Dictionary<string, string>>();

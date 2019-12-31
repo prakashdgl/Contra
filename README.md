@@ -1,6 +1,6 @@
 # Contra
 
-[![Build Status](https://travis-ci.com/SDBagel/OpenTalon.svg?branch=master)](https://travis-ci.com/SDBagel/OpenTalon)
+[![Build Status](https://travis-ci.com/SDBagel/Contra.svg?branch=master)](https://travis-ci.com/SDBagel/OpenTalon)
 
 Contra is an open source web application built around the traditional news media site, but adding in forum-style user interaction that encourages engagement.
 
