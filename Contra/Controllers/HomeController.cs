@@ -28,7 +28,6 @@ namespace Contra.Controllers
 
         public IActionResult Index()
         {
-            List<List<Article>> articles = new List<List<Article>>();
             Article placeholder = new Article
             {
                 Title = "Relevant Story",
@@ -37,42 +36,15 @@ namespace Contra.Controllers
             };
 
             Random rnd = new Random();
-            List<Article> top = (from a in _context.Article
-                                 where a.Approved == ApprovalStatus.Approved
-                                 orderby a.Date descending
-                                 select a).ToList();
-            while (top.Count < 4)
-            {
-                placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".jpg";
-                top.Add(placeholder);
-            }
-            articles.Add(top);
-
-            List<Article> editorial = (from a in _context.Article
-                                       where a.Approved == ApprovalStatus.Approved && 
-                                       a.SummaryShort.Contains("Featured") &&
-                                       a.SummaryShort.Contains("Editorial")
-                                       orderby a.Date descending
-                                       select a).ToList();
-            while (editorial.Count < 4)
-            {
-                placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".jpg";
-                editorial.Add(placeholder);
-            }
-            articles.Add(editorial);
-
-            List<Article> newsbeat = (from a in _context.Article
-                                      where a.Approved == ApprovalStatus.Approved &&
-                                      a.SummaryShort.Contains("Newsbeat") ||
-                                      a.SummaryShort.Contains("Event")
+            List<Article> articles = (from a in _context.Article
+                                      where a.Approved == ApprovalStatus.Approved
                                       orderby a.Date descending
                                       select a).ToList();
-            while (newsbeat.Count < 8)
+            while (articles.Count < 5)
             {
                 placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".jpg";
-                newsbeat.Add(placeholder);
+                articles.Add(placeholder);
             }
-            articles.Add(newsbeat);
 
             return View(articles);
         }

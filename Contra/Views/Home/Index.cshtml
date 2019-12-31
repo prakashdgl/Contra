@@ -1,4 +1,4 @@
-﻿@model IEnumerable<List<Article>>
+﻿@model IEnumerable<Article>
 
 @{
     ViewData["Title"] = "Home";
@@ -7,37 +7,49 @@
 <section id="main-wrapper">
     <div id="main">
         <div class="section-title">
+            <h2>Today's Cover Story</h2>
+        </div>
+        <section>
+            <div class="card card-big story" onclick="redirect(@Model.ElementAt(0).Id)">
+                <span class="image-container"><img src=@Model.ElementAt(0).ThumbnailURL alt="Article Thumbnail" /></span>
+                <div>
+                    <h2>@Model.ElementAt(0).Title</h2>
+                    <p>@Model.ElementAt(0).SummaryLong</p>
+                </div>
+            </div>
+        </section>
+        <div class="section-title">
             <h2>Trending Now</h2>
         </div>
         <section>
-            <div class="card card-big story" onclick="redirect(@Model.ElementAt(0)[0].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(0)[0].ThumbnailURL alt="Article Thumbnail" /></span>
+            <div class="card card-big story" onclick="redirect(@Model.ElementAt(1).Id)">
+                <span class="image-container"><img src=@Model.ElementAt(1).ThumbnailURL alt="Article Thumbnail" /></span>
                 <div>
-                    <h2>@Model.ElementAt(0)[0].Title</h2>
-                    <p>@Model.ElementAt(0)[0].SummaryLong</p>
+                    <h2>@Model.ElementAt(1).Title</h2>
+                    <p>@Model.ElementAt(1).SummaryLong</p>
                 </div>
             </div>
-            <div class="card card-encapsulate story" onclick="redirect(@Model.ElementAt(0)[1].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(0)[1].ThumbnailURL alt="Article Thumbnail" /></span>
+            <div class="card card-encapsulate story" onclick="redirect(@Model.ElementAt(2).Id)">
+                <span class="image-container"><img src=@Model.ElementAt(2).ThumbnailURL alt="Article Thumbnail" /></span>
                 <div>
-                    <h2>@Model.ElementAt(0)[1].Title</h2>
-                    <p>@Model.ElementAt(0)[1].SummaryLong</p>
+                    <h2>@Model.ElementAt(2).Title</h2>
+                    <p>@Model.ElementAt(2).SummaryLong</p>
                 </div>
             </div>
         </section>
         <section>
-            <div class="card card-encapsulate story" onclick="redirect(@Model.ElementAt(0)[2].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(0)[2].ThumbnailURL alt="Article Thumbnail" /></span>
+            <div class="card card-encapsulate story" onclick="redirect(@Model.ElementAt(3).Id)">
+                <span class="image-container"><img src=@Model.ElementAt(3).ThumbnailURL alt="Article Thumbnail" /></span>
                 <div>
-                    <h2>@Model.ElementAt(0)[2].Title</h2>
-                    <p>@Model.ElementAt(0)[2].SummaryLong</p>
+                    <h2>@Model.ElementAt(3).Title</h2>
+                    <p>@Model.ElementAt(3).SummaryLong</p>
                 </div>
             </div>
-            <div class="card card-big story" onclick="redirect(@Model.ElementAt(0)[3].Id)">
-                <span class="image-container"><img src=@Model.ElementAt(0)[3].ThumbnailURL alt="Article Thumbnail" /></span>
+            <div class="card card-big story" onclick="redirect(@Model.ElementAt(4).Id)">
+                <span class="image-container"><img src=@Model.ElementAt(4).ThumbnailURL alt="Article Thumbnail" /></span>
                 <div>
-                    <h2>@Model.ElementAt(0)[3].Title</h2>
-                    <p>@Model.ElementAt(0)[3].SummaryLong</p>
+                    <h2>@Model.ElementAt(4).Title</h2>
+                    <p>@Model.ElementAt(4).SummaryLong</p>
                 </div>
             </div>
         </section>
@@ -52,7 +64,7 @@
         </div>
         <section class="flex-fill">
             <div id="newsbeat" class="card">
-                <section class="neoload" data-amount="7" data-query="tag-newsbeat" data-type="mini"></section>
+                <section class="neoload" data-amount="10" data-query="tag-newsbeat" data-type="mini"></section>
             </div>
         </section>
     </div>

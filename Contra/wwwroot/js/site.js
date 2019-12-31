@@ -250,7 +250,7 @@ function submitNextStep() {
 function toggleTag(tag) {
     var tags = document.getElementById("tags");
     if (tags.value.includes(tag))
-        tags.value.replace(tag, "");
+        tags.value = tags.value.replace(" " + tag, "");
     else
         tags.value += " " + tag;
 }
