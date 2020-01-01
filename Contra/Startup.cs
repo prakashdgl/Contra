@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Contra.Areas.Identity.Data;
 using Contra.Data;
 using System;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Contra.Services;
 
 namespace Contra
 {
@@ -30,6 +32,10 @@ namespace Contra
             services.AddDefaultIdentity<OpenTalonUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 

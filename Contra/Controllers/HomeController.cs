@@ -184,7 +184,10 @@ namespace Contra.Controllers
 
                 OpenTalonUser user = _userManager.GetUserAsync(User).Result;
                 article.OwnerID = user.Id;
-                article.AuthorName = user.Name + ", " + article.AuthorName;
+                if (!string.IsNullOrWhiteSpace(article.AuthorName))
+                    article.AuthorName = user.Name + ", " + article.AuthorName;
+                else
+                    article.AuthorName = user.Name;
                 article.Date = DateTime.Now;
                 article.Views = 0;
 
