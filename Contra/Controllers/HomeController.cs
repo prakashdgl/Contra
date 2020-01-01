@@ -111,6 +111,7 @@ namespace Contra.Controllers
         [HttpPost("/Home/Search")]
         public IActionResult Search(string filter)
         {
+            if (string.IsNullOrEmpty(filter)) filter = "all";
             return Redirect($"/search/{filter}");
         }
 
