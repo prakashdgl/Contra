@@ -55,7 +55,7 @@ namespace Contra.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Approved,OwnerId,AuthorName,ThumbnailURL,Title,Date,SummaryShort,SummaryLong,Content")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Approved,OwnerId,AuthorName,ThumbnailURL,Title,Date,Tags,SummaryLong,Content")] Article article)
         {
             if (id != article.Id) return NotFound();
 

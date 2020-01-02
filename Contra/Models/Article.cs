@@ -9,21 +9,39 @@ namespace Contra.Models
         public string OwnerID { get; set; }
 
         public ApprovalStatus Approved { get; set; }
+        public ArticleType ArticleType { get; set; }
         public string AuthorName { get; set; }
         public string ThumbnailURL { get; set; }
 
         public string Title { get; set; }
         public DateTime Date { get; set; }
-        public string SummaryShort { get; set; }
+        public string Tags { get; set; }
         public string SummaryLong { get; set; }
 
         public int Views { get; set; }
 
         public string Content { get; set; }
+
+        public bool IsEditorial { get; set; }
+
+        public bool Anonymous { get; set; }
+        public bool Sensitive { get; set; }
+        public string SensitiveContent { get; set; }
+        public bool Spoiler { get; set; }
+        public string SpoilerContent { get; set; }
     }
 
     public enum ApprovalStatus
     {
-        Submitted, Approved, Rejected
+        Submitted, 
+        Approved, 
+        Rejected
+    }
+
+    public enum ArticleType
+    {
+        Article,
+        Event,
+        Newsbeat
     }
 }

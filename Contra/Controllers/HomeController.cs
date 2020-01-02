@@ -133,7 +133,7 @@ namespace Contra.Controllers
                     articles = (from a in _context.Article
                                 where a.Approved == ApprovalStatus.Approved &&
                                       (a.Title.ToLower().Contains(filter.ToLower()) || 
-                                       a.SummaryShort.ToLower().Contains(filter.ToLower()) || 
+                                       a.Tags.ToLower().Contains(filter.ToLower()) || 
                                        a.SummaryLong.ToLower().Contains(filter.ToLower()))
                                 select a).ToList();
                     break;
@@ -163,6 +163,18 @@ namespace Contra.Controllers
             return View(articles);
         }
 
+        [HttpGet("/submit")]
+        public IActionResult Submit()
+        {
+            return View();
+        }
+
+        [HttpPost("/submit")]
+        public IActionResult Submit([Bind("Id,AuthorName,ThumbnailURL,Title,Tags,SummaryLong,Content")] Article article)
+        {
+            return View();
+        }
+
         [HttpGet("/apply")]
         public IActionResult Apply()
         {
@@ -171,7 +183,7 @@ namespace Contra.Controllers
 
         [HttpPost("/apply")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Apply([Bind("Id,AuthorName,ThumbnailURL,Title,SummaryShort,SummaryLong,Content")] Article article)
+        public async Task<IActionResult> Apply([Bind("Id,AuthorName,ThumbnailURL,Title,Tags,SummaryLong,Content")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -194,7 +206,7 @@ namespace Contra.Controllers
                 if (User.IsInRole("Staff"))
                 {
                     article.Approved = ApprovalStatus.Approved;
-                    article.SummaryShort += " Editorial";
+                    article.Tags += " Editorial";
                 }
                 else
                     article.Approved = ApprovalStatus.Submitted;

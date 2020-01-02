@@ -64,7 +64,7 @@ namespace Contra.Controllers
                     articles = (from a in _context.Article
                                 where a.Approved == ApprovalStatus.Approved &&
                                      (a.Title.ToLower().Contains(filter) ||
-                                      a.SummaryShort.ToLower().Contains(filter) ||
+                                      a.Tags.ToLower().Contains(filter) ||
                                       a.SummaryLong.ToLower().Contains(filter))
                                 select a).ToList();
                     break;
