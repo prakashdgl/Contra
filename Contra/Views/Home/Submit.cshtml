@@ -1,0 +1,241 @@
+﻿@model Contra.Models.Article
+
+@using Microsoft.AspNetCore.Identity
+@using Contra.Areas.Identity.Data
+@inject SignInManager<OpenTalonUser> SignInManager
+@inject UserManager<OpenTalonUser> UserManager
+
+@{
+    ViewData["Title"] = "Submit";
+}
+
+<div class="section-title">
+    <h2>Submit an Item</h2>
+    @if (User.IsInRole("Staff"))
+    {
+        <span class="secondary-info"><img src="~/img/supericon.png" alt="Superuser" /> - Your item will be published immediately.</span>
+    }
+</div>
+<br />
+@if (SignInManager.IsSignedIn(User))
+{
+    <section id="select-format">
+        <div class="card">
+            <div>
+                <h2>Article</h2>
+                <p>Articles are advised to be between approximately 300 and 1,000 words. Articles can cover almost anything from the most recent movies to politics to local news. If you are unsure if a topic will be accepted, <a href="~/feedback">file a ticket</a>.</p>
+                <button class="btn btn-outline-primary" onclick="selectFormat(0)">Write an Article</button>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <h2>Event</h2>
+                <p>Events articles should be used to cover upcoming and past local events. Events articles are advised to be related to Los Altos High School or Santa Clara County and be at least 200 words long.</p>
+                <button class="btn btn-outline-primary" onclick="selectFormat(1)">Cover an Event</button>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <h2>Newsbeat</h2>
+                <p>Newsbeat articles are meant to be short, at under 300 words. While Newsbeat articles can cover anything a full-length article can, it is recommended that Newsbeat be limited to more factual content.</p>
+                <button class="btn btn-outline-primary" onclick="selectFormat(2)">Deliver the News</button>
+            </div>
+        </div>
+    </section>
+    <section id="select-article" class="format hidden">
+        <div class="card">
+            <div>
+                <form asp-action="Submit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input id="input-articleType" asp-for="ArticleType" type="hidden" />
+                    <div id="step-1">
+                        <h2>Article Info (Step 1)</h2>
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <p><b>@UserManager.GetUserAsync(User).Result.Email</b></p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Author Name</label>
+                            <p><b>@UserManager.GetUserAsync(User).Result.Name</b></p>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AuthorName" class="control-label">Co-Author Names</label>
+                            <input id="input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="E.g. Sei, Armitage, Dana" />
+                            <span asp-validation-for="AuthorName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input id="input-title" asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label class="control-label">Article Options</label>
+                            <section>
+                                <label asp-for="Sensitive" class="toggle">
+                                    Sensitive Content
+                                    <input type="checkbox" asp-for="Sensitive" onclick="toggleGroup(this, 'sensitiveContent')">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label asp-for="Spoiler" class="toggle">
+                                    Spoiler Content
+                                    <input type="checkbox" asp-for="Spoiler" onclick="toggleGroup(this, 'spoilerContent')">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label asp-for="Anonymous" class="toggle">
+                                    Post Anonymously
+                                    <input type="checkbox" asp-for="Anonymous" onclick="toggleGroup(this, 'anonymous')">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </section>
+                            <br />
+                            <div id="inputGroup-sensitiveContent" class="form-group hidden">
+                                <label asp-for="SensitiveContent">Sensitive Content</label>
+                                <input type="text" asp-for="SensitiveContent" class="form-control" maxlength="50" placeholder="Describe the sensitive content.">
+                                <span asp-validation-for="SensitiveContent" class="text-danger"></span>
+                                <br />
+                            </div>
+                            <div id="inputGroup-spoilerContent" class="form-group hidden">
+                                <label asp-for="SpoilerContent">Spoiler Content</label>
+                                <input type="text" asp-for="SpoilerContent" class="form-control" maxlength="50" placeholder="Describe what is being spoiled.">
+                                <span asp-validation-for="SensitiveContent" class="text-danger"></span>
+                                <br />
+                            </div>
+                            <div id="inputGroup-anonymous" class="form-group hidden">
+                                <p class="content-notice">Your anonymity is guaranteed only if the content in your writing is potentially sensitive to you or others. The administrative team can still see your identity.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="step-2">
+                        <h2>Article Info (Step 2)</h2>
+                        <div class="form-group">
+                            <label class="control-label">Thumbnail URL</label>
+                            <input id="input-img" asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
+                            <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
+                            <p>Please provide an external URL to an image to use as a thumbnail.</p>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label class="control-label">Article Tags</label>
+                            <input id="tags" asp-for="Tags" type="text" class="disabled form-control" disabled placeholder="Tags you choose will appear here." />
+                            <br />
+                            <section>
+                                <label for="tag-news" class="toggle">
+                                    News
+                                    <input type="checkbox" id="tag-news" onclick="toggleTag('News')">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for="tag-opinion" class="toggle">
+                                    Opinion
+                                    <input type="checkbox" id="tag-opinion" onclick="toggleTag('Opinion')">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for="tag-entertainment" class="toggle">
+                                    Entertainment &amp; Culture
+                                    <input type="checkbox" id="tag-entertainment" onclick="toggleTag('Entertainment/Culture')">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </section>
+                            <section>
+                                <label for="tag-politics" class="toggle">
+                                    Politics
+                                    <input type="checkbox" id="tag-politics" onclick="toggleTag('Politics')">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for="tag-sports" class="toggle">
+                                    Sports
+                                    <input type="checkbox" id="tag-sports" onclick="toggleTag('Sports')">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for="tag-event" class="toggle">
+                                    Local Events
+                                    <input type="checkbox" id="tag-event" onclick="toggleTag('Event')">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Summary</label>
+                            <input asp-for="SummaryLong" class="form-control" maxlength="60" placeholder="A short summary or overview of your article." />
+                            <span asp-validation-for="SummaryLong" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div id="step-3">
+                        <h2>Content (Step 3)</h2>
+                        <div class="form-group">
+                            <label asp-for="Content" class="control-label"></label>
+                            <textarea asp-for="Content" id="summernote"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div id="step-4">
+                        <h2>Review &amp; Submit (Step 4)</h2>
+                        <p>Please look over the article preview below to make sure everything is A-OK, then submit.</p>
+                        <br />
+                        <div class="form-group">
+                            <input type="submit" value="Submit Article" class="btn btn-primary" />
+                            <a href="~/">
+                                <input type="button" value="Cancel" class="btn btn-outline-dark" />
+                            </a>
+                            <br />
+                            <p>By submitting an article, you agree to our <a href="~/privacy">Terms of Service and Privacy Policy</a>.</p>
+                        </div>
+                    </div>
+                    <br />
+                </form>
+                <div id="submit-controls">
+                    <button class="btn btn-outline-dark" onclick="reselectFormat(0)">Reselect Article Type</button>
+                    <button id="prevButton" class="btn btn-outline-dark disabled" onclick="submitUndoStep()">Previous Step</button>
+                    <button id="nextButton" class="btn btn-outline-info" onclick="submitNextStep()">Next Step</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="preview" class="hidden">
+        <div class="card article">
+            <div class="image-container">
+                <img id="thumbnail-img" src="../img/img05.jpg" alt="Article Preview Image" />
+                <div class="secondary-info">
+                    <p>Views: 0</p>
+                    <span class="social-links">
+                        <img src="~/img/twitter.svg" alt="Share on Twitter" />
+                        <img src="~/img/facebook.svg" alt="Share on Facebook" />
+                        <img src="~/img/discuss.svg" alt="Discuss Here" />
+                    </span>
+                </div>
+            </div>
+            <div class="content">
+                <h2 id="title">Title</h2>
+                <p>
+                    @UserManager.GetUserAsync(User).Result.Name<span id="coauthors"></span> - @DateTime.Now.ToShortDateString()
+                </p>
+                <br />
+                <span id="content"></span>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section>
+        <div class="card">
+            <div>
+                <h2>Not Signed In</h2>
+                <br />
+                <p>Register or login to an account to submit an item.</p>
+                <br />
+                <section>
+                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info w-50 flex-fill mr-3">Register</a>
+                    <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Submit", "Home", new { area = "" })" class="btn btn-outline-info w-50 flex-fill mr-3">Login</a>
+                </section>
+            </div>
+        </div>
+    </section>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_SummernoteScriptsPartial" />
+    <script src="~/js/submit.js" asp-append-version="true"></script>
+    <script src="~/lib/animejs/anime.min.js" asp-append-version="true"></script>
+}

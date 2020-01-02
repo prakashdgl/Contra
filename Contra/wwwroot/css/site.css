@@ -132,6 +132,10 @@ a {
     margin: auto;
 }
 
+.hidden {
+    display: none;
+}
+
 .c-btn-primary {
     background-image: linear-gradient(to right, #ff6c97, #7b19ff);
     border: 0;

@@ -170,8 +170,15 @@ namespace Contra.Controllers
         }
 
         [HttpPost("/submit")]
-        public IActionResult Submit([Bind("Id,AuthorName,ThumbnailURL,Title,Tags,SummaryLong,Content")] Article article)
+        public IActionResult Submit([Bind("Id,ArticleType,AuthorName,Title,Sensitive," +
+                                          "SensitiveContent,Spoiler,SpoilerContent,Anonymous," +
+                                          "ThumbnailURL,Tags,SummaryLong,Content")] Article article)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
+
             return View();
         }
 

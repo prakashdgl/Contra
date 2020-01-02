@@ -46,14 +46,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener("resize", function () {
         onResize();
     });
-    
-    coauthors = document.getElementById("coauthors");
-    inputCoauthors = document.getElementById("input-coauthors");
-    title = document.getElementById("title");
-    inputTitle = document.getElementById("input-title");
-    image = document.getElementById("thumbnail-img");
-    inputImage = document.getElementById("input-img");
-    content = document.getElementById("content");
 });
 
 function showMenu() {
@@ -210,74 +202,6 @@ function formatNewsbeat(id, image, title, summary) {
     return "<div class='card card-big card-encapsulate card-newsbeat' onclick='redirect(" +
            id + ")'><span class='image-container'><img src='" + image + "' alt='" + title +
            " Thumbnail' /></span><div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
-}
-
-function submitUndoStep() {
-    if (submitStep > 1) submitStep--;
-    else submitStep = 1;
-
-    var toShow = document.getElementById("step-" + submitStep);
-    var shown = document.getElementById("step-" + (submitStep + 1));
-    toShow.style.display = "unset";
-    shown.style.display = "none";
-
-    if (submitStep === 1) {
-        document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
-    }
-    document.getElementById("nextButton").classList = "btn btn-outline-info";
-
-    updateLivePreview();
-}
-
-function submitNextStep() {
-    if (submitStep < 4) submitStep++;
-    else submitStep = 4;
-
-    var toShow = document.getElementById("step-" + submitStep);
-    var shown = document.getElementById("step-" + (submitStep - 1));
-    toShow.style.display = "unset";
-    shown.style.display = "none";
-
-    if (submitStep === 4) {
-        document.getElementById("nextButton").classList = "btn btn-outline-dark disabled";
-        content.innerHTML = $("#summernote").summernote('code');
-    }
-    document.getElementById("prevButton").classList = "btn btn-outline-info";
-
-    updateLivePreview();
-}
-
-function toggleTag(tag) {
-    var tags = document.getElementById("tags");
-    if (tags.value.includes(" " + tag + " "))
-        tags.value = tags.value.replace(" " + tag, "");
-    else
-        tags.value += " " + tag;
-}
-
-var coauthors, inputCoauthors;
-var title, inputTitle;
-var image, inputImage;
-var content, contentUpdateTimer;
-var submitStep = 1;
-
-function updateLivePreview() {
-    if (inputCoauthors.value)
-        coauthors.innerText = ", " + inputCoauthors.value;
-    else
-        coauthors.innerText = "";
-
-    if (inputTitle.value)
-        title.innerText = inputTitle.value;
-    else
-        title.innerText = "Title";
-
-    if (inputImage.value)
-        image.src = inputImage.value;
-    else
-        image.src = "../img/img05.jpg";
-
-    content.innerHTML = $("#summernote").summernote('code');
 }
 
 function showComfortable() {

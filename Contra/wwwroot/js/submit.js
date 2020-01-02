@@ -1,0 +1,131 @@
+﻿
+document.addEventListener("DOMContentLoaded", function () {
+    coauthors = document.getElementById("coauthors");
+    inputCoauthors = document.getElementById("input-coauthors");
+    title = document.getElementById("title");
+    inputTitle = document.getElementById("input-title");
+    image = document.getElementById("thumbnail-img");
+    inputImage = document.getElementById("input-img");
+    content = document.getElementById("content");
+});
+
+function selectFormat(format) {
+    anime.timeline({
+        duration: 1000,
+        easing: 'easeOutExpo'
+    }).add({
+        targets: '#select-format',
+        height: "0px",
+        opacity: 0
+    }).add({
+        targets: '.format',
+        delay: -1000,
+        opacity: 1
+    });
+
+    if (format === 0)
+        document.getElementById("select-article").style.display = "block";
+    else if (format === 1)
+        document.getElementById("select-event").style.display = "block";
+    else if (format === 2)
+        document.getElementById("select-newsbeat").style.display = "block";
+
+    document.getElementById("input-articleType").value = format;
+}
+
+function reselectFormat(currentFormat) {
+    anime.timeline({
+        duration: 1000,
+        easing: 'easeOutExpo'
+    }).add({
+        targets: '#select-format',
+        height: "100%",
+        opacity: 1
+    });
+
+    if (currentFormat === 0)
+        document.getElementById("select-article").style.display = "none";
+    else if (currentFormat === 1)
+        document.getElementById("select-event").style.display = "none";
+    else if (currentFormat === 2)
+        document.getElementById("select-newsbeat").style.display = "none";
+
+    submitUndoStep();
+}
+
+function toggleGroup(sender, group) {
+    if (sender.checked)
+        document.getElementById("inputGroup-" + group).style.display = "unset";
+    else
+        document.getElementById("inputGroup-" + group).style.display = "none";
+}
+
+function submitUndoStep() {
+    if (submitStep > 1) submitStep--;
+    else submitStep = 1;
+
+    var toShow = document.getElementById("step-" + submitStep);
+    var shown = document.getElementById("step-" + (submitStep + 1));
+    toShow.style.display = "unset";
+    shown.style.display = "none";
+
+    if (submitStep === 1) {
+        document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
+    }
+    document.getElementById("nextButton").classList = "btn btn-outline-info";
+    document.getElementById("preview").style.display = "none";
+
+    updateLivePreview();
+}
+
+function submitNextStep() {
+    if (submitStep < 4) submitStep++;
+    else submitStep = 4;
+
+    var toShow = document.getElementById("step-" + submitStep);
+    var shown = document.getElementById("step-" + (submitStep - 1));
+    toShow.style.display = "unset";
+    shown.style.display = "none";
+
+    if (submitStep === 4) {
+        document.getElementById("preview").style.display = "unset";
+        document.getElementById("nextButton").classList = "btn btn-outline-dark disabled";
+        content.innerHTML = $("#summernote").summernote('code');
+    }
+    document.getElementById("prevButton").classList = "btn btn-outline-info";
+
+    updateLivePreview();
+}
+
+function toggleTag(tag) {
+    var tags = document.getElementById("tags");
+    if (tags.value.includes(" " + tag))
+        tags.value = tags.value.replace(" " + tag, "");
+    else
+        tags.value += " " + tag;
+}
+
+var coauthors, inputCoauthors;
+var title, inputTitle;
+var image, inputImage;
+var content;
+var submitStep = 1;
+
+function updateLivePreview() {
+    if (inputCoauthors.value)
+        coauthors.innerText = ", " + inputCoauthors.value;
+    else
+        coauthors.innerText = "";
+
+    if (inputTitle.value)
+        title.innerText = inputTitle.value;
+    else
+        title.innerText = "Title";
+
+    if (inputImage.value)
+        image.src = inputImage.value;
+    else
+        image.src = "../img/img05.jpg";
+
+    content.innerHTML = $("#summernote").summernote('code');
+}

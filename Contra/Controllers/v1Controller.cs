@@ -274,7 +274,7 @@ namespace Contra.Controllers
                 string tag = query.Substring(4);
                 articles = (from a in _context.Article
                             where a.Approved == ApprovalStatus.Approved &&
-                            a.Tags.ToLower().Contains(tag)
+                                  a.Tags.ToLower().Contains(tag)
                             orderby a.Date descending
                             select a).ToList();
             }
@@ -282,15 +282,25 @@ namespace Contra.Controllers
             {
                 articles = (query.ToLower()) switch
                 {
+                    "editorial" => (from a in _context.Article
+                                    where a.Approved == ApprovalStatus.Approved &&
+                                          a.IsEditorial
+                                    orderby a.Date descending
+                                    select a).ToList(),
                     "new" => (from a in _context.Article
                               where a.Approved == ApprovalStatus.Approved
                               orderby a.Date descending
                               select a).ToList(),
+                    "newsbeat" => (from a in _context.Article
+                                   where a.Approved == ApprovalStatus.Approved &&
+                                         a.ArticleType == ArticleType.Newsbeat
+                                   orderby a.Date descending
+                                   select a).ToList(),
                     _ => (from a in _context.Article
                           where a.Approved == ApprovalStatus.Approved &&
-                              (a.Title.ToLower().Contains(query) ||
-                              a.Tags.ToLower().Contains(query) ||
-                              a.OwnerID == query)
+                               (a.Title.ToLower().Contains(query) ||
+                                a.Tags.ToLower().Contains(query) ||
+                                a.OwnerID == query)
                           orderby a.Date descending
                           select a).ToList()
                 };
