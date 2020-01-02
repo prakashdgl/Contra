@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Contra.Areas.Identity.Data;
 using Contra.Models;
+using Contra.Services;
 
 namespace Contra.Areas.Identity.Pages.Account
 {
@@ -24,13 +25,13 @@ namespace Contra.Areas.Identity.Pages.Account
         private readonly SignInManager<OpenTalonUser> _signInManager;
         private readonly UserManager<OpenTalonUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly EmailSender _emailSender;
 
         public RegisterModel(
             UserManager<OpenTalonUser> userManager,
             SignInManager<OpenTalonUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            EmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -119,8 +120,7 @@ namespace Contra.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailSender.SendConfirmEmailAsync(Input.Email, Input.Name, callbackUrl);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

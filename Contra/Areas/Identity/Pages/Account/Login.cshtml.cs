@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Encodings.Web;
@@ -12,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Contra.Areas.Identity.Data;
+using Contra.Services;
 
 namespace Contra.Areas.Identity.Pages.Account
 {
@@ -21,12 +21,12 @@ namespace Contra.Areas.Identity.Pages.Account
         private readonly UserManager<OpenTalonUser> _userManager;
         private readonly SignInManager<OpenTalonUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly EmailSender _emailSender;
 
         public LoginModel(SignInManager<OpenTalonUser> signInManager, 
             ILogger<LoginModel> logger,
             UserManager<OpenTalonUser> userManager,
-            IEmailSender emailSender)
+            EmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -112,15 +112,11 @@ namespace Contra.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostSendVerificationEmailAsync()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
-            {
                 ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
-            }
 
             var userId = await _userManager.GetUserIdAsync(user);
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -129,10 +125,7 @@ namespace Contra.Areas.Identity.Pages.Account
                 pageHandler: null,
                 values: new { userId, code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
-                Input.Email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+            await _emailSender.SendConfirmEmailAsync(Input.Email, user.Name, callbackUrl);
 
             ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
             return Page();

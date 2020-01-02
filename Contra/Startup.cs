@@ -34,6 +34,7 @@ namespace Contra
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<EmailSender, EmailSender>();
             services.Configure<EmailOptions>(Configuration);
 
             services.AddControllersWithViews();
