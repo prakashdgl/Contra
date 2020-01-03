@@ -16,13 +16,13 @@
     <header>
         <nav id="nav">
             <div class="container">
-                <a class="navbar-brand" href="~/"><img src="~/img/contra.png" alt="Home Button" /></a>
-                <button id="menu-button" onclick="showMenu()">Menu</button>
+                <a class="navbar-brand" href="~/" name="Contra Home" ><img src="~/img/contra.png" alt="Contra" /></a>
+                <button id="menu-button" onclick="showMenu()" type="button">Menu</button>
                 <div id="links">
                     <div class="links nav-search search">
                         <form asp-controller="Home" asp-action="Search">
                             <input name="filter" type="text" placeholder="Search articles" />
-                            <button class="btn c-btn-primary" type="submit"><img src="~/img/search.png" /></button>
+                            <button class="btn c-btn-primary" type="submit" name="Search"><img src="~/img/search.png" alt="Search" /></button>
                         </form>
                     </div>
                     <div class="links float-right">
@@ -48,7 +48,7 @@
             <a href="~/privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     @RenderSection("Scripts", required: false)
 </body>

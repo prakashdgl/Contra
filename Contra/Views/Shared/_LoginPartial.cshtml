@@ -7,7 +7,7 @@
 {
     @if (User.IsInRole("Staff"))
     {
-        <a class="nav-link px-0" href="~/admin"><img src="~/img/superuser.png" /></a>
+        <a class="nav-link px-0" href="~/admin"><img src="~/img/superuser.png" alt="Superuser" /></a>
     }
     <a class="nav-link" href="~/submit">Create Post</a>
     <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">

@@ -25,14 +25,10 @@ function selectFormat(format) {
         targets: '#select-format',
         height: "0px",
         opacity: 0
-    }).add({
-        targets: '.format',
-        delay: -1000,
-        opacity: 1
     });
 
     currentFormat = format;
-    document.getElementById("submit-form").style.display = "block";
+    document.getElementById("submit-form").style.display = "unset";
 
     document.getElementById("input-articleType").value = format;
 }
@@ -62,8 +58,8 @@ function toggleGroup(sender, group) {
 function submitResetSteps() {
     var toShow = document.getElementById("step-1");
     var shown = document.getElementById("step-" + submitStep);
-    toShow.style.display = "unset";
     shown.style.display = "none";
+    toShow.style.display = "unset";
 
     document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
     document.getElementById("nextButton").classList = "btn btn-outline-info";

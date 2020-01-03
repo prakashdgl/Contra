@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     for (var i = 0; i < nltargets.length; i++) {
         var el = nltargets[i];
         neoload(el,
-                el.getAttribute("data-query"),
-                el.getAttribute("data-amount"),
-                el.getAttribute("data-type"));
+            el.getAttribute("data-query"),
+            el.getAttribute("data-amount"),
+            el.getAttribute("data-type"));
     }
 
     var search = document.getElementById("search");
@@ -67,7 +67,7 @@ function onResize() {
 }
 
 function redirect(id) {
-    window.location = "/article/"+id;
+    window.location = "/article/" + id;
 }
 
 function changePFP(id, url) {
@@ -187,21 +187,21 @@ function formatCard(id, image, title, summary, big, encapsulate) {
     if (encapsulate) classes += " card-encapsulate";
 
     return "<div class='" + classes + "' onclick='redirect(" + id + ")'>" +
-           "<span class='image-container'><img src='" + image + "' alt='" + title + " Thumbnail Image' /></span>" +
-           "<div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
+        "<span class='image-container'><img src='" + image + "' alt='" + title + " Thumbnail Image' /></span>" +
+        "<div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
 }
 
 function formatSearchCard(id, image, title, author, date, summary) {
     return "<div class='card card-big card-search'><span class='image-container'>" +
-           "<img src='" + image + "' alt='" + title + " Thumbnail Image' /></span><div><h2>" +
-           title + "</h2><p class='compact-hidden'>" + author + " - " + date + "</p><hr class='compact-hidden' /><p>" +
-           summary + "</p><a href='https://" + window.location.host + "/article/" + id + "'>Read More</a></div></div>";
+        "<img src='" + image + "' alt='" + title + " Thumbnail Image' /></span><div><h2>" +
+        title + "</h2><p class='compact-hidden'>" + author + " - " + date + "</p><hr class='compact-hidden' /><p>" +
+        summary + "</p><a href='https://" + window.location.host + "/article/" + id + "'>Read More</a></div></div>";
 }
 
 function formatNewsbeat(id, image, title, summary) {
     return "<div class='card card-big card-encapsulate card-newsbeat' onclick='redirect(" +
-           id + ")'><span class='image-container'><img src='" + image + "' alt='" + title +
-           " Thumbnail' /></span><div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
+        id + ")'><span class='image-container'><img src='" + image + "' alt='" + title +
+        " Thumbnail' /></span><div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
 }
 
 function showComfortable() {
