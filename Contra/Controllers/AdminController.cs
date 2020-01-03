@@ -126,7 +126,7 @@ namespace Contra.Controllers
                     break;
                 default:
                     ViewData["SortBy"] = "New";
-                    comments = comments.OrderBy(u => u.Date).ToList();
+                    comments = comments.OrderByDescending(u => u.Date).ToList();
                     break;
             }
 
@@ -167,7 +167,7 @@ namespace Contra.Controllers
                     break;
                 case "date":
                     ViewData["SortBy"] = "Date";
-                    users = users.OrderBy(u => u.DateJoined).ToList();
+                    users = users.OrderByDescending(u => u.DateJoined).ToList();
                     break;
                 case "email":
                     ViewData["SortBy"] = "Email";
