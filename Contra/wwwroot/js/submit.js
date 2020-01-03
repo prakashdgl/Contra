@@ -1,13 +1,23 @@
 ﻿
-document.addEventListener("DOMContentLoaded", function () {
+var coauthors, inputCoauthors;
+var title, inputTitle;
+var image, inputImage;
+var content;
+var submitStep = 1;
+var currentFormat;
+
+document.addEventListener("DOMContentLoaded", () => {
     coauthors = document.getElementById("coauthors");
-    inputCoauthors = document.getElementById("input-coauthors");
     title = document.getElementById("title");
-    inputTitle = document.getElementById("input-title");
     image = document.getElementById("thumbnail-img");
-    inputImage = document.getElementById("input-img");
     content = document.getElementById("content");
 });
+
+function setPreviewVariables() {
+    inputCoauthors = document.getElementById(currentFormat + "-input-coauthors");
+    inputTitle = document.getElementById(currentFormat + "-input-title");
+    inputImage = document.getElementById(currentFormat + "-input-img");
+}
 
 function selectFormat(format) {
     anime.timeline({
@@ -23,6 +33,7 @@ function selectFormat(format) {
         opacity: 1
     });
 
+    currentFormat = format;
     if (format === 0)
         document.getElementById("select-article").style.display = "block";
     else if (format === 1)
@@ -31,9 +42,10 @@ function selectFormat(format) {
         document.getElementById("select-newsbeat").style.display = "block";
 
     document.getElementById("input-articleType").value = format;
+    setPreviewVariables();
 }
 
-function reselectFormat(currentFormat) {
+function reselectFormat() {
     anime.timeline({
         duration: 1000,
         easing: 'easeOutExpo'
@@ -50,7 +62,7 @@ function reselectFormat(currentFormat) {
     else if (currentFormat === 2)
         document.getElementById("select-newsbeat").style.display = "none";
 
-    submitUndoStep();
+    submitResetSteps();
 }
 
 function toggleGroup(sender, group) {
@@ -60,19 +72,32 @@ function toggleGroup(sender, group) {
         document.getElementById("inputGroup-" + group).style.display = "none";
 }
 
+function submitResetSteps() {
+    var toShow = document.getElementById(currentFormat + "-step-1");
+    var shown = document.getElementById(currentFormat + "-step-" + submitStep);
+    toShow.style.display = "unset";
+    shown.style.display = "none";
+
+    document.getElementById(currentFormat + "-prevButton").classList = "btn btn-outline-dark disabled";
+    document.getElementById(currentFormat + "-nextButton").classList = "btn btn-outline-info";
+    document.getElementById("preview").style.display = "none";
+
+    submitStep = 1;
+}
+
 function submitUndoStep() {
     if (submitStep > 1) submitStep--;
     else submitStep = 1;
 
-    var toShow = document.getElementById("step-" + submitStep);
-    var shown = document.getElementById("step-" + (submitStep + 1));
+    var toShow = document.getElementById(currentFormat + "-step-" + submitStep);
+    var shown = document.getElementById(currentFormat + "-step-" + (submitStep + 1));
     toShow.style.display = "unset";
     shown.style.display = "none";
 
     if (submitStep === 1) {
-        document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
+        document.getElementById(currentFormat + "-prevButton").classList = "btn btn-outline-dark disabled";
     }
-    document.getElementById("nextButton").classList = "btn btn-outline-info";
+    document.getElementById(currentFormat + "-nextButton").classList = "btn btn-outline-info";
     document.getElementById("preview").style.display = "none";
 
     updateLivePreview();
@@ -82,17 +107,17 @@ function submitNextStep() {
     if (submitStep < 4) submitStep++;
     else submitStep = 4;
 
-    var toShow = document.getElementById("step-" + submitStep);
-    var shown = document.getElementById("step-" + (submitStep - 1));
+    var toShow = document.getElementById(currentFormat + "-step-" + submitStep);
+    var shown = document.getElementById(currentFormat + "-step-" + (submitStep - 1));
     toShow.style.display = "unset";
     shown.style.display = "none";
 
     if (submitStep === 4) {
         document.getElementById("preview").style.display = "unset";
-        document.getElementById("nextButton").classList = "btn btn-outline-dark disabled";
+        document.getElementById(currentFormat + "-nextButton").classList = "btn btn-outline-dark disabled";
         content.innerHTML = $("#summernote").summernote('code');
     }
-    document.getElementById("prevButton").classList = "btn btn-outline-info";
+    document.getElementById(currentFormat + "-prevButton").classList = "btn btn-outline-info";
 
     updateLivePreview();
 }
@@ -105,11 +130,6 @@ function toggleTag(tag) {
         tags.value += " " + tag;
 }
 
-var coauthors, inputCoauthors;
-var title, inputTitle;
-var image, inputImage;
-var content;
-var submitStep = 1;
 
 function updateLivePreview() {
     if (inputCoauthors.value)
@@ -127,5 +147,5 @@ function updateLivePreview() {
     else
         image.src = "../img/img05.jpg";
 
-    content.innerHTML = $("#summernote").summernote('code');
+    content.innerHTML = $("#" + currentFormat + "-content").summernote('code');
 }

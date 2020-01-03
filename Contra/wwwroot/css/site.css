@@ -421,33 +421,8 @@ section {
     padding: 0.5rem !important;
 }
 
-.submit {
-    flex-direction: column;
-    padding: 0;
-    margin: 10px;
-    margin-bottom: 20px;
-}
-.submit h2 {
-    margin: 15px;
-}
-.submit form h2, .article-preview h2 {
-    margin-left: 0;
-}
-
-.submit-form {
-    flex: 1 1;
-}
-.submit-form form {
-    width: 95%;
-    margin: auto;
-}
-
 form section div:last-of-type {
     margin-right: 0;
-}
-
-#step-2, #step-3, #step-4 {
-    display: none;
 }
 
 .toggle {

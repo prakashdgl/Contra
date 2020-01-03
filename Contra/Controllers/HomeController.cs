@@ -182,12 +182,6 @@ namespace Contra.Controllers
             return View();
         }
 
-        [HttpGet("/apply")]
-        public IActionResult Apply()
-        {
-            return View();
-        }
-
         [HttpPost("/apply")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Apply([Bind("Id,AuthorName,ThumbnailURL,Title,Tags,SummaryLong,Content")] Article article)
