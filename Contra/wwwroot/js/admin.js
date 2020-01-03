@@ -45,3 +45,31 @@ function postToAPI(route, updateResponseText = true) {
 
     http.send();
 }
+
+function toggleTag(tag) {
+    var tags = document.getElementById("tags");
+    if (tags.value.includes(" " + tag))
+        tags.value = tags.value.replace(" " + tag, "");
+    else
+        tags.value += " " + tag;
+}
+
+function generateTestArticle(newsbeat, editorial) {
+    var tags = document.getElementById("tags").value;
+    var route = "api/v1/generate/" + tags;
+
+    if (newsbeat) route += "/true";
+    else route += "/false";
+    if (editorial) route += "/true";
+    else route += "/false";
+
+    request("POST", route, (x) => {
+        document.getElementById("suite-response").innerText = x;
+    });
+}
+
+function degenerateArticles() {
+    request("POST", "api/v1/degenerate", (x) => {
+        document.getElementById("suite-response").innerText = x;
+    });
+}
