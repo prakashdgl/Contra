@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     var search = document.getElementById("search");
-    if (search) { formatSearch = true; skip = 2; }
+    if (search) { formatSearch = true; skip = 0; }
 
     var query = document.getElementById("query");
     if (query) { loadContent(query.innerText); }
@@ -95,31 +95,40 @@ function request(method, route, callback = null) {
     http.send();
 }
 
-function neoload(target, query, amount, type) {
-    request("GET", "api/v1/article/list/" + query + "/" + amount, x => {
+function neoload(target, query, amount, type, skip = 0, callback = null) {
+    request("GET", "api/v1/article/list/" + query + "/" + amount + "/" + skip, x => {
+        if (callback) callback(x);
+        if (!x) return;
+
         var json = JSON.parse(x);
 
         var i = 0;
         var html = "";
         json.forEach(obj => {
+            var sensitive = false, spoiler = false;
+            if (obj.sensitive === "True") sensitive = true;
+            if (obj.spoiler === "True") spoiler = true;
+
+            var cw;
             if (type === "search") {
-                html += formatSearchCard(obj.id, obj.image, obj.title, obj.author, obj.date, obj.summary);
+                cw = formatContentWarning(sensitive, spoiler, false);
+                html += formatSearchCard(obj.id, obj.image, obj.title, obj.author, obj.date, obj.summary, cw);
             }
             else if (type === "block") {
+                cw = formatContentWarning(sensitive, spoiler, false);
                 var biggify = false;
                 if (i % 2 === 0) {
                     if (i % 4 === 2) biggify = !biggify;
-                    html += "<section>" + formatCard(obj.id, obj.image,
-                        obj.title, obj.summary, !biggify, biggify);
+                    html += "<section>" + formatCard(obj.id, obj.image, obj.title, obj.summary, !biggify, biggify, cw);
                 }
                 else {
                     if (i % 4 === 3) biggify = !biggify;
-                    html += formatCard(obj.id, obj.image, obj.title,
-                        obj.summary, biggify, !biggify) + "</section>";
+                    html += formatCard(obj.id, obj.image, obj.title, obj.summary, biggify, !biggify, cw) + "</section>";
                 }
             }
             else if (type === "mini") {
-                html += formatNewsbeat(obj.id, obj.image, obj.title, obj.summary);
+                cw = formatContentWarning(sensitive, spoiler, true);
+                html += formatNewsbeat(obj.id, obj.image, obj.title, obj.summary, cw);
             }
             i++;
         });
@@ -132,76 +141,62 @@ function loadContent(query) {
     loadTarget = document.getElementById("loadTarget");
     if (!loadTarget) return;
 
-    var http = new XMLHttpRequest();
-    http.open('GET', "https://" + window.location.host + "/api/v1/article/list/" + query + "/8/" + skip, true);
+    var format = "block";
+    if (formatSearch) format = "search";
+
+    neoload(loadTarget, query, 8, format, skip, x => {
+        if (x === "") {
+            if (document.getElementById("loadSection") && loadTarget.innerHTML === "")
+                document.getElementById("loadSection").style.display = "none";
+            document.getElementById("loadButton").style.display = "none";
+            loadTarget.innerHTML += "<div class='section-title text-center'><h2>No more content! :(</h2></div>";
+            return;
+        }
+    });
+
     skip++;
 
-    http.onreadystatechange = function () {
-        if (http.readyState === 4 && http.status === 200) {
-            if (http.responseText === "") {
-                if (document.getElementById("loadSection") && loadTarget.innerHTML === "")
-                    document.getElementById("loadSection").style.display = "none";
-                document.getElementById("loadButton").style.display = "none";
-                loadTarget.innerHTML += "<div class='section-title text-center'><h2>No more content! :(</h2></div>";
-                return;
-            }
-
-            var json = JSON.parse(http.responseText);
-
-            var i = 0;
-            var html = "";
-            json.forEach(obj => {
-                if (formatSearch) {
-                    html += formatSearchCard(obj.id, obj.image, obj.title, obj.author, obj.date, obj.summary);
-                }
-                else {
-                    var biggify = true;
-                    if (i % 2 === 0) {
-                        if (i % 4 === 2) biggify = !biggify;
-                        html += "<section>" + formatCard(obj.id, obj.image,
-                            obj.title, obj.summary, !biggify, biggify);
-                    }
-                    else {
-                        if (i % 4 === 3) biggify = !biggify;
-                        html += formatCard(obj.id, obj.image, obj.title,
-                            obj.summary, biggify, !biggify) + "</section>";
-                    }
-                }
-                i++;
-            });
-
-            loadTarget.innerHTML += html;
-
-            if (document.cookie.includes("compact=yes") &&
-                document.getElementById("compact-compatible"))
-                showCompact();
-        }
-    };
-
-    http.send();
+    if (document.cookie.includes("compact=yes") &&
+        document.getElementById("compact-compatible"))
+        showCompact();
 }
 
-function formatCard(id, image, title, summary, big, encapsulate) {
+function formatContentWarning(sensitive, spoiler, mini) {
+    if (!sensitive && !spoiler)
+        return "";
+
+    var html = "<p class='content-notice";
+    if (mini) html += " content-notice-inline";
+    html += "'>CW: ";
+
+    if (sensitive) html += "<span>Sensitive</span>";
+    if (sensitive && spoiler) html += "<span>, </span>";
+    if (spoiler) html += "<span>Spoiler</span>";
+
+    return html + "</p>";
+}
+
+function formatCard(id, image, title, summary, big, encapsulate, contentWarning) {
     var classes = "card story";
     if (big) classes += " card-big";
     if (encapsulate) classes += " card-encapsulate";
 
     return "<div class='" + classes + "' onclick='redirect(" + id + ")'>" +
         "<span class='image-container'><img src='" + image + "' alt='" + title + " Thumbnail Image' /></span>" +
-        "<div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
+        "<div><h2>" + title + "</h2>" + contentWarning + "<p>" + summary + "</p></div></div>";
 }
 
-function formatSearchCard(id, image, title, author, date, summary) {
+function formatSearchCard(id, image, title, author, date, summary, contentWarning) {
     return "<div class='card card-big card-search'><span class='image-container'>" +
         "<img src='" + image + "' alt='" + title + " Thumbnail Image' /></span><div><h2>" +
-        title + "</h2><p class='compact-hidden'>" + author + " - " + date + "</p><hr class='compact-hidden' /><p>" +
+        title + "</h2><p class='compact-hidden'>" + author + " - " + date + "</p>" + contentWarning + "<hr class='compact-hidden' /><p>" +
         summary + "</p><a href='https://" + window.location.host + "/article/" + id + "'>Read More</a></div></div>";
 }
 
-function formatNewsbeat(id, image, title, summary) {
+function formatNewsbeat(id, image, title, summary, contentWarning) {
     return "<div class='card card-big card-encapsulate card-newsbeat' onclick='redirect(" +
         id + ")'><span class='image-container'><img src='" + image + "' alt='" + title +
-        " Thumbnail' /></span><div><h2>" + title + "</h2><p>" + summary + "</p></div></div>";
+        " Thumbnail' /></span><div><h2>" + title + "</h2>" + contentWarning + "<p>" + summary + "</p></div></div>";
 }
 
 function showComfortable() {

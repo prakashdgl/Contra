@@ -10,12 +10,8 @@
             <h2>Cover Story</h2>
         </div>
         <section>
-            <div class="card card-big story" onclick="redirect(@Model.ElementAt(0).Id)">
-                <span class="image-container"><img src=@Model.ElementAt(0).ThumbnailURL alt="Article Thumbnail" /></span>
-                <div>
-                    <h2>@Model.ElementAt(0).Title</h2>
-                    <p>@Model.ElementAt(0).SummaryLong</p>
-                </div>
+            <div class="card card-cover story" onclick="redirect(@Model.ElementAt(0).Id)">
+                <partial name="_CardContentPartial" model="@Model.ElementAt(0)" />
             </div>
         </section>
         <div class="section-title">
@@ -23,34 +19,18 @@
         </div>
         <section>
             <div class="card card-big story" onclick="redirect(@Model.ElementAt(1).Id)">
-                <span class="image-container"><img src=@Model.ElementAt(1).ThumbnailURL alt="Article Thumbnail" /></span>
-                <div>
-                    <h2>@Model.ElementAt(1).Title</h2>
-                    <p>@Model.ElementAt(1).SummaryLong</p>
-                </div>
+                <partial name="_CardContentPartial" model="@Model.ElementAt(1)" />
             </div>
             <div class="card card-encapsulate story" onclick="redirect(@Model.ElementAt(2).Id)">
-                <span class="image-container"><img src=@Model.ElementAt(2).ThumbnailURL alt="Article Thumbnail" /></span>
-                <div>
-                    <h2>@Model.ElementAt(2).Title</h2>
-                    <p>@Model.ElementAt(2).SummaryLong</p>
-                </div>
+                <partial name="_CardContentPartial" model="@Model.ElementAt(2)" />
             </div>
         </section>
         <section>
             <div class="card card-encapsulate story" onclick="redirect(@Model.ElementAt(3).Id)">
-                <span class="image-container"><img src=@Model.ElementAt(3).ThumbnailURL alt="Article Thumbnail" /></span>
-                <div>
-                    <h2>@Model.ElementAt(3).Title</h2>
-                    <p>@Model.ElementAt(3).SummaryLong</p>
-                </div>
+                <partial name="_CardContentPartial" model="@Model.ElementAt(3)" />
             </div>
             <div class="card card-big story" onclick="redirect(@Model.ElementAt(4).Id)">
-                <span class="image-container"><img src=@Model.ElementAt(4).ThumbnailURL alt="Article Thumbnail" /></span>
-                <div>
-                    <h2>@Model.ElementAt(4).Title</h2>
-                    <p>@Model.ElementAt(4).SummaryLong</p>
-                </div>
+                <partial name="_CardContentPartial" model="@Model.ElementAt(4)" />
             </div>
         </section>
         <div class="section-title">

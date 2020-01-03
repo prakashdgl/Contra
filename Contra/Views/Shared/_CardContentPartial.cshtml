@@ -1,0 +1,19 @@
+﻿@model Article
+
+<span class="image-container"><img src=@Model.ThumbnailURL alt="@Model.Title Thumbnail Image" /></span>
+<div>
+    <h2>@Model.Title</h2>
+    @if (Model.Sensitive || Model.Spoiler)
+    {
+        <p class="content-notice">
+            CW: 
+            @if (Model.Sensitive)
+            {<span>Sensitive</span>}
+            @if (Model.Sensitive && Model.Spoiler)
+            {<span>, </span>}
+            @if (Model.Spoiler)
+            {<span>Spoilers</span>}
+        </p>
+    }
+    <p>@Model.SummaryLong</p>
+</div>

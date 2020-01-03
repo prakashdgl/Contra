@@ -250,7 +250,11 @@ namespace Contra.Controllers
                 { "date", article.Date.ToString() },
                 { "tags", article.Tags },
                 { "summary", article.SummaryLong },
-                { "image", article.ThumbnailURL }
+                { "image", article.ThumbnailURL },
+                { "sensitive", article.Sensitive.ToString() },
+                { "sensitiveContent", article.SensitiveContent },
+                { "spoiler", article.Spoiler.ToString() },
+                { "spoilerContent", article.SpoilerContent }
             };
 
             return JsonConvert.SerializeObject(info);
@@ -282,6 +286,10 @@ namespace Contra.Controllers
             {
                 articles = (query.ToLower()) switch
                 {
+                    "all" => (from a in _context.Article
+                              where a.Approved == ApprovalStatus.Approved
+                              orderby a.Date descending
+                              select a).ToList(),
                     "editorial" => (from a in _context.Article
                                     where a.Approved == ApprovalStatus.Approved &&
                                           a.IsEditorial
@@ -320,8 +328,16 @@ namespace Contra.Controllers
                     { "date", a.Date.ToString() },
                     { "tags", a.Tags },
                     { "summary", a.SummaryLong },
-                    { "image", a.ThumbnailURL }
+                    { "image", a.ThumbnailURL },
+                    { "sensitive", a.Sensitive.ToString() },
+                    { "sensitiveContent", a.SensitiveContent },
+                    { "spoiler", a.Spoiler.ToString() },
+                    { "spoilerContent", a.SpoilerContent }
                 };
+
+                if (a.Anonymous)
+                    i["author"] = "Anonymous";
+
                 info.Add(i);
             }
 

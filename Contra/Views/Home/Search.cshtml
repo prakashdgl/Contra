@@ -28,6 +28,18 @@
             <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
             <p class="compact-hidden">@Html.DisplayFor(modelItem => item.AuthorName) - @Html.DisplayFor(modelItem => item.Date)</p>
             <hr class="compact-hidden" />
+            @if (item.Sensitive || item.Spoiler)
+            {
+                <p class="content-notice">
+                    CW:
+                    @if (item.Sensitive)
+                    {<span>Sensitive</span>}
+                    @if (item.Sensitive && item.Spoiler)
+                    {<span>, </span>}
+                    @if (item.Spoiler)
+                    {<span>Spoilers</span>}
+                </p>
+            }
             <p>@Html.DisplayFor(modelItem => item.SummaryLong)</p>
             <a asp-controller="Home" asp-action="Article" asp-route-id="@item.Id">Read More</a>
         </div>

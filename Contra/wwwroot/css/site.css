@@ -288,11 +288,22 @@ section {
 }
 
 .content-notice {
-    background-color: #ddd;
+    background-color: #eee;
     border-radius: 5px;
     color: #555;
     font-size: 14px;
-    padding: 5px;
+    padding: 5px 10px;
+}
+.content-notice-inline {
+    display: inline-block;
+    font-size: 10px;
+    margin-left: 0.5rem;
+    padding: 2px 4px;
+}
+
+.card-encapsulate .content-notice {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 
 .card .image-container {
@@ -321,8 +332,11 @@ section {
 .card-big {
     flex: 3 1;
 }
-.card-big .image-container {
-    left: 220px;
+.card-cover > div {
+    width: 300px;
+}
+.card-cover .image-container {
+    left: 300px;
 }
 
 .card-encapsulate {
@@ -372,6 +386,7 @@ section {
     height: 100%;
 }
 .card-newsbeat > div > h2 {
+    display: inline-block;
     font-size: 16px;
 }
 .card-newsbeat > div > p {
