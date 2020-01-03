@@ -10,14 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
     coauthors = document.getElementById("coauthors");
     title = document.getElementById("title");
     image = document.getElementById("thumbnail-img");
-    content = document.getElementById("content");
-});
+    content = document.getElementById("preview-content");
 
-function setPreviewVariables() {
-    inputCoauthors = document.getElementById(currentFormat + "-input-coauthors");
-    inputTitle = document.getElementById(currentFormat + "-input-title");
-    inputImage = document.getElementById(currentFormat + "-input-img");
-}
+    inputCoauthors = document.getElementById("input-coauthors");
+    inputTitle = document.getElementById("input-title");
+    inputImage = document.getElementById("input-img");
+});
 
 function selectFormat(format) {
     anime.timeline({
@@ -34,15 +32,9 @@ function selectFormat(format) {
     });
 
     currentFormat = format;
-    if (format === 0)
-        document.getElementById("select-article").style.display = "block";
-    else if (format === 1)
-        document.getElementById("select-event").style.display = "block";
-    else if (format === 2)
-        document.getElementById("select-newsbeat").style.display = "block";
+    document.getElementById("submit-form").style.display = "block";
 
     document.getElementById("input-articleType").value = format;
-    setPreviewVariables();
 }
 
 function reselectFormat() {
@@ -55,12 +47,7 @@ function reselectFormat() {
         opacity: 1
     });
 
-    if (currentFormat === 0)
-        document.getElementById("select-article").style.display = "none";
-    else if (currentFormat === 1)
-        document.getElementById("select-event").style.display = "none";
-    else if (currentFormat === 2)
-        document.getElementById("select-newsbeat").style.display = "none";
+    document.getElementById("submit-form").style.display = "none";
 
     submitResetSteps();
 }
@@ -73,13 +60,13 @@ function toggleGroup(sender, group) {
 }
 
 function submitResetSteps() {
-    var toShow = document.getElementById(currentFormat + "-step-1");
-    var shown = document.getElementById(currentFormat + "-step-" + submitStep);
+    var toShow = document.getElementById("step-1");
+    var shown = document.getElementById("step-" + submitStep);
     toShow.style.display = "unset";
     shown.style.display = "none";
 
-    document.getElementById(currentFormat + "-prevButton").classList = "btn btn-outline-dark disabled";
-    document.getElementById(currentFormat + "-nextButton").classList = "btn btn-outline-info";
+    document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
+    document.getElementById("nextButton").classList = "btn btn-outline-info";
     document.getElementById("preview").style.display = "none";
 
     submitStep = 1;
@@ -89,15 +76,15 @@ function submitUndoStep() {
     if (submitStep > 1) submitStep--;
     else submitStep = 1;
 
-    var toShow = document.getElementById(currentFormat + "-step-" + submitStep);
-    var shown = document.getElementById(currentFormat + "-step-" + (submitStep + 1));
+    var toShow = document.getElementById("step-" + submitStep);
+    var shown = document.getElementById("step-" + (submitStep + 1));
     toShow.style.display = "unset";
     shown.style.display = "none";
 
     if (submitStep === 1) {
-        document.getElementById(currentFormat + "-prevButton").classList = "btn btn-outline-dark disabled";
+        document.getElementById("prevButton").classList = "btn btn-outline-dark disabled";
     }
-    document.getElementById(currentFormat + "-nextButton").classList = "btn btn-outline-info";
+    document.getElementById("nextButton").classList = "btn btn-outline-info";
     document.getElementById("preview").style.display = "none";
 
     updateLivePreview();
@@ -107,17 +94,17 @@ function submitNextStep() {
     if (submitStep < 4) submitStep++;
     else submitStep = 4;
 
-    var toShow = document.getElementById(currentFormat + "-step-" + submitStep);
-    var shown = document.getElementById(currentFormat + "-step-" + (submitStep - 1));
+    var toShow = document.getElementById("step-" + submitStep);
+    var shown = document.getElementById("step-" + (submitStep - 1));
     toShow.style.display = "unset";
     shown.style.display = "none";
 
     if (submitStep === 4) {
         document.getElementById("preview").style.display = "unset";
-        document.getElementById(currentFormat + "-nextButton").classList = "btn btn-outline-dark disabled";
-        content.innerHTML = $("#summernote").summernote('code');
+        document.getElementById("nextButton").classList = "btn btn-outline-dark disabled";
+        content.innerHTML = $("#content").summernote('code');
     }
-    document.getElementById(currentFormat + "-prevButton").classList = "btn btn-outline-info";
+    document.getElementById("prevButton").classList = "btn btn-outline-info";
 
     updateLivePreview();
 }
@@ -147,5 +134,5 @@ function updateLivePreview() {
     else
         image.src = "../img/img05.jpg";
 
-    content.innerHTML = $("#" + currentFormat + "-content").summernote('code');
+    content.innerHTML = $("#Content").summernote('code');
 }

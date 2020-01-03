@@ -42,13 +42,13 @@
             </div>
         </div>
     </section>
-    <section id="select-article" class="format hidden">
+    <section id="submit-form" class="format hidden">
         <div class="card">
             <div>
                 <form asp-action="Submit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input id="input-articleType" asp-for="ArticleType" type="hidden" />
-                    <div id="0-step-1">
+                    <div id="step-1">
                         <h2>Article Info (Step 1)</h2>
                         <div class="form-group">
                             <label class="control-label">Email</label>
@@ -60,31 +60,31 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="AuthorName" class="control-label">Co-Author Names</label>
-                            <input id="0-input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="E.g. Sei, Armitage, Dana" />
+                            <input id="input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="E.g. Sei, Armitage, Dana" />
                             <span asp-validation-for="AuthorName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Title" class="control-label"></label>
-                            <input id="0-input-title" asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
+                            <input id="input-title" asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
                             <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
                         <br />
                         <div class="form-group">
                             <label class="control-label">Article Options</label>
                             <section>
-                                <label for="0-sensitive" asp-for="Sensitive" class="toggle">
+                                <label for="sensitive" asp-for="Sensitive" class="toggle">
                                     Sensitive Content
-                                    <input type="checkbox" id="0-sensitive" asp-for="Sensitive" onclick="toggleGroup(this, 'sensitiveContent')">
+                                    <input type="checkbox" id="sensitive" asp-for="Sensitive" onclick="toggleGroup(this, 'sensitiveContent')">
                                     <span class="checkmark"></span>
                                 </label>
-                                <label for="0-spoiler" asp-for="Spoiler" class="toggle">
+                                <label for="spoiler" asp-for="Spoiler" class="toggle">
                                     Spoiler Content
-                                    <input type="checkbox" id="0-spoiler" asp-for="Spoiler" onclick="toggleGroup(this, 'spoilerContent')">
+                                    <input type="checkbox" id="spoiler" asp-for="Spoiler" onclick="toggleGroup(this, 'spoilerContent')">
                                     <span class="checkmark"></span>
                                 </label>
-                                <label for="0-anonymous" asp-for="Anonymous" class="toggle">
+                                <label for="anonymous" asp-for="Anonymous" class="toggle">
                                     Post Anonymously
-                                    <input type="checkbox" id="0-anonymous" asp-for="Anonymous" onclick="toggleGroup(this, 'anonymous')">
+                                    <input type="checkbox" id="anonymous" asp-for="Anonymous" onclick="toggleGroup(this, 'anonymous')">
                                     <span class="checkmark"></span>
                                 </label>
                             </section>
@@ -106,50 +106,50 @@
                             </div>
                         </div>
                     </div>
-                    <div id="0-step-2" class="hidden">
+                    <div id="step-2" class="hidden">
                         <h2>Article Info (Step 2)</h2>
                         <div class="form-group">
                             <label class="control-label">Thumbnail URL</label>
-                            <input id="0-input-img" asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
+                            <input id="input-img" asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
                             <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
                             <p>Please provide an external URL to an image to use as a thumbnail.</p>
                         </div>
                         <br />
                         <div class="form-group">
                             <label class="control-label">Article Tags</label>
-                            <input id="0-tags" asp-for="Tags" type="text" class="disabled form-control" disabled placeholder="Tags you choose will appear here." />
+                            <input id="tags" asp-for="Tags" type="text" class="disabled form-control" disabled placeholder="Tags you choose will appear here." />
                             <br />
                             <section>
-                                <label for="0-tag-news" class="toggle">
+                                <label for="tag-news" class="toggle">
                                     News
-                                    <input type="checkbox" id="0-tag-news" onclick="toggleTag('News')">
+                                    <input type="checkbox" id="tag-news" onclick="toggleTag('News')">
                                     <span class="checkmark"></span>
                                 </label>
-                                <label for="0-tag-opinion" class="toggle">
+                                <label for="tag-opinion" class="toggle">
                                     Opinion
-                                    <input type="checkbox" id="0-tag-opinion" onclick="toggleTag('Opinion')">
+                                    <input type="checkbox" id="tag-opinion" onclick="toggleTag('Opinion')">
                                     <span class="checkmark"></span>
                                 </label>
-                                <label for="0-tag-entertainment" class="toggle">
+                                <label for="tag-entertainment" class="toggle">
                                     Entertainment &amp; Culture
-                                    <input type="checkbox" id="0-tag-entertainment" onclick="toggleTag('Entertainment/Culture')">
+                                    <input type="checkbox" id="tag-entertainment" onclick="toggleTag('Entertainment/Culture')">
                                     <span class="checkmark"></span>
                                 </label>
                             </section>
                             <section>
-                                <label for="0-tag-politics" class="toggle">
+                                <label for="tag-politics" class="toggle">
                                     Politics
-                                    <input type="checkbox" id="0-tag-politics" onclick="toggleTag('Politics')">
+                                    <input type="checkbox" id="tag-politics" onclick="toggleTag('Politics')">
                                     <span class="checkmark"></span>
                                 </label>
-                                <label for="0-tag-sports" class="toggle">
+                                <label for="tag-sports" class="toggle">
                                     Sports
-                                    <input type="checkbox" id="0-tag-sports" onclick="toggleTag('Sports')">
+                                    <input type="checkbox" id="tag-sports" onclick="toggleTag('Sports')">
                                     <span class="checkmark"></span>
                                 </label>
-                                <label for="0-tag-event" class="toggle">
+                                <label for="tag-event" class="toggle">
                                     Local Events
-                                    <input type="checkbox" id="0-tag-event" onclick="toggleTag('Event')">
+                                    <input type="checkbox" id="tag-event" onclick="toggleTag('Event')">
                                     <span class="checkmark"></span>
                                 </label>
                             </section>
@@ -160,15 +160,15 @@
                             <span asp-validation-for="SummaryLong" class="text-danger"></span>
                         </div>
                     </div>
-                    <div id="0-step-3" class="hidden">
+                    <div id="step-3" class="hidden">
                         <h2>Content (Step 3)</h2>
                         <div class="form-group">
                             <label asp-for="Content" class="control-label"></label>
-                            <textarea asp-for="Content" class="summernote" id="0-content"></textarea>
+                            <textarea asp-for="Content" class="summernote"></textarea>
                             <span asp-validation-for="Content" class="text-danger"></span>
                         </div>
                     </div>
-                    <div id="0-step-4" class="hidden">
+                    <div id="step-4" class="hidden">
                         <h2>Review &amp; Submit (Step 4)</h2>
                         <p>Please look over the article preview below to make sure everything is A-OK, then submit.</p>
                         <br />
@@ -185,270 +185,8 @@
                 </form>
                 <div id="submit-controls">
                     <button class="btn btn-outline-dark" onclick="reselectFormat()">Reselect Article Type</button>
-                    <button id="0-prevButton" class="btn btn-outline-dark disabled" onclick="submitUndoStep()">Previous Step</button>
-                    <button id="0-nextButton" class="btn btn-outline-info" onclick="submitNextStep()">Next Step</button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="select-event" class="format hidden">
-        <div class="card">
-            <div>
-                <form asp-action="Submit">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input id="input-articleType" asp-for="ArticleType" type="hidden" />
-                    <div id="1-step-1">
-                        <h2>Event Info (Step 1)</h2>
-                        <div class="form-group">
-                            <label class="control-label">Email</label>
-                            <p><b>@UserManager.GetUserAsync(User).Result.Email</b></p>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Author Name</label>
-                            <p><b>@UserManager.GetUserAsync(User).Result.Name</b></p>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="AuthorName" class="control-label">Co-Author Names</label>
-                            <input id="1-input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="E.g. Sei, Armitage, Dana" />
-                            <span asp-validation-for="AuthorName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Title" class="control-label"></label>
-                            <input id="1-input-title" asp-for="Title" class="form-control" maxlength="40" placeholder="Event Title" />
-                            <span asp-validation-for="Title" class="text-danger"></span>
-                        </div>
-                        <br />
-                    </div>
-                    <div id="1-step-2" class="hidden">
-                        <h2>Event Info (Step 2)</h2>
-                        <div class="form-group">
-                            <label class="control-label">Thumbnail URL</label>
-                            <input id="1-input-img" asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
-                            <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
-                            <p>Please provide an external URL to an image to use as a thumbnail.</p>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <label class="control-label">Event Tags</label>
-                            <input id="1-tags" asp-for="Tags" type="text" class="disabled form-control" disabled placeholder="Tags you choose will appear here." />
-                            <br />
-                            <section>
-                                <label for="1-tag-news" class="toggle">
-                                    News
-                                    <input type="checkbox" id="1-tag-news" onclick="toggleTag('News')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="1-tag-opinion" class="toggle">
-                                    Opinion
-                                    <input type="checkbox" id="1-tag-opinion" onclick="toggleTag('Opinion')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="1-tag-entertainment" class="toggle">
-                                    Entertainment &amp; Culture
-                                    <input type="checkbox" id="1-tag-entertainment" onclick="toggleTag('Entertainment/Culture')">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </section>
-                            <section>
-                                <label for="1-tag-politics" class="toggle">
-                                    Politics
-                                    <input type="checkbox" id="1-tag-politics" onclick="toggleTag('Politics')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="1-tag-sports" class="toggle">
-                                    Sports
-                                    <input type="checkbox" id="1-tag-sports" onclick="toggleTag('Sports')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="1-tag-event" class="toggle">
-                                    Local Events
-                                    <input type="checkbox" id="1-tag-event" onclick="toggleTag('Event')">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </section>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Summary</label>
-                            <input asp-for="SummaryLong" class="form-control" maxlength="60" placeholder="A short summary or overview of the event." />
-                            <span asp-validation-for="SummaryLong" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div id="1-step-3" class="hidden">
-                        <h2>Content (Step 3)</h2>
-                        <div class="form-group">
-                            <label asp-for="Content" class="control-label"></label>
-                            <textarea asp-for="Content" class="summernote" id="1-content"></textarea>
-                            <span asp-validation-for="Content" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div id="1-step-4" class="hidden">
-                        <h2>Review &amp; Submit (Step 4)</h2>
-                        <p>Please look over the article preview below to make sure everything is A-OK, then submit.</p>
-                        <br />
-                        <div class="form-group">
-                            <input type="submit" value="Submit Article" class="btn btn-primary" />
-                            <a href="~/">
-                                <input type="button" value="Cancel" class="btn btn-outline-dark" />
-                            </a>
-                            <br />
-                            <p>By submitting an item, you agree to our <a href="~/privacy">Terms of Service and Privacy Policy</a>.</p>
-                        </div>
-                    </div>
-                    <br />
-                </form>
-                <div id="submit-controls">
-                    <button class="btn btn-outline-dark" onclick="reselectFormat()">Reselect Article Type</button>
-                    <button id="1-prevButton" class="btn btn-outline-dark disabled" onclick="submitUndoStep()">Previous Step</button>
-                    <button id="1-nextButton" class="btn btn-outline-info" onclick="submitNextStep()">Next Step</button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="select-newsbeat" class="format hidden">
-        <div class="card">
-            <div>
-                <form asp-action="Submit">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input id="input-articleType" asp-for="ArticleType" type="hidden" />
-                    <div id="2-step-1">
-                        <h2>Article Info (Step 1)</h2>
-                        <div class="form-group">
-                            <label class="control-label">Email</label>
-                            <p><b>@UserManager.GetUserAsync(User).Result.Email</b></p>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Author Name</label>
-                            <p><b>@UserManager.GetUserAsync(User).Result.Name</b></p>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="AuthorName" class="control-label">Co-Author Names</label>
-                            <input id="2-input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="E.g. Sei, Armitage, Dana" />
-                            <span asp-validation-for="AuthorName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Title" class="control-label"></label>
-                            <input id="2-input-title" asp-for="Title" class="form-control" maxlength="40" placeholder="Article Title" />
-                            <span asp-validation-for="Title" class="text-danger"></span>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <label class="control-label">Article Options</label>
-                            <section>
-                                <label for="2-sensitive" asp-for="Sensitive" class="toggle">
-                                    Sensitive Content
-                                    <input type="checkbox" id="2-sensitive" asp-for="Sensitive" onclick="toggleGroup(this, 'sensitiveContent')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="2-spoiler" asp-for="Spoiler" class="toggle">
-                                    Spoiler Content
-                                    <input type="checkbox" id="2-spoiler" asp-for="Spoiler" onclick="toggleGroup(this, 'spoilerContent')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="2-anonymous" asp-for="Anonymous" class="toggle">
-                                    Post Anonymously
-                                    <input type="checkbox" id="2-anonymous" asp-for="Anonymous" onclick="toggleGroup(this, 'anonymous')">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </section>
-                            <br />
-                            <div id="inputGroup-sensitiveContent" class="form-group hidden">
-                                <label asp-for="SensitiveContent">Sensitive Content</label>
-                                <input type="text" asp-for="SensitiveContent" class="form-control" maxlength="50" placeholder="Describe the sensitive content.">
-                                <span asp-validation-for="SensitiveContent" class="text-danger"></span>
-                                <br />
-                            </div>
-                            <div id="inputGroup-spoilerContent" class="form-group hidden">
-                                <label asp-for="SpoilerContent">Spoiler Content</label>
-                                <input type="text" asp-for="SpoilerContent" class="form-control" maxlength="50" placeholder="Describe what is being spoiled.">
-                                <span asp-validation-for="SensitiveContent" class="text-danger"></span>
-                                <br />
-                            </div>
-                            <div id="inputGroup-anonymous" class="form-group hidden">
-                                <p class="content-notice">Your anonymity is guaranteed only if the content in your writing is potentially sensitive to you or others. The administrative team can still see your identity.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="2-step-2" class="hidden">
-                        <h2>Article Info (Step 2)</h2>
-                        <div class="form-group">
-                            <label class="control-label">Thumbnail URL</label>
-                            <input id="2-input-img" asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
-                            <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
-                            <p>Please provide an external URL to an image to use as a thumbnail.</p>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <label class="control-label">Article Tags</label>
-                            <input id="2-tags" asp-for="Tags" type="text" class="disabled form-control" disabled placeholder="Tags you choose will appear here." />
-                            <br />
-                            <section>
-                                <label for="2-tag-news" class="toggle">
-                                    News
-                                    <input type="checkbox" id="2-tag-news" onclick="toggleTag('News')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="2-tag-opinion" class="toggle">
-                                    Opinion
-                                    <input type="checkbox" id="2-tag-opinion" onclick="toggleTag('Opinion')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="2-tag-entertainment" class="toggle">
-                                    Entertainment &amp; Culture
-                                    <input type="checkbox" id="2-tag-entertainment" onclick="toggleTag('Entertainment/Culture')">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </section>
-                            <section>
-                                <label for="2-tag-politics" class="toggle">
-                                    Politics
-                                    <input type="checkbox" id="2-tag-politics" onclick="toggleTag('Politics')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="2-tag-sports" class="toggle">
-                                    Sports
-                                    <input type="checkbox" id="2-tag-sports" onclick="toggleTag('Sports')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="2-tag-event" class="toggle">
-                                    Local Events
-                                    <input type="checkbox" id="2-tag-event" onclick="toggleTag('Event')">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </section>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Summary</label>
-                            <input asp-for="SummaryLong" class="form-control" maxlength="60" placeholder="A short summary or overview of your article." />
-                            <span asp-validation-for="SummaryLong" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div id="2-step-3" class="hidden">
-                        <h2>Content (Step 3)</h2>
-                        <div class="form-group">
-                            <label asp-for="Content" class="control-label"></label>
-                            <textarea asp-for="Content" class="summernote" id="2-content"></textarea>
-                            <span asp-validation-for="Content" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div id="2-step-4" class="hidden">
-                        <h2>Review &amp; Submit (Step 4)</h2>
-                        <p>Please look over the article preview below to make sure everything is A-OK, then submit.</p>
-                        <br />
-                        <div class="form-group">
-                            <input type="submit" value="Submit Article" class="btn btn-primary" />
-                            <a href="~/">
-                                <input type="button" value="Cancel" class="btn btn-outline-dark" />
-                            </a>
-                            <br />
-                            <p>By submitting an article, you agree to our <a href="~/privacy">Terms of Service and Privacy Policy</a>.</p>
-                        </div>
-                    </div>
-                    <br />
-                </form>
-                <div id="submit-controls">
-                    <button class="btn btn-outline-dark" onclick="reselectFormat()">Reselect Article Type</button>
-                    <button id="2-prevButton" class="btn btn-outline-dark disabled" onclick="submitUndoStep()">Previous Step</button>
-                    <button id="2-nextButton" class="btn btn-outline-info" onclick="submitNextStep()">Next Step</button>
+                    <button id="prevButton" class="btn btn-outline-dark disabled" onclick="submitUndoStep()">Previous Step</button>
+                    <button id="nextButton" class="btn btn-outline-info" onclick="submitNextStep()">Next Step</button>
                 </div>
             </div>
         </div>
@@ -472,7 +210,7 @@
                     @UserManager.GetUserAsync(User).Result.Name<span id="coauthors"></span> - @DateTime.Now.ToShortDateString()
                 </p>
                 <br />
-                <span id="content"></span>
+                <span id="preview-content"></span>
             </div>
         </div>
     </section>

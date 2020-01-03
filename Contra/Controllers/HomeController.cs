@@ -170,31 +170,13 @@ namespace Contra.Controllers
         }
 
         [HttpPost("/submit")]
-        public IActionResult Submit([Bind("Id,ArticleType,AuthorName,Title,Sensitive," +
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Submit([Bind("Id,ArticleType,AuthorName,Title,Sensitive," +
                                           "SensitiveContent,Spoiler,SpoilerContent,Anonymous," +
                                           "ThumbnailURL,Tags,SummaryLong,Content")] Article article)
         {
             if (ModelState.IsValid)
             {
-
-            }
-
-            return View();
-        }
-
-        [HttpPost("/apply")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Apply([Bind("Id,AuthorName,ThumbnailURL,Title,Tags,SummaryLong,Content")] Article article)
-        {
-            if (ModelState.IsValid)
-            {
-                if (string.IsNullOrWhiteSpace(article.SummaryLong))
-                    article.SummaryLong = article.Content.Substring(0, 60) + "...";
-                else if (article.SummaryLong.Length > 60)
-                    article.SummaryLong = article.SummaryLong.Substring(0, 60) + "...";
-                if (string.IsNullOrWhiteSpace(article.ThumbnailURL))
-                    article.ThumbnailURL = "/img/img05.jpg";
-
                 OpenTalonUser user = _userManager.GetUserAsync(User).Result;
                 article.OwnerID = user.Id;
                 if (!string.IsNullOrWhiteSpace(article.AuthorName))
@@ -207,7 +189,7 @@ namespace Contra.Controllers
                 if (User.IsInRole("Staff"))
                 {
                     article.Approved = ApprovalStatus.Approved;
-                    article.Tags += " Editorial";
+                    article.IsEditorial = true;
                 }
                 else
                     article.Approved = ApprovalStatus.Submitted;
