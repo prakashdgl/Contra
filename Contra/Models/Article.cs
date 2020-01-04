@@ -26,9 +26,7 @@ namespace Contra.Models
 
         public bool Anonymous { get; set; }
         public bool Sensitive { get; set; }
-        public string SensitiveContent { get; set; }
         public bool Spoiler { get; set; }
-        public string SpoilerContent { get; set; }
     }
 
     public enum ApprovalStatus

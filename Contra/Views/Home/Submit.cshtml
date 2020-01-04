@@ -72,14 +72,14 @@
                         <div class="form-group">
                             <label class="control-label">Article Options</label>
                             <section>
+                                <label for="spoiler" asp-for="Spoiler" class="toggle">
+                                    Spoiler Content
+                                    <input type="checkbox" id="spoiler" asp-for="Spoiler">
+                                    <span class="checkmark"></span>
+                                </label>
                                 <label for="sensitive" asp-for="Sensitive" class="toggle">
                                     Sensitive Content
                                     <input type="checkbox" id="sensitive" asp-for="Sensitive" onclick="toggleGroup(this, 'sensitiveContent')">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="spoiler" asp-for="Spoiler" class="toggle">
-                                    Spoiler Content
-                                    <input type="checkbox" id="spoiler" asp-for="Spoiler" onclick="toggleGroup(this, 'spoilerContent')">
                                     <span class="checkmark"></span>
                                 </label>
                                 <label for="anonymous" asp-for="Anonymous" class="toggle">
@@ -90,15 +90,7 @@
                             </section>
                             <br />
                             <div id="inputGroup-sensitiveContent" class="form-group hidden">
-                                <label asp-for="SensitiveContent">Sensitive Content</label>
-                                <input type="text" asp-for="SensitiveContent" class="form-control" maxlength="50" placeholder="Describe the sensitive content.">
-                                <span asp-validation-for="SensitiveContent" class="text-danger"></span>
-                                <br />
-                            </div>
-                            <div id="inputGroup-spoilerContent" class="form-group hidden">
-                                <label asp-for="SpoilerContent">Spoiler Content</label>
-                                <input type="text" asp-for="SpoilerContent" class="form-control" maxlength="50" placeholder="Describe what is being spoiled.">
-                                <span asp-validation-for="SensitiveContent" class="text-danger"></span>
+                                <p class="content-notice">Please note if you write about a sensitive topic, we are forced to follow the same legal guidelines that the school does dealing with these things.</p>
                                 <br />
                             </div>
                             <div id="inputGroup-anonymous" class="form-group hidden">

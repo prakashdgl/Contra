@@ -35,24 +35,20 @@ namespace Contra.Controllers
                 Id = -1
             };
 
-            Random rnd = new Random();
             List<Article> articles = (from a in _context.Article
-                                      where a.Approved == ApprovalStatus.Approved
-                                      orderby a.Date descending
+                                      where a.Approved == ApprovalStatus.Approved &&
+                                            a.Date >= DateTime.Now.AddDays(-2)
+                                      orderby a.Views descending
                                       select a).ToList();
+
+            Random rnd = new Random();
             while (articles.Count < 5)
             {
-                placeholder.ThumbnailURL = "../img/img0" + rnd.Next(1, 5).ToString() + ".jpg";
+                placeholder.ThumbnailURL = "/img/img0" + rnd.Next(1, 5).ToString() + ".jpg";
                 articles.Add(placeholder);
             }
 
             return View(articles);
-        }
-
-        [Route("/about")]
-        public IActionResult About()
-        {
-            return View(_userManager.GetUsersInRoleAsync("Staff").Result);
         }
 
         [Route("/article/{*id}")]
@@ -146,19 +142,19 @@ namespace Contra.Controllers
             {
                 case "author":
                     ViewData["SortBy"] = "Author";
-                    articles = articles.OrderBy(a => a.AuthorName).Take(8).ToList();
+                    articles = articles.OrderBy(a => a.AuthorName).ToList();
                     break;
                 case "new":
                     ViewData["SortBy"] = "New";
-                    articles = articles.OrderByDescending(a => a.Date).Take(8).ToList();
+                    articles = articles.OrderByDescending(a => a.Date).ToList();
                     break;
                 case "top":
                     ViewData["SortBy"] = "Top";
-                    articles = articles.OrderBy(a => a.Views).Take(8).ToList();
+                    articles = articles.OrderBy(a => a.Views).ToList();
                     break;
                 default:
                     ViewData["SortBy"] = "Trending";
-                    articles = articles.OrderBy(a => a.Views).Take(8).ToList();
+                    articles = articles.OrderBy(a => a.Views).ToList();
                     break;
             }
 
@@ -175,8 +171,8 @@ namespace Contra.Controllers
         [HttpPost("/submit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Submit([Bind("Id,ArticleType,AuthorName,Title,Sensitive," +
-                                          "SensitiveContent,Spoiler,SpoilerContent,Anonymous," +
-                                          "ThumbnailURL,Tags,SummaryLong,Content")] Article article)
+                                                      "SensitiveContent,Spoiler,SpoilerContent,Anonymous," +
+                                                      "ThumbnailURL,Tags,SummaryLong,Content")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -235,6 +231,12 @@ namespace Contra.Controllers
             }
 
             return View(ticket);
+        }
+
+        [Route("/about")]
+        public IActionResult About()
+        {
+            return View(_userManager.GetUsersInRoleAsync("Staff").Result);
         }
 
         [Route("/privacy")]

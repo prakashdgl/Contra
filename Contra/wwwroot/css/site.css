@@ -1,5 +1,5 @@
 ﻿::selection {
-    background-color: #abc;
+    background-color: #fba;
 }
 html {
     font-size: 14px;
@@ -94,9 +94,6 @@ a.navbar-brand {
     text-align: center;
     word-break: break-all;
     height: 100%;
-}
-a.navbar-brand:hover {
-    color: #edeef3;
 }
 a.navbar-brand img {
     vertical-align: text-bottom;
@@ -653,9 +650,6 @@ form section div:last-of-type {
         display: flex;
         flex-wrap: wrap;
     }
-    .filters-small {
-        width: 800px;
-    }
     .filter-group {
         flex: none;
         width: 50%;
@@ -690,7 +684,6 @@ form section div:last-of-type {
         right: 0;
     }
     .card-newsbeat {
-        flex: unset;
         width: unset;
         min-height: unset;
         margin: 5px 0;

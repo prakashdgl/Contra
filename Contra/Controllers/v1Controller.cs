@@ -233,33 +233,6 @@ namespace Contra.Controllers
             else return "Not found!";
         }
 
-        [HttpGet("article/info/{*id}")]
-        public async Task<string> ArticleInfo(int? id)
-        {
-            if (id == null) return "Requested resource not found.";
-
-            Article article = await _context.Article.FindAsync(id);
-            if (article == null) return $"Article {id} does not exist in the database.";
-            if (article.Approved != ApprovalStatus.Approved) return "401 Unauthorized";
-
-            Dictionary<string, string> info = new Dictionary<string, string>()
-            {
-                { "id", article.Id.ToString() },
-                { "title", article.Title },
-                { "author", article.AuthorName },
-                { "date", article.Date.ToString() },
-                { "tags", article.Tags },
-                { "summary", article.SummaryLong },
-                { "image", article.ThumbnailURL },
-                { "sensitive", article.Sensitive.ToString() },
-                { "sensitiveContent", article.SensitiveContent },
-                { "spoiler", article.Spoiler.ToString() },
-                { "spoilerContent", article.SpoilerContent }
-            };
-
-            return JsonConvert.SerializeObject(info);
-        }
-
         [HttpGet("article/list/{query}/{amount}/{*skip}")]
         public string ArticleGetBulk(string query, int amount, int skip)
         {
@@ -273,23 +246,10 @@ namespace Contra.Controllers
                             orderby a.Date descending
                             select a).ToList();
             }
-            else if (query.StartsWith("tag-"))
-            {
-                string tag = query.Substring(4);
-                articles = (from a in _context.Article
-                            where a.Approved == ApprovalStatus.Approved &&
-                                  a.Tags.ToLower().Contains(tag)
-                            orderby a.Date descending
-                            select a).ToList();
-            }
             else
             {
                 articles = (query.ToLower()) switch
                 {
-                    "all" => (from a in _context.Article
-                              where a.Approved == ApprovalStatus.Approved
-                              orderby a.Date descending
-                              select a).ToList(),
                     "editorial" => (from a in _context.Article
                                     where a.Approved == ApprovalStatus.Approved &&
                                           a.IsEditorial
@@ -330,9 +290,7 @@ namespace Contra.Controllers
                     { "summary", a.SummaryLong },
                     { "image", a.ThumbnailURL },
                     { "sensitive", a.Sensitive.ToString() },
-                    { "sensitiveContent", a.SensitiveContent },
-                    { "spoiler", a.Spoiler.ToString() },
-                    { "spoilerContent", a.SpoilerContent }
+                    { "spoiler", a.Spoiler.ToString() }
                 };
 
                 if (a.Anonymous)

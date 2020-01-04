@@ -1,8 +1,4 @@
-﻿var menu, nav;
-var loadTarget, targetPos, skip = 0;
-var formatSearch = false;
-
-// https://stackoverflow.com/a/24103596
+﻿// https://stackoverflow.com/a/24103596
 function setCookie(name, value, days) {
     var expires = "";
     if (days) {
@@ -20,24 +16,19 @@ function eraseCookie(name) {
     document.cookie = name + '=' + expires + ';path=/;';
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+var menu, nav;
+document.addEventListener("DOMContentLoaded", () => {
     menu = document.getElementById("links");
     nav = document.getElementById("nav");
 
     var nltargets = document.getElementsByClassName("neoload");
     for (var i = 0; i < nltargets.length; i++) {
         var el = nltargets[i];
-        neoload(el,
-            el.getAttribute("data-query"),
-            el.getAttribute("data-amount"),
-            el.getAttribute("data-type"));
+        neoload(el, el.getAttribute("data-query"),
+                    el.getAttribute("data-amount"),
+                    el.getAttribute("data-type"),
+                    0);
     }
-
-    var search = document.getElementById("search");
-    if (search) { formatSearch = true; skip = 1; }
-
-    var query = document.getElementById("query");
-    if (query) { loadContent(query.innerText); }
 
     if (document.cookie.includes("compact=yes") &&
         document.getElementById("compact-compatible"))
@@ -95,9 +86,8 @@ function request(method, route, callback = null) {
     http.send();
 }
 
-function neoload(target, query, amount, type, skip = 0, callback = null) {
-    request("GET", "api/v1/article/list/" + query + "/" + amount + "/" + skip, x => {
-        if (callback) callback(x);
+function neoload(target, query, amount, type) {
+    request("GET", "api/v1/article/list/" + query + "/" + amount, x => {
         if (!x) return;
 
         var json = JSON.parse(x);
@@ -139,26 +129,6 @@ function neoload(target, query, amount, type, skip = 0, callback = null) {
             document.getElementById("compact-compatible"))
             showCompact();
     });
-}
-
-function loadContent(query) {
-    loadTarget = document.getElementById("loadTarget");
-    if (!loadTarget) return;
-
-    var format = "block";
-    if (formatSearch) format = "search";
-
-    neoload(loadTarget, query, 8, format, skip, x => {
-        if (x === "") {
-            if (document.getElementById("loadSection") && loadTarget.innerHTML === "")
-                document.getElementById("loadSection").style.display = "none";
-            document.getElementById("loadButton").style.display = "none";
-            loadTarget.innerHTML += "<div class='section-title text-center'><h2>No more content! :(</h2></div>";
-            return;
-        }
-    });
-
-    skip++;
 }
 
 function formatContentWarning(sensitive, spoiler, mini) {

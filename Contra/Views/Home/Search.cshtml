@@ -1,12 +1,12 @@
-﻿@model IEnumerable<Contra.Models.Article>
+﻿@model IEnumerable<Article>
 
 @{
     ViewData["Title"] = "Search";
 }
 
 <div class="section-title" id="compact-compatible" >
-    <h2 id="search">Search - <span id="query">@ViewData["Query"]</span></h2>
-    <div class="filters filters-small">
+    <h2>@ViewData["Message"]</h2>
+    <div class="filters">
         <div class="filter-group">
             <h5 class="hideable">View:</h5>
             <button id="comfortableButton" class="btn btn-info" onclick="showComfortable()">Comfortable</button>
@@ -21,6 +21,7 @@
         </div>
     </div>
 </div>
+
 @foreach (var item in Model) {
     <div class="card card-search">
         <span class="image-container"><img src="@item.ThumbnailURL" alt="'@item.Title' Thumbnail Image" /></span>
@@ -45,5 +46,3 @@
         </div>
     </div>
 }
-<div id="loadTarget"></div>
-<button id="loadButton" onclick="loadContent('@ViewData["Query"]')" class="btn btn-outline-info w-100">Load More</button>
