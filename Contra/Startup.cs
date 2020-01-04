@@ -29,7 +29,7 @@ namespace Contra
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<OpenTalonUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ContraUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 

@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Contra.Areas.Identity.Data
-@inject SignInManager<OpenTalonUser> SignInManager
-@inject UserManager<OpenTalonUser> UserManager
+@inject SignInManager<ContraUser> SignInManager
+@inject UserManager<ContraUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {

@@ -15,10 +15,10 @@ namespace Contra.Controllers
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<OpenTalonUser> _userManager;
+        private readonly UserManager<ContraUser> _userManager;
 
         public AdminController(ApplicationDbContext context,
-                               UserManager<OpenTalonUser> userManager)
+                               UserManager<ContraUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -139,7 +139,7 @@ namespace Contra.Controllers
             if (string.IsNullOrEmpty(filter)) filter = "all";
             ViewData["Filter"] = filter;
 
-            List<OpenTalonUser> users;
+            List<ContraUser> users;
             switch (filter)
             {
                 case "staff":
@@ -179,8 +179,8 @@ namespace Contra.Controllers
                     break;
             }
 
-            Dictionary<OpenTalonUser, List<string>> userRoles = new Dictionary<OpenTalonUser, List<string>>();
-            foreach (OpenTalonUser user in users)
+            Dictionary<ContraUser, List<string>> userRoles = new Dictionary<ContraUser, List<string>>();
+            foreach (ContraUser user in users)
                 userRoles.Add(user, _userManager.GetRolesAsync(user).Result.ToList());
 
             return View(userRoles);

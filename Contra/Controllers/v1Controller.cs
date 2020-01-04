@@ -18,11 +18,11 @@ namespace Contra.Controllers
     public class v1Controller : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<OpenTalonUser> _userManager;
+        private readonly UserManager<ContraUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public v1Controller(ApplicationDbContext context,
-                            UserManager<OpenTalonUser> userManager,
+                            UserManager<ContraUser> userManager,
                             RoleManager<IdentityRole> roleManager)
         {
             _context = context;
@@ -198,7 +198,7 @@ namespace Contra.Controllers
         {
             if (_userManager.GetUserId(User) == id)
             {
-                OpenTalonUser user = await _userManager.GetUserAsync(User);
+                ContraUser user = await _userManager.GetUserAsync(User);
                 if (url == "reset")
                 {
                     StringBuilder sb = new StringBuilder();
@@ -227,7 +227,7 @@ namespace Contra.Controllers
         [HttpGet("account/{id}/picture")]
         public async Task<string> GetProfilePicture(string id)
         {
-            OpenTalonUser user = await _userManager.FindByIdAsync(id);
+            ContraUser user = await _userManager.FindByIdAsync(id);
             if (user != null)
                 return user.ProfilePictureURL;
             else return "Not found!";

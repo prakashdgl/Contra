@@ -10,12 +10,12 @@ namespace Contra.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<OpenTalonUser> _userManager;
-        private readonly SignInManager<OpenTalonUser> _signInManager;
+        private readonly UserManager<ContraUser> _userManager;
+        private readonly SignInManager<ContraUser> _signInManager;
 
         public IndexModel(
-            UserManager<OpenTalonUser> userManager,
-            SignInManager<OpenTalonUser> signInManager)
+            UserManager<ContraUser> userManager,
+            SignInManager<ContraUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -35,9 +35,13 @@ namespace Contra.Areas.Identity.Pages.Account.Manage
             [DataType(DataType.Text)]
             [Display(Name = "Full name")]
             public string Name { get; set; }
+
+            [DataType(DataType.Text)]
+            [Display(Name = "A short summary of yourself")]
+            public string Bio { get; set; }
         }
 
-        private async Task LoadAsync(OpenTalonUser user)
+        private async Task LoadAsync(ContraUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
 
@@ -45,7 +49,8 @@ namespace Contra.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                Name = user.Name
+                Name = user.Name,
+                Bio = user.Bio
             };
         }
 
@@ -78,6 +83,11 @@ namespace Contra.Areas.Identity.Pages.Account.Manage
             if (Input.Name != user.Name)
             {
                 user.Name = Input.Name;
+            }
+
+            if (Input.Bio != user.Bio)
+            {
+                user.Bio = Input.Bio;
             }
 
             await _userManager.UpdateAsync(user);

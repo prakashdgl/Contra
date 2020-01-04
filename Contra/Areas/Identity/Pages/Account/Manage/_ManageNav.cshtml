@@ -1,4 +1,4 @@
-﻿@inject SignInManager<OpenTalonUser> SignInManager
+﻿@inject SignInManager<ContraUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

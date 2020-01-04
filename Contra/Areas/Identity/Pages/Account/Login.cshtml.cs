@@ -18,14 +18,14 @@ namespace Contra.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<OpenTalonUser> _userManager;
-        private readonly SignInManager<OpenTalonUser> _signInManager;
+        private readonly UserManager<ContraUser> _userManager;
+        private readonly SignInManager<ContraUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly EmailSender _emailSender;
 
-        public LoginModel(SignInManager<OpenTalonUser> signInManager, 
+        public LoginModel(SignInManager<ContraUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<OpenTalonUser> userManager,
+            UserManager<ContraUser> userManager,
             EmailSender emailSender)
         {
             _userManager = userManager;
@@ -91,7 +91,7 @@ namespace Contra.Areas.Identity.Pages.Account
                 }
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, Input.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {

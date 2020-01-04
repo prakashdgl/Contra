@@ -4,7 +4,7 @@ using Contra.Areas.Identity.Data;
 
 namespace Contra.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<OpenTalonUser>
+    public class ApplicationDbContext : IdentityDbContext<ContraUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -10,9 +10,9 @@ namespace Contra.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<OpenTalonUser> _userManager;
+        private readonly UserManager<ContraUser> _userManager;
 
-        public ConfirmEmailModel(UserManager<OpenTalonUser> userManager)
+        public ConfirmEmailModel(UserManager<ContraUser> userManager)
         {
             _userManager = userManager;
         }

@@ -22,14 +22,14 @@ namespace Contra.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<OpenTalonUser> _signInManager;
-        private readonly UserManager<OpenTalonUser> _userManager;
+        private readonly SignInManager<ContraUser> _signInManager;
+        private readonly UserManager<ContraUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly EmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<OpenTalonUser> userManager,
-            SignInManager<OpenTalonUser> signInManager,
+            UserManager<ContraUser> userManager,
+            SignInManager<ContraUser> signInManager,
             ILogger<RegisterModel> logger,
             EmailSender emailSender)
         {
@@ -92,7 +92,7 @@ namespace Contra.Areas.Identity.Pages.Account
                         sb.Append(hashBytes[i].ToString("X2"));
                 }
 
-                var user = new OpenTalonUser {
+                var user = new ContraUser {
                     Name = Input.Name,
 
                     Articles = new List<Article>(),
@@ -117,7 +117,7 @@ namespace Contra.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code },
+                        values: new { area = "Identity", userId = user.Id, code },
                         protocol: Request.Scheme);
 
                     await _emailSender.SendConfirmEmailAsync(Input.Email, Input.Name, callbackUrl);

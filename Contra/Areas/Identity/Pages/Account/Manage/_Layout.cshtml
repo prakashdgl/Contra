@@ -1,10 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Contra.Areas.Identity.Data
-@inject UserManager<OpenTalonUser> UserManager
+@inject UserManager<ContraUser> UserManager
 
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
-    OpenTalonUser user = UserManager.GetUserAsync(User).Result;
+    ContraUser user = UserManager.GetUserAsync(User).Result;
     string pfpURL = user.ProfilePictureURL;
     if (user.ProfilePictureURL.Contains("gravatar"))
         pfpURL += "&s=512";

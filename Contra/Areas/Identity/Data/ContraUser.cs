@@ -5,10 +5,12 @@ using Contra.Models;
 
 namespace Contra.Areas.Identity.Data
 {
-    public class OpenTalonUser : IdentityUser
+    public class ContraUser : IdentityUser
     {
         [PersonalData]
         public string Name { get; set; }
+        [PersonalData]
+        public string Bio { get; set; }
         [PersonalData]
         public string ProfilePictureURL { get; set; }
         [PersonalData]

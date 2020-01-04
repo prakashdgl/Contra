@@ -1,4 +1,4 @@
-﻿@model Dictionary<OpenTalonUser, List<string>>
+﻿@model Dictionary<ContraUser, List<string>>
 
 @using Microsoft.AspNetCore.Identity
 @using Contra.Areas.Identity.Data
@@ -34,7 +34,7 @@
     </div>
 </div>
 <br />
-@foreach (OpenTalonUser user in Model.Keys)
+@foreach (ContraUser user in Model.Keys)
 {
     <section>
         <div class="card card-big card-compact card-user">

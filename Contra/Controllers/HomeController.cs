@@ -18,10 +18,10 @@ namespace Contra.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<OpenTalonUser> _userManager;
+        private readonly UserManager<ContraUser> _userManager;
 
         public HomeController(ApplicationDbContext context,
-                              UserManager<OpenTalonUser> userManager)
+                              UserManager<ContraUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -84,7 +84,7 @@ namespace Contra.Controllers
         {
             if (ModelState.IsValid)
             {
-                OpenTalonUser user = _userManager.GetUserAsync(User).Result;
+                ContraUser user = _userManager.GetUserAsync(User).Result;
                 comment.OwnerID = _userManager.GetUserId(User);
                 comment.AuthorName = user.Name;
                 comment.PostId = PostId;
@@ -179,7 +179,7 @@ namespace Contra.Controllers
         {
             if (ModelState.IsValid)
             {
-                OpenTalonUser user = _userManager.GetUserAsync(User).Result;
+                ContraUser user = _userManager.GetUserAsync(User).Result;
                 article.OwnerID = user.Id;
                 if (!string.IsNullOrWhiteSpace(article.AuthorName))
                     article.AuthorName = user.Name + ", " + article.AuthorName;

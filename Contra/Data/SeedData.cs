@@ -24,7 +24,7 @@ namespace Contra.Data
 
         private static async Task<string> EnsureUser(IServiceProvider serviceProvider, string testUserPw, string UserName)
         {
-            var userManager = serviceProvider.GetService<UserManager<OpenTalonUser>>();
+            var userManager = serviceProvider.GetService<UserManager<ContraUser>>();
 
             var user = await userManager.FindByNameAsync(UserName);
             if (user == null)
@@ -40,9 +40,9 @@ namespace Contra.Data
                         sb.Append(hashBytes[i].ToString("X2"));
                 }
 
-                user = new OpenTalonUser
+                user = new ContraUser
                 {
-                    Name = "Sei",
+                    Name = "Qi",
 
                     Articles = new List<Article>(),
                     ArticlesLiked = new List<Article>(),
@@ -71,7 +71,7 @@ namespace Contra.Data
             if (!await roleManager.RoleExistsAsync(role))
                 _ = await roleManager.CreateAsync(new IdentityRole(role));
 
-            var userManager = serviceProvider.GetService<UserManager<OpenTalonUser>>();
+            var userManager = serviceProvider.GetService<UserManager<ContraUser>>();
             var user = await userManager.FindByIdAsync(uid);
 
             if (user == null)
