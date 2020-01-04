@@ -101,7 +101,7 @@ namespace Contra.Controllers
 
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return Redirect($"~/article/{PostId}#" + comment.Id.ToString());
+                return Redirect($"~/article/{PostId}");
             }
             return View(comment);
         }

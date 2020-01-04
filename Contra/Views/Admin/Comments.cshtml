@@ -37,7 +37,7 @@
                 <p class="compact-hidden">Status: @Html.DisplayFor(modelItem => item.Approved) (Attached to Post @item.PostId)</p>
                 <p>@Html.DisplayFor(modelItem => item.Content)</p>
                 <div class="actions">
-                    <a asp-controller="Home" asp-action="Article" asp-route-id="@item.PostId">Read Article</a>
+                    <a href="/articlemanager/@item.PostId">Read Article</a>
                     <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delete/@item.Id')">Remove</a>
                     @if (item.Approved == ApprovalStatus.Approved)
                     { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delist/@item.Id')">Delist</a> }
