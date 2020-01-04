@@ -82,10 +82,11 @@ function request(method, route, callback = null) {
 
 function neoload(target, query, amount, type) {
     request("GET", "api/v1/article/list/" + query + "/" + amount, x => {
-        if (!x) target.style.display = "none";
+        if (!x) return;
+        else target.style.display = "block";
 
         var json = JSON.parse(x);
-
+        
         var i = 0;
         var html = "";
         json.forEach(obj => {
