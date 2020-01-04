@@ -11,6 +11,7 @@ using Contra.Areas.Identity.Data;
 using Contra.Data;
 using Contra.Models;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Contra.Controllers
 {
@@ -76,6 +77,7 @@ namespace Contra.Controllers
             return View(article);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Comment([Bind("Id,Content")] Comment comment, int PostId)
@@ -87,7 +89,7 @@ namespace Contra.Controllers
                 comment.AuthorName = user.Name;
                 comment.PostId = PostId;
                 comment.Date = DateTime.Now;
-
+                
                 if (User.IsInRole("Staff"))
                     comment.Approved = ApprovalStatus.Approved;
                 else
@@ -99,7 +101,7 @@ namespace Contra.Controllers
 
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return Redirect($"~/article/{PostId}");
+                return Redirect($"~/article/{PostId}#" + comment.Id.ToString());
             }
             return View(comment);
         }
@@ -168,6 +170,7 @@ namespace Contra.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost("/submit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Submit([Bind("Id,ArticleType,AuthorName,Title,Sensitive," +

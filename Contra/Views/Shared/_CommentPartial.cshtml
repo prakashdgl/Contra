@@ -15,7 +15,7 @@
                 <h4><b>Posting as: @UserManager.GetUserAsync(User).Result.Name</b></h4>
             </div>
             <div class="form-group">
-                <input asp-for="Content" class="form-control" autocomplete="off" value="" />
+                <input asp-for="Content" class="form-control" autocomplete="off" value="" maxlength="512" />
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">

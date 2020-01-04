@@ -25,7 +25,7 @@
             <div class="content">
                 @if (User.IsInRole("Administrator"))
                 {
-                    <span class="secondary-info p-0"><img src="~/img/supericon.png"/> - <a href="~/articlemanager/@Model.Id">Manage Article</a></span>
+                    <span class="secondary-info p-0"><img src="~/img/supericon.png" /> - <a href="~/articlemanager/@Model.Id">Manage Article</a></span>
                     if (Model.Approved != ApprovalStatus.Approved)
                     {
                         <p class="text-info">This article is not viewable to the public.</p>
@@ -50,18 +50,16 @@
     @if (((List<Comment>)ViewData["Comments"]).Count != 0)
     {
         <section>
-            <div class="card">
+            <div class="card card-compact">
                 @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
                 {
-                    <section>
-                        <div class="card card-compact comment">
-                            <div>
-                                <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
-                                <p>@comment.Content</p>
-                            </div>
+                    <div class="card card-compact comment">
+                        <div>
+                            <a name="@comment.Id"></a>
+                            <h3>@comment.AuthorName - @comment.Date.ToLocalTime()</h3>
+                            <p>@comment.Content</p>
                         </div>
-                    </section>
-                    <hr />
+                    </div>
                 }
             </div>
         </section>
@@ -78,15 +76,13 @@ else
                 <h2>This Article is Not Approved Yet</h2>
                 <p>This article has not been approved by our moderation team, and as such, cannot be displayed yet.</p>
                 <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
-                <a class="btn btn-outline-info" href="~/apply">Submit an Article</a>
+                <a class="btn btn-outline-info" href="~/submit">Submit an Article</a>
             </div>
         </div>
     </section>
 }
-<div id="loadSection">
-    <div class="section-title">
-        <h2><span id="query">New</span> Articles</h2>
-    </div>
-    <div id="loadTarget"></div>
-    <button id="loadButton" onclick="loadContent('New')" class="btn btn-outline-info w-100">Load More</button>
+
+<div class="section-title">
+    <h2>New Articles</h2>
 </div>
+<div class="neoload" data-amount="6" data-query="new" data-type="block"></div>

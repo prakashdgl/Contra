@@ -12,7 +12,7 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="ml-2">
-    <h4>@ViewData["Title"]</h4>
+    <h2>@ViewData["Title"]</h2>
     <form id="profile-form" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
@@ -26,15 +26,11 @@
         <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
-<div id="loadSection">
-    <div class="section-title">
-        <span id="query" class="d-none">@UserManager.GetUserId(User)</span>
-        <h2>Your Articles</h2>
-    </div>
-    <div id="loadTarget"></div>
-    <br />
-    <button id="loadButton" onclick="loadContent('@UserManager.GetUserId(User)')" class="btn btn-outline-info w-100">Load More</button>
+
+<div class="section-title">
+    <h2>Your Recent Articles</h2>
 </div>
+<div class="neoload" data-amount="6" data-query="@UserManager.GetUserId(User)" data-type="block"></div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
