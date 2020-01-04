@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     var search = document.getElementById("search");
-    if (search) { formatSearch = true; skip = 0; }
+    if (search) { formatSearch = true; skip = 1; }
 
     var query = document.getElementById("query");
     if (query) { loadContent(query.innerText); }
@@ -134,6 +134,10 @@ function neoload(target, query, amount, type, skip = 0, callback = null) {
         });
 
         target.innerHTML += html;
+
+        if (document.cookie.includes("compact=yes") &&
+            document.getElementById("compact-compatible"))
+            showCompact();
     });
 }
 
@@ -155,10 +159,6 @@ function loadContent(query) {
     });
 
     skip++;
-
-    if (document.cookie.includes("compact=yes") &&
-        document.getElementById("compact-compatible"))
-        showCompact();
 }
 
 function formatContentWarning(sensitive, spoiler, mini) {

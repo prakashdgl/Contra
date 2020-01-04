@@ -126,7 +126,10 @@ namespace Contra.Controllers
             {
                 case "all":
                     ViewData["Message"] = "Search All";
-                    articles = _context.Article.ToList();
+                    articles = (from a in _context.Article
+                                where a.Approved == ApprovalStatus.Approved
+                                orderby a.Date descending
+                                select a).ToList();
                     break;
                 default:
                     ViewData["Message"] = "Search - " + filter;
