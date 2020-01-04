@@ -10,28 +10,28 @@
             <h2>Cover Story</h2>
         </div>
         <section>
-            <div class="card card-cover story" onclick="redirect(@Model.ElementAt(0).Id)">
+            <a class="card card-cover story" href="~/article/@Model.ElementAt(0).Id">
                 <partial name="_CardContentPartial" model="@Model.ElementAt(0)" />
-            </div>
+            </a>
         </section>
         <div class="section-title">
             <h2>Trending Now</h2>
         </div>
         <section>
-            <div class="card card-big story" onclick="redirect(@Model.ElementAt(1).Id)">
+            <a class="card card-big story" href="~/article/@Model.ElementAt(1).Id">
                 <partial name="_CardContentPartial" model="@Model.ElementAt(1)" />
-            </div>
-            <div class="card card-encapsulate story" onclick="redirect(@Model.ElementAt(2).Id)">
+            </a>
+            <a class="card card-encapsulate story" href="~/article/@Model.ElementAt(2).Id">
                 <partial name="_CardContentPartial" model="@Model.ElementAt(2)" />
-            </div>
+            </a>
         </section>
         <section>
-            <div class="card card-encapsulate story" onclick="redirect(@Model.ElementAt(3).Id)">
+            <a class="card card-encapsulate story" href="~/article/@Model.ElementAt(3).Id">
                 <partial name="_CardContentPartial" model="@Model.ElementAt(3)" />
-            </div>
-            <div class="card card-big story" onclick="redirect(@Model.ElementAt(4).Id)">
+            </a>
+            <a class="card card-big story" href="~/article/@Model.ElementAt(4).Id">
                 <partial name="_CardContentPartial" model="@Model.ElementAt(4)" />
-            </div>
+            </a>
         </section>
         <div class="section-title">
             <h2>Editorials</h2>
@@ -51,7 +51,8 @@
     </div>
 </section>
 
-<div class="section-title">
-    <h2>New Articles</h2>
+<div class="neoload" data-amount="6" data-query="new" data-type="block">
+    <div class="section-title">
+        <h2>New Articles</h2>
+    </div>
 </div>
-<div class="neoload" data-amount="6" data-query="new" data-type="block"></div>

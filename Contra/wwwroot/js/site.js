@@ -34,9 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("compact-compatible"))
         showCompact();
 
-    window.addEventListener("resize", function () {
-        onResize();
-    });
+    window.addEventListener("resize", onResize);
 });
 
 function showMenu() {
@@ -55,10 +53,6 @@ function onResize() {
         menu.style.display = "";
         nav.style.height = "";
     }
-}
-
-function redirect(id) {
-    window.location = "/article/" + id;
 }
 
 function changePFP(id, url) {
@@ -88,7 +82,7 @@ function request(method, route, callback = null) {
 
 function neoload(target, query, amount, type) {
     request("GET", "api/v1/article/list/" + query + "/" + amount, x => {
-        if (!x) return;
+        if (!x) target.style.display = "none";
 
         var json = JSON.parse(x);
 
@@ -151,9 +145,9 @@ function formatCard(id, image, title, summary, big, encapsulate, contentWarning)
     if (big) classes += " card-big";
     if (encapsulate) classes += " card-encapsulate";
 
-    return "<div class='" + classes + "' onclick='redirect(" + id + ")'>" +
+    return "<a class='" + classes + "' href='/article/" + id + "'>" +
         "<span class='image-container'><img src='" + image + "' alt='" + title + " Thumbnail Image' /></span>" +
-        "<div><h2>" + title + "</h2>" + contentWarning + "<p>" + summary + "</p></div></div>";
+        "<div><h2>" + title + "</h2>" + contentWarning + "<p>" + summary + "</p></div></da>";
 }
 
 function formatSearchCard(id, image, title, author, date, summary, contentWarning) {
@@ -164,9 +158,9 @@ function formatSearchCard(id, image, title, author, date, summary, contentWarnin
 }
 
 function formatNewsbeat(id, image, title, summary, contentWarning) {
-    return "<div class='card card-big card-encapsulate card-newsbeat' onclick='redirect(" +
-        id + ")'><span class='image-container'><img src='" + image + "' alt='" + title +
-        " Thumbnail' /></span><div><h2>" + title + "</h2>" + contentWarning + "<p>" + summary + "</p></div></div>";
+    return "<a class='card card-big card-encapsulate card-newsbeat' href='/article/" + id +
+        "'><span class='image-container'><img src='" + image + "' alt='" + title +
+        " Thumbnail' /></span><div><h2>" + title + "</h2>" + contentWarning + "<p>" + summary + "</p></div></a>";
 }
 
 function showComfortable() {

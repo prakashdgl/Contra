@@ -27,10 +27,11 @@
     </form>
 </div>
 
-<div class="section-title">
-    <h2>Your Recent Articles</h2>
+<div class="neoload" data-amount="6" data-query="@UserManager.GetUserId(User)" data-type="block">
+    <div class="section-title">
+        <h2>Your Recent Articles</h2>
+    </div>
 </div>
-<div class="neoload" data-amount="6" data-query="@UserManager.GetUserId(User)" data-type="block"></div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

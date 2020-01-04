@@ -245,6 +245,12 @@ section {
     transform: none !important;
 }
 
+a.card {
+    color: #000;
+}
+a.card:hover {
+    text-decoration: none;
+}
 .card {
     border: none;
     border-radius: 3px;
@@ -261,7 +267,7 @@ section {
 .story {
     padding: 0;
 }
-.story:hover {
+.story:hover, .story:focus {
     box-shadow: -10px 10px 5px #bbb;
     cursor: pointer;
     transform: translate(4px, -4px);
@@ -371,7 +377,7 @@ section {
     margin: 5px 0;
     margin-right: 10px;
 }
-.card-newsbeat:hover {
+.card-newsbeat:hover, .card-newsbeat:focus {
     box-shadow: -8px 8px 5px #bbb;
     cursor: pointer;
     transform: translate(2px, -2px);
