@@ -19,10 +19,12 @@ namespace Contra.Models
         public string SummaryLong { get; set; }
 
         public int Views { get; set; }
+        public int Likes { get; set; }
 
         public string Content { get; set; }
 
         public bool IsEditorial { get; set; }
+        public bool IsPinned { get; set; }
 
         public bool Anonymous { get; set; }
         public bool Sensitive { get; set; }

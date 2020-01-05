@@ -25,7 +25,7 @@
             <div class="content">
                 @if (User.IsInRole("Administrator"))
                 {
-                    <span class="secondary-info p-0"><img src="~/img/supericon.png" /> - <a href="~/articlemanager/@Model.Id">Manage Article</a></span>
+                    <span class="secondary-info p-0"><img src="~/img/supericon.png" alt="Superuser" /> - <a href="~/articlemanager/@Model.Id">Manage Article</a></span>
                     if (Model.Approved != ApprovalStatus.Approved)
                     {
                         <p class="text-info">This article is not viewable to the public.</p>

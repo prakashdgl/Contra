@@ -83,7 +83,10 @@ function request(method, route, callback = null) {
 function neoload(target, query, amount, type) {
     request("GET", "api/v1/article/list/" + query + "/" + amount, x => {
         if (!x) return;
-        else target.style.display = "block";
+        else {
+            if (type === "mini") target.style.display = "flex";
+            else target.style.display = "block";
+        }
 
         var json = JSON.parse(x);
         

@@ -9,10 +9,10 @@
     <h2>@ViewData["Title"]</h2>
 </div>
 <br />
-<div class="row">
-    <div class="col-md-4">
+<section class="mx-2">
+    <div class="cw-50">
         <section>
-            <form id="account" method="post">
+            <form id="account" method="post" class="w-100">
                 <h4>Use a local account to log in.</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
@@ -51,7 +51,7 @@
             </form>
         </section>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    <div class="cw-50">
         <h4>Use another service to log in.</h4>
         <hr />
         @{
@@ -79,7 +79,7 @@
             }
         }
     </div>
-</div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

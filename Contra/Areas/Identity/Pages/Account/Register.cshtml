@@ -8,8 +8,8 @@
     <h2>@ViewData["Title"]</h2>
 </div>
 <br />
-<div class="row">
-    <div class="col-md-4">
+<section class="mx-2">
+    <div class="cw-50">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Create a new account.</h4>
             <hr />
@@ -37,7 +37,7 @@
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    <div class="cw-50">
         <h4>Use another service to register.</h4>
         <hr />
         @{
@@ -65,7 +65,7 @@
             }
         }
     </div>
-</div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
