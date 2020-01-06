@@ -22,7 +22,7 @@
                     <div class="links nav-search search">
                         <form asp-controller="Home" asp-action="Search">
                             <input name="filter" type="text" placeholder="Search articles" />
-                            <button class="btn c-btn-primary" type="submit" name="Search"><img src="~/img/search.png" alt="Search" /></button>
+                            <button class="btn c-btn-primary animated" type="submit" name="Search"><img src="~/img/search.png" alt="Search" /></button>
                         </form>
                     </div>
                     <div class="links float-right">
@@ -38,6 +38,10 @@
 
     <div class="container">
         @RenderBody()
+    </div>
+
+    <div class="notifications">
+        <partial name="_CookieConsentPartial" />
     </div>
 
     <footer class="border-top footer text-muted">

@@ -25,40 +25,40 @@ nav {
 }
 
 nav .container {
-        position: relative;
-        margin-bottom: 0;
-    }
+    position: relative;
+    margin-bottom: 0;
+}
 
 nav #links {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-    }
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
 
 nav .links {
-        flex-direction: column;
-        min-width: 200px;
-    }
+    flex-direction: column;
+    min-width: 200px;
+}
 
 nav .links a {
-            color: #555;
-            margin: 0;
-            padding: 0.2rem 1rem;
-        }
+    color: #555;
+    margin: 0;
+    padding: 0.2rem 1rem;
+}
 
 nav .links button {
-            height: 100%;
-        }
+    height: 100%;
+}
 
 nav .links a:hover {
-            color: #6daedb;
-        }
+    color: #6daedb;
+}
 
 nav .links img {
-            border-radius: 5px;
-            height: 30px;
-            margin-right: 10px;
-        }
+    border-radius: 5px;
+    height: 30px;
+    margin-right: 10px;
+}
 
 .nav-link button {
     padding-left: 0;
@@ -83,24 +83,23 @@ nav #menu-button {
 }
 
 .nav-search > form {
-        display: flex !important;
-    }
+    display: flex !important;
+}
 
 .nav-search > form > input {
-            background-color: #eeeff5;
-        }
+    background-color: #eeeff5;
+}
 
 .nav-search > form > .btn {
-            flex: none;
-            width: 70px;
-        }
+    flex: none;
+}
 
 .nav-search > form > .btn img {
-                width: 20px;
-                height: 20px;
-                margin: 0;
-                margin-top: -5px;
-            }
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    margin-top: -5px;
+}
 
 a.navbar-brand {
     white-space: normal;
@@ -149,14 +148,64 @@ a {
         margin: auto;
     }
 
+.notifications {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    width: 400px;
+}
+
 .hidden, .neoload {
     display: none;
 }
 
+.bg-contra {
+    background-image: url("../img/contra_back.svg");
+    background-size: cover;
+}
+
+.banner-notice {
+    border-radius: 5px;
+    color: #fff;
+    line-height: 20px;
+    margin-top: 20px;
+    padding: 10px 15px;
+}
+
+.banner-notice > p {
+    margin: 0;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes doubleswipe {
+    from {
+        background-position-x: 0;
+    }
+
+    to {
+        background-position-x: 200px;
+    }
+}
+
 .c-btn-primary {
-    background-image: linear-gradient(to right, #ff6c97, #7b19ff);
+    background-image: url("../img/contra_back.svg");
+    background-size: cover;
     border: 0;
     color: #fff;
+    width: 100px;
+}
+
+.c-btn-primary:hover {
+    color: #fff;
+    -webkit-animation-name: doubleswipe;
+    animation-name: doubleswipe;
 }
 
 #border-gradient {
@@ -291,7 +340,7 @@ a.card:hover {
 .card {
     border: none;
     border-radius: 3px;
-    box-shadow: -6px 6px 5px #ddd;
+    box-shadow: -6px 6px 5px rgba(0, 0, 0, 0.1);
     flex: 2 1;
     min-height: 200px;
     margin: 4px 10px;
@@ -627,32 +676,25 @@ form section div:last-of-type {
         width: 500px;
         margin: auto;
     }
-
     #border-gradient {
         height: 8px;
     }
-
     .container {
         max-width: 98%;
     }
-
     .card {
         border-radius: 5px;
         margin: 10px;
     }
-
     .story > div {
         padding: 20px;
     }
-
     .profile-controls {
         flex-direction: row;
     }
-
     .profile-controls > div {
             margin-left: 30px;
         }
-
     .profile-picture {
         width: 20rem;
     }
@@ -662,71 +704,55 @@ form section div:last-of-type {
     html {
         font-size: 16px;
     }
-
     .hideable {
         display: inline-block;
     }
-
     .fullscreen {
         bottom: 60px;
     }
-
     .container {
         margin-bottom: 100px;
     }
-
     .cw-50 {
         width: 50%;
         margin-right: 20px;
     }
-
     .section-title {
         margin-top: 40px;
     }
-
     section {
         flex-direction: row;
     }
-
     .story, .card-profile {
         min-height: 250px;
     }
-
     .flex-wrap {
         justify-content: center;
     }
-
     .flex-wrap .card {
             flex: none;
             width: 45%;
         }
-
     .card-compact {
         padding: 25px;
     }
-
     .article .image-container {
         height: 200px;
     }
-
     .article > .content {
         padding: 1rem 2rem;
         margin-top: 200px;
     }
-
     .footer {
         line-height: 60px;
     }
-
     .profile-controls {
         flex-direction: column;
     }
-
     .profile-controls > div {
             margin: 0;
             width: 100%;
         }
-
     .profile-page {
         margin-left: 20px;
         margin-top: 0;
@@ -737,7 +763,6 @@ form section div:last-of-type {
     nav #menu-button {
         display: none;
     }
-
     nav #links {
         position: absolute;
         display: inline-flex;
@@ -745,55 +770,43 @@ form section div:last-of-type {
         left: 120px;
         right: 0;
     }
-
     nav .links {
         display: inline-flex;
         flex-direction: row;
         min-width: 0;
     }
-
     nav .links a {
         }
-
     .filters {
         display: flex;
         flex-wrap: wrap;
     }
-
     .filter-group {
         flex: none;
         width: 50%;
     }
-
     .filter-group h5 {
             margin: 0 1rem;
             width: unset;
         }
-
     .filter-group:first-of-type h5 {
             margin-left: 0;
         }
-
     .filter-group:last-of-type h5 {
             margin-left: 0;
         }
-
     .search {
         width: 100%;
     }
-
     #main-wrapper {
         flex-direction: row;
     }
-
     #extras {
         width: 360px;
     }
-
     #extras section {
             flex-direction: column;
         }
-
     #extras > section {
             position: absolute;
             top: 88px;
@@ -801,26 +814,21 @@ form section div:last-of-type {
             left: 0;
             right: 0;
         }
-
     .card-newsbeat {
         width: unset;
         min-height: unset;
         margin: 5px 0;
     }
-
     .flex-wrap .card {
         flex: none;
         width: 31%;
     }
-
     .article .image-container {
         height: 300px;
     }
-
     .article > .content {
         margin-top: 300px;
     }
-
     .profile-page {
         margin-left: 40px;
     }
@@ -836,20 +844,16 @@ form section div:last-of-type {
     .container {
         max-width: 1260px;
     }
-
     .filters {
         flex-wrap: nowrap;
     }
-
     .filter-group {
         flex: 1 1;
         width: unset;
     }
-
     .filter-group:last-of-type h5 {
             margin-left: 1rem;
         }
-
     .search {
         flex: 2 1;
     }

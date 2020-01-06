@@ -97,7 +97,10 @@ namespace Contra.Areas.Identity.Pages.Account.Manage
                     values: new { userId, email = Input.NewEmail, code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendConfirmEmailAsync(Input.NewEmail, user.Name, callbackUrl);
+                await _emailSender.SendEmailAsync(
+                    email,
+                    "Confirm your email",
+                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                 StatusMessage = "Confirmation link to change email sent. Please check your email.";
                 return RedirectToPage();
