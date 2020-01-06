@@ -93,17 +93,18 @@ function neoload(target, query, amount, type) {
         var i = 0;
         var html = "";
         json.forEach(obj => {
-            var sensitive = false, spoiler = false;
+            var sensitive = false, spoiler = false, pinned = false;
+            if (obj.pinned === "True") pinned = true;
             if (obj.sensitive === "True") sensitive = true;
             if (obj.spoiler === "True") spoiler = true;
 
             var cw;
             if (type === "search") {
-                cw = formatContentWarning(sensitive, spoiler, false);
+                cw = formatContentWarning(pinned, sensitive, spoiler, false);
                 html += formatSearchCard(obj.id, obj.image, obj.title, obj.author, obj.date, obj.summary, cw);
             }
             else if (type === "block") {
-                cw = formatContentWarning(sensitive, spoiler, false);
+                cw = formatContentWarning(pinned, sensitive, spoiler, false);
                 var biggify = false;
                 if (i % 2 === 0) {
                     if (i % 4 === 2) biggify = !biggify;
@@ -115,7 +116,7 @@ function neoload(target, query, amount, type) {
                 }
             }
             else if (type === "mini") {
-                cw = formatContentWarning(sensitive, spoiler, true);
+                cw = formatContentWarning(pinned, sensitive, spoiler, true);
                 html += formatNewsbeat(obj.id, obj.image, obj.title, obj.summary, cw);
             }
             i++;
@@ -129,14 +130,16 @@ function neoload(target, query, amount, type) {
     });
 }
 
-function formatContentWarning(sensitive, spoiler, mini) {
-    if (!sensitive && !spoiler)
+function formatContentWarning(pinned, sensitive, spoiler, mini) {
+    if (!(pinned && mini) && !sensitive && !spoiler)
         return "";
 
     var html = "<p class='content-notice";
     if (mini) html += " content-notice-inline";
-    html += "'>CW: ";
+    html += "'>";
+    if (pinned && mini) html += "Pinned ";
 
+    if (sensitive || spoiler) html += "CW: ";
     if (sensitive) html += "<span>Sensitive</span>";
     if (sensitive && spoiler) html += "<span>, </span>";
     if (spoiler) html += "<span>Spoiler</span>";

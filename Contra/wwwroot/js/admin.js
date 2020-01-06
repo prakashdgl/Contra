@@ -13,6 +13,13 @@ function confirmAction(sender, route) {
         "<a class='text-info clickable' onclick='cancelAction()'>No</a></h5>";
 }
 
+function postToAPI(route) {
+    request("POST", route, x => {
+        lastSender.innerHTML = "<h5>" + x + "</h5>";
+        handled = true;
+    });
+}
+
 function cancelAction() {
     lastSender.innerHTML = lastSenderContent;
     handled = false;

@@ -192,6 +192,40 @@ namespace Contra.Controllers
             return $"Deleted article {id} successfully!";
         }
 
+        [Authorize(Roles = "Administrator")]
+        [HttpPost("article/pin/{*id}")]
+        public async Task<string> ArticlePin(int? id)
+        {
+            if (id == null) return "Requested resource not found.";
+
+            Article article = await _context.Article.FindAsync(id);
+            if (article != null)
+            {
+                article.IsPinned = true;
+                await _context.SaveChangesAsync();
+            }
+            else return $"Article {id} does not exist in the database.";
+
+            return $"Pinned article {id} successfully!";
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost("article/unpin/{*id}")]
+        public async Task<string> ArticleUnpin(int? id)
+        {
+            if (id == null) return "Requested resource not found.";
+
+            Article article = await _context.Article.FindAsync(id);
+            if (article != null)
+            {
+                article.IsPinned = false;
+                await _context.SaveChangesAsync();
+            }
+            else return $"Article {id} does not exist in the database.";
+
+            return $"Unpinned article {id} successfully!";
+        }
+
         [Authorize]
         [HttpPost("account/{id}/picture/{*url}")]
         public async Task<string> ChangeProfilePicture(string id, string url)
@@ -262,7 +296,7 @@ namespace Contra.Controllers
                     "newsbeat" => (from a in _context.Article
                                    where a.Approved == ApprovalStatus.Approved &&
                                          a.ArticleType == ArticleType.Newsbeat
-                                   orderby a.Date descending
+                                   orderby a.IsPinned descending, a.Date descending
                                    select a).ToList(),
                     _ => (from a in _context.Article
                           where a.Approved == ApprovalStatus.Approved &&
@@ -289,6 +323,7 @@ namespace Contra.Controllers
                     { "tags", a.Tags },
                     { "summary", a.SummaryLong },
                     { "image", a.ThumbnailURL },
+                    { "pinned", a.IsPinned.ToString() },
                     { "sensitive", a.Sensitive.ToString() },
                     { "spoiler", a.Spoiler.ToString() }
                 };
