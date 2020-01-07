@@ -286,11 +286,18 @@ namespace Contra.Controllers
                 {
                     "editorial" => (from a in _context.Article
                                     where a.Approved == ApprovalStatus.Approved &&
+                                          a.ArticleType == ArticleType.Article &&
                                           a.IsEditorial
                                     orderby a.Date descending
                                     select a).ToList(),
+                    "event" => (from a in _context.Article
+                                   where a.Approved == ApprovalStatus.Approved &&
+                                         a.ArticleType == ArticleType.Event
+                                   orderby a.IsPinned descending, a.Date descending
+                                   select a).ToList(),
                     "new" => (from a in _context.Article
-                              where a.Approved == ApprovalStatus.Approved
+                              where a.Approved == ApprovalStatus.Approved &&
+                                    a.ArticleType == ArticleType.Article
                               orderby a.Date descending
                               select a).ToList(),
                     "newsbeat" => (from a in _context.Article

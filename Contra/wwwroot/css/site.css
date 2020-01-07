@@ -184,6 +184,16 @@ a {
     animation-fill-mode: both;
 }
 
+@-webkit-keyframes doubleswipe {
+    from {
+        background-position-x: 0;
+    }
+
+    to {
+        background-position-x: 200px;
+    }
+}
+
 @keyframes doubleswipe {
     from {
         background-position-x: 0;
@@ -236,16 +246,16 @@ a {
 }
 
 #extras .section-title {
-        margin-bottom: 0;
-    }
+    margin-bottom: 0;
+}
 
 #extras .card {
-        padding: 10px 15px;
-    }
+    padding: 10px 15px;
+}
 
 #extras > section > .card {
-        overflow: auto;
-    }
+    overflow: auto;
+}
 
 #newsbeat > section {
     height: 100%;
