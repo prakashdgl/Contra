@@ -296,8 +296,7 @@ namespace Contra.Controllers
                                    orderby a.IsPinned descending, a.Date descending
                                    select a).ToList(),
                     "new" => (from a in _context.Article
-                              where a.Approved == ApprovalStatus.Approved &&
-                                    a.ArticleType == ArticleType.Article
+                              where a.Approved == ApprovalStatus.Approved
                               orderby a.Date descending
                               select a).ToList(),
                     "newsbeat" => (from a in _context.Article

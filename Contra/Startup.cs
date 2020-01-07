@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Http;
 using Contra.Areas.Identity.Data;
 using Contra.Data;
-using System;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Contra.Services;
-using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Contra
 {
@@ -45,6 +45,13 @@ namespace Contra
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = Configuration.GetValue<string>("GoogleId");
+                    options.ClientSecret = Configuration.GetValue<string>("GoogleSecret");
+                });
 
             services.Configure<IdentityOptions>(options =>
             {

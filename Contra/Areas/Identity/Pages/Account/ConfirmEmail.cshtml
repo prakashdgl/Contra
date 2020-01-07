@@ -4,23 +4,21 @@
     ViewData["Title"] = "Confirm email";
 }
 
-<div id="main">
-    <div class="section-title">
-        <h2>Email Confirmation</h2>
+<div class="section-title">
+    <h2>Email Confirmation</h2>
+</div>
+<section>
+    <div class="card card-compact">
+        <div>
+            <partial name="_StatusMessage" model="Model.StatusMessage" />
+            <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
+            <a class="btn btn-outline-info" href="~/Identity/Account/Login">Login</a>
+        </div>
     </div>
-    <section>
-        <div class="card card-compact">
-            <div>
-                <partial name="_StatusMessage" model="Model.StatusMessage" />
-                <a class="btn btn-outline-info" href="~/">Return to Homepage</a>
-                <a class="btn btn-outline-info" href="~/Identity/Account/Login">Login</a>
-            </div>
-        </div>
-    </section>
+</section>
     
-    <div class="neoload" data-amount="6" data-query="new" data-type="block">
-        <div class="section-title">
-            <h2>New Articles</h2>
-        </div>
+<div class="neoload" data-amount="6" data-query="new" data-type="block">
+    <div class="section-title">
+        <h2>New Articles</h2>
     </div>
 </div>

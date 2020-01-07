@@ -62,6 +62,9 @@ namespace Contra.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
+            if (string.IsNullOrEmpty(user.ProfilePictureURL)) user.ProfilePictureURL = "";
+            await _userManager.UpdateAsync(user);
+
             await LoadAsync(user);
             return Page();
         }
