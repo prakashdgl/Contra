@@ -151,9 +151,9 @@ a {
 .notifications {
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    right: 5px;
+    left: 5px;
     z-index: 10;
-    width: 400px;
 }
 
 .hidden, .neoload {
@@ -671,10 +671,13 @@ form section div:last-of-type {
 }
 
 @media (min-width: 512px) {
-    .header img {
-        display: block;
-        width: 500px;
-        margin: auto;
+    .notifications {
+        position: fixed;
+        bottom: 20px;
+        right: 15px;
+        left: unset;
+        width: 400px;
+        z-index: 10;
     }
     #border-gradient {
         height: 8px;
