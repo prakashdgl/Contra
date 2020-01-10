@@ -4,52 +4,42 @@
     ViewData["Title"] = "Register";
 }
 
-<div class="section-title ml-0">
+<div class="section-title">
     <h2>@ViewData["Title"]</h2>
 </div>
 <br />
-<section class="mx-2">
-    <div class="cw-50">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Name"></label>
-                <input asp-for="Input.Name" class="form-control" />
-                <span asp-validation-for="Input.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
-    <div class="cw-50">
+<section class="card card-login">
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <h4>Create a Contra account</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Input.Name"></label>
+            <input asp-for="Input.Name" class="form-control" />
+            <span asp-validation-for="Input.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form-control" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.ConfirmPassword"></label>
+            <input asp-for="Input.ConfirmPassword" class="form-control" />
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <div>
         <h4>Use another service to register.</h4>
         <hr />
         @{
-            if ((Model.ExternalLogins?.Count ?? 0) == 0)
-            {
-                <div>
-                    <p>
-                        We're looking into this feature right now.
-                    </p>
-                </div>
-            }
-            else
+            if ((Model.ExternalLogins?.Count ?? 0) >= 0)
             {
                 <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                     <div>

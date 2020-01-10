@@ -112,6 +112,8 @@ namespace Contra.Areas.Identity.Pages.Account
             if (!ModelState.IsValid)
                 return Page();
 
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
                 ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");

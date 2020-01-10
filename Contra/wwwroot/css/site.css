@@ -749,6 +749,13 @@ form section div:last-of-type {
     .card-compact {
         padding: 25px;
     }
+    .card-login {
+        flex-direction: row;
+    }
+    .card-login > form {
+        width: 50%;
+        margin-right: 20px;
+    }
     .article .image-container {
         height: 200px;
     }
@@ -835,6 +842,12 @@ form section div:last-of-type {
     .flex-wrap .card {
         flex: none;
         width: 31%;
+    }
+    .card-login {
+        width: 70%;
+    }
+    .card-login > form {
+        margin-right: 40px;
     }
     .article .image-container {
         height: 300px;
