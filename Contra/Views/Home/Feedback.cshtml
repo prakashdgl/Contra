@@ -44,7 +44,7 @@
                     <div id="step-2" class="hidden">
                         <h2>Describe Feedback (Step 2)</h2>
                         <div class="form-group">
-                            <textarea asp-for="Content" class="summernote"></textarea>
+                            <textarea asp-for="Content"></textarea>
                             <span asp-validation-for="Content" class="text-danger"></span>
                         </div>
                         <br />
@@ -86,6 +86,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <partial name="_SummernoteScriptsPartial" />
-    <script src="~/js/submit.js" asp-append-version="true"></script>
+    <partial name="_SimpleMDEScriptsPartial" />
 }
