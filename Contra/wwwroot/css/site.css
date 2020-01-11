@@ -21,7 +21,7 @@ nav {
     line-height: 45px;
     position: relative;
     padding: 0 15px;
-    z-index: 5;
+    z-index: 30;
 }
 
 nav .container {
@@ -177,6 +177,35 @@ a {
     margin: 0;
 }
 
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #ff6c97ff;
+    border-color: #ff6c97ff transparent #ff6c97ff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .animated {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
@@ -237,27 +266,27 @@ a {
     flex-direction: column;
 }
 
-#main {
+.main {
     flex: 1 1;
 }
 
-#extras {
+.extras {
     position: relative;
 }
 
-#extras .section-title {
+.extras .section-title {
     margin-bottom: 0;
 }
 
-#extras .card {
+.extras .card {
     padding: 10px 15px;
 }
 
-#extras > section > .card {
+.extras > section > .card {
     overflow: auto;
 }
 
-#newsbeat > section {
+.newsbeat > section {
     height: 100%;
     flex-direction: row;
 }
@@ -821,13 +850,13 @@ form section div:last-of-type {
     #main-wrapper {
         flex-direction: row;
     }
-    #extras {
+    .extras {
         width: 360px;
     }
-    #extras section {
+    .extras section {
             flex-direction: column;
         }
-    #extras > section {
+    .extras > section {
             position: absolute;
             top: 88px;
             bottom: 0;

@@ -30,68 +30,71 @@
         </div>
     </div>
 </section>
-<div class="section-title">
-    <h2>Test Suite</h2>
-</div>
-<section>
-    <div class="card">
-        <div>
-            <h2>Generate Article</h2>
-            <br />
-            <section>
-                <button type="button" onclick="generateTestArticle(false, false)" class="btn btn-primary mx-1">Article</button>
-                <button type="button" onclick="generateTestArticle(true, false)" class="btn btn-primary mx-1">Newsbeat</button>
-                <button type="button" onclick="generateTestArticle(false, true)" class="btn btn-primary mx-1">Editorial</button>
-            </section>
-            <br />
-            <section>
-                <button type="button" onclick="degenerateArticles()" class="btn btn-danger mx-1">Degenerate Articles</button>
-            </section>
-        </div>
+
+<environment include="Development">
+    <div class="section-title">
+        <h2>Test Suite</h2>
     </div>
-    <div class="card card-big">
-        <div>
-            <h2>Options</h2>
-            <label class="control-label">Article Tags</label>
-            <input id="tags" type="text" class="disabled form-control" disabled placeholder="Tags you choose will appear here." />
-            <br />
-            <section>
-                <label for="tag-news" class="toggle">
-                    News
-                    <input type="checkbox" id="tag-news" onclick="toggleTag('News')">
-                    <span class="checkmark"></span>
-                </label>
-                <label for="tag-opinion" class="toggle">
-                    Opinion
-                    <input type="checkbox" id="tag-opinion" onclick="toggleTag('Opinion')">
-                    <span class="checkmark"></span>
-                </label>
-                <label for="tag-entertainment" class="toggle">
-                    Entertainment &amp; Culture
-                    <input type="checkbox" id="tag-entertainment" onclick="toggleTag('Entertainment Culture')">
-                    <span class="checkmark"></span>
-                </label>
-            </section>
-            <section>
-                <label for="tag-politics" class="toggle">
-                    Politics
-                    <input type="checkbox" id="tag-politics" onclick="toggleTag('Politics')">
-                    <span class="checkmark"></span>
-                </label>
-                <label for="tag-sports" class="toggle">
-                    Sports
-                    <input type="checkbox" id="tag-sports" onclick="toggleTag('Sports')">
-                    <span class="checkmark"></span>
-                </label>
-                <label for="tag-event" class="toggle">
-                    Local Events
-                    <input type="checkbox" id="tag-event" onclick="toggleTag('Event')">
-                    <span class="checkmark"></span>
-                </label>
-            </section>
-            <p id="suite-response"></p>
-            <br />
+    <section>
+        <div class="card">
+            <div>
+                <h2>Generate Article</h2>
+                <br />
+                <section>
+                    <button type="button" onclick="generateTestArticle(false, false)" class="btn btn-primary mx-1">Article</button>
+                    <button type="button" onclick="generateTestArticle(true, false)" class="btn btn-primary mx-1">Newsbeat</button>
+                    <button type="button" onclick="generateTestArticle(false, true)" class="btn btn-primary mx-1">Editorial</button>
+                </section>
+                <br />
+                <section>
+                    <button type="button" onclick="degenerateArticles()" class="btn btn-danger mx-1">Degenerate Articles</button>
+                </section>
+            </div>
         </div>
-    </div>
-</section>
+        <div class="card card-big">
+            <div>
+                <h2>Options</h2>
+                <label class="control-label">Article Tags</label>
+                <input id="tags" type="text" class="disabled form-control" disabled placeholder="Tags you choose will appear here." />
+                <br />
+                <section>
+                    <label for="tag-news" class="toggle">
+                        News
+                        <input type="checkbox" id="tag-news" onclick="toggleTag('News')">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label for="tag-opinion" class="toggle">
+                        Opinion
+                        <input type="checkbox" id="tag-opinion" onclick="toggleTag('Opinion')">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label for="tag-entertainment" class="toggle">
+                        Entertainment &amp; Culture
+                        <input type="checkbox" id="tag-entertainment" onclick="toggleTag('Entertainment Culture')">
+                        <span class="checkmark"></span>
+                    </label>
+                </section>
+                <section>
+                    <label for="tag-politics" class="toggle">
+                        Politics
+                        <input type="checkbox" id="tag-politics" onclick="toggleTag('Politics')">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label for="tag-sports" class="toggle">
+                        Sports
+                        <input type="checkbox" id="tag-sports" onclick="toggleTag('Sports')">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label for="tag-event" class="toggle">
+                        Local Events
+                        <input type="checkbox" id="tag-event" onclick="toggleTag('Event')">
+                        <span class="checkmark"></span>
+                    </label>
+                </section>
+                <p id="suite-response"></p>
+                <br />
+            </div>
+        </div>
+    </section>
+</environment>
 <br />

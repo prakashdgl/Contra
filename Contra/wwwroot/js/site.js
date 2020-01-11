@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         neoload(el, el.getAttribute("data-query"),
                     el.getAttribute("data-amount"),
                     el.getAttribute("data-type"),
-                    0);
+                    el.getAttribute("data-loading"));
     }
 
     if (document.cookie.includes("compact=yes") &&
@@ -80,7 +80,7 @@ function request(method, route, callback = null) {
     http.send();
 }
 
-function neoload(target, query, amount, type) {
+function neoload(target, query, amount, type, loading) {
     request("GET", "api/v1/article/list/" + query + "/" + amount, x => {
         if (!x) return;
         else {
@@ -122,11 +122,15 @@ function neoload(target, query, amount, type) {
             i++;
         });
 
-        target.innerHTML += html;
+        setTimeout(() => {
+            target.innerHTML += html;
 
-        if (document.cookie.includes("compact=yes") &&
-            document.getElementById("compact-compatible"))
-            showCompact();
+            if (document.cookie.includes("compact=yes") &&
+                document.getElementById("compact-compatible"))
+                showCompact();
+
+            if (loading) document.getElementById("loading-" + loading).style.display = "none";
+        }, 100);
     });
 }
 
