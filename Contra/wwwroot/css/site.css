@@ -181,7 +181,7 @@ a {
     display: inline-block;
     width: 80px;
     height: 80px;
-    margin: auto;
+    margin: 20px auto;
 }
 
 .lds-dual-ring:after {
