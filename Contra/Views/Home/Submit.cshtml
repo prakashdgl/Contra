@@ -156,8 +156,7 @@
                         <h2>Content (Step 3)</h2>
                         <div class="form-group">
                             <label asp-for="Content" class="control-label"></label>
-                            <input asp-for="Content" type="hidden" />
-                            <textarea></textarea>
+                            <textarea asp-for="Content" class="summernote"></textarea>
                             <span asp-validation-for="Content" class="text-danger"></span>
                         </div>
                     </div>
@@ -228,7 +227,7 @@ else
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_SummernoteScriptsPartial" />
+    <script src="~/js/submit.js" asp-append-version="true"></script>
     <script src="~/lib/animejs/anime.min.js" asp-append-version="true"></script>
-    <partial name="_MDRenderScriptsPartial" />
-    <partial name="_SimpleMDEScriptsPartial" />
 }

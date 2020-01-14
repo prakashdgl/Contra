@@ -34,7 +34,7 @@
                 <h1>@Html.DisplayFor(model => model.Title)</h1>
                 <p>@Model.AuthorName - @Model.Date.ToShortDateString()</p>
                 <br />
-                <span class="markdown">@Model.Content</span>
+                @Html.Raw(Model.Content)
             </div>
         </div>
     </section>
@@ -87,7 +87,3 @@ else
         <h2>New Articles</h2>
     </div>
 </div>
-
-@section Scripts {
-    <partial name="_MDRenderScriptsPartial" />
-}

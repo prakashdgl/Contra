@@ -31,7 +31,7 @@
                 { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@Model.Id')">Approve</a>}
             </div>
             <br />
-            <span class="markdown">@Model.Content</span>
+            <p>@Html.Raw(Model.Content)</p>
         </div>
     </div>
 </section>
@@ -59,8 +59,4 @@
             }
         </div>
     </section>
-}
-
-@section Scripts {
-    <partial name="_MDRenderScriptsPartial" />
 }

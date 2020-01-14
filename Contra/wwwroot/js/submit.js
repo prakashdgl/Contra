@@ -6,8 +6,6 @@ var content;
 var submitStep = 1;
 var currentFormat;
 
-var simplemde;
-
 document.addEventListener("DOMContentLoaded", () => {
     coauthors = document.getElementById("coauthors");
     title = document.getElementById("title");
@@ -17,8 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     inputCoauthors = document.getElementById("input-coauthors");
     inputTitle = document.getElementById("input-title");
     inputImage = document.getElementById("input-img");
-
-    simplemde = new SimpleMDE();
 });
 
 function selectFormat(format) {
@@ -102,7 +98,7 @@ function submitNextStep() {
     if (submitStep === 4) {
         document.getElementById("preview").style.display = "unset";
         document.getElementById("nextButton").classList = "btn btn-outline-dark disabled";
-        content.innerHTML = simplemde.value();
+        content.innerHTML = $("#content").summernote('code');
     }
     document.getElementById("prevButton").classList = "btn btn-outline-info";
 
@@ -132,8 +128,7 @@ function updateLivePreview() {
     if (inputImage.value)
         image.src = inputImage.value;
     else
-        image.src = "/img/img05.jpg";
+        image.src = "../img/img05.jpg";
 
-    document.getElementById("Content").value = DOMPurify.sanitize(marked(simplemde.value()));
-    content.innerHTML = DOMPurify.sanitize(marked(simplemde.value()));
+    content.innerHTML = $("#Content").summernote('code');
 }
