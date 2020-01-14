@@ -568,22 +568,22 @@ a.card:hover {
     }
 
 .article > .content {
-        margin-top: 150px;
-        font-size: 18px;
-    }
+    margin-top: 150px;
+    font-size: 18px;
+}
 
 .article-preview {
     flex: 1 1;
 }
 
 .article-preview .card {
-        margin: 0;
-        margin-bottom: 10px;
-    }
+    margin: 0;
+    margin-bottom: 10px;
+}
 
 .article-preview .content {
-        padding: 0.5rem !important;
-    }
+    padding: 0.5rem !important;
+}
 
 form section div:last-of-type {
     margin-right: 0;
