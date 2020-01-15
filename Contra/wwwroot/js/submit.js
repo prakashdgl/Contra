@@ -125,10 +125,15 @@ function updateLivePreview() {
     else
         title.innerText = "Title";
 
-    if (inputImage.value)
-        image.src = inputImage.value;
+    if (inputImage.value) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            image.src = reader.result;
+        };
+        reader.readAsDataURL(inputImage.files[0]);
+    }
     else
-        image.src = "../img/img05.jpg";
+        image.src = "/img/img05.jpg";
 
     content.innerHTML = $("#Content").summernote('code');
 }

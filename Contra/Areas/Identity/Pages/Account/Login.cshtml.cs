@@ -104,6 +104,7 @@ namespace Contra.Areas.Identity.Pages.Account
             }
 
             // If we got this far, something failed, redisplay form
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             return Page();
         }
 

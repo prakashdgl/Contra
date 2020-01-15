@@ -45,7 +45,7 @@
     <section id="submit-form" class="format hidden">
         <div class="card">
             <div>
-                <form asp-action="Submit">
+                <form enctype="multipart/form-data" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input id="input-articleType" asp-for="ArticleType" type="hidden" />
                     <div id="step-1">
@@ -90,8 +90,7 @@
                             </section>
                             <br />
                             <div id="inputGroup-sensitiveContent" class="form-group hidden">
-                                <p class="content-notice">Please note if you write about a sensitive topic, we are forced to follow the same legal guidelines that the school does dealing with these things.</p>
-                                <br />
+                                <p class="content-notice">Please note if you write about a sensitive topic, we follow the same legal guidelines that the school does dealing with these things.</p>
                             </div>
                             <div id="inputGroup-anonymous" class="form-group hidden">
                                 <p class="content-notice">Your anonymity is guaranteed only if the content in your writing is potentially sensitive to you or others. The administrative team can still see your identity.</p>
@@ -102,9 +101,8 @@
                         <h2>Article Info (Step 2)</h2>
                         <div class="form-group">
                             <label class="control-label">Thumbnail URL</label>
-                            <input id="input-img" asp-for="ThumbnailURL" class="form-control" placeholder="https://imgur.com/NcKtjUr.jpg" />
-                            <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
-                            <p>Please provide an external URL to an image to use as a thumbnail.</p>
+                            <input id="input-img" name="thumbnail" type="file" class="form-control form-control-file" />
+                            <p>Maximum size: 2MB JPG or PNG.</p>
                         </div>
                         <br />
                         <div class="form-group">

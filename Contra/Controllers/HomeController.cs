@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Contra.Areas.Identity.Data;
 using Contra.Data;
 using Contra.Models;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Contra.Controllers
 {
@@ -19,12 +21,15 @@ namespace Contra.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ContraUser> _userManager;
+        private readonly IWebHostEnvironment _environment;
 
         public HomeController(ApplicationDbContext context,
-                              UserManager<ContraUser> userManager)
+                              UserManager<ContraUser> userManager,
+                              IWebHostEnvironment environment)
         {
             _context = context;
             _userManager = userManager;
+            _environment = environment;
         }
 
         public IActionResult Index()
@@ -176,11 +181,40 @@ namespace Contra.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Submit([Bind("Id,ArticleType,AuthorName,Title,Sensitive," +
                                                       "SensitiveContent,Spoiler,SpoilerContent,Anonymous," +
-                                                      "ThumbnailURL,Tags,SummaryLong,Content")] Article article)
+                                                      "Tags,SummaryLong,Content")] Article article, IFormFile thumbnail)
         {
             if (ModelState.IsValid)
             {
                 ContraUser user = _userManager.GetUserAsync(User).Result;
+                if (thumbnail.Length > 0 && thumbnail.Length < 2000000)
+                {
+                    string rootPath = _environment.WebRootPath + "/img/user/" + user.Id;
+                    if (!Directory.Exists(rootPath))
+                        Directory.CreateDirectory(rootPath);
+
+                    string filePath = rootPath + "/" + Path.GetRandomFileName();
+                    switch (thumbnail.ContentType)
+                    {
+                        case "image/png":
+                            filePath += ".png";
+                            break;
+                        case "image/jpeg":
+                            filePath += ".jpg";
+                            break;
+                        default:
+                            return View(article);
+                    }
+
+                    using (var stream = System.IO.File.Create(filePath))
+                    {
+                        await thumbnail.CopyToAsync(stream);
+                    }
+
+                    article.ThumbnailURL = filePath;
+                }
+                else
+                    return View(article);
+
                 article.OwnerID = user.Id;
                 if (!string.IsNullOrWhiteSpace(article.AuthorName))
                     article.AuthorName = user.Name + ", " + article.AuthorName;

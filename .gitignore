@@ -350,3 +350,4 @@ MigrationBackup/
 EarthsTimeline/appsettings.Production.json
 OpenTalon/appsettings.Production.json
 Contra/appsettings.Production.json
+Contra/wwwroot/img/user
