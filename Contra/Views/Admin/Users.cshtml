@@ -41,6 +41,7 @@
             <div class="user-info">
                 <h5>@user.Name - @user.Email</h5>
                 <p>Id: @user.Id</p>
+                <p>Verified Email: @user.EmailConfirmed</p>
                 @foreach (IdentityRole role in RoleManager.Roles)
                 {
                     <label for="@role.Name-@user.Id" class="toggle compact-hidden">@role.Name

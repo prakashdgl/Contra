@@ -216,7 +216,9 @@ namespace Contra.Controllers
                     return View(article);
 
                 article.OwnerID = user.Id;
-                if (!string.IsNullOrWhiteSpace(article.AuthorName))
+                if (article.Anonymous)
+                    article.AuthorName = "Anonymous";
+                else if (!string.IsNullOrWhiteSpace(article.AuthorName))
                     article.AuthorName = user.Name + ", " + article.AuthorName;
                 else
                     article.AuthorName = user.Name;
