@@ -210,7 +210,7 @@ namespace Contra.Controllers
                         await thumbnail.CopyToAsync(stream);
                     }
 
-                    article.ThumbnailURL = filePath;
+                    article.ThumbnailURL = "/img/user/" + user.Id + "/" + Path.GetRandomFileName();
                 }
                 else
                     return View(article);

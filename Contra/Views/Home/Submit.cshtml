@@ -20,29 +20,47 @@
 <br />
 @if (SignInManager.IsSignedIn(User))
 {
-    <section id="select-format">
-        <div class="card">
-            <div>
-                <h2>Article</h2>
-                <p>Articles are advised to be between approximately 300 and 1,000 words. Articles can cover almost anything from movies to politics to local news. If you are unsure if a topic will be accepted, <a href="~/feedback">ask</a>!</p>
-                <button class="btn btn-outline-primary" onclick="selectFormat(0)">Write an Article</button>
+    <div id="select-format">
+        <section>
+            <div class="card">
+                <div>
+                    <h2>Article</h2>
+                    <p>Articles are advised to be between approximately 300 and 1,000 words. Articles can cover almost anything from entertainment to global politics. If you aren't sure, write an article.</p>
+                    <button class="btn btn-outline-primary" onclick="selectFormat(0)">Write an Article</button>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <div>
-                <h2>Event</h2>
-                <p>Events articles should be used to cover upcoming and past local events. Events articles are advised to be related to Los Altos High School or Santa Clara County and be at least 200 words long.</p>
-                <button class="btn btn-outline-primary" onclick="selectFormat(1)">Cover an Event</button>
+            <div class="card">
+                <div>
+                    <h2>Insight</h2>
+                    <p>Insight articles are meant to be short, at under 300 words. Insight articles can cover anything a regular article can, but it is recommended that Insight be more fact-oriented content.</p>
+                    <button class="btn btn-outline-primary" onclick="selectFormat(2)">Share Insights</button>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <div>
-                <h2>Newsbeat</h2>
-                <p>Newsbeat articles are meant to be short, at under 300 words. Newsbeat articles can cover anything a regular article can, but it is recommended that Newsbeat be more fact-oriented content.</p>
-                <button class="btn btn-outline-primary" onclick="selectFormat(2)">Deliver the News</button>
+            <div class="card">
+                <div>
+                    <h2>Response</h2>
+                    <p>Someone say something that you really disagree with, or something you'd like to add to? Respond to them! Response articles will be shown on articles but should be written like regular articles.</p>
+                    <button class="btn btn-outline-primary">Coming Soon</button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <section>
+            <div class="card">
+                <div>
+                    <h2>Event</h2>
+                    <p>Events articles should be used to cover upcoming and past local events. Events articles are advised to be related to Los Altos High School or Santa Clara County and be at least 200 words long.</p>
+                    <button class="btn btn-outline-primary" onclick="selectFormat(1)">Cover an Event</button>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <h2>Meta</h2>
+                    <p>Unhappy with things on Contra? Make a meta post about the current state of things, what you'd like to see changed, or anything related to Contra itself. This is like the feedback tool, but public.</p>
+                    <button class="btn btn-outline-primary">Coming Soon</button>
+                </div>
+            </div>
+        </section>
+    </div>
     <section id="submit-form" class="format hidden">
         <div class="card">
             <div>
@@ -175,7 +193,7 @@
                     <br />
                 </form>
                 <div id="submit-controls">
-                    <button class="btn btn-outline-dark" onclick="reselectFormat()">Reselect Article Type</button>
+                    <button class="btn btn-outline-dark" onclick="reselectFormat()">Reselect Type</button>
                     <button id="prevButton" class="btn btn-outline-dark disabled" onclick="submitUndoStep()">Previous Step</button>
                     <button id="nextButton" class="btn btn-outline-info" onclick="submitNextStep()">Next Step</button>
                 </div>

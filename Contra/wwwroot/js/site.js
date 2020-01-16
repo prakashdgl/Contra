@@ -117,7 +117,7 @@ function neoload(target, query, amount, type, loading) {
             }
             else if (type === "mini") {
                 cw = formatContentWarning(pinned, sensitive, spoiler, true);
-                html += formatNewsbeat(obj.id, obj.image, obj.title, obj.summary, cw);
+                html += formatInsight(obj.id, obj.image, obj.title, obj.summary, cw);
             }
             i++;
         });
@@ -168,8 +168,8 @@ function formatSearchCard(id, image, title, author, date, summary, contentWarnin
         summary + "</p><a href='https://" + window.location.host + "/article/" + id + "'>Read More</a></div></div>";
 }
 
-function formatNewsbeat(id, image, title, summary, contentWarning) {
-    return "<a class='card card-big card-encapsulate card-newsbeat' href='/article/" + id +
+function formatInsight(id, image, title, summary, contentWarning) {
+    return "<a class='card card-big card-encapsulate card-insight' href='/article/" + id +
         "'><span class='image-container'><img src='" + image + "' alt='" + title +
         " Thumbnail' /></span><div><h2>" + title + "</h2>" + contentWarning + "<p>" + summary + "</p></div></a>";
 }

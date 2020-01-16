@@ -52,11 +52,11 @@ function toggleTag(tag) {
         tags.value += " " + tag;
 }
 
-function generateTestArticle(newsbeat, editorial) {
+function generateTestArticle(insight, editorial) {
     var tags = document.getElementById("tags").value;
     var route = "api/v1/generate/" + tags;
 
-    if (newsbeat) route += "/true";
+    if (insight) route += "/true";
     else route += "/false";
     if (editorial) route += "/true";
     else route += "/false";

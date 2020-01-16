@@ -42,6 +42,6 @@ namespace Contra.Models
     {
         Article,
         Event,
-        Newsbeat
+        Insight
     }
 }

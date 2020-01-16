@@ -299,11 +299,11 @@ namespace Contra.Controllers
                               where a.Approved == ApprovalStatus.Approved
                               orderby a.Date descending
                               select a).ToList(),
-                    "newsbeat" => (from a in _context.Article
-                                   where a.Approved == ApprovalStatus.Approved &&
-                                         a.ArticleType == ArticleType.Newsbeat
-                                   orderby a.IsPinned descending, a.Date descending
-                                   select a).ToList(),
+                    "insight" => (from a in _context.Article
+                                  where a.Approved == ApprovalStatus.Approved &&
+                                        a.ArticleType == ArticleType.Insight
+                                  orderby a.IsPinned descending, a.Date descending
+                                  select a).ToList(),
                     _ => (from a in _context.Article
                           where a.Approved == ApprovalStatus.Approved &&
                                (a.Title.ToLower().Contains(query) ||
@@ -344,8 +344,8 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("generate/{tags}/{isNewsbeat}/{isEditorial}")]
-        public async Task<string> Generate(string tags, bool isNewsbeat = false, bool isEditorial = false)
+        [Route("generate/{tags}/{isInsight}/{isEditorial}")]
+        public async Task<string> Generate(string tags, bool isInsight = false, bool isEditorial = false)
         {
             Article placeholder = new Article
             {
@@ -361,7 +361,7 @@ namespace Contra.Controllers
                 Views = 0
             };
 
-            if (isNewsbeat) placeholder.ArticleType = ArticleType.Newsbeat;
+            if (isInsight) placeholder.ArticleType = ArticleType.Insight;
             if (isEditorial) placeholder.IsEditorial = true;
 
             string[] urls = new string[5] { "/img/img01.jpg",
