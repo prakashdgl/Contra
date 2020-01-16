@@ -109,9 +109,9 @@ a.navbar-brand {
 }
 
 a.navbar-brand img {
-        vertical-align: text-bottom;
-        height: 28px;
-    }
+    vertical-align: text-bottom;
+    height: 28px;
+}
 
 .text-secondary {
     font-size: 1rem;
@@ -144,9 +144,9 @@ a {
 }
 
 .query > div {
-        width: 60%;
-        margin: auto;
-    }
+    width: 60%;
+    margin: auto;
+}
 
 .notifications {
     position: fixed;
@@ -305,8 +305,8 @@ a {
 }
 
 .section-title h2 {
-        font-size: 32px;
-    }
+    font-size: 32px;
+}
 
 .filters {
     margin-top: 20px;
@@ -319,27 +319,27 @@ a {
 }
 
 .filter-group h5 {
-        line-height: 35px;
-        width: 80px;
-    }
+    line-height: 35px;
+    width: 80px;
+}
 
 .filter-group .btn {
-        border-left: 0;
-        border-radius: 0;
-        margin: 0;
-        flex: 1 1;
-    }
+    border-left: 0;
+    border-radius: 0;
+    margin: 0;
+    flex: 1 1;
+}
 
 .filter-group .btn:first-of-type, .search input {
-            border-left: 1px solid var(--info);
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-        }
+    border-left: 1px solid var(--info);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
 
 .filter-group .btn:last-of-type {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
 
 .search form {
     display: inline-flex;
@@ -373,8 +373,8 @@ a.card {
 }
 
 a.card:hover {
-        text-decoration: none;
-    }
+    text-decoration: none;
+}
 
 .card {
     border: none;
@@ -394,16 +394,16 @@ a.card:hover {
 }
 
 .story:hover, .story:focus {
-        box-shadow: -10px 10px 5px #bbb;
-        cursor: pointer;
-        transform: translate(4px, -4px);
-    }
+    box-shadow: -10px 10px 5px #bbb;
+    cursor: pointer;
+    transform: translate(4px, -4px);
+}
 
 .story > div {
-        width: 220px;
-        height: 100%;
-        padding: 15px;
-    }
+    width: 220px;
+    height: 100%;
+    padding: 15px;
+}
 
 .secondary-info {
     background-color: #fff;
@@ -414,9 +414,9 @@ a.card:hover {
 }
 
 .secondary-info img {
-        line-height: inherit;
-        height: 30px;
-    }
+    line-height: inherit;
+    height: 30px;
+}
 
 .content-notice {
     background-color: #eee;
@@ -481,16 +481,16 @@ a.card:hover {
 }
 
 .card-encapsulate > div {
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        z-index: 5;
-        width: 220px;
-        height: 100%;
-    }
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    z-index: 5;
+    width: 230px;
+    height: 100%;
+}
 
 .card-encapsulate .image-container {
-        left: 0;
-    }
+    left: 0;
+}
 
 .card-search, .card-compact {
     min-height: 50px;
@@ -498,13 +498,13 @@ a.card:hover {
 }
 
 .card-search > div {
-        width: 50%;
-    }
+    width: 50%;
+}
 
 .card-search .image-container {
-        left: 60%;
-        min-width: 50%;
-    }
+    left: 60%;
+    min-width: 50%;
+}
 
 .card-newsbeat {
     padding: 0 !important;
@@ -516,26 +516,26 @@ a.card:hover {
 }
 
 .card-newsbeat:hover, .card-newsbeat:focus {
-        box-shadow: -8px 8px 5px #bbb;
-        cursor: pointer;
-        transform: translate(2px, -2px);
-    }
+    box-shadow: -8px 8px 5px #bbb;
+    cursor: pointer;
+    transform: translate(2px, -2px);
+}
 
 .card-newsbeat > div {
-        padding: 15px;
-        margin: 0;
-        width: 100%;
-        height: 100%;
-    }
+    padding: 15px;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
 
 .card-newsbeat > div > h2 {
-            display: inline-block;
-            font-size: 16px;
-        }
+    display: inline-block;
+    font-size: 16px;
+}
 
 .card-newsbeat > div > p {
-            font-size: 14px;
-        }
+    font-size: 14px;
+}
 
 .card-profile > div {
     width: 100%;
@@ -559,13 +559,13 @@ a.card:hover {
 }
 
 .article .image-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 150px;
-        overflow: hidden;
-    }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
 
 .article > .content {
     margin-top: 150px;
@@ -603,12 +603,12 @@ form section div:last-of-type {
 }
 
 .toggle input {
-        cursor: pointer;
-        position: absolute;
-        opacity: 0;
-        height: 0;
-        width: 0;
-    }
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
 
 .checkmark {
     position: absolute;
@@ -659,13 +659,13 @@ form section div:last-of-type {
 }
 
 .social-links img {
-        display: inline-block;
-        width: 30px;
-        height: auto;
-        padding: 0.3rem;
-        padding-left: 0;
-        margin-right: 0.2rem;
-    }
+    display: inline-block;
+    width: 30px;
+    height: auto;
+    padding: 0.3rem;
+    padding-left: 0;
+    margin-right: 0.2rem;
+}
 
 .footer {
     position: absolute;
@@ -677,8 +677,8 @@ form section div:last-of-type {
 }
 
 .footer .container {
-        margin-bottom: 0;
-    }
+    margin-bottom: 0;
+}
 
 .profile-dashboard {
     margin-top: 50px;
@@ -690,13 +690,13 @@ form section div:last-of-type {
 }
 
 .profile-controls .image-container {
-        position: relative;
-    }
+    position: relative;
+}
 
 .profile-controls > div {
-        width: 80%;
-        margin: auto;
-    }
+    width: 80%;
+    margin: auto;
+}
 
 .profile-picture {
     width: 50%;
@@ -735,8 +735,8 @@ form section div:last-of-type {
         flex-direction: row;
     }
     .profile-controls > div {
-            margin-left: 30px;
-        }
+        margin-left: 30px;
+    }
     .profile-picture {
         width: 20rem;
     }
@@ -772,9 +772,9 @@ form section div:last-of-type {
         justify-content: center;
     }
     .flex-wrap .card {
-            flex: none;
-            width: 45%;
-        }
+        flex: none;
+        width: 45%;
+    }
     .card-compact {
         padding: 25px;
     }
@@ -799,9 +799,9 @@ form section div:last-of-type {
         flex-direction: column;
     }
     .profile-controls > div {
-            margin: 0;
-            width: 100%;
-        }
+        margin: 0;
+        width: 100%;
+    }
     .profile-page {
         margin-left: 20px;
         margin-top: 0;
@@ -824,8 +824,6 @@ form section div:last-of-type {
         flex-direction: row;
         min-width: 0;
     }
-    nav .links a {
-        }
     .filters {
         display: flex;
         flex-wrap: wrap;
@@ -835,15 +833,15 @@ form section div:last-of-type {
         width: 50%;
     }
     .filter-group h5 {
-            margin: 0 1rem;
-            width: unset;
-        }
+        margin: 0 1rem;
+        width: unset;
+    }
     .filter-group:first-of-type h5 {
-            margin-left: 0;
-        }
+        margin-left: 0;
+    }
     .filter-group:last-of-type h5 {
-            margin-left: 0;
-        }
+        margin-left: 0;
+    }
     .search {
         width: 100%;
     }
@@ -854,15 +852,15 @@ form section div:last-of-type {
         width: 360px;
     }
     .extras section {
-            flex-direction: column;
-        }
+        flex-direction: column;
+    }
     .extras > section {
-            position: absolute;
-            top: 88px;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
+        position: absolute;
+        top: 88px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
     .card-newsbeat {
         width: unset;
         min-height: unset;
@@ -907,8 +905,8 @@ form section div:last-of-type {
         width: unset;
     }
     .filter-group:last-of-type h5 {
-            margin-left: 1rem;
-        }
+        margin-left: 1rem;
+    }
     .search {
         flex: 2 1;
     }
