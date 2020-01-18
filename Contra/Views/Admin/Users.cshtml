@@ -10,7 +10,7 @@
 }
 
 <div class="section-title" id="compact-compatible" >
-    <h2>@ViewData["Message"]</h2>
+    <h2>@ViewData["Message"] (@Model.Keys.Count)</h2>
     <div class="filters">
         <div class="filter-group">
             <h5 class="hideable">View:</h5>
@@ -55,13 +55,11 @@
                 <a class="nav-link" href="~/tickets/@user.Id">❔ Tickets</a>
                 <div class="actions">
                     @if (user.IsBanned)
-                    {
-                        <a class="nav-link text-danger clickable" onclick="confirmAction(this, 'api/v1/user/@user.Id/unban')">🙌 Unban</a>
-                    }
+                    { <a class="nav-link text-danger clickable" onclick="confirmAction(this, 'api/v1/user/@user.Id/unban')">🙌 Unban</a> }
                     else
-                    {
-                        <a class="nav-link text-danger clickable" onclick="confirmAction(this, 'api/v1/user/@user.Id/ban')">👋 Ban</a>
-                    }
+                    { <a class="nav-link text-danger clickable" onclick="confirmAction(this, 'api/v1/user/@user.Id/ban')">🤚 Ban</a> }
+                    @if (!user.EmailConfirmed)
+                    { <a class="nav-link text-danger clickable" onclick="confirmAction(this, 'api/v1/user/@user.Id/remove')">👋 Remove</a> }
                 </div>
             </div>
         </div>

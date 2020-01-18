@@ -100,6 +100,22 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
+        [HttpPost("user/{userID}/remove")]
+        public async Task<string> RemoveUser(string userID)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userID);
+            if (user == null)
+                return "Requested user not found.";
+
+            if (!user.EmailConfirmed)
+                await _userManager.DeleteAsync(user);
+            else
+                return "Cannot remove user!";
+
+            return $"Removed {user.Name}!";
+        }
+
+        [Authorize(Roles = "Administrator")]
         [HttpPost("user/{userID}/enfeeble/{*role}")]
         public async Task<string> EnfeebleRole(string userID, string role)
         {
