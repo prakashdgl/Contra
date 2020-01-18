@@ -3,10 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Contra.Data;
 using Contra.Models;
+using Contra.Areas.Identity.Data;
 
 namespace Contra.Controllers
 {
@@ -14,38 +16,38 @@ namespace Contra.Controllers
     public class ImagesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ContraUser> _userManager;
 
-        public ImagesController(ApplicationDbContext context)
+        public ImagesController(ApplicationDbContext context,
+                                UserManager<ContraUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        // GET: Images
         public async Task<IActionResult> Index()
         {
             return View(await _context.Image.ToListAsync());
         }
 
-        [HttpGet("/img/upload/{id}")]
-        public FileStreamResult GetImage(int id)
+        [HttpGet("/img/upload/{name}")]
+        public FileStreamResult GetImage(string name)
         {
             var image = (from i in _context.Image
-                         where i.Id == id
+                         where i.Name == name
                          select i).FirstOrDefault();
+
+            if (image == null) return null;
 
             Stream stream = new MemoryStream(image.Content);
             return new FileStreamResult(stream, image.ContentType);
         }
 
-        // GET: Images/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Images/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(IFormFile file)
@@ -60,6 +62,8 @@ namespace Contra.Controllers
                 {
                     var image = new Image()
                     {
+                        OwnerID = _userManager.GetUserId(User),
+                        Name = Path.GetRandomFileName(),
                         ContentType = file.ContentType,
                         Content = memoryStream.ToArray()
                     };
@@ -73,7 +77,6 @@ namespace Contra.Controllers
             return View();
         }
 
-        // GET: Images/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -91,7 +94,6 @@ namespace Contra.Controllers
             return View(image);
         }
 
-        // POST: Images/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

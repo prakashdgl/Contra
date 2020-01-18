@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Contra.Models.Image>
+
+@{
+    ViewData["Title"] = "Images";
+    Layout = "_AdminLayout";
+}
+
+<div class="section-title">
+    <h2>@ViewData["Message"]</h2>
+    <div class="filters">
+        <div class="filter-group">
+            <h5 class="hideable">View:</h5>
+            <button id="comfortableButton" class="btn btn-info" onclick="showComfortable()">Comfortable</button>
+            <button id="compactButton" class="btn btn-outline-info" onclick="showCompact()">Compact</button>
+        </div>
+        <div class="filter-group">
+            <h5 class="hideable">Sort:</h5>
+            <a class="btn @(ViewData["SortBy"].Equals("Author")? "btn-info" : "btn-outline-info")" href="~/images/@ViewData["Filter"]/author">Author</a>
+            <a class="btn @(ViewData["SortBy"].Equals("Name")? "btn-info" : "btn-outline-info")" href="~/images/@ViewData["Filter"]/name">Name</a>
+        </div>
+        <div class="filter-group search">
+            <h5 class="hideable">Search:</h5>
+            <form asp-action="Images">
+                <input name="filter" type="text" placeholder="Search images" />
+                <button class="btn btn-info" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+<section class="flex-wrap">
+    @foreach (var item in Model)
+    {
+        <div class="card card-encapsulate card-grid">
+            <span class="image-container"><img src="/img/upload/@item.Name" /></span>
+            <div>
+                <h5>@item.OwnerID</h5>
+                <p>@item.Name</p>
+                <a href="~/images/delete/@item.Id" class="btn btn-primary">Delete</a>
+            </div>
+        </div>
+    }
+</section>

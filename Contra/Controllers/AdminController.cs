@@ -133,6 +133,43 @@ namespace Contra.Controllers
             return View(comments);
         }
 
+        [Route("/images/{filter}/{*sortBy}")]
+        public IActionResult Images(string filter, string sortBy = "new")
+        {
+            if (string.IsNullOrEmpty(filter)) filter = "all";
+            ViewData["Filter"] = filter;
+
+            List<Image> images;
+            switch (filter)
+            {
+                case "all":
+                    ViewData["Message"] = "All Images";
+                    images = _context.Image.ToList();
+                    break;
+                default:
+                    ViewData["Message"] = "Images - " + filter;
+                    images = (from i in _context.Image
+                              where i.OwnerID == filter ||
+                                    i.ContentType == filter ||
+                                    i.Name.Contains(filter)
+                              select i).ToList();
+                    break;
+            }
+            switch (sortBy)
+            {
+                case "author":
+                    ViewData["SortBy"] = "Author";
+                    images = images.OrderBy(i => i.OwnerID).ToList();
+                    break;
+                default:
+                    ViewData["SortBy"] = "Name";
+                    images = images.OrderByDescending(i => i.Name).ToList();
+                    break;
+            }
+
+            return View(images);
+        }
+
         [Route("/users/{filter}/{*sortBy}")]
         public IActionResult Users(string filter, string sortBy = "name")
         {

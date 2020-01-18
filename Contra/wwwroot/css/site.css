@@ -500,6 +500,20 @@ a.card:hover {
     left: 0;
 }
 
+.card-grid {
+    min-width: 300px;
+    padding: 0 !important;
+}
+
+.card-grid > div {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+}
+
+.card-grid > .image-container > img {
+    width: 100%;
+}
+
 .card-search, .card-compact {
     min-height: 50px;
     padding: 20px;

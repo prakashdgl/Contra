@@ -182,31 +182,41 @@ namespace Contra.Controllers
             if (ModelState.IsValid)
             {
                 ContraUser user = _userManager.GetUserAsync(User).Result;
+                if (user.IsBanned) return Redirect("/Identity/Account/Login");
+
                 if (thumbnail.Length > 0 && thumbnail.Length < 2000000)
                 {
-                    string rootPath = _environment.WebRootPath + "/img/user/" + user.Id;
-                    if (!Directory.Exists(rootPath))
-                        Directory.CreateDirectory(rootPath);
-
-                    string filePath = rootPath + "/" + Path.GetRandomFileName();
+                    string name = Path.GetRandomFileName();
                     switch (thumbnail.ContentType)
                     {
                         case "image/png":
-                            filePath += ".png";
+                            name += ".png";
                             break;
                         case "image/jpeg":
-                            filePath += ".jpg";
+                            name += ".jpg";
                             break;
                         default:
                             return View(article);
                     }
 
-                    using (var stream = System.IO.File.Create(filePath))
+                    Image image = new Image
                     {
-                        await thumbnail.CopyToAsync(stream);
+                        OwnerID = user.Id,
+                        Name = name,
+                        ContentType = thumbnail.ContentType,
+                    };
+
+                    using (var rs = thumbnail.OpenReadStream())
+                    using (var ms = new MemoryStream())
+                    {
+                        rs.CopyTo(ms);
+                        image.Content = ms.ToArray();
                     }
 
-                    article.ThumbnailURL = "/img/user/" + user.Id + "/" + Path.GetRandomFileName();
+                    _context.Image.Add(image);
+                    await _context.SaveChangesAsync();
+
+                    article.ThumbnailURL = "/img/upload/" + name;
                 }
                 else
                     return View(article);
