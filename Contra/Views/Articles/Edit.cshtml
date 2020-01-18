@@ -26,7 +26,7 @@
             </div>
             <div class="flex-grow-1">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" maxlength="40" />
+                <input asp-for="Title" class="form-control" maxlength="60" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
         </section>
@@ -43,13 +43,17 @@
                 <input asp-for="Approved" class="form-control" />
                 <span asp-validation-for="Approved" class="text-danger"></span>
             </div>
+            <div class="flex-grow-1">
+                <label class="control-label">Approved</label>
+                <input asp-for="Views" class="form-control" />
+                <span asp-validation-for="Views" class="text-danger"></span>
+            </div>
         </section>
     </div>
     <div class="form-group">
         <label class="control-label">Thumbnail URL</label>
         <input asp-for="ThumbnailURL" class="form-control" />
         <span asp-validation-for="ThumbnailURL" class="text-danger"></span>
-        <p>Please provide a link to an image to use as a thumbnail.</p>
     </div>
     <div class="form-group">
         <label class="control-label">Publish Date</label>
@@ -59,13 +63,11 @@
     <div class="form-group">
         <label class="control-label">Article Tags</label>
         <input asp-for="Tags" class="form-control" />
-        <p>Use tags like "News" or "Sports" to get indexed in our search function.</p>
         <span asp-validation-for="Tags" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label class="control-label">Summary</label>
         <input asp-for="SummaryLong" class="form-control" maxlength="60" />
-        <p>A short summary of your article that will appear in search results and on the front page.</p>
         <span asp-validation-for="SummaryLong" class="text-danger"></span>
     </div>
     <div class="form-group">
