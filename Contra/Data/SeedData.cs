@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Contra.Areas.Identity.Data;
 using Contra.Models;
@@ -47,7 +46,6 @@ namespace Contra.Data
                     Articles = new List<Article>(),
                     ArticlesLiked = new List<Article>(),
                     ArticlesViewed = new List<Article>(),
-                    Comments = new List<Comment>(),
                     CommentsLiked = new List<Comment>(),
 
                     ProfilePictureURL = "https://gravatar.com/avatar/" + sb.ToString() + "?d=identicon",

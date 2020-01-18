@@ -72,6 +72,34 @@ namespace Contra.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
+        [HttpPost("user/{userID}/ban")]
+        public async Task<string> BanUser(string userID)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userID);
+            if (user == null)
+                return "Requested user not found.";
+
+            user.IsBanned = true;
+            await _userManager.UpdateAsync(user);
+            
+            return $"Banned {user.Name}!";
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost("user/{userID}/unban")]
+        public async Task<string> UnbanUser(string userID)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userID);
+            if (user == null)
+                return "Requested user not found.";
+
+            user.IsBanned = false;
+            await _userManager.UpdateAsync(user);
+
+            return $"Unbanned {user.Name}!";
+        }
+
+        [Authorize(Roles = "Administrator")]
         [HttpPost("user/{userID}/enfeeble/{*role}")]
         public async Task<string> EnfeebleRole(string userID, string role)
         {

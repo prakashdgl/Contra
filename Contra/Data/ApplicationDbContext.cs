@@ -11,9 +11,11 @@ namespace Contra.Data
         {
         }
 
+        public DbSet<Models.Article> Article { get; set; }
+
         public DbSet<Models.Comment> Comment { get; set; }
 
-        public DbSet<Models.Article> Article { get; set; }
+        public DbSet<Models.Image> Image { get; set; }
 
         public DbSet<Models.Ticket> Ticket { get; set; }
     }

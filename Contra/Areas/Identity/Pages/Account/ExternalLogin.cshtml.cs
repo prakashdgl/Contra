@@ -68,7 +68,7 @@ namespace Contra.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnGetCallbackAsync(string returnUrl = null, string remoteError = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             if (remoteError != null)
             {
                 ErrorMessage = $"Error from external provider: {remoteError}";
@@ -110,7 +110,7 @@ namespace Contra.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             // Get the information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
@@ -138,7 +138,6 @@ namespace Contra.Areas.Identity.Pages.Account
                     Articles = new List<Article>(),
                     ArticlesLiked = new List<Article>(),
                     ArticlesViewed = new List<Article>(),
-                    Comments = new List<Comment>(),
                     CommentsLiked = new List<Comment>(),
 
                     ProfilePictureURL = "https://gravatar.com/avatar/" + sb.ToString() + "?d=identicon",
@@ -161,7 +160,7 @@ namespace Contra.Areas.Identity.Pages.Account
                         var callbackUrl = Url.Page(
                             "/Account/ConfirmEmail",
                             pageHandler: null,
-                            values: new { area = "Identity", userId = userId, code = code },
+                            values: new { area = "Identity", userId, code },
                             protocol: Request.Scheme);
 
                         await _emailSender.SendConfirmEmailAsync(Input.Email, info.Principal.FindFirstValue(ClaimTypes.Name), callbackUrl);

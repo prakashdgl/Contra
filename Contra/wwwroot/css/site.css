@@ -141,6 +141,9 @@ a {
 .query {
     display: none;
     background-color: rgba(0, 0, 0, 0.5);
+    bottom: 0 !important;
+    top: 0;
+    position: fixed;
 }
 
 .query > div {
@@ -175,6 +178,11 @@ a {
 
 .banner-notice > p {
     margin: 0;
+}
+
+.banner-notice a {
+    color: #fff;
+    text-decoration: underline;
 }
 
 .lds-dual-ring {

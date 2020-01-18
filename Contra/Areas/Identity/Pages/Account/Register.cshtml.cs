@@ -95,7 +95,6 @@ namespace Contra.Areas.Identity.Pages.Account
                     Articles = new List<Article>(),
                     ArticlesLiked = new List<Article>(),
                     ArticlesViewed = new List<Article>(),
-                    Comments = new List<Comment>(),
                     CommentsLiked = new List<Comment>(),
 
                     ProfilePictureURL = "https://gravatar.com/avatar/" + sb.ToString() + "?d=identicon",

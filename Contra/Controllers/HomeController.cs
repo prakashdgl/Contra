@@ -101,10 +101,6 @@ namespace Contra.Controllers
                 else
                     comment.Approved = ApprovalStatus.Submitted;
 
-                if (user.Comments == null)
-                    user.Comments = new List<Comment>();
-                user.Comments.Add(comment);
-
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return Redirect($"~/article/{PostId}");

@@ -31,7 +31,7 @@
 @foreach (var item in Model)
 {
     <section>
-        <div class="card card-big card-search">
+        <div class="card card-compact">
             <div>
                 <h5>@item.AuthorName - @item.Date</h5>
                 <p class="compact-hidden">Status: @Html.DisplayFor(modelItem => item.Approved) (Attached to Post @item.PostId)</p>

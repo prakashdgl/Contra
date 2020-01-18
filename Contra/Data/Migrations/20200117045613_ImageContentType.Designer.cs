@@ -4,14 +4,16 @@ using Contra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Contra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200117045613_ImageContentType")]
+    partial class ImageContentType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +44,6 @@ namespace Contra.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsBanned")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -196,6 +195,9 @@ namespace Contra.Data.Migrations
                     b.Property<string>("ContraUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ContraUserId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -209,6 +211,8 @@ namespace Contra.Data.Migrations
 
                     b.HasIndex("ContraUserId");
 
+                    b.HasIndex("ContraUserId1");
+
                     b.ToTable("Comment");
                 });
 
@@ -219,8 +223,8 @@ namespace Contra.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("Content")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Base64Content")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContentType")
                         .HasColumnType("nvarchar(max)");
@@ -425,8 +429,12 @@ namespace Contra.Data.Migrations
             modelBuilder.Entity("Contra.Models.Comment", b =>
                 {
                     b.HasOne("Contra.Areas.Identity.Data.ContraUser", null)
-                        .WithMany("CommentsLiked")
+                        .WithMany("Comments")
                         .HasForeignKey("ContraUserId");
+
+                    b.HasOne("Contra.Areas.Identity.Data.ContraUser", null)
+                        .WithMany("CommentsLiked")
+                        .HasForeignKey("ContraUserId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

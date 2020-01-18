@@ -118,6 +118,8 @@ namespace Contra.Areas.Identity.Pages.Account
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
                 ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+            if (user.IsBanned)
+                ModelState.AddModelError(string.Empty, "Account banned. Sucks mate?");
 
             var userId = await _userManager.GetUserIdAsync(user);
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
