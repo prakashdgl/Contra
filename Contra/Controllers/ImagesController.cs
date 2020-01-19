@@ -32,6 +32,7 @@ namespace Contra.Controllers
 
         [AllowAnonymous]
         [HttpGet("/img/upload/{name}")]
+        [ResponseCache(Duration = 86400)]
         public FileStreamResult GetImage(string name)
         {
             var image = (from i in _context.Image
@@ -40,7 +41,6 @@ namespace Contra.Controllers
 
             if (image == null) return null;
 
-            Response.Headers.Add("Cache-Control", "max-age=86400");
             Stream stream = new MemoryStream(image.Content);
             return new FileStreamResult(stream, image.ContentType);
         }
