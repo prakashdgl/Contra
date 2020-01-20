@@ -16,10 +16,11 @@ function eraseCookie(name) {
     document.cookie = name + '=' + expires + ';path=/;';
 }
 
-var menu, nav;
+var menu, nav, dropdown;
 document.addEventListener("DOMContentLoaded", () => {
     menu = document.getElementById("links");
     nav = document.getElementById("nav");
+    dropdown = document.getElementById("account-dropdown");
 
     var nltargets = document.getElementsByClassName("neoload");
     for (var i = 0; i < nltargets.length; i++) {
@@ -52,6 +53,21 @@ function onResize() {
     if ((menu.style.height !== "" || nav.style.height !== "") && window.innerWidth > 768) {
         menu.style.display = "";
         nav.style.height = "";
+    }
+    if (dropdown.style.display === "none" && window.innerWidth < 768) {
+        dropdown.style.display = "block";
+    }
+    else if (window.innerWidth > 768) {
+        dropdown.style.display = "none";
+    }
+}
+
+function toggleAccountDropdown() {
+    if (dropdown.style.display !== "block") {
+        dropdown.style.display = "block";
+    }
+    else {
+        dropdown.style.display = "none";
     }
 }
 

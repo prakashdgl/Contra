@@ -5,18 +5,17 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    @if (User.IsInRole("Staff"))
-    {
-        <a class="nav-link px-0" href="~/admin"><img src="~/img/superuser.png" alt="Superuser" /></a>
-    }
-    <a class="nav-link" href="~/submit">Create Post</a>
-    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+    <a class="nav-link" href="~/submit" title="Create post">Create Post</a>
+    <a class="nav-link clickable" id="account-dropdown-toggler" onclick="toggleAccountDropdown()" title="Show options">
         <img src="@UserManager.GetUserAsync(User).Result.ProfilePictureURL" alt="User Profile Picture" />
-        @UserManager.GetUserAsync(User).Result.Name
+        @UserManager.GetUserAsync(User).Result.Name  ▾
     </a>
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-        <button type="submit" class="nav-link btn btn-link text-dark text-center">Logout</button>
-    </form>
+    <div class="account-dropdown" id="account-dropdown">
+        @if (User.IsInRole("Staff"))
+        { <a class="nav-link" href="~/admin" title="Admin Dashboard">⚡ Admin</a> }
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage your profile">Your Profile</a>
+        <a class="nav-link" href="/Identity/Account/Logout" title="Log out">Logout</a>
+    </div>
 }
 else
 {

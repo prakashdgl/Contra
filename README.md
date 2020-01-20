@@ -11,4 +11,6 @@ This app aims to challenge some aspects of Los Altos High School's newspaper, Th
 # Project State
 Project started: 10/24/19
 
-Project suspended until further notice (01/18/20)
+Project ongoing (Beta)
+
+Full release: 02/20/2020
