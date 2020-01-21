@@ -16,6 +16,22 @@ function eraseCookie(name) {
     document.cookie = name + '=' + expires + ';path=/;';
 }
 
+(function () {
+    if (document.cookie.includes("dark=true"))
+        document.documentElement.classList.add("dark");
+})();
+
+function toggleNightTheme() {
+    if (document.cookie.includes("dark=true")) {
+        eraseCookie("dark");
+        document.documentElement.classList.remove("dark");
+    }
+    else {
+        setCookie("dark", "true", 30);
+        document.documentElement.classList.add("dark");
+    }
+}
+
 var menu, nav, dropdown;
 document.addEventListener("DOMContentLoaded", () => {
     menu = document.getElementById("links");

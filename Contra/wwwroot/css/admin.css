@@ -4,12 +4,13 @@
 
 .dashboard-header {
     display: none;
+    color: var(--text-primary);
     margin: 15px;
     margin-left: 30px;
 }
 
 .dashboard-controls {
-    background-color: #f5f6f8;
+    background-color: var(--background-secondary);
     position: absolute;
     top: 0;
     bottom: 0;
@@ -19,15 +20,15 @@
 }
 
 .dashboard-controls a {
-    background-color: #f0f1f5;
-    border-bottom: 1px solid #ddd;
-    color: #555;
+    background-color: var(--background-tertiary);
+    border-bottom: 1px solid var(--background-primary);
+    color: var(--text-primary);
     padding: 15px;
     transition-duration: 0.2s;
 }
 
 .dashboard-controls a:hover {
-    background-color: #ddd;
+    background-color: var(--background-primary);
     padding-left: 20px;
 }
 

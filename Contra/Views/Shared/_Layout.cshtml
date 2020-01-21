@@ -21,7 +21,7 @@
                 <div id="links">
                     <div class="links nav-search search">
                         <form asp-controller="Home" asp-action="Search">
-                            <input name="filter" type="text" placeholder="Search articles" />
+                            <input name="filter" type="text" title="Search articles" placeholder="Search articles" />
                             <button class="btn c-btn-primary animated" type="submit" name="Search"><img src="~/img/search.png" alt="Search" /></button>
                         </form>
                     </div>
@@ -44,7 +44,7 @@
         <partial name="_CookieConsentPartial" />
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted">
         <div class="container">
             &copy; 2020 Contra -
             <a href="~/about">About</a> -
