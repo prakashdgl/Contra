@@ -43,6 +43,8 @@ namespace Contra
             services.AddTransient<EmailSender, EmailSender>();
             services.Configure<EmailOptions>(Configuration);
 
+            services.AddResponseCompression();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -80,6 +82,7 @@ namespace Contra
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseResponseCompression();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
