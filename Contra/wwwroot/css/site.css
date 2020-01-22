@@ -451,6 +451,10 @@ a.card:hover {
     padding: 15px;
 }
 
+.story > div > h2 {
+    font-size: 26px;
+}
+
 .secondary-info {
     background-color: var(--background-secondary);
     border-radius: 5px;
