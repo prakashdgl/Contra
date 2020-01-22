@@ -91,6 +91,8 @@ namespace Contra.Controllers
             if (ModelState.IsValid)
             {
                 ContraUser user = _userManager.GetUserAsync(User).Result;
+                if (user.IsBanned) return Redirect("/Identity/Account/Login");
+
                 comment.OwnerID = _userManager.GetUserId(User);
                 comment.AuthorName = user.Name;
                 comment.PostId = PostId;
@@ -262,11 +264,14 @@ namespace Contra.Controllers
         {
             if (ModelState.IsValid)
             {
+                ContraUser user = _userManager.GetUserAsync(User).Result;
+                if (user.IsBanned) return Redirect("/Identity/Account/Login");
+
                 if (string.IsNullOrEmpty(ticket.Title) && string.IsNullOrEmpty(ticket.Content))
                     return View(ticket);
 
-                ticket.OwnerID = _userManager.GetUserId(User);
-                ticket.AuthorName = _userManager.GetUserAsync(User).Result.Name;
+                ticket.OwnerID = user.Id;
+                ticket.AuthorName = user.Name;
                 ticket.Approved = HandledStatus.Submitted;
                 ticket.Date = DateTime.Now;
                 ticket.AssignedTo = "None";
