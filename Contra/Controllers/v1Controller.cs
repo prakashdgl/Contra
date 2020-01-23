@@ -336,7 +336,7 @@ namespace Contra.Controllers
                                     select a).ToList(),
                     "event" => (from a in _context.Article
                                    where a.Approved == ApprovalStatus.Approved &&
-                                         a.ArticleType == ArticleType.Event
+                                         a.ArticleType == ArticleType.Creative
                                    orderby a.IsPinned descending, a.Date descending
                                    select a).ToList(),
                     "new" => (from a in _context.Article
@@ -386,6 +386,38 @@ namespace Contra.Controllers
 
             return JsonConvert.SerializeObject(info);
         }
+
+        [HttpGet("article/{id}")]
+        public string ArticleGet(int id)
+        {
+            Article a = (from c in _context.Article
+                         where c.Id == id &&
+                               c.Approved == ApprovalStatus.Approved
+                         select c).FirstOrDefault();
+
+            if (a == null) return "";
+
+            Dictionary<string, string> i = new Dictionary<string, string>()
+            {
+                { "id", a.Id.ToString() },
+                { "title", a.Title },
+                { "author", a.AuthorName },
+                { "date", a.Date.ToString() },
+                { "tags", a.Tags },
+                { "summary", a.SummaryLong },
+                { "content", a.Content },
+                { "image", a.ThumbnailURL },
+                { "pinned", a.IsPinned.ToString() },
+                { "sensitive", a.Sensitive.ToString() },
+                { "spoiler", a.Spoiler.ToString() }
+            };
+
+            if (a.Anonymous)
+                i["author"] = "Anonymous";
+
+            return JsonConvert.SerializeObject(i);
+        }
+
 
         [Authorize(Roles = "Administrator")]
         [Route("generate/{tags}/{isInsight}/{isEditorial}")]

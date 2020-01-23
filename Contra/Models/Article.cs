@@ -41,7 +41,7 @@ namespace Contra.Models
     public enum ArticleType
     {
         Article,
-        Event,
+        Creative,
         Insight
     }
 }

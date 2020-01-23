@@ -50,9 +50,9 @@
         <section>
             <div class="card">
                 <div>
-                    <h2>Event</h2>
-                    <p>Events articles should be used to cover upcoming and past local events. Events articles are advised to be related to Los Altos High School or Santa Clara County.</p>
-                    <button class="btn btn-outline-primary" onclick="selectFormat(1)">Cover an Event</button>
+                    <h2>Creative</h2>
+                    <p>Want to post creative writing, literature, satire, or meme-like articles? Write a creative article! Practically any creative work will get accepted and there is no word reccomendation.</p>
+                    <button class="btn btn-outline-primary">Coming Soon</button>
                 </div>
             </div>
             <div class="card">
@@ -80,6 +80,11 @@
                             <label class="control-label">Author Name</label>
                             <p><b>@UserManager.GetUserAsync(User).Result.Name</b></p>
                         </div>
+                        <label for="toggle-coauthors" class="toggle">
+                            Sensitive Content
+                            <input type="checkbox" id="toggle-coauthors" onclick="toggleGroup(this, 'coauthors')">
+                            <span class="checkmark"></span>
+                        </label>
                         <div class="form-group">
                             <label asp-for="AuthorName" class="control-label">Co-Author Names</label>
                             <input id="input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="E.g. Sei, Armitage, Dana" />

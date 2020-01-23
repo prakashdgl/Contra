@@ -25,14 +25,9 @@ namespace Contra.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Image.ToListAsync());
-        }
-
         [AllowAnonymous]
         [HttpGet("/img/upload/{name}")]
-        [ResponseCache(Duration = 86400)]
+        [ResponseCache(Duration = 604800)]
         public FileStreamResult GetImage(string name)
         {
             var image = (from i in _context.Image
@@ -81,17 +76,11 @@ namespace Contra.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var image = await _context.Image
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (image == null)
-            {
-                return NotFound();
-            }
+            if (image == null) return NotFound();
 
             return View(image);
         }
@@ -103,12 +92,7 @@ namespace Contra.Controllers
             var image = await _context.Image.FindAsync(id);
             _context.Image.Remove(image);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ImageExists(int id)
-        {
-            return _context.Image.Any(e => e.Id == id);
+            return Redirect("/images/all");
         }
     }
 }
