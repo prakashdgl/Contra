@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Home";
+    ViewData["Description"] = "Catch up on the latest news on the Contra homepage";
 }
 
 <div class="bg-contra banner-notice">
@@ -49,30 +50,48 @@
         </div>
         <section class="flex-fill">
             <div class="insight card">
-                <div id="loading-0" class="lds-dual-ring"></div>
-                <section class="neoload" data-amount="9" data-query="insight" data-type="mini" data-loading="0"></section>
+                <div class="scrollbar">
+                    <div id="loading-0" class="lds-dual-ring"></div>
+                    <section class="neoload" data-amount="10" data-query="insight" data-type="mini" data-loading="0"></section>
+                </div>
             </div>
         </section>
+    </div>
+</section>
+
+<div class="section-title">
+    <h2>Creative Work</h2>
+</div>
+<section class="flex-fill">
+    <div class="insight-horizontal card">
+        <div class="scrollbar">
+            <div id="loading-1" class="lds-dual-ring"></div>
+            <section class="neoload" data-amount="6" data-query="creative" data-type="mini" data-loading="1"></section>
+        </div>
     </div>
 </section>
 
 <section class="main-wrapper">
     <div class="extras">
         <div class="section-title">
-            <h2>Events</h2>
+            <h2>Responses</h2>
         </div>
         <section class="flex-fill">
             <div class="insight card">
-                <div id="loading-1" class="lds-dual-ring"></div>
-                <section class="neoload" data-amount="6" data-query="event" data-type="mini" data-loading="1"></section>
+                <div class="scrollbar">
+                    <div id="loading-2" class="lds-dual-ring"></div>
+                    <section class="neoload" data-amount="6" data-query="response" data-type="mini" data-loading="2"></section>
+                </div>
             </div>
         </section>
     </div>
 
     <div class="main">
-        <div class="neoload" data-amount="6" data-query="new" data-type="block">
-            <div class="section-title">
-                <h2>New Articles</h2>
+        <div class="scrollbar">
+            <div class="neoload" data-amount="6" data-query="new" data-type="block">
+                <div class="section-title">
+                    <h2>New Articles</h2>
+                </div>
             </div>
         </div>
     </div>

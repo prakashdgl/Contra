@@ -52,14 +52,9 @@ function toggleTag(tag) {
         tags.value += " " + tag;
 }
 
-function generateTestArticle(insight, editorial) {
+function generateTestArticle(type) {
     var tags = document.getElementById("tags").value;
-    var route = "api/v1/generate/" + tags;
-
-    if (insight) route += "/true";
-    else route += "/false";
-    if (editorial) route += "/true";
-    else route += "/false";
+    var route = "api/v1/generate/" + tags + "/" + type;
 
     request("POST", route, (x) => {
         document.getElementById("suite-response").innerText = x;

@@ -52,14 +52,14 @@
                 <div>
                     <h2>Creative</h2>
                     <p>Want to post creative writing, literature, satire, or meme-like articles? Write a creative article! Practically any creative work will get accepted and there is no word reccomendation.</p>
-                    <button class="btn btn-outline-primary">Coming Soon</button>
+                    <button class="btn btn-outline-primary" onclick="selectFormat(1)">Create Greatness</button>
                 </div>
             </div>
             <div class="card">
                 <div>
                     <h2>Meta</h2>
                     <p>Unhappy with things on Contra? Make a meta post about the current state of things, what you'd like to see changed, or anything related to Contra itself.</p>
-                    <button class="btn btn-outline-primary">Coming Soon</button>
+                    <button class="btn btn-outline-primary" onclick="selectFormat(4)">Submit Feedback</button>
                 </div>
             </div>
         </section>
@@ -80,15 +80,18 @@
                             <label class="control-label">Author Name</label>
                             <p><b>@UserManager.GetUserAsync(User).Result.Name</b></p>
                         </div>
-                        <label for="toggle-coauthors" class="toggle">
-                            Sensitive Content
-                            <input type="checkbox" id="toggle-coauthors" onclick="toggleGroup(this, 'coauthors')">
-                            <span class="checkmark"></span>
-                        </label>
                         <div class="form-group">
+                            <label for="toggle-coauthors" class="toggle">
+                                Add Coauthors
+                                <input type="checkbox" id="toggle-coauthors" onclick="toggleGroup(this, 'coauthors')">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div id="inputGroup-coauthors" class="form-group hidden">
                             <label asp-for="AuthorName" class="control-label">Co-Author Names</label>
                             <input id="input-coauthors" asp-for="AuthorName" class="form-control" maxlength="50" placeholder="E.g. Sei, Armitage, Dana" />
                             <span asp-validation-for="AuthorName" class="text-danger"></span>
+                            <br />
                         </div>
                         <div class="form-group">
                             <label asp-for="Title" class="control-label"></label>

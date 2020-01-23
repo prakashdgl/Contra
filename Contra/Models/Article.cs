@@ -5,6 +5,7 @@ namespace Contra.Models
     public class Article
     {
         public int Id { get; set; }
+        public int ResponseId { get; set; }
 
         public string OwnerID { get; set; }
 
@@ -42,6 +43,8 @@ namespace Contra.Models
     {
         Article,
         Creative,
-        Insight
+        Insight,
+        Response,
+        Meta
     }
 }

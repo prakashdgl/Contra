@@ -115,6 +115,9 @@ function toggleTag(tag) {
 
 
 function updateLivePreview() {
+    if (!document.getElementById("toggle-coauthors").checked)
+        inputCoauthors.value = null;
+
     if (inputCoauthors.value)
         coauthors.innerText = ", " + inputCoauthors.value;
     else

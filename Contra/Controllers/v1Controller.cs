@@ -328,17 +328,17 @@ namespace Contra.Controllers
             {
                 articles = (query.ToLower()) switch
                 {
+                    "creative" => (from a in _context.Article
+                                   where a.Approved == ApprovalStatus.Approved &&
+                                         a.ArticleType == ArticleType.Creative
+                                   orderby a.IsPinned descending, a.Date descending
+                                   select a).ToList(),
                     "editorial" => (from a in _context.Article
                                     where a.Approved == ApprovalStatus.Approved &&
                                           a.ArticleType == ArticleType.Article &&
                                           a.IsEditorial
                                     orderby a.Date descending
                                     select a).ToList(),
-                    "event" => (from a in _context.Article
-                                   where a.Approved == ApprovalStatus.Approved &&
-                                         a.ArticleType == ArticleType.Creative
-                                   orderby a.IsPinned descending, a.Date descending
-                                   select a).ToList(),
                     "new" => (from a in _context.Article
                               where a.Approved == ApprovalStatus.Approved
                               orderby a.Date descending
@@ -348,6 +348,12 @@ namespace Contra.Controllers
                                         a.ArticleType == ArticleType.Insight
                                   orderby a.IsPinned descending, a.Date descending
                                   select a).ToList(),
+                    "response" => (from a in _context.Article
+                                   where a.Approved == ApprovalStatus.Approved &&
+                                        (a.ArticleType == ArticleType.Response ||
+                                         a.ArticleType == ArticleType.Meta)
+                                   orderby a.IsPinned descending, a.Date descending
+                                   select a).ToList(),
                     _ => (from a in _context.Article
                           where a.Approved == ApprovalStatus.Approved &&
                                (a.Title.ToLower().Contains(query) ||
@@ -420,12 +426,11 @@ namespace Contra.Controllers
 
 
         [Authorize(Roles = "Administrator")]
-        [Route("generate/{tags}/{isInsight}/{isEditorial}")]
-        public async Task<string> Generate(string tags, bool isInsight = false, bool isEditorial = false)
+        [Route("generate/{tags}/{type}")]
+        public async Task<string> Generate(string tags, int type)
         {
             Article placeholder = new Article
             {
-                ArticleType = ArticleType.Article,
                 Approved = ApprovalStatus.Approved,
                 AuthorName = "Sei",
                 OwnerID = "Autogen",
@@ -437,8 +442,7 @@ namespace Contra.Controllers
                 Views = 0
             };
 
-            if (isInsight) placeholder.ArticleType = ArticleType.Insight;
-            if (isEditorial) placeholder.IsEditorial = true;
+            placeholder.ArticleType = (ArticleType)type;
 
             string[] urls = new string[5] { "/img/img01.jpg",
                                             "/img/img02.jpg",
