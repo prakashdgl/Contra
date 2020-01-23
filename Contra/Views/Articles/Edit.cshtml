@@ -44,14 +44,38 @@
                 <span asp-validation-for="Approved" class="text-danger"></span>
             </div>
             <div class="flex-grow-1">
-                <label class="control-label">Approved</label>
+                <label class="control-label">Views</label>
                 <input asp-for="Views" class="form-control" />
                 <span asp-validation-for="Views" class="text-danger"></span>
+            </div>
+        </section>
+    </div>
+    <div class="form-group">
+        <section>
+            <div class="flex-grow-1">
+                <label class="control-label">Editorial</label>
+                <input asp-for="IsEditorial" class="form-control" />
+                <span asp-validation-for="IsEditorial" class="text-danger"></span>
             </div>
             <div class="flex-grow-1">
                 <label class="control-label">Pinned</label>
                 <input asp-for="IsPinned" class="form-control" />
                 <span asp-validation-for="IsPinned" class="text-danger"></span>
+            </div>
+            <div class="flex-grow-1">
+                <label class="control-label">Sensitive</label>
+                <input asp-for="Sensitive" class="form-control" />
+                <span asp-validation-for="Sensitive" class="text-danger"></span>
+            </div>
+            <div class="flex-grow-1">
+                <label class="control-label">Spoiler</label>
+                <input asp-for="Spoiler" class="form-control" />
+                <span asp-validation-for="Spoiler" class="text-danger"></span>
+            </div>
+            <div class="flex-grow-1">
+                <label class="control-label">Anonymous</label>
+                <input asp-for="Anonymous" class="form-control" />
+                <span asp-validation-for="Anonymous" class="text-danger"></span>
             </div>
         </section>
     </div>

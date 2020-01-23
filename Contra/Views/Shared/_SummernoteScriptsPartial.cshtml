@@ -3,6 +3,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        $('.summernote').summernote({ height: 300 });
+        $('.summernote').summernote({
+            height: 300,
+            disableDragAndDrope: true,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'italic', 'strikethrough', 'clear']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'help']]
+            ]
+        });
     })
 </script>
