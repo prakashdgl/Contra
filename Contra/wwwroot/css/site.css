@@ -511,6 +511,7 @@ a.card:hover {
     left: 0;
     min-width: 100%;
     min-height: 100%;
+    max-width: 150%;
 }
 
 .image-container .secondary-info {
