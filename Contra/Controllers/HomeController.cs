@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Contra.Areas.Identity.Data;
 using Contra.Data;
 using Contra.Models;
+using Ganss.XSS;
 
 namespace Contra.Controllers
 {
@@ -21,15 +22,12 @@ namespace Contra.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ContraUser> _userManager;
-        private readonly IWebHostEnvironment _environment;
 
         public HomeController(ApplicationDbContext context,
-                              UserManager<ContraUser> userManager,
-                              IWebHostEnvironment environment)
+                              UserManager<ContraUser> userManager)
         {
             _context = context;
             _userManager = userManager;
-            _environment = environment;
         }
 
         public IActionResult Index()
@@ -204,7 +202,7 @@ namespace Contra.Controllers
                 ContraUser user = _userManager.GetUserAsync(User).Result;
                 if (user.IsBanned) return Redirect("/Identity/Account/Login");
 
-                if (thumbnail.Length > 0 && thumbnail.Length < 2000000)
+                if (thumbnail != null && thumbnail.Length > 0 && thumbnail.Length < 2000000)
                 {
                     string name = Path.GetRandomFileName();
                     switch (thumbnail.ContentType)
@@ -258,6 +256,9 @@ namespace Contra.Controllers
                 }
                 else
                     article.Approved = ApprovalStatus.Submitted;
+
+                HtmlSanitizer sanitizer = new HtmlSanitizer();
+                article.Content = sanitizer.Sanitize(article.Content);
 
                 if (user.Articles == null)
                     user.Articles = new List<Article>();
