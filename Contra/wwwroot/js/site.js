@@ -70,11 +70,13 @@ function onResize() {
         menu.style.display = "";
         nav.style.height = "";
     }
-    if (dropdown.style.display === "none" && window.innerWidth < 768) {
-        dropdown.style.display = "block";
-    }
-    else if (window.innerWidth > 768) {
-        dropdown.style.display = "none";
+    if (dropdown) {
+        if (dropdown.style.display === "none" && window.innerWidth < 768) {
+            dropdown.style.display = "block";
+        }
+        else if (window.innerWidth > 768) {
+            dropdown.style.display = "none";
+        }
     }
 }
 
@@ -222,8 +224,8 @@ function showComfortable() {
 
     eraseCookie("compact");
 
-    document.getElementById("comfortableButton").classList = "btn btn-info";
-    document.getElementById("compactButton").classList = "btn btn-outline-info";
+    document.getElementById("comfortableButton").classList = "btn c-btn-info";
+    document.getElementById("compactButton").classList = "btn c-btn-outline-info";
 }
 
 function showCompact() {
@@ -242,8 +244,8 @@ function showCompact() {
 
     setCookie("compact", "yes", 0);
 
-    document.getElementById("comfortableButton").classList = "btn btn-outline-info";
-    document.getElementById("compactButton").classList = "btn btn-info";
+    document.getElementById("comfortableButton").classList = "btn c-btn-outline-info";
+    document.getElementById("compactButton").classList = "btn c-btn-info";
 }
 
 function setDialog(selector) {

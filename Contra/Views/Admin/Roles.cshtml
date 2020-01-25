@@ -14,19 +14,19 @@
     <div class="filters">
         <div class="filter-group">
             <h5 class="hideable">View:</h5>
-            <button id="comfortableButton" class="btn btn-info" onclick="showComfortable()">Comfortable</button>
-            <button id="compactButton" class="btn btn-outline-info" onclick="showCompact()">Compact</button>
+            <button id="comfortableButton" class="btn c-btn-info" onclick="showComfortable()">Comfortable</button>
+            <button id="compactButton" class="btn c-btn-outline-info" onclick="showCompact()">Compact</button>
         </div>
         <div class="filter-group">
             <h5 class="hideable">Sort:</h5>
-            <a class="btn @(ViewData["SortBy"].Equals("Users")? "btn-info" : "btn-outline-info")" href="~/roles/@ViewData["Filter"]/users">Users</a>
-            <a class="btn @(ViewData["SortBy"].Equals("Name")? "btn-info" : "btn-outline-info")" href="~/roles/@ViewData["Filter"]/name">Name</a>
+            <a class="btn @(ViewData["SortBy"].Equals("Users")? "c-btn-info" : "c-btn-outline-info")" href="~/roles/@ViewData["Filter"]/users">Users</a>
+            <a class="btn @(ViewData["SortBy"].Equals("Name")? "c-btn-info" : "c-btn-outline-info")" href="~/roles/@ViewData["Filter"]/name">Name</a>
         </div>
         <div class="filter-group search">
             <h5 class="hideable">Search:</h5>
             <form asp-action="Roles">
                 <input name="filter" type="text" placeholder="Search roles" />
-                <button class="btn btn-info" type="submit">Search</button>
+                <button class="btn c-btn-info" type="submit">Search</button>
             </form>
         </div>
     </div>
@@ -38,7 +38,7 @@
             <h5>Create a New Role</h5>
             <div class="d-flex">
                 <input type="text" id="roleName" name="role" placeholder="Role Name" />
-                <button class="btn btn-info" onclick="createRole()">Create</button>
+                <button class="btn c-btn-info" onclick="createRole()">Create</button>
             </div>
             <p id="message"></p>
         </div>

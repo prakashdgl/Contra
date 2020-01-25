@@ -8,6 +8,8 @@
     --background-tertiary: #fff;
     --background-accent-primary: #bbb;
     --background-accent-secondary: #bbb;
+    --brand-primary: #a6f;
+    --brand-primary-dark: #a3f;
     --text-primary: #000;
     --link-hover: rgb(81, 11, 255);
 }
@@ -16,10 +18,10 @@ html.dark {
     --background-primary: rgb(23, 23, 23);
     --background-secondary: rgb(36, 36, 36);
     --background-tertiary: rgb(46, 46, 46);
-
     --background-accent-primary: rgb(12, 12, 12);
     --background-accent-secondary: rgb(23, 23, 23);
-
+    --brand-primary: #a4f;
+    --brand-primary-dark: #f8a;
     --text-primary: rgb(227, 227, 227);
     --link-hover: rgb(181, 181, 255);
 }
@@ -88,9 +90,9 @@ nav .links img {
 
 nav #menu-button {
     background-color: inherit;
-    border: solid 2px #88c;
+    border: solid 2px var(--brand-primary);
     border-radius: 10px;
-    color: #32f;
+    color: var(--brand-primary);
     float: right;
     padding: 0 24px;
     line-height: 35px;
@@ -303,6 +305,29 @@ a {
     animation-name: doubleswipe;
 }
 
+.c-btn-info {
+    background-color: var(--brand-primary);
+    color: #fff;
+    transition-duration: 0.2s;
+}
+
+.c-btn-info:hover {
+    background-color: var(--brand-primary-dark);
+    color: #fff;
+}
+
+.c-btn-outline-info {
+    background-color: inherit;
+    border: 1px solid var(--brand-primary);
+    color: var(--brand-primary);
+    transition-duration: 0.2s;
+}
+
+.c-btn-outline-info:hover {
+    background-color: var(--brand-primary);
+    color: #fff;
+}
+
 #border-gradient {
     background-image: linear-gradient(var(--background-secondary), var(--background-primary));
     position: absolute;
@@ -387,7 +412,7 @@ a {
 }
 
 .filter-group .btn:first-of-type, .search input {
-    border-left: 1px solid var(--info);
+    border-left: 1px solid var(--brand-primary);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -511,7 +536,7 @@ a.card:hover {
     left: 0;
     min-width: 100%;
     min-height: 100%;
-    max-width: 150%;
+    max-width: 300%;
 }
 
 .image-container .secondary-info {
@@ -573,6 +598,10 @@ a.card:hover {
 
 .card-search > div {
     width: 50%;
+}
+
+.card-search > div > h2 {
+    font-size: 28px;
 }
 
 .card-search .image-container {

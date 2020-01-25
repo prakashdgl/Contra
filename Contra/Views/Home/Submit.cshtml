@@ -193,18 +193,17 @@
                         <p>Please look over the article preview below to make sure everything is A-OK, then submit.</p>
                         <br />
                         <div class="form-group">
-                            <input type="submit" value="Submit Article" class="btn btn-primary" />
+                            <input type="submit" value="Submit Article" class="btn c-btn-info" />
                             <a href="~/">
-                                <input type="button" value="Cancel" class="btn btn-outline-dark" />
+                                <input type="button" value="Cancel" class="btn c-btn-outline-info" />
                             </a>
-                            <br />
-                            <p>By submitting an article, you agree to our <a href="~/privacy">Terms of Service and Privacy Policy</a>.</p>
+                            <p class="mt-1">By submitting an article, you agree to our <a href="~/privacy">Terms of Service and Privacy Policy</a>.</p>
                         </div>
                     </div>
                     <br />
                 </form>
                 <div id="submit-controls">
-                    <button class="btn btn-outline-dark" onclick="reselectFormat()">Reselect Type</button>
+                    <button class="btn c-btn-outline-info" onclick="reselectFormat()">Reselect Type</button>
                     <button id="prevButton" class="btn btn-outline-dark disabled" onclick="submitUndoStep()">Previous Step</button>
                     <button id="nextButton" class="btn btn-outline-info" onclick="submitNextStep()">Next Step</button>
                 </div>
@@ -245,8 +244,8 @@ else
                 <p>Register or login to an account to submit an item.</p>
                 <br />
                 <section>
-                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info w-50 flex-fill mr-3">Register</a>
-                    <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Submit", "Home", new { area = "" })" class="btn btn-outline-info w-50 flex-fill mr-3">Login</a>
+                    <a asp-area="Identity" asp-page="/Account/Register" class="btn c-btn-info flex-fill mr-3 mb-1">Register</a>
+                    <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Submit", "Home", new { area = "" })" class="btn c-btn-outline-info flex-fill mr-3">Login</a>
                 </section>
             </div>
         </div>
