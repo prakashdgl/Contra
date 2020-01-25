@@ -66,19 +66,37 @@ namespace Contra.Controllers
             var article = await _context.Article.FirstOrDefaultAsync(m => m.Id == id);
             if (article == null) return Redirect("~/404");
 
-            article.Views++;
-            await _context.SaveChangesAsync();
+            if (!Request.Cookies.ContainsKey("VSession"))
+            {
+                Response.Cookies.Append("VSession", id.ToString() + "-", new CookieOptions
+                {
+                    MaxAge = TimeSpan.FromHours(1),
+                    Secure = true
+                });
+                article.Views++;
+                await _context.SaveChangesAsync();
+            }
+            else if (!Request.Cookies["VSession"].Contains(id.ToString() + "-"))
+            {
+                Response.Cookies.Append("VSession", Request.Cookies["VSession"] + id.ToString() + "-", new CookieOptions
+                {
+                    MaxAge = TimeSpan.FromHours(1),
+                    Secure = true
+                });
+                article.Views++;
+                await _context.SaveChangesAsync();
+            }
 
-            List<Comment> comments = await (from c in _context.Comment
+            IEnumerable<Comment> comments = from c in _context.Comment
                                             where c.PostId == article.Id
-                                            && c.Approved == ApprovalStatus.Approved
                                             orderby c.Date descending
-                                            select c).ToListAsync();
-            ViewData["Comments"] = comments;
-            ViewData["PendingComments"] = (await (from c in _context.Comment
-                                                  where c.PostId == article.Id
-                                                  && c.Approved != ApprovalStatus.Approved
-                                                  select c).ToListAsync()).Count;
+                                            select c;
+            ViewData["Comments"] = (from c in comments
+                                    where c.Approved == ApprovalStatus.Approved
+                                    select c).ToList();
+            ViewData["PendingComments"] = (from c in comments
+                                           where c.Approved != ApprovalStatus.Approved
+                                           select c).Count();
 
             return View(article);
         }
