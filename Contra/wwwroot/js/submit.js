@@ -3,8 +3,10 @@ var coauthors, inputCoauthors;
 var title, inputTitle;
 var image, inputImage;
 var content;
-var submitStep = 1;
+var submitStep = 1, maxSteps;
 var currentFormat;
+
+var inputResponseID;
 
 document.addEventListener("DOMContentLoaded", () => {
     coauthors = document.getElementById("coauthors");
@@ -15,38 +17,23 @@ document.addEventListener("DOMContentLoaded", () => {
     inputCoauthors = document.getElementById("input-coauthors");
     inputTitle = document.getElementById("input-title");
     inputImage = document.getElementById("input-img");
+
+    maxSteps = parseInt(document.getElementById("submit-data").getAttribute("data-steps"));
+
+    inputResponseID = document.getElementById("input-responseID");
+    if (inputResponseID) {
+        var id = parseInt(inputResponseID.value.split('/').pop());
+        document.getElementById("ResponseId").value = id;
+        monoload(document.getElementById("responseEmbedPreview"), id);
+        inputResponseID.addEventListener("input", () => {
+            var id = parseInt(inputResponseID.value.split('/').pop());
+            if (id) {
+                document.getElementById("ResponseId").value = id;
+                monoload(document.getElementById("responseEmbedPreview"), id);
+            }
+        });
+    }
 });
-
-function selectFormat(format) {
-    anime.timeline({
-        duration: 1000,
-        easing: 'easeOutExpo'
-    }).add({
-        targets: '#select-format',
-        height: "0px",
-        opacity: 0
-    });
-
-    currentFormat = format;
-    document.getElementById("submit-form").style.display = "unset";
-
-    document.getElementById("input-articleType").value = format;
-}
-
-function reselectFormat() {
-    anime.timeline({
-        duration: 1000,
-        easing: 'easeOutExpo'
-    }).add({
-        targets: '#select-format',
-        height: "100%",
-        opacity: 1
-    });
-
-    document.getElementById("submit-form").style.display = "none";
-
-    submitResetSteps();
-}
 
 function toggleGroup(sender, group) {
     if (sender.checked)
@@ -87,15 +74,15 @@ function submitUndoStep() {
 }
 
 function submitNextStep() {
-    if (submitStep < 4) submitStep++;
-    else submitStep = 4;
+    if (submitStep < maxSteps) submitStep++;
+    else submitStep = maxSteps;
 
     var toShow = document.getElementById("step-" + submitStep);
     var shown = document.getElementById("step-" + (submitStep - 1));
     toShow.style.display = "unset";
     shown.style.display = "none";
 
-    if (submitStep === 4) {
+    if (submitStep === maxSteps) {
         document.getElementById("preview").style.display = "unset";
         document.getElementById("nextButton").classList = "btn btn-outline-dark disabled";
         content.innerHTML = $("#content").summernote('code');

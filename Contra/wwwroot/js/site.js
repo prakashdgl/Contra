@@ -40,11 +40,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     var nltargets = document.getElementsByClassName("neoload");
     for (var i = 0; i < nltargets.length; i++) {
-        var el = nltargets[i];
-        neoload(el, el.getAttribute("data-query"),
-                    el.getAttribute("data-amount"),
-                    el.getAttribute("data-type"),
-                    el.getAttribute("data-loading"));
+        var nl = nltargets[i];
+        neoload(nl, nl.getAttribute("data-query"),
+                    nl.getAttribute("data-amount"),
+                    nl.getAttribute("data-type"),
+                    nl.getAttribute("data-loading"));
+    }
+
+    var mltargets = document.getElementsByClassName("monoload");
+    for (var m = 0; m < mltargets.length; m++) {
+        var ml = mltargets[m];
+        monoload(ml, ml.getAttribute("data-query"));
     }
 
     if (document.cookie.includes("compact=yes") &&
@@ -156,15 +162,36 @@ function neoload(target, query, amount, type, loading) {
             i++;
         });
 
-        setTimeout(() => {
-            target.innerHTML += html;
+        target.innerHTML += html;
+        if (loading) document.getElementById("loading-" + loading).style.display = "none";
 
+        setTimeout(() => {
             if (document.cookie.includes("compact=yes") &&
                 document.getElementById("compact-compatible"))
                 showCompact();
-
-            if (loading) document.getElementById("loading-" + loading).style.display = "none";
         }, 100);
+    });
+}
+
+function monoload(target, query) {
+    request("GET", "api/v1/article/" + query, x => {
+        if (!x) {
+            target.innerHTML = "<p class='text-danger'>Error: No article with id " + query + " could be loaded.</p>";
+            return;
+        }
+
+        var obj = JSON.parse(x);
+
+        var html = "";
+        var sensitive = false, spoiler = false, pinned = false;
+        if (obj.pinned === "True") pinned = true;
+        if (obj.sensitive === "True") sensitive = true;
+        if (obj.spoiler === "True") spoiler = true;
+
+        var cw = formatContentWarning(pinned, sensitive, spoiler, false);
+        html += formatEmbed(obj.id, obj.image, obj.title, obj.summary, cw);
+
+        target.innerHTML = html;
     });
 }
 
@@ -206,6 +233,12 @@ function formatInsight(id, image, title, summary, contentWarning) {
     return "<a class='card card-big card-encapsulate card-insight' href='/article/" + id +
         "'><span class='image-container'><img src='" + image + "' alt='" + title +
         " Thumbnail' /></span><div><h2>" + title + "</h2>" + contentWarning + "<p>" + summary + "</p></div></a>";
+}
+
+function formatEmbed(id, image, title, summary, contentWarning) {
+    return "<a class='card card-embed' href='/article/" + id + "'><span " +
+           "class='image-container'><img src='" + image + "'/></span><div><h6>" +
+           title + "</h6>" + contentWarning + "<p>" + summary + "</p></div></a>";
 }
 
 function showComfortable() {

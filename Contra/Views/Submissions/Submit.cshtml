@@ -1,0 +1,112 @@
+﻿@model Contra.Models.Article
+
+@using Microsoft.AspNetCore.Identity
+@using Contra.Areas.Identity.Data
+@inject SignInManager<ContraUser> SignInManager
+@inject UserManager<ContraUser> UserManager
+
+@{
+    ViewData["Title"] = "Submit";
+    ViewData["Description"] = "Submit a post on Contra.";
+}
+
+<div class="section-title">
+    <h2>Submit an Item</h2>
+    @if (User.IsInRole("Staff"))
+    {
+        <span class="secondary-info"><img src="~/img/supericon.png" alt="Superuser" /> - Your item will be published immediately.</span>
+    }
+</div>
+@if (SignInManager.IsSignedIn(User))
+{
+    <div id="select-format">
+        <div class="section-title">
+            <h2>Journalism</h2>
+        </div>
+        <section>
+            <div class="card">
+                <div>
+                    <div class="mb-2">
+                        <h2 class="d-inline-block">Article</h2>
+                        <a class="btn btn-outline-primary float-right d-inline-block" href="/submit/full/article">Write an Article</a>
+                    </div>
+                    <p>Articles are advised to be longer works, covering primarily factual content. Articles can cover everything from local news to global events.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="mb-2">
+                        <h2 class="d-inline-block">Insight</h2>
+                        <a class="btn btn-outline-primary float-right d-inline-block" href="/submit/full/insight">Share Insights</a>
+                    </div>
+                    <p>Insights are like articles, but way shorter! Have a great idea for something, but don't have the time to write something longer? Write an insight.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="mb-2">
+                        <h2 class="d-inline-block">Response</h2>
+                        <a class="btn btn-outline-primary float-right d-inline-block" href="/submit/response">Respond</a>
+                    </div>
+                    <p>Someone say something that you disagree with, or something you'd like to add to? Respond! You will need to select an article to respond to.</p>
+                </div>
+            </div>
+        </section>
+        <div class="section-title">
+            <h2>Creative Writing</h2>
+        </div>
+        <section>
+            <div class="card">
+                <div>
+                    <div class="mb-2">
+                        <h2 class="d-inline-block">Creative</h2>
+                        <a class="btn btn-outline-primary float-right d-inline-block" href="/submit/quick/creative">Create Greatness</a>
+                    </div>
+                    <p>Want to post creative writing or literature? Write a creative article! This category includes satire and other fiction works.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="mb-2">
+                        <h2 class="d-inline-block">Meme</h2>
+                        <a class="btn btn-outline-primary float-right d-inline-block" href="https://youtu.be/dQw4w9WgXcQ">ok zoomer lol</a>
+                    </div>
+                    <p>If you really can't be bothered to put any effort into maintaing professionalism or have no respect for the site, post a meme.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="mb-2">
+                        <h2 class="d-inline-block">Meta</h2>
+                        <a class="btn btn-outline-primary float-right d-inline-block" href="/submit/quick/meta">Submit Feedback</a>
+                    </div>
+                    <p>Make a meta post about the current state of things, what you'd like to see changed, or anything related to Contra itself.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+else
+{
+    <section>
+        <div class="card">
+            <div>
+                <h2>Not Signed In</h2>
+                <br />
+                <p>Register or login to an account to submit an item.</p>
+                <br />
+                <section>
+                    <a asp-area="Identity" asp-page="/Account/Register" class="btn c-btn-info flex-fill mr-3 mb-1">Register</a>
+                    <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Submit", "Home", new { area = "" })" class="btn c-btn-outline-info flex-fill mr-3 mb-1">Login</a>
+                </section>
+            </div>
+        </div>
+    </section>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_SummernoteScriptsPartial" />
+    <script src="~/js/submit.js" asp-append-version="true"></script>
+    <script src="~/lib/animejs/anime.min.js" asp-append-version="true"></script>
+}

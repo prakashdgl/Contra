@@ -34,6 +34,13 @@
                 <h1>@Html.DisplayFor(model => model.Title)</h1>
                 <p>@Model.AuthorName - @Model.Date.ToShortDateString()</p>
                 <br />
+                @if (Model.ArticleType == ArticleType.Response)
+                {
+                    <h4>In Response To:</h4>
+                    <div class="monoload" data-query="@Model.ResponseId"></div>
+                    <br />
+                    <hr />
+                }
                 @Html.Raw(Model.Content)
             </div>
         </div>

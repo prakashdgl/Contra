@@ -640,6 +640,31 @@ a.card:hover {
     font-size: 14px;
 }
 
+.card-embed {
+    max-width: 550px;
+    margin-left: 0 !important;
+    min-height: 50px !important;
+    border: 1px solid var(--brand-primary);
+    border-left: 5px solid var(--brand-primary);
+    padding: 20px;
+}
+
+.card-embed:hover {
+    transform: translateX(6px);
+}
+
+.card-embed > div {
+    width: 220px;
+}
+
+.card-embed > .image-container {
+    left: 240px;
+}
+
+.card-embed > div > p {
+    font-size: 14px;
+}
+
 .card-profile > div {
     width: 100%;
 }
@@ -661,7 +686,7 @@ a.card:hover {
     padding: 20px;
 }
 
-.article .image-container {
+.article > .image-container {
     position: absolute;
     top: 0;
     left: 0;
@@ -914,7 +939,7 @@ form section div:last-of-type {
         width: 50%;
         margin-right: 20px;
     }
-    .article .image-container {
+    .article > .image-container {
         height: 200px;
     }
     .article > .content {
@@ -990,7 +1015,7 @@ form section div:last-of-type {
     .card-login > form {
         margin-right: 40px;
     }
-    .article .image-container {
+    .article > .image-container {
         height: 300px;
     }
     .article > .content {

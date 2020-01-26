@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing;
@@ -14,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Contra.Areas.Identity.Data;
 using Contra.Data;
 using Contra.Models;
-using Ganss.XSS;
 
 namespace Contra.Controllers
 {
@@ -46,10 +43,9 @@ namespace Contra.Controllers
                                       orderby a.Views descending
                                       select a).ToList();
 
-            Random rnd = new Random();
             while (articles.Count < 5)
             {
-                placeholder.ThumbnailURL = "/img/img0" + rnd.Next(1, 5).ToString() + ".jpg";
+                placeholder.ThumbnailURL = "/img/img0" + (1 + articles.Count).ToString() + ".jpg";
                 articles.Add(placeholder);
             }
 
@@ -182,94 +178,6 @@ namespace Contra.Controllers
 
             ViewData["Query"] = filter;
             return View(articles);
-        }
-
-        [HttpGet("/submit")]
-        public IActionResult Submit()
-        {
-            return View();
-        }
-
-        [Authorize]
-        [HttpPost("/submit")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Submit([Bind("Id,ArticleType,AuthorName,Title,Sensitive," +
-                                                      "SensitiveContent,Spoiler,SpoilerContent,Anonymous," +
-                                                      "Tags,SummaryLong,Content")] Article article, IFormFile thumbnail)
-        {
-            if (ModelState.IsValid)
-            {
-                ContraUser user = _userManager.GetUserAsync(User).Result;
-                if (user.IsBanned) return Redirect("/Identity/Account/Login");
-
-                if (thumbnail != null && thumbnail.Length > 0 && thumbnail.Length < 2000000)
-                {
-                    string name = Path.GetRandomFileName();
-                    switch (thumbnail.ContentType)
-                    {
-                        case "image/png":
-                            name += ".png";
-                            break;
-                        case "image/jpeg":
-                            name += ".jpg";
-                            break;
-                        default:
-                            return View(article);
-                    }
-
-                    Image image = new Image
-                    {
-                        OwnerID = user.Id,
-                        Name = name,
-                        ContentType = thumbnail.ContentType,
-                    };
-
-                    using (var rs = thumbnail.OpenReadStream())
-                    using (var ms = new MemoryStream())
-                    {
-                        rs.CopyTo(ms);
-                        image.Content = ms.ToArray();
-                    }
-
-                    _context.Image.Add(image);
-                    await _context.SaveChangesAsync();
-
-                    article.ThumbnailURL = "/img/upload/" + name;
-                }
-                else
-                    return View(article);
-
-                article.OwnerID = user.Id;
-                if (article.Anonymous)
-                    article.AuthorName = "Anonymous";
-                else if (!string.IsNullOrWhiteSpace(article.AuthorName))
-                    article.AuthorName = user.Name + ", " + article.AuthorName;
-                else
-                    article.AuthorName = user.Name;
-                article.Date = DateTime.Now;
-                article.Views = 0;
-
-                if (User.IsInRole("Staff"))
-                {
-                    article.Approved = ApprovalStatus.Approved;
-                    article.IsEditorial = true;
-                }
-                else
-                    article.Approved = ApprovalStatus.Submitted;
-
-                HtmlSanitizer sanitizer = new HtmlSanitizer();
-                article.Content = sanitizer.Sanitize(article.Content);
-
-                if (user.Articles == null)
-                    user.Articles = new List<Article>();
-                user.Articles.Add(article);
-
-                _context.Add(article);
-                await _context.SaveChangesAsync();
-                return Redirect("~/success");
-            }
-
-            return View(article);
         }
 
         [HttpGet("/feedback")]
