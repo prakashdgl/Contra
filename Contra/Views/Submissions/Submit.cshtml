@@ -3,7 +3,6 @@
 @using Microsoft.AspNetCore.Identity
 @using Contra.Areas.Identity.Data
 @inject SignInManager<ContraUser> SignInManager
-@inject UserManager<ContraUser> UserManager
 
 @{
     ViewData["Title"] = "Submit";
@@ -97,16 +96,9 @@ else
                 <br />
                 <section>
                     <a asp-area="Identity" asp-page="/Account/Register" class="btn c-btn-info flex-fill mr-3 mb-1">Register</a>
-                    <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Submit", "Home", new { area = "" })" class="btn c-btn-outline-info flex-fill mr-3 mb-1">Login</a>
+                    <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Submit", "Submissions", new { area = "" })" class="btn c-btn-outline-info flex-fill mr-3 mb-1">Login</a>
                 </section>
             </div>
         </div>
     </section>
-}
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <partial name="_SummernoteScriptsPartial" />
-    <script src="~/js/submit.js" asp-append-version="true"></script>
-    <script src="~/lib/animejs/anime.min.js" asp-append-version="true"></script>
 }

@@ -37,6 +37,7 @@ namespace Contra.Controllers
             _userManager = userManager;
         }
 
+        [AllowAnonymous]
         [HttpGet("/submit")]
         public IActionResult Submit()
         {

@@ -31,7 +31,14 @@
                 { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@Model.Id')">Approve</a>}
             </div>
             <br />
-            <p>@Html.Raw(Model.Content)</p>
+            @if (Model.ArticleType == ArticleType.Response)
+            {
+                <h4>In Response To:</h4>
+                <div class="monoload" data-query="@Model.ResponseId"></div>
+                <br />
+                <hr />
+            }
+            @Html.Raw(Model.Content)
         </div>
     </div>
 </section>
