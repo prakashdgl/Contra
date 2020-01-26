@@ -23,8 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
     inputResponseID = document.getElementById("input-responseID");
     if (inputResponseID) {
         var id = parseInt(inputResponseID.value.split('/').pop());
-        document.getElementById("ResponseId").value = id;
-        monoload(document.getElementById("responseEmbedPreview"), id);
+        if (id) {
+            document.getElementById("ResponseId").value = id;
+            monoload(document.getElementById("responseEmbedPreview"), id);
+        }
+
         inputResponseID.addEventListener("input", () => {
             var id = parseInt(inputResponseID.value.split('/').pop());
             if (id) {
