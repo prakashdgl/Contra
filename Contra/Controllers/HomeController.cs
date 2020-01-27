@@ -60,6 +60,7 @@ namespace Contra.Controllers
             var article = await _context.Article.FirstOrDefaultAsync(m => m.Id == id);
             if (article == null) return Redirect("~/404");
 
+            // Handle view duplication from one user
             if (!Request.Cookies.ContainsKey("VSession"))
             {
                 Response.Cookies.Append("VSession", id.ToString() + "-", new CookieOptions

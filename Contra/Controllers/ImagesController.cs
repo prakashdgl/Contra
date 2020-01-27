@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -26,7 +27,7 @@ namespace Contra.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("/img/upload/{name}")]
+        [HttpGet("/img/upload/{*name}")]
         [ResponseCache(Duration = 604800)]
         public FileStreamResult GetImage(string name)
         {

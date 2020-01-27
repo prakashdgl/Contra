@@ -5,18 +5,24 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Contra.Areas.Identity.Data;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Contra.Models;
+using Contra.Data;
 
 namespace Contra.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ContraUser> _userManager;
         private readonly SignInManager<ContraUser> _signInManager;
 
-        public IndexModel(
-            UserManager<ContraUser> userManager,
-            SignInManager<ContraUser> signInManager)
+        public IndexModel(ApplicationDbContext context,
+                          UserManager<ContraUser> userManager,
+                          SignInManager<ContraUser> signInManager)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -39,6 +45,10 @@ namespace Contra.Areas.Identity.Pages.Account.Manage
             [DataType(DataType.Text)]
             [Display(Name = "A short summary of yourself")]
             public string Bio { get; set; }
+
+            [DataType(DataType.Upload)]
+            [Display(Name = "Profile picture file")]
+            public IFormFile Image { get; set; }
         }
 
         private async Task LoadAsync(ContraUser user)
@@ -91,6 +101,30 @@ namespace Contra.Areas.Identity.Pages.Account.Manage
             if (Input.Bio != user.Bio)
             {
                 user.Bio = Input.Bio;
+            }
+
+            if (Input.Image != null)
+            {
+                string name = Path.GetRandomFileName();
+
+                Image i = new Image
+                {
+                    OwnerID = user.Id,
+                    Name = "pfp/" + name,
+                    ContentType = Input.Image.ContentType,
+                };
+
+                using (var rs = Input.Image.OpenReadStream())
+                using (var ms = new MemoryStream())
+                {
+                    rs.CopyTo(ms);
+                    i.Content = ms.ToArray();
+                }
+
+                _context.Image.Add(i);
+                await _context.SaveChangesAsync();
+
+                user.ProfilePictureURL = "/img/upload/pfp/" + name;
             }
 
             await _userManager.UpdateAsync(user);

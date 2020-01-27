@@ -37,6 +37,23 @@
     </div>
 </div>
 
+<div class="fullscreen query" id="dialog" onclick="hideDialog()">
+    <div id="changePFP" class="align-content-center" onclick="stopPropogation(event)">
+        <div class="card card-compact search shadow-none">
+            <h2>Change profile picture</h2>
+            <br />
+            <form enctype="multipart/form-data" method="post">
+                <input asp-for="Input.Name" type="hidden" value="@UserManager.GetUserAsync(User).Result.Name" />
+                <input asp-for="Input.Bio" type="hidden" value="@UserManager.GetUserAsync(User).Result.Bio" />
+                <section class="w-100">
+                    <input title="New profile picture file" asp-for="Input.Image" class="form-control" />
+                    <button type="submit" class="btn c-btn-primary w-100">Update</button>
+                </section>
+            </form>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

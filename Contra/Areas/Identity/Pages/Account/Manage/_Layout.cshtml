@@ -39,18 +39,6 @@
     </div>
 </section>
 
-<div class="fullscreen query" id="dialog" onclick="hideDialog()">
-    <div id="changePFP" class="align-content-center" onclick="stopPropogation(event)">
-        <div class="card card-compact search shadow-none">
-            <h2>Change profile picture</h2>
-            <section>
-                <input type="text" id="pfpURL" name="url" class="text-input" placeholder="Ex: https://example.com/example.png" />
-                <button type="submit" class="btn c-btn-primary w-100" onclick="changePFP('@user.Id', document.getElementById('pfpURL').value)">Update</button>
-            </section>
-        </div>
-    </div>
-</div>
-
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }
