@@ -270,38 +270,6 @@ namespace Contra.Controllers
             return $"Unpinned article {id} successfully!";
         }
 
-        [Authorize]
-        [HttpPost("account/{id}/picture/{*url}")]
-        public async Task<string> ChangeProfilePicture(string id, string url)
-        {
-            if (_userManager.GetUserId(User) == id)
-            {
-                ContraUser user = await _userManager.GetUserAsync(User);
-                if (url == "reset")
-                {
-                    StringBuilder sb = new StringBuilder();
-                    using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
-                    {
-                        byte[] inputBytes = Encoding.ASCII.GetBytes(user.Email.Trim().ToLower());
-                        byte[] hashBytes = md5.ComputeHash(inputBytes);
-
-                        for (int i = 0; i < hashBytes.Length; i++)
-                            sb.Append(hashBytes[i].ToString("X2"));
-                    }
-                    user.ProfilePictureURL = "https://gravatar.com/avatar/" + sb.ToString() + "?d=identicon";
-                    await _userManager.UpdateAsync(user);
-                }
-                else
-                {
-                    user.ProfilePictureURL = url;
-                    await _userManager.UpdateAsync(user);
-                }
-
-                return "Successfully changed profile picture!";
-            }
-            else return "Not authorized!";
-        }
-
         [HttpGet("account/{id}/picture")]
         public async Task<string> GetProfilePicture(string id)
         {
