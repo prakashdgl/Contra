@@ -43,12 +43,13 @@
                     <a asp-controller="Articles" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id">Details</a>
                     @if (item.IsPinned)
-                    {<a class="clickable" onclick="confirmAction(this, 'api/v1/article/unpin/@item.Id')">Unpin</a> }
+                    { <a class="clickable" onclick="confirmAction(this, 'api/v1/article/unpin/@item.Id')">Unpin</a> }
                     else
                     { <a class="clickable" onclick="confirmAction(this, 'api/v1/article/pin/@item.Id')">Pin</a>}
-                    <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@item.Id')">Remove</a>
+                    @if (User.IsInRole("Administrator"))
+                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delete/@item.Id')">Remove</a> }
                     @if (item.Approved == ApprovalStatus.Approved)
-                    {<a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@item.Id')">Delist</a> }
+                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/delist/@item.Id')">Delist</a> }
                     else
                     { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/article/approve/@item.Id')">Approve</a>}
                 </div>

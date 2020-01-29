@@ -212,6 +212,15 @@ namespace Contra.Controllers
             return View(ticket);
         }
 
+        [HttpGet("/profile/{*userID}")]
+        public async Task<IActionResult> Profile(string userID)
+        {
+            ContraUser user = await _userManager.FindByIdAsync(userID);
+            if (user == null) return Redirect("/404");
+
+            return View(user);
+        }
+
         [Route("/about")]
         public IActionResult About()
         {

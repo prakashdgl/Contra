@@ -1,0 +1,31 @@
+﻿@model ContraUser
+
+@using Contra.Areas.Identity.Data
+@{
+    ViewData["Title"] = Model.Name + "'s Profile";
+    ViewData["Description"] = "See what " + Model.Name + " has been up to on Contra.";
+
+    string pfpURL = Model.ProfilePictureURL;
+    if (Model.ProfilePictureURL.Contains("gravatar"))
+        pfpURL += "&s=512";
+}
+
+<section class="profile-dashboard">
+    <div class="profile-controls">
+        <div class="image-container">
+            <img class="profile-picture" id="user-picture" src="@pfpURL" />
+        </div>
+        <hr />
+        <div>
+            <h2>@Model.Name</h2>
+            <h5>Joined: @Model.DateJoined.ToShortDateString()</h5>
+        </div>
+    </div>
+    <div class="profile-page flex-big">
+        <div class="neoload" data-amount="10" data-query="@Model.Id" data-type="block">
+            <div class="section-title mt-0">
+                <h2>Recently Posted</h2>
+            </div>
+        </div>
+    </div>
+</section>

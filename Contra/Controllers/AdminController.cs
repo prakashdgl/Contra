@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Contra.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Staff, Administrator")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -170,6 +170,36 @@ namespace Contra.Controllers
             return View(images);
         }
 
+        [Route("/tickets/{*filter}")]
+        public IActionResult Tickets(string filter)
+        {
+            List<Ticket> tickets;
+            switch (filter)
+            {
+                case "submitted":
+                    ViewData["Message"] = "Submitted Tickets";
+                    tickets = _context.Ticket.Where(x =>
+                                   x.Approved == HandledStatus.Submitted).ToList();
+                    break;
+                case "all":
+                    ViewData["Message"] = "All Tickets";
+                    tickets = _context.Ticket.ToList();
+                    break;
+                default:
+                    ViewData["Message"] = "Tickets - " + filter;
+                    tickets = (from t in _context.Ticket
+                               where t.OwnerID == filter ||
+                                     t.Content.Contains(filter) ||
+                                     t.AuthorName.Contains(filter) ||
+                                     t.AssignedTo.Contains(filter)
+                               select t).ToList();
+                    break;
+            }
+
+            return View(tickets);
+        }
+
+        [Authorize(Roles = "Administrator")]
         [Route("/users/{filter}/{*sortBy}")]
         public IActionResult Users(string filter, string sortBy = "name")
         {
@@ -223,35 +253,7 @@ namespace Contra.Controllers
             return View(userRoles);
         }
 
-        [Route("/tickets/{*filter}")]
-        public IActionResult Tickets(string filter)
-        {
-            List<Ticket> tickets;
-            switch (filter)
-            {
-                case "submitted":
-                    ViewData["Message"] = "Submitted Tickets";
-                    tickets = _context.Ticket.Where(x =>
-                                   x.Approved == HandledStatus.Submitted).ToList();
-                    break;
-                case "all":
-                    ViewData["Message"] = "All Tickets";
-                    tickets = _context.Ticket.ToList();
-                    break;
-                default:
-                    ViewData["Message"] = "Tickets - " + filter;
-                    tickets = (from t in _context.Ticket
-                               where t.OwnerID == filter ||
-                                     t.Content.Contains(filter) ||
-                                     t.AuthorName.Contains(filter) ||
-                                     t.AssignedTo.Contains(filter)
-                               select t).ToList();
-                    break;
-            }
-
-            return View(tickets);
-        }
-
+        [Authorize(Roles = "Administrator")]
         [Route("/roles/{filter}/{*sortBy}")]
         public IActionResult Roles(string filter, string sortBy = "name")
         {

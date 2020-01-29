@@ -32,7 +32,14 @@
                     }
                 }
                 <h1>@Html.DisplayFor(model => model.Title)</h1>
-                <p>@Model.AuthorName - @Model.Date.ToShortDateString()</p>
+                <p>
+                    @if (!Model.Anonymous) {
+                        <a href="/profile/@Model.OwnerID" title="View author's profile" class="link-subtle">@Model.AuthorName</a> 
+                    }
+                    else {
+                        @Model.AuthorName
+                    } - @Model.Date.ToShortDateString()
+                </p>
                 <br />
                 @if (Model.ArticleType == ArticleType.Response)
                 {
@@ -41,7 +48,8 @@
                     <br />
                     <hr />
                 }
-                @Html.Raw(Model.Content)
+                <div>@Html.Raw(Model.Content)</div>
+                <a href="/submit/response/@Model.Id" class="btn c-btn-info mt-3">Respond to this article</a>
             </div>
         </div>
     </section>

@@ -13,6 +13,7 @@ using Contra.Models;
 
 namespace Contra.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class v1Controller : ControllerBase
@@ -30,7 +31,6 @@ namespace Contra.Controllers
             _roleManager = roleManager;
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost("role/create/{*role}")]
         public async Task<string> CreateRole(string role)
         {
@@ -42,7 +42,6 @@ namespace Contra.Controllers
             return $"Created {role} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost("role/delete/{*role}")]
         public async Task<string> DeleteRole(string role)
         {
@@ -56,7 +55,6 @@ namespace Contra.Controllers
             return $"Deleted {role} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost("user/{userID}/ensure/{*role}")]
         public async Task<string> EnsureRole(string userID, string role)
         {
@@ -71,7 +69,6 @@ namespace Contra.Controllers
             return $"Added {role} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost("user/{userID}/ban")]
         public async Task<string> BanUser(string userID)
         {
@@ -85,7 +82,6 @@ namespace Contra.Controllers
             return $"Banned {user.Name}!";
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost("user/{userID}/unban")]
         public async Task<string> UnbanUser(string userID)
         {
@@ -99,7 +95,6 @@ namespace Contra.Controllers
             return $"Unbanned {user.Name}!";
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost("user/{userID}/remove")]
         public async Task<string> RemoveUser(string userID)
         {
@@ -115,7 +110,6 @@ namespace Contra.Controllers
             return $"Removed {user.Name}!";
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost("user/{userID}/enfeeble/{*role}")]
         public async Task<string> EnfeebleRole(string userID, string role)
         {
@@ -130,7 +124,7 @@ namespace Contra.Controllers
             return $"Removed {role} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Staff, Administrator")]
         [HttpPost("comment/approve/{*id}")]
         public async Task<string> CommentApprove(int? id)
         {
@@ -147,7 +141,7 @@ namespace Contra.Controllers
             return $"Approved comment {id} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Staff, Administrator")]
         [HttpPost("comment/delist/{*id}")]
         public async Task<string> CommentDelist(int? id)
         {
@@ -164,7 +158,6 @@ namespace Contra.Controllers
             return $"Delisted comment {id} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost("comment/delete/{*id}")]
         public async Task<string> CommentDelete(int? id)
         {
@@ -181,7 +174,7 @@ namespace Contra.Controllers
             return $"Deleted comment {id} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Staff, Administrator")]
         [HttpPost("article/approve/{*id}")]
         public async Task<string> ArticleApprove(int? id)
         {
@@ -198,7 +191,7 @@ namespace Contra.Controllers
             return $"Approved article {id} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Staff, Administrator")]
         [HttpPost("article/delist/{*id}")]
         public async Task<string> ArticleDelist(int? id)
         {
@@ -215,7 +208,6 @@ namespace Contra.Controllers
             return $"Delisted article {id} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost("article/delete/{*id}")]
         public async Task<string> ArticleDelete(int? id)
         {
@@ -236,7 +228,7 @@ namespace Contra.Controllers
             return $"Deleted article {id} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Staff, Administrator")]
         [HttpPost("article/pin/{*id}")]
         public async Task<string> ArticlePin(int? id)
         {
@@ -253,7 +245,7 @@ namespace Contra.Controllers
             return $"Pinned article {id} successfully!";
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Staff, Administrator")]
         [HttpPost("article/unpin/{*id}")]
         public async Task<string> ArticleUnpin(int? id)
         {
@@ -270,6 +262,7 @@ namespace Contra.Controllers
             return $"Unpinned article {id} successfully!";
         }
 
+        [AllowAnonymous]
         [HttpGet("account/{id}/picture")]
         public async Task<string> GetProfilePicture(string id)
         {
@@ -279,6 +272,7 @@ namespace Contra.Controllers
             else return "Not found!";
         }
 
+        [AllowAnonymous]
         [HttpGet("article/list/{query}/{amount}/{*skip}")]
         public string ArticleGetBulk(string query, int amount, int skip)
         {
@@ -326,7 +320,7 @@ namespace Contra.Controllers
                           where a.Approved == ApprovalStatus.Approved &&
                                (a.Title.ToLower().Contains(query) ||
                                 a.Tags.ToLower().Contains(query) ||
-                                a.OwnerID == query)
+                                (a.OwnerID == query && !a.Anonymous))
                           orderby a.Date descending
                           select a).ToList()
                 };
@@ -361,6 +355,7 @@ namespace Contra.Controllers
             return JsonConvert.SerializeObject(info);
         }
 
+        [AllowAnonymous]
         [HttpGet("article/{id}")]
         public string ArticleGet(int id)
         {
@@ -392,15 +387,13 @@ namespace Contra.Controllers
             return JsonConvert.SerializeObject(i);
         }
 
-
-        [Authorize(Roles = "Administrator")]
         [Route("generate/{tags}/{type}")]
         public async Task<string> Generate(string tags, int type)
         {
             Article placeholder = new Article
             {
                 Approved = ApprovalStatus.Approved,
-                AuthorName = "Sei",
+                AuthorName = (await _userManager.GetUserAsync(User)).Name,
                 OwnerID = "Autogen",
                 Date = DateTime.Now,
                 Title = "Autogen",
@@ -424,7 +417,6 @@ namespace Contra.Controllers
             return "Created Article with ID: " + placeholder.Id;
         }
 
-        [Authorize(Roles = "Administrator")]
         [Route("degenerate")]
         public async Task<string> Degenerate()
         {

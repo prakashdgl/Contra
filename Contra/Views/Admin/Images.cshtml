@@ -36,7 +36,8 @@
             <div>
                 <h5>@item.OwnerID</h5>
                 <p>@item.Name</p>
-                <a href="~/images/delete/@item.Id" class="btn btn-primary">Delete</a>
+                @if (User.IsInRole("Administrator"))
+                { <a href="~/images/delete/@item.Id" class="btn btn-primary">Delete</a> }
             </div>
         </div>
     }

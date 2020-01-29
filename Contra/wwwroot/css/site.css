@@ -162,6 +162,15 @@ a {
     transition-duration: 0.2s;
 }
 
+.link-subtle {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+.link-subtle:hover {
+    color: var(--brand-primary);
+}
+
 .clickable {
     cursor: pointer;
 }

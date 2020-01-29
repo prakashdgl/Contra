@@ -38,11 +38,12 @@
                 <p>@Html.DisplayFor(modelItem => item.Content)</p>
                 <div class="actions">
                     <a href="/articlemanager/@item.PostId">Read Article</a>
-                    <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delete/@item.Id')">Remove</a>
+                    @if (User.IsInRole("Administrator"))
+                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delete/@item.Id')">Remove</a> }
                     @if (item.Approved == ApprovalStatus.Approved)
                     { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/delist/@item.Id')">Delist</a> }
                     else
-                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/approve/@item.Id')">Approve</a> }
+                    { <a class="text-danger clickable" onclick="confirmAction(this, 'api/v1/comment/approve/@item.Id')">Approve</a>}
                 </div>
             </div>
         </div>

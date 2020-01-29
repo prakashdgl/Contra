@@ -39,10 +39,13 @@
             <h3 class="dashboard-header">Approvals</h3>
             <a class="nav-link" href="~/articles/submitted">☑ <span class="hideable">Articles</span></a>
             <a class="nav-link" href="~/comments/submitted">✅ <span class="hideable">Comments</span></a>
-            <h3 class="dashboard-header">Users</h3>
-            <a class="nav-link" href="~/roles/all">🎟 <span class="hideable">Roles</span></a>
-            <a class="nav-link" href="~/users/staff">👩‍💼 <span class="hideable">Staff</span></a>
-            <a class="nav-link" href="~/users/all">🙋‍ <span class="hideable">Users</span></a>
+            @if (User.IsInRole("Administrator"))
+            {
+                <h3 class="dashboard-header">Users</h3>
+                <a class="nav-link" href="~/roles/all">🎟 <span class="hideable">Roles</span></a>
+                <a class="nav-link" href="~/users/staff">👩‍💼 <span class="hideable">Staff</span></a>
+                <a class="nav-link" href="~/users/all">🙋‍ <span class="hideable">Users</span></a>
+            }
         </div>
         <div class="dashboard-content">
             @RenderBody()

@@ -14,6 +14,7 @@
         @if (User.IsInRole("Staff"))
         {<a class="nav-link" href="~/admin" title="Admin Dashboard">⚡ Admin</a>}
         <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage your profile">Your Profile</a>
+        <a class="nav-link" href="~/profile/@UserManager.GetUserId(User)" title="See your profile">Public Profile</a>
         <a class="nav-link clickable" onclick="toggleNightTheme()" title="Toggle night theme">Toggle Night Theme</a>
         <a class="nav-link" href="/Identity/Account/Logout" title="Log out">Logout</a>
     </div>
