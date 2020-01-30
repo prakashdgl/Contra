@@ -17,6 +17,12 @@
                 <h5>@t.Title - @t.Approved</h5>
                 <p>@t.Date | Tags: @t.Tags</p>
                 <p>User: @t.AuthorName | Assigned to: @t.AssignedTo</p>
+                <div>@Html.Raw(t.Content)</div>
+                <div class="actions">
+                    @if (User.IsInRole("Administrator"))
+                    { <a class="btn c-btn-info" onclick="confirmAction(this, 'api/v2/ticket/delete/@t.Id')">Delete Ticket</a> }
+                    
+                </div>
             </div>
         </div>
     </section>

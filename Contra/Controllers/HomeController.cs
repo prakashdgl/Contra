@@ -222,9 +222,9 @@ namespace Contra.Controllers
         }
 
         [Route("/about")]
-        public IActionResult About()
+        public async Task<IActionResult> About()
         {
-            return View(_userManager.GetUsersInRoleAsync("Staff").Result);
+            return View((await _userManager.GetUsersInRoleAsync("Staff")).OrderBy(u => u.Name));
         }
 
         [Route("/privacy")]
