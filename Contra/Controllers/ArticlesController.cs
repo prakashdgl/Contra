@@ -19,30 +19,6 @@ namespace Contra.Controllers
             _context = context;
         }
 
-        [Route("/articlemanager/{*id}")]
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var article = await _context.Article
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null) return NotFound();
-
-            List<Comment> comments = await (from c in _context.Comment
-                                            where c.PostId == article.Id
-                                            && c.Approved == ApprovalStatus.Approved
-                                            orderby c.Date descending
-                                            select c).ToListAsync();
-            ViewData["Comments"] = comments;
-            ViewData["PendingComments"] = (await (from c in _context.Comment
-                                                  where c.PostId == article.Id
-                                                  && c.Approved != ApprovalStatus.Approved
-                                                  orderby c.Date descending
-                                                  select c).ToListAsync()).Count;
-
-            return View(article);
-        }
-
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();

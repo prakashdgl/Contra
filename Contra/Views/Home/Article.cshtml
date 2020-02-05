@@ -9,50 +9,7 @@
 @if (Model.Approved == ApprovalStatus.Approved || User.IsInRole("Administrator"))
 {
     <br />
-    <section>
-        <div class="card article">
-            <div class="image-container">
-                <img src="@Model.ThumbnailURL" alt="Article Thumbnail Image" />
-                <div class="secondary-info">
-                    <p>Views: @Model.Views</p>
-                    <span class="social-links">
-                        <a href="https://twitter.com/intent/tweet?text=@System.Net.WebUtility.UrlEncode(Model.Title)+@(url)"><img src="~/img/twitter.svg" alt="Share on Twitter" /></a>
-                        <a href="https://facebook.com/sharer/sharer.php?u=@(url)"><img src="~/img/facebook.svg" alt="Share on Facebook" /></a>
-                        <a href="#discuss"><img src="~/img/discuss.svg" alt="Discuss Here" /></a>
-                    </span>
-                </div>
-            </div>
-            <div class="content">
-                @if (User.IsInRole("Administrator"))
-                {
-                    <span class="secondary-info p-0"><img src="~/img/supericon.png" alt="Superuser" /> - <a href="~/articlemanager/@Model.Id">Manage Article</a></span>
-                    if (Model.Approved != ApprovalStatus.Approved)
-                    {
-                        <p class="text-info">This article is not viewable to the public.</p>
-                    }
-                }
-                <h1>@Html.DisplayFor(model => model.Title)</h1>
-                <p>
-                    @if (!Model.Anonymous) {
-                        <a href="/profile/@Model.OwnerID" title="View author's profile" class="link-subtle">@Model.AuthorName</a> 
-                    }
-                    else {
-                        @Model.AuthorName
-                    } - @Model.Date.ToShortDateString()
-                </p>
-                <br />
-                @if (Model.ArticleType == ArticleType.Response)
-                {
-                    <h4>In Response To:</h4>
-                    <div class="monoload" data-query="@Model.ResponseId"></div>
-                    <br />
-                    <hr />
-                }
-                <div>@Html.Raw(Model.Content)</div>
-                <a href="/submit/response/@Model.Id" class="btn c-btn-info mt-3">Respond to this article</a>
-            </div>
-        </div>
-    </section>
+    <partial name="_ArticlePartial" model="Model" />
 
     <div class="section-title">
         <h2>Comments</h2>

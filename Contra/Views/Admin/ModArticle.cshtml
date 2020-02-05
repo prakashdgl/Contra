@@ -1,0 +1,34 @@
+﻿@model Contra.Models.Article
+
+@{
+    ViewData["Title"] = "Details";
+    ViewData["Managable"] = true;
+    Layout = "_AdminLayout";
+}
+
+<partial name="_ArticlePartial" model="Model" />
+
+<div class="section-title">
+    <h2>Comments</h2>
+    <p class="text-secondary">@ViewData["PendingComments"] Pending</p>
+</div>
+<section>
+    <partial name="_CommentPartial" />
+</section>
+@if (((List<Comment>)ViewData["Comments"]).Count != 0)
+{
+    <section>
+        <div class="card card-compact">
+            @foreach (Comment comment in (List<Comment>)ViewData["Comments"])
+            {
+                <div class="card card-compact comment">
+                    <div>
+                        <a name="@comment.Id"></a>
+                        <h5>@comment.AuthorName - @comment.Date.ToShortDateString()</h5>
+                        <p>@comment.Content</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+}
