@@ -231,7 +231,7 @@ function formatEmbed(id, image, title, summary, contentWarning) {
 function showComfortable() {
     var elements = document.getElementsByClassName("compact-hidden");
     for (var i = 0; i < elements.length; i++) {
-        elements[i].style.display = "flex";
+        elements[i].style.display = "";
     }
 
     var cards = document.getElementsByClassName("card");

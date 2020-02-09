@@ -66,6 +66,11 @@
     margin-right: 15px;
 }
 
+.roles .toggle {
+    display: inline-block;
+    width: 300px;
+}
+
 @media (min-width: 768px) {
     .dashboard-header {
         display: block;
