@@ -39,7 +39,12 @@
     <section>
         <div class="card card-big card-compact card-user">
             <div class="user-info">
-                <h5>@user.Name - @user.Email</h5>
+                @{
+                    var email = @user.Email.Split('@');
+                    string provider = email[1];
+                    string name = email[0].Substring(0, 3) + new string('*', email[0].Length - 3);
+                }
+                <h5>@user.Name - @(name + "@" + provider)</h5>
                 <p>Id: @user.Id</p>
                 <p>Verified Email: @user.EmailConfirmed</p>
                 @foreach (IdentityRole role in RoleManager.Roles)
