@@ -859,21 +859,20 @@ form section div:last-of-type {
 }
 
     .page-center h1, .page-center h4 {
-        margin-left: 15px;
+        text-align: center;
+        font-size: 1.2rem;
         white-space: nowrap;
-    }
-
-    .page-center img {
-        width: 600px;
     }
 
 .outer-circle {
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    margin-left: -100px;
-    width: 812px;
-    height: 812px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 312px;
+    height: 312px;
     z-index: -1;
     overflow: hidden;
 }
@@ -881,8 +880,8 @@ form section div:last-of-type {
     .outer-circle:after {
         content: " ";
         display: block;
-        width: 800px;
-        height: 800px;
+        width: 300px;
+        height: 300px;
         margin: 8px;
         border-radius: 50%;
         border: 12px solid #b3a6e8;
@@ -1075,6 +1074,28 @@ form section div:last-of-type {
     .profile-page {
         margin-left: 40px;
     }
+
+    .page-center h1 {
+        font-size: 2.5rem;
+        margin-left: 15px;
+        text-align: unset;
+    }
+    .page-center h4 {
+        font-size: 1.5rem;
+        margin-left: 15px;
+        text-align: unset;
+    }
+    .outer-circle {
+        left: unset;
+        right: unset;
+        margin-left: -100px;
+        width: 812px;
+        height: 812px;
+    }
+        .outer-circle:after {
+            width: 800px;
+            height: 800px;
+        }
 }
 
 @media (min-width: 1200px) {
