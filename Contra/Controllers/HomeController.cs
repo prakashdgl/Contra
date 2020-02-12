@@ -27,8 +27,15 @@ namespace Contra.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet("reconstructing")]
+        public IActionResult Reconstructing()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
+            return Redirect("/reconstructing");
             Article placeholder = new Article
             {
                 Title = "Relevant Story",

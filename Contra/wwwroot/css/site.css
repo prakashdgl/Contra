@@ -10,6 +10,7 @@
     --background-accent-secondary: #bbb;
     --brand-primary: #a6f;
     --brand-primary-dark: #a3f;
+    --brand-secondary: #f8a;
     --text-primary: #000;
     --link-hover: rgb(81, 11, 255);
 }
@@ -22,6 +23,7 @@ html.dark {
     --background-accent-secondary: rgb(23, 23, 23);
     --brand-primary: #a4f;
     --brand-primary-dark: #f8a;
+    --brand-secondary: #f8a;
     --text-primary: rgb(227, 227, 227);
     --link-hover: rgb(181, 181, 255);
 }
@@ -805,7 +807,6 @@ form section div:last-of-type {
 }
 
 .footer {
-    border-top: 1px solid var(--background-secondary);
     position: absolute;
     bottom: 0;
     left: 20px;
@@ -847,6 +848,47 @@ form section div:last-of-type {
     margin: auto;
     margin-top: 30px;
 }
+
+.page-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+
+    .page-center h1, .page-center h4 {
+        margin-left: 15px;
+        white-space: nowrap;
+    }
+
+    .page-center img {
+        width: 600px;
+    }
+
+.outer-circle {
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    margin-left: -100px;
+    width: 812px;
+    height: 812px;
+    z-index: -1;
+    overflow: hidden;
+}
+
+    .outer-circle:after {
+        content: " ";
+        display: block;
+        width: 800px;
+        height: 800px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 12px solid #b3a6e8;
+        border-color: var(--brand-primary) transparent var(--brand-secondary) transparent;
+        animation: lds-dual-ring 69s linear infinite;
+    }
 
 @media (min-width: 512px) {
     .notifications {
