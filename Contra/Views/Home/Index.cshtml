@@ -11,16 +11,13 @@
 <section class="main-wrapper">
     <div class="main">
         <div class="section-title">
-            <h2>Cover Story</h2>
+            <h2>Trending Now</h2>
         </div>
         <section>
             <a class="card card-cover story" href="~/article/@Model.ElementAt(0).Id">
                 <partial name="_CardContentPartial" model="@Model.ElementAt(0)" />
             </a>
         </section>
-        <div class="section-title">
-            <h2>Trending Now</h2>
-        </div>
         <section>
             <a class="card card-big story" href="~/article/@Model.ElementAt(1).Id">
                 <partial name="_CardContentPartial" model="@Model.ElementAt(1)" />

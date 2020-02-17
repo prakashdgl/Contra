@@ -44,6 +44,7 @@ namespace Contra.Controllers
             return View();
         }
 
+        // Check if image is < 2MB and is either JPEG or PNG
         private bool ValidateImage(IFormFile image)
         {
             if (image == null) return false;
@@ -56,6 +57,7 @@ namespace Contra.Controllers
             return true;
         }
 
+        // Adds an image to the database, associates it with a user, and returns the URL
         private async Task<string> UploadImage(string ownerID, IFormFile image) {
             string name = Path.GetRandomFileName();
 

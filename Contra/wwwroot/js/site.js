@@ -135,11 +135,11 @@ function neoload(target, query, amount, type, loading) {
                 var biggify = false;
                 if (i % 2 === 0) {
                     if (i % 4 === 2) biggify = !biggify;
-                    html += "<section>" + formatCard(obj.id, obj.image, obj.title, obj.summary, !biggify, biggify, cw);
+                    html += "<section>" + formatCard(obj.id, obj.image, obj.title, obj.summary, !biggify, biggify, cw, obj.tags);
                 }
                 else {
                     if (i % 4 === 3) biggify = !biggify;
-                    html += formatCard(obj.id, obj.image, obj.title, obj.summary, biggify, !biggify, cw) + "</section>";
+                    html += formatCard(obj.id, obj.image, obj.title, obj.summary, biggify, !biggify, cw, obj.tags) + "</section>";
                 }
             }
             else if (type === "mini") {
@@ -199,14 +199,15 @@ function formatContentWarning(pinned, sensitive, spoiler, mini) {
     return html + "</p>";
 }
 
-function formatCard(id, image, title, summary, big, encapsulate, contentWarning) {
+function formatCard(id, image, title, summary, big, encapsulate, contentWarning, tags) {
     var classes = "card story";
     if (big) classes += " card-big";
     if (encapsulate) classes += " card-encapsulate";
+    if (!tags) tags = "";
 
     return "<a class='" + classes + "' href='/article/" + id + "'>" +
         "<span class='image-container'><img src='" + image + "' alt='" + title + " Thumbnail Image' /></span>" +
-        "<div><h2>" + title + "</h2>" + contentWarning + "<p>" + summary + "</p></div></da>";
+        "<div><h2>" + title + "</h2>" + contentWarning + "<p>" + summary + "</p><blockquote class='tags'>" + tags + "</blockquote></div></da>";
 }
 
 function formatSearchCard(id, image, title, author, date, summary, contentWarning) {

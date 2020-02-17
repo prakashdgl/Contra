@@ -1,5 +1,13 @@
 ﻿@model Article
 
+@{ 
+    string tags = "";
+    if (!string.IsNullOrEmpty(Model.Tags))
+    {
+        tags = Model.Tags.Trim().Replace(" ", ", ");
+    }
+}
+
 <span class="image-container"><img src=@Model.ThumbnailURL alt="@Model.Title Thumbnail Image" /></span>
 <div>
     <h2>@Model.Title</h2>
@@ -16,4 +24,5 @@
         </p>
     }
     <p>@Model.SummaryLong</p>
+    <blockquote class="tags">@tags</blockquote>
 </div>

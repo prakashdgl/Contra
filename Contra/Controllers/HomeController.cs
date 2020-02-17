@@ -35,7 +35,6 @@ namespace Contra.Controllers
 
         public IActionResult Index()
         {
-            return Redirect("/reconstructing");
             Article placeholder = new Article
             {
                 Title = "Relevant Story",

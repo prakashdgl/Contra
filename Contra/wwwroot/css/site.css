@@ -3,7 +3,7 @@
 }
 
 :root {
-    --background-primary: #eeeff5;
+    --background-primary: #edeef5;
     --background-secondary: #fff;
     --background-tertiary: #fff;
     --background-accent-primary: #bbb;
@@ -260,9 +260,9 @@ a {
     height: 64px;
     margin: 8px;
     border-radius: 50%;
-    border: 6px solid #ff6c97;
-    border-color: #ff6c97 transparent #ff6c97 transparent;
-    animation: lds-dual-ring 1.2s linear infinite;
+    border: 6px solid var(--brand-primary);
+    border-color: var(--brand-primary) transparent var(--brand-secondary) transparent;
+    animation: lds-dual-ring 1.5s linear infinite;
 }
 
 @keyframes lds-dual-ring {
@@ -849,45 +849,10 @@ form section div:last-of-type {
     margin-top: 30px;
 }
 
-.page-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    height: 90vh;
-    overflow: hidden;
+blockquote {
+    border-left: 3px solid var(--brand-primary);
+    padding-left: 15px;
 }
-
-    .page-center h1, .page-center h4 {
-        text-align: center;
-        font-size: 1.2rem;
-        white-space: nowrap;
-    }
-
-.outer-circle {
-    border-radius: 50%;
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 312px;
-    height: 312px;
-    z-index: -1;
-    overflow: hidden;
-}
-
-    .outer-circle:after {
-        content: " ";
-        display: block;
-        width: 300px;
-        height: 300px;
-        margin: 8px;
-        border-radius: 50%;
-        border: 12px solid #b3a6e8;
-        border-color: var(--brand-primary) transparent var(--brand-secondary) transparent;
-        animation: lds-dual-ring 69s linear infinite;
-    }
 
 @media (min-width: 512px) {
     .notifications {
@@ -1052,7 +1017,7 @@ form section div:last-of-type {
     }
     .insight .card-insight {
         width: unset;
-        min-height: unset;
+        min-height: 130px;
         margin: 5px 0;
     }
     .flex-wrap .card {
@@ -1074,28 +1039,6 @@ form section div:last-of-type {
     .profile-page {
         margin-left: 40px;
     }
-
-    .page-center h1 {
-        font-size: 2.5rem;
-        margin-left: 15px;
-        text-align: unset;
-    }
-    .page-center h4 {
-        font-size: 1.5rem;
-        margin-left: 15px;
-        text-align: unset;
-    }
-    .outer-circle {
-        left: unset;
-        right: unset;
-        margin-left: -100px;
-        width: 812px;
-        height: 812px;
-    }
-        .outer-circle:after {
-            width: 800px;
-            height: 800px;
-        }
 }
 
 @media (min-width: 1200px) {
