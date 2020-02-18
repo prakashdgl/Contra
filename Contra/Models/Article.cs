@@ -45,6 +45,7 @@ namespace Contra.Models
         Creative,
         Insight,
         Response,
-        Meta
+        Meta,
+        Blog
     }
 }

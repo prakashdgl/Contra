@@ -27,7 +27,7 @@ namespace Contra.Controllers
         };
         private static readonly List<string> SubmitQuickAllowedTypes = new List<string>()
         {
-            "creative", "meta"
+            "creative", "meta", "blog"
         };
 
         public SubmissionsController(ApplicationDbContext context,
@@ -185,6 +185,9 @@ namespace Contra.Controllers
                     case "meta":
                         article.ArticleType = ArticleType.Meta;
                         break;
+                    case "blog":
+                        article.ArticleType = ArticleType.Blog;
+                        break;
                     default:
                         return Redirect("/submit");
                 }
@@ -210,10 +213,17 @@ namespace Contra.Controllers
                 else
                     article.Approved = ApprovalStatus.Submitted;
 
+                if (article.ArticleType == ArticleType.Blog) 
+                    article.Approved = ApprovalStatus.Approved;
+
                 HtmlSanitizer sanitizer = new HtmlSanitizer();
                 article.Content = sanitizer.Sanitize(article.Content);
 
-                article.SummaryLong = Regex.Replace(article.Content, @"<[^>]*>", string.Empty).Trim().Substring(0, 60) + "...";
+                string summary = Regex.Replace(article.Content, @"<[^>]*>", string.Empty).Trim();
+                if (summary.Length > 60)
+                    article.SummaryLong = summary.Substring(0, 60) + "...";
+                else
+                    article.SummaryLong = summary;
 
                 if (user.Articles == null)
                     user.Articles = new List<Article>();

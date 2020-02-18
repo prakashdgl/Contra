@@ -24,9 +24,15 @@
         </div>
     </div>
     <div class="profile-page flex-big">
-        <div class="neoload" data-amount="10" data-query="@Model.Id" data-type="block">
+        <div class="neoload" data-amount="4" data-query="@Model.Id" data-type="block">
             <div class="section-title mt-0">
                 <h2>Recently Posted</h2>
+            </div>
+        </div>
+        <br />
+        <div class="neoload" data-amount="4" data-query="blog::@Model.Id" data-type="block">
+            <div class="section-title mt-0">
+                <h2>Recent Blog Posts</h2>
             </div>
         </div>
     </div>

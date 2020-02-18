@@ -277,8 +277,10 @@ namespace Contra.Controllers
         public string ArticleGetBulk(string query, int amount, int skip)
         {
             if (string.IsNullOrEmpty(query)) return "";
+            if (query.StartsWith("blog::"))
+                return new v2Controller(_context).BlogGetBulk(query.Substring(6), amount, skip);
 
-            List<Article> articles;
+                List<Article> articles;
             if (_userManager.GetUserId(User) == query)
             {
                 articles = (from a in _context.Article
@@ -302,7 +304,8 @@ namespace Contra.Controllers
                                     orderby a.Date descending
                                     select a).ToList(),
                     "new" => (from a in _context.Article
-                              where a.Approved == ApprovalStatus.Approved
+                              where a.Approved == ApprovalStatus.Approved &&
+                                    a.ArticleType != ArticleType.Blog
                               orderby a.Date descending
                               select a).ToList(),
                     "insight" => (from a in _context.Article
@@ -318,6 +321,7 @@ namespace Contra.Controllers
                                    select a).ToList(),
                     _ => (from a in _context.Article
                           where a.Approved == ApprovalStatus.Approved &&
+                                a.ArticleType != ArticleType.Blog &&
                                (a.Title.ToLower().Contains(query) ||
                                 a.Tags.ToLower().Contains(query) ||
                                 (a.OwnerID == query && !a.Anonymous))

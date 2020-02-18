@@ -839,7 +839,6 @@ form section div:last-of-type {
 }
 
 .profile-picture {
-    width: 50%;
     margin: auto;
 }
 
@@ -852,7 +851,45 @@ form section div:last-of-type {
 blockquote {
     border-left: 3px solid var(--brand-primary);
     padding-left: 15px;
+    overflow: hidden;
 }
+
+.page-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+    .page-center h1, .page-center h4 {
+        text-align: center;
+        font-size: 1.2rem;
+        white-space: nowrap;
+    }
+.outer-circle {
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 312px;
+    height: 312px;
+    z-index: -1;
+    overflow: hidden;
+}
+    .outer-circle:after {
+        content: " ";
+        display: block;
+        width: 300px;
+        height: 300px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 12px solid #b3a6e8;
+        border-color: var(--brand-primary) transparent var(--brand-secondary) transparent;
+        animation: lds-dual-ring 69s linear infinite;
+    }
 
 @media (min-width: 512px) {
     .notifications {
@@ -878,12 +915,11 @@ blockquote {
     }
     .profile-controls {
         flex-direction: row;
-    }
-    .profile-controls > div {
-        margin-left: 30px;
+        margin-left: 10px;
     }
     .profile-picture {
-        width: 20rem;
+        min-width: unset !important;
+        width: 15rem;
     }
 }
 
@@ -966,6 +1002,7 @@ blockquote {
     }
     .profile-controls {
         flex-direction: column;
+        max-width: 20rem;
     }
     .profile-controls > div {
         margin: 0;
@@ -1039,6 +1076,28 @@ blockquote {
     .profile-page {
         margin-left: 40px;
     }
+
+    .page-center h1 {
+        font-size: 2.5rem;
+        margin-left: 15px;
+        text-align: unset;
+    }
+    .page-center h4 {
+        font-size: 1.5rem;
+        margin-left: 15px;
+        text-align: unset;
+    }
+    .outer-circle {
+        left: unset;
+        right: unset;
+        margin-left: -100px;
+        width: 812px;
+        height: 812px;
+    }
+        .outer-circle:after {
+            width: 800px;
+            height: 800px;
+        }
 }
 
 @media (min-width: 1200px) {
