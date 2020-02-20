@@ -109,7 +109,12 @@ function request(method, route, callback = null) {
 
 function neoload(target, query, amount, type, loading) {
     request("GET", "api/v1/article/list/" + query + "/" + amount, x => {
-        if (!x) return;
+        if (!x) {
+            target.innerHTML += "<span class='secondary-info'>No content found!</span>";
+            if (loading) document.getElementById("loading-" + loading).style.display = "none";
+            if (type === "mini") target.style.display = "flex";
+            return;
+        }
         else {
             if (type === "mini") target.style.display = "flex";
             else target.style.display = "block";
