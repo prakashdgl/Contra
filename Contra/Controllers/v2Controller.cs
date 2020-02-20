@@ -82,13 +82,14 @@ namespace Contra.Controllers
         }
 
         [HttpPost("article/archive/all")]
-        public string ArchiveAll()
+        public async Task<string> ArchiveAll()
         {
-            foreach(Article a in _context.Article)
+            List<Article> articles = _context.Article.ToList();
+            foreach(Article a in articles)
             {
                 a.IsArchived = true;
-                _context.Article.Update(a);
             }
+            await _context.SaveChangesAsync();
 
             return "Archived all.";
         }

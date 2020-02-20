@@ -116,6 +116,12 @@ namespace Contra.Controllers
             return View(article);
         }
 
+        [Route("/admin/tools")]
+        public IActionResult ModTools()
+        {
+            return View();
+        }
+
         [Route("/comments/{filter}/{*sortBy}")]
         public IActionResult Comments(string filter, string sortBy = "new")
         {
