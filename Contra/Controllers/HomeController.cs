@@ -35,9 +35,6 @@ namespace Contra.Controllers
 
         public IActionResult Index()
         {
-            if (!User.IsInRole("Administrator"))
-                return Redirect("/reconstructing");
-
             Article placeholder = new Article
             {
                 Title = "Relevant Story",
