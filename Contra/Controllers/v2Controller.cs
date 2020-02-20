@@ -80,5 +80,17 @@ namespace Contra.Controllers
 
             return JsonConvert.SerializeObject(info);
         }
+
+        [HttpPost("article/archive/all")]
+        public string ArchiveAll()
+        {
+            foreach(Article a in _context.Article)
+            {
+                a.IsArchived = true;
+                _context.Article.Update(a);
+            }
+
+            return "Archived all.";
+        }
     }
 }

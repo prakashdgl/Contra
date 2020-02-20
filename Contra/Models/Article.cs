@@ -24,6 +24,7 @@ namespace Contra.Models
 
         public string Content { get; set; }
 
+        public bool IsArchived { get; set; }
         public bool IsEditorial { get; set; }
         public bool IsPinned { get; set; }
 

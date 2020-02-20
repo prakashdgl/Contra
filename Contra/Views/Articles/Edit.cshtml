@@ -58,6 +58,11 @@
     <div class="form-group">
         <section>
             <div class="flex-grow-1">
+                <label class="control-label">Archived</label>
+                <input asp-for="IsArchived" class="form-control" />
+                <span asp-validation-for="IsArchived" class="text-danger"></span>
+            </div>
+            <div class="flex-grow-1">
                 <label class="control-label">Editorial</label>
                 <input asp-for="IsEditorial" class="form-control" />
                 <span asp-validation-for="IsEditorial" class="text-danger"></span>

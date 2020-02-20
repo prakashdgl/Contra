@@ -294,27 +294,32 @@ namespace Contra.Controllers
                 {
                     "creative" => (from a in _context.Article
                                    where a.Approved == ApprovalStatus.Approved &&
+                                         a.IsArchived != true &&
                                          a.ArticleType == ArticleType.Creative
                                    orderby a.IsPinned descending, a.Date descending
                                    select a).ToList(),
                     "editorial" => (from a in _context.Article
                                     where a.Approved == ApprovalStatus.Approved &&
+                                          a.IsArchived != true &&
                                           a.ArticleType == ArticleType.Article &&
                                           a.IsEditorial
                                     orderby a.Date descending
                                     select a).ToList(),
                     "new" => (from a in _context.Article
                               where a.Approved == ApprovalStatus.Approved &&
+                                    a.IsArchived != true &&
                                     a.ArticleType != ArticleType.Blog
                               orderby a.Date descending
                               select a).ToList(),
                     "insight" => (from a in _context.Article
                                   where a.Approved == ApprovalStatus.Approved &&
+                                        a.IsArchived != true &&
                                         a.ArticleType == ArticleType.Insight
                                   orderby a.IsPinned descending, a.Date descending
                                   select a).ToList(),
                     "response" => (from a in _context.Article
                                    where a.Approved == ApprovalStatus.Approved &&
+                                         a.IsArchived != true &&
                                         (a.ArticleType == ArticleType.Response ||
                                          a.ArticleType == ArticleType.Meta)
                                    orderby a.IsPinned descending, a.Date descending

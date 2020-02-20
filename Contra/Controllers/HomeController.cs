@@ -35,7 +35,9 @@ namespace Contra.Controllers
 
         public IActionResult Index()
         {
-            return Redirect("/reconstructing");
+            if (!User.IsInRole("Administrator"))
+                return Redirect("/reconstructing");
+
             Article placeholder = new Article
             {
                 Title = "Relevant Story",
@@ -46,6 +48,7 @@ namespace Contra.Controllers
             List<Article> articles = (from a in _context.Article
                                       where a.Approved == ApprovalStatus.Approved &&
                                             a.ArticleType == ArticleType.Article && 
+                                            a.IsArchived != true &&
                                             a.Date >= DateTime.Now.AddDays(-14)
                                       orderby a.Views descending
                                       select a).ToList();
@@ -150,6 +153,7 @@ namespace Contra.Controllers
                     ViewData["Message"] = "Search All";
                     articles = (from a in _context.Article
                                 where a.Approved == ApprovalStatus.Approved &&
+                                      a.IsArchived != true &&
                                       a.ArticleType != ArticleType.Blog
                                 orderby a.Date descending
                                 select a).ToList();
@@ -158,6 +162,7 @@ namespace Contra.Controllers
                     ViewData["Message"] = "Search - " + filter;
                     articles = (from a in _context.Article
                                 where a.Approved == ApprovalStatus.Approved &&
+                                      a.IsArchived != true &&
                                       a.ArticleType != ArticleType.Blog &&
                                       (a.Title.ToLower().Contains(filter.ToLower()) || 
                                        a.Tags.ToLower().Contains(filter.ToLower()) || 
