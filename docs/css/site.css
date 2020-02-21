@@ -1,0 +1,200 @@
+html {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fff;
+  margin: 0;
+}
+
+.container {
+  margin: 0 1rem;
+}
+
+hr {
+  margin: 2rem 0;
+}
+
+br {
+  clear: both;
+}
+
+a {
+  color: #78a1bb;
+  text-decoration: underline;
+}
+
+span {
+  background-color: #eee;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+button {
+  box-shadow: none;
+  border: solid 2px;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  margin: 0.6rem 0;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 100;
+  transition-duration: 0.2s;
+}
+
+nav {
+  background-color: #32292f;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  padding: 0 2rem;
+  z-index: 2;
+}
+
+nav img {
+  border-radius: 25%;
+  height: 2.5rem;
+  margin: 0.75rem 0;
+}
+
+nav button {
+  background-color: #32292f;
+  border-color: #f4f4f4;
+  color: #f4f4f4;
+  float: right;
+}
+
+nav button:hover {
+  border-color: #78a1bb;
+  color: #78a1bb;
+}
+
+.block-header {
+  background-image: url("../img/contra_back.png");
+  background-size: cover;
+  margin-top: 4rem;
+  width: 100%;
+  height: 8rem;
+  overflow: hidden;
+}
+
+.block-header h1 {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 200;
+  line-height: 8rem;
+  text-align: center;
+  margin: auto;
+}
+
+.g-left {
+  background-image: linear-gradient(45deg, #FC5C7D, #6A82FB);
+}
+
+.g-mid {
+  background-image: linear-gradient(45deg, #4e54c8, #8f94fb);
+}
+
+.g-right {
+  background-image: linear-gradient(45deg, #6A82FB, #FC5C7D);
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  border-radius: 5px;
+  color: #fff;
+  flex: 1 1;
+  margin: 1rem 0;
+  padding: 2rem;
+}
+
+.card h2 {
+  display: inline-block;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.card a {
+  color: #fff;
+  float: right;
+  line-height: 1.5rem;
+}
+
+.card p {
+  font-size: 1.2rem;
+  margin: 0.2rem 0;
+}
+
+footer {
+  background-color: #32292f;
+  min-height: 10rem;
+  margin-top: 5rem;
+  padding: 2rem;
+  color: #f4f4f4;
+}
+
+footer > p {
+  color: #93a3b1;
+}
+
+@media screen and (min-width: 512px) {
+  .container {
+    width: 30rem;
+    margin: auto;
+  }
+  .block-header {
+    height: 15rem;
+  }
+  .block-header h1 {
+    line-height: 15rem;
+  }
+  nav {
+    padding: 0 3rem;
+  }
+  footer {
+    padding: 2rem 3rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  nav {
+    padding: 0 6rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .container {
+    width: 90%;
+  }
+  nav {
+    padding: 0 8rem;
+  }
+  section {
+    flex-direction: row;
+  }
+  .card {
+    margin: 0.5rem;
+  }
+  footer {
+    padding: 2rem 15%;
+  }
+  footer hr {
+    margin: 0 15%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .container {
+    width: 80rem;
+  }
+}
