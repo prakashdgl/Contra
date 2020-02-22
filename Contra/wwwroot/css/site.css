@@ -114,6 +114,7 @@ nav #menu-button {
 
 .nav-search > form > input {
     background-color: var(--background-primary);
+    color: var(--text-primary);
 }
 
 .nav-search > form > .btn {
