@@ -136,8 +136,8 @@ section {
 }
 
 .sidebar {
-  border-right: 1px solid #555;
   width: 250px;
+  margin: auto;
 }
 
 .sidebar a {
@@ -150,7 +150,6 @@ section {
 
 .docs .card {
   color: #333;
-  margin-left: 4rem;
 }
 
 .docs .card a {
@@ -207,6 +206,13 @@ footer > p {
   }
   .card {
     margin: 0.5rem;
+  }
+  .sidebar {
+    border-right: 1px solid #555;
+    margin: 0;
+  }
+  .docs .card {
+    margin-left: 4rem;
   }
   footer {
     padding: 2rem 15%;
