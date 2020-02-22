@@ -327,6 +327,7 @@ namespace Contra.Controllers
                     _ => (from a in _context.Article
                           where a.Approved == ApprovalStatus.Approved &&
                                 a.ArticleType != ArticleType.Blog &&
+                                a.IsArchived != true &&
                                (a.Title.ToLower().Contains(query) ||
                                 a.Tags.ToLower().Contains(query) ||
                                 (a.OwnerID == query && !a.Anonymous))

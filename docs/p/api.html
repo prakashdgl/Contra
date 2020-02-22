@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Contra API</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="stylesheet" type="text/css" href="../css/site.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <img src="../img/contra_min.png" alt="Logo">
+      <a href="https://github.com/SDBagel/Contra">
+        <button>Repository</button>
+      </a>
+    </nav>
+  </header>
+  <a name="top"></a>
+  <div class="block-header">
+    <h1>Contra API</h1>
+  </div>
+  <main class="container">
+    <center>
+      <br>
+      <p><b>Documentation version: <span>v1.0 Full Release</span></b></p>
+      <p><a href="https://sdbagel.github.io/Contra">Back to Home</a></p>
+      <br>
+    </center>
+    <section>
+      <div class="sidebar">
+        <h2>Outline</h2>
+        <p><b><a href="#api">Public API</a></b></p>
+        <p><a href="#getprofilepicture">GetProfilePicture</a></p>
+        <p><a href="#articlegetbulk">ArticleGetBulk</a></p>
+        <p><a href="#articleget">ArticleGet</a></p>
+        <p><a href="#bloggetbulk">BlogGetBulk</a></p>
+      </div>
+      <div class="docs">
+        <div class="card">
+          <a name="api"></a>
+          <h2>About the Public API</h2>
+          <p>Contra's public API is split into two routes, <span>api/v1</span> and <span>api/v2</span>. It can be called using standard HTTP requests. All information passed to the API is in the route itself, and none of it is in the request body. This means the <span>GET</span> routes are testable directly in your browser. The API is not rate-limited, and it queries the database directly instead of drawing from a cache to allow live updates as data changes. Please do not abuse this.</p>
+          <br>
+          <p>An example of a call to a route is <span>https://contra.live/api/v1/route/parameter</span>.</p>
+        </div>
+        <div class="card">
+          <a name="getprofilepicture"></a>
+          <h2>GetProfilePicture</h2>
+          <p><b>Route:</b> <span>/api/v1/account/{id}/picture</span></p>
+          <p><b>Type:</b> <span>GET</span></p>
+          <br>
+          <p>Calling this route with user ID <span>{id}</span> returns the URL of their picture if the user exists. If not, it returns a string "Not Found!"</p>
+        </div>
+        <div class="card">
+          <a name="articlegetbulk"></a>
+          <h2>ArticleGetBulk</h2>
+          <p><b>Route:</b> <span>/api/v1/article/list/{query}/{amount}/{skip}</span></p>
+          <p><b>Type:</b> <span>GET</span></p>
+          <br>
+          <p>This API endpoint functions similarly to the search function on the site with extra keyword helpers. The <span>{query}</span> parameter would be the search term. The <span>{amount}</span> dictates the number of articles returned, and <span>{skip}</span> allows the <span>amount * skip</span> number of articles to be skipped, for implementations utilising pagination or continuous scrolling.</p>
+          <br>
+          <p>This endpoint will return special results if some queries are entered.</p>
+          <ul>
+            <li><span>blog::{id}</span>: Redirects to <span>api/v2/blogs/list/{id}/{amount}/{skip}</span></li>
+            <li><span>Creative</span>: Approved articles where the ArticleType is Creative, sorted by pinned, then date.</li>
+            <li><span>Editorial</span>: Approved articles where the ArticleType is Article and is flagged an editorial, sorted by date.</li>
+            <li><span>New</span>: Approved articles sorted by date.</li>
+            <li><span>Insight</span>: Approved articles where the ArticleType is Insight, sorted by pinned, then date.</li>
+            <li><span>Response</span>: Approved articles where the ArticleType is Response OR Meta, sorted by pinned, then date.</li>
+          </ul>
+          <p>Default behavior: Return approved articles where the title or tags match the query, or where the query matches the article's owner (user) ID and the article is not anonymous.</p>
+          <br>
+          <p>This endpoint will exclude archived articles and blog posts. It is recommended that instead of calling this endpoint with <span>blog::</span> the <a href="#bloggetbulk">BlogGetBulk</a> endpoint be called directly.</p>
+          <br>
+          <p>This endpoint returns a JSON list of articles, each the same structure as the <a href="#articlejson">article JSON</a>.</p>
+        </div>
+        <div class="card">
+          <a name="articleget"></a>
+          <h2>ArticleGet</h2>
+          <p><b>Route:</b> <span>/api/v1/article/{id}</span></p>
+          <p><b>Type:</b> <span>GET</span></p>
+          <br>
+          <p>Calling this route with int article ID <span>{id}</span> returns the following JSON containing article information:</p>
+          <a name="articlejson"></a>
+          <ul>
+            <li>id: author's userID (string)</li>
+            <li>title: (string)</li>
+            <li>date: (string)</li>
+            <li>tags: space delimited string</li>
+            <li>summary: (string)</li>
+            <li>image: url (string)</li>
+            <li>pinned: True/False (string)</li>
+            <li>sensitive: True/False (string)</li>
+            <li>spoiler: True/False (string)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <a name="articleget"></a>
+          <h2>ArticleGet</h2>
+          <p><b>Route:</b> <span>/api/v1/article/{id}</span></p>
+          <p><b>Type:</b> <span>GET</span></p>
+          <br>
+          <p>Calling this route with int article ID <span>{id}</span> returns the following JSON containing article information:</p>
+          <a name="articlejson"></a>
+          <ul>
+            <li>id: author's userID (string)</li>
+            <li>title: (string)</li>
+            <li>date: (string)</li>
+            <li>tags: space delimited string</li>
+            <li>summary: (string)</li>
+            <li>image: url (string)</li>
+            <li>pinned: True/False (string)</li>
+            <li>sensitive: True/False (string)</li>
+            <li>spoiler: True/False (string)</li>
+          </ul>
+          <p>This route may also be used to get indiviudal blogs.</p>
+        </div>
+        <div class="card">
+          <a name="bloggetbulk"></a>
+          <h2>BlogGetBulk</h2>
+          <p><b>Route:</b> <span>/api/v2/blog/list/{id}/{amount}/{skip}</span></p>
+          <p><b>Type:</b> <span>GET</span></p>
+          <br>
+          <p>This route functions similarly to <a href="#articlegetbulk">ArticleGetBulk</a>, but instead of a query, this route takes a user ID and returns blogs from that user. There are no special keywords in this route.</p>
+          <a name="articlejson"></a>
+          <ul>
+            <li>id: author's userID (string)</li>
+            <li>title: (string)</li>
+            <li>date: (string)</li>
+            <li>tags: space delimited string</li>
+            <li>summary: (string)</li>
+            <li>image: url (string)</li>
+            <li>pinned: True/False (string)</li>
+            <li>sensitive: True/False (string)</li>
+            <li>spoiler: True/False (string)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <br>
+  </main>
+  <footer>
+    <section>
+      <div>
+        <h3>More Stuff</h3>
+        <p><a href="https://sdproductions.github.io/p/about">About Us</a></p>
+        <p><a href="https://sdproductions.github.io/p/about#privacy">Privacy</a></p>
+        <p><a href="https://sdproductions.github.io/p/about#terms">Terms of Use</a></p>
+      </div>
+      <hr>
+      <div>
+        <h3>Contact</h3>
+        <p><a href="mailto:sdbagel@gmail.com">Email</a></p>
+        <p><a href="https://github.com/SDBagel">GitHub</a></p>
+        <p><a href="https://sdbagel.github.io">SDBagel</a></p>
+      </div>
+    </section>
+    <br>
+    <p>Documentation provided by SDProductions & SDBagel.</p>
+    <p>&#9400; SDProductions 2020</p>
+  </footer>
+</body>
+</html>

@@ -135,6 +135,29 @@ section {
   margin: 0.2rem 0;
 }
 
+.sidebar {
+  border-right: 1px solid #555;
+  width: 250px;
+}
+
+.sidebar a {
+  font-size: 1.2rem;
+}
+
+.docs {
+  flex: 1 1;
+}
+
+.docs .card {
+  color: #333;
+  margin-left: 4rem;
+}
+
+.docs .card a {
+  color: #333;
+  float: none;
+}
+
 footer {
   background-color: #32292f;
   min-height: 10rem;
