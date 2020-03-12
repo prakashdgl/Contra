@@ -45,8 +45,7 @@ namespace Contra.Controllers
             List<Article> articles = (from a in _context.Article
                                       where a.Approved == ApprovalStatus.Approved &&
                                             a.ArticleType == ArticleType.Article && 
-                                            a.IsArchived != true &&
-                                            a.Date >= DateTime.Now.AddDays(-14)
+                                            a.IsArchived != true
                                       orderby a.Views descending
                                       select a).ToList();
 

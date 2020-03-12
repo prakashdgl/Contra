@@ -93,5 +93,18 @@ namespace Contra.Controllers
 
             return "Archived all.";
         }
+
+        [HttpPost("article/unarchive/all")]
+        public async Task<string> UnArchiveAll()
+        {
+            List<Article> articles = _context.Article.ToList();
+            foreach (Article a in articles)
+            {
+                a.IsArchived = false;
+            }
+            await _context.SaveChangesAsync();
+
+            return "Unarchived all.";
+        }
     }
 }
