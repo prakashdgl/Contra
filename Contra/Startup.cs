@@ -11,6 +11,7 @@ using Contra.Areas.Identity.Data;
 using Contra.Data;
 using Contra.Services;
 using System;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace Contra
 {
@@ -31,9 +32,10 @@ namespace Contra
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContextPool<ApplicationDbContext>(options => options
+                .UseMySql(Configuration.GetConnectionString("DefaultConnection"), mySqlOptions => mySqlOptions
+                    .ServerVersion(new Version(8, 0, 19), ServerType.MySql)
+            ));
 
             services.AddDefaultIdentity<ContraUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()

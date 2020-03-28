@@ -18,12 +18,21 @@ namespace Contra
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+                var logger = services.GetRequiredService<ILogger<Program>>();
 
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     context.Database.Migrate();
+                    logger.LogError("Migrated.");
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "An error occurred migrating the DB.");
+                }
 
+                try
+                {
                     var config = host.Services.GetRequiredService<IConfiguration>();
                     var testUserPw = config["SeedUserPW"];
 
@@ -31,7 +40,6 @@ namespace Contra
                 }
                 catch (Exception ex)
                 {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
